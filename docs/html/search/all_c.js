@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['read_100',['read',['../class_audio_kit.html#a4391c1fb579f295184d58bcd2d2450e7',1,'AudioKit']]]
+  ['read_101',['read',['../class_audio_kit.html#a4391c1fb579f295184d58bcd2d2450e7',1,'AudioKit']]]
 ];

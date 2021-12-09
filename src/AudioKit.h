@@ -143,42 +143,42 @@ class AudioKit {
   }
 
   /// Starts the CODEC
-  bool begin(AudioKitConfig cfg) {
-    config = cfg;
+  bool begin(AudioKitConfig cnfg) {
+    cfg = cnfg;
     bool result = true;
-    audio_hal_conf.adc_input = config.adc_input;
-    audio_hal_conf.dac_output = config.dac_output;
-    audio_hal_conf.codec_mode = config.codec_mode;
-    // audio_hal_conf.i2s_iface = config.master_slave_mode;
+    audio_hal_conf.adc_input = cfg.adc_input;
+    audio_hal_conf.dac_output = cfg.dac_output;
+    audio_hal_conf.codec_mode = cfg.codec_mode;
+    // audio_hal_conf.i2s_iface = cfg.master_slave_mode;
     if (audio_hal_init(&audio_hal_conf, &audio_hal) != ESP_OK) {
       return false;
     }
 
     // setup audio_hal_codec_i2s_iface_t
-    iface.mode = config.master_slave_mode;
-    iface.fmt = config.fmt;
-    iface.samples = config.sample_rate;
-    iface.bits = config.bits_per_sample;
+    iface.mode = cfg.master_slave_mode;
+    iface.fmt = cfg.fmt;
+    iface.samples = cfg.sample_rate;
+    iface.bits = cfg.bits_per_sample;
 
     // configure codec
-    if (audio_hal_codec_iface_config(&audio_hal, config.codec_mode, &iface) !=
+    if (audio_hal_codec_iface_config(&audio_hal, cfg.codec_mode, &iface) !=
         ESP_OK) {
       return false;
     }
 
     // start codec driver
-    if (audio_hal_ctrl_codec(&audio_hal, config.codec_mode,
+    if (audio_hal_ctrl_codec(&audio_hal, cfg.codec_mode,
                              AUDIO_HAL_CTRL_START) != ESP_OK) {
       return false;
     }
 
     // setup i2s driver
-    i2s_config_t i2s_config = config.i2sConfig();
-    if (i2s_driver_install(config.i2s_num, &i2s_config, 0, NULL)) {
+    i2s_config_t i2s_config = cfg.i2sConfig();
+    if (i2s_driver_install(cfg.i2s_num, &i2s_config, 0, NULL)) {
       return false;
     }
 
-    if (i2s_mclk_gpio_select(config.i2s_num, config.mclk_gpio) != ESP_OK) {
+    if (i2s_mclk_gpio_select(cfg.i2s_num, cfg.mclk_gpio) != ESP_OK) {
       return false;
     }
   }
@@ -186,17 +186,22 @@ class AudioKit {
   /// Stops the CODEC
   bool end() {
     // uninstall i2s driver
-    i2s_driver_uninstall(config.i2s_num);
+    i2s_driver_uninstall(cfg.i2s_num);
     // stop codec driver
-    audio_hal_ctrl_codec(&audio_hal, config.codec_mode, AUDIO_HAL_CTRL_STOP);
+    audio_hal_ctrl_codec(&audio_hal, cfg.codec_mode, AUDIO_HAL_CTRL_STOP);
     // deinit
     audio_hal_deinit(&audio_hal) == ESP_OK;
+  }
+
+  /// Provides the actual configuration
+  AudioKitConfig config() {
+      return cfg;
   }
 
   /// Sets the codec active / inactive
   bool setActive(bool active) {
     return audio_hal_ctrl_codec(
-               &audio_hal, config.codec_mode,
+               &audio_hal, cfg.codec_mode,
                active ? AUDIO_HAL_CTRL_START : AUDIO_HAL_CTRL_STOP) == ESP_OK;
   }
 
@@ -223,7 +228,7 @@ class AudioKit {
   size_t write(const void *src, size_t size,
                TickType_t ticks_to_wait = portMAX_DELAY) {
     size_t bytes_written = 0;
-    i2s_write(config.i2s_num, src, size, &bytes_written, ticks_to_wait);
+    i2s_write(cfg.i2s_num, src, size, &bytes_written, ticks_to_wait);
     return bytes_written;
   }
 
@@ -231,7 +236,7 @@ class AudioKit {
   size_t read(void *dest, size_t size,
               TickType_t ticks_to_wait = portMAX_DELAY) {
     size_t bytes_read = 0;
-    i2s_read(config.i2s_num, dest, size, &bytes_read, ticks_to_wait);
+    i2s_read(cfg.i2s_num, dest, size, &bytes_read, ticks_to_wait);
     return bytes_read;
   }
 
@@ -359,5 +364,5 @@ class AudioKit {
   audio_hal_func_t audio_hal;
   audio_hal_codec_config_t audio_hal_conf;
   audio_hal_codec_i2s_iface_t iface;
-  AudioKitConfig config;
+  AudioKitConfig cfg;
 };

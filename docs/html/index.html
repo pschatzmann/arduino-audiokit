@@ -65,8 +65,10 @@ $(function() {
 <div class="title">Arduino <a class="el" href="class_audio_kit.html" title="AudioKit API using the audio_hal.">AudioKit</a> HAL </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> The Espressif ESP32 ADF Framework contains an abstractioin layer to support different CODEC chips. Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.</p>
-<p>I converted the <b>audio_boards</b> and their related <b>drivers</b> into an <b>Arduino Library</b> and provide an easy to use C++ class which configures both the CODEC and I2S.</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> There are different ESP32 <a class="el" href="class_audio_kit.html" title="AudioKit API using the audio_hal.">AudioKit</a> boards available that can be programmed with the Espressif ADF Framework.</p>
+<p><img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" class="inline"/></p>
+<p>The ADF Framework contains an abstractioin layer to support different CODEC chips. Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.</p>
+<p>I converted the <b>audio_boards</b> and their related <b>drivers</b> into an <b>Arduino Library</b> and provide an easy to use C++ class which configures both the CODEC and I2S. With this project it should get quite easy to use these boards also in Arduino.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Configuration</h1>
 <p>You can define your board and the default settings in the <code><a class="el" href="_audio_kit_settings_8h_source.html">AudioKitSettings.h</a></code> file.</p>
@@ -81,10 +83,10 @@ Configuration</h1>
 <div class="line"> */</div>
 <div class="line"> </div>
 <div class="line">#define AUDIOKIT_BOARD 1</div>
-</div><!-- fragment --><p> Here the lyrat v3.4 has been selected. Alternatively you can specify the board in a sketch with a #define before the #includes as show in the next example.</p>
+</div><!-- fragment --><p> Here the lyrat v3.4 has been selected. Alternatively you can specify the board in a sketch with a #define before the #includes as shown in the next example.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Example Sketch</h1>
-<p>Here is an example sketch that writes data to the audio kit board via I2S. By default, I2S is set up as master, the CODEC as slave, the sample size is 16 bits and the sample rate is 44.1k/sec if you did not change the defaults.</p>
+<p>Here is an example sketch that writes audio data to the audio kit board via I2S. By default I2S is set up as master, the CODEC as slave, the sample size is 16 bits and the sample rate is 44.1k/sec if you did not change the default settings.</p>
 <p>You can adjust these parameters by setting your requested values in the cfg below:</p>
 <div class="fragment"><div class="line">#define AUDIOKIT_BOARD 7</div>
 <div class="line"> </div>
@@ -111,7 +113,13 @@ Example Sketch</h1>
 <div class="line">  size_t l = wave.read(buffer, BUFFER_SIZE);</div>
 <div class="line">  kit.write(buffer, l);</div>
 <div class="line">}</div>
-</div><!-- fragment --> </div></div><!-- PageDoc -->
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
+Documentation</h1>
+<p>Here is the documentaion of the <a href="https://pschatzmann.github.io/arduino-audiokit-hal/html/class_audio_kit.html">AudioKit class</a></p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Status</h1>
+<p>Early Development </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

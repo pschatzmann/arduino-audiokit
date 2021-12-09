@@ -64,6 +64,10 @@ void loop() {
 
 ```
 
+## Documentation
+
+Here is the documentaion of the [AudioKit class](https://pschatzmann.github.io/arduino-audiokit-hal/html/class_audio_kit.html)
+
 ## Status
 
 Early Development

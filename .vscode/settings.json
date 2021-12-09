@@ -18,6 +18,8 @@
         "boundingbox": "cpp",
         "image": "cpp",
         "node": "cpp",
-        "state": "cpp"
+        "state": "cpp",
+        "streambuf": "cpp",
+        "cstddef": "cpp"
     }
 }
