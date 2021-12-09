@@ -124,14 +124,14 @@ struct AudioKitConfig {
 
 class AudioKit {
  public:
-  /// Provides the configuration for input & output
+  /// Provides a default configuration for input & output
   AudioKitConfig defaultConfig() {
     AudioKitConfig result;
     result.codec_mode = AUDIO_HAL_CODEC_MODE_BOTH;
     return result;
   }
 
-  /// Provides the configuration for input or output
+  /// Provides the default configuration for input or output
   AudioKitConfig defaultConfig(bool isOutput) {
     AudioKitConfig result;
     if (isOutput) {
@@ -142,7 +142,7 @@ class AudioKit {
     return result;
   }
 
-  /// Starts the CODEC
+  /// Starts the codec
   bool begin(AudioKitConfig cnfg) {
     cfg = cnfg;
     bool result = true;
