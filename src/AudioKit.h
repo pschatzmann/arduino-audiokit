@@ -56,7 +56,7 @@ struct AudioKitConfig {
 
   /// provides the bits per sample
   int bitsPerSample() {
-    switch (bits) {
+    switch (bits_per_sample) {
       case AUDIO_HAL_BIT_LENGTH_16BITS:
         return 16;
       case AUDIO_HAL_BIT_LENGTH_24BITS:
@@ -69,7 +69,7 @@ struct AudioKitConfig {
 
   /// Provides the sample rate in samples per second
   int sampleRate() {
-    switch (samples) {
+    switch (sample_rate) {
       case AUDIO_HAL_08K_SAMPLES: /*!< set to  8k samples per second */
         return 8000;
       case AUDIO_HAL_11K_SAMPLES: /*!< set to 11.025k samples per second */
@@ -114,7 +114,11 @@ struct AudioKitConfig {
     return i2s_config;
   }
 
-  i2s_pin_config_t i2sPins() { i2s_pin_config_t result; }
+  i2s_pin_config_t i2sPins() { 
+    i2s_pin_config_t result;
+    get_i2s_pins(i2s_num, &result);
+    return result;
+   }
 };
 
 /**
@@ -145,7 +149,6 @@ class AudioKit {
   /// Starts the codec
   bool begin(AudioKitConfig cnfg) {
     cfg = cnfg;
-    bool result = true;
     audio_hal_conf.adc_input = cfg.adc_input;
     audio_hal_conf.dac_output = cfg.dac_output;
     audio_hal_conf.codec_mode = cfg.codec_mode;
@@ -178,9 +181,17 @@ class AudioKit {
       return false;
     }
 
+    // define i2s pins
+    i2s_pin_config_t pin_config = cfg.i2sPins();
+    if (i2s_set_pin(cfg.i2s_num, &pin_config)!=ESP_OK){
+      return false;
+    }
+
     if (i2s_mclk_gpio_select(cfg.i2s_num, cfg.mclk_gpio) != ESP_OK) {
       return false;
     }
+
+    return true;
   }
 
   /// Stops the CODEC
@@ -190,7 +201,8 @@ class AudioKit {
     // stop codec driver
     audio_hal_ctrl_codec(&audio_hal, cfg.codec_mode, AUDIO_HAL_CTRL_STOP);
     // deinit
-    audio_hal_deinit(&audio_hal) == ESP_OK;
+    audio_hal_deinit(&audio_hal);
+    return true;
   }
 
   /// Provides the actual configuration
@@ -334,7 +346,7 @@ class AudioKit {
    * @return -1       non-existent
    *        Others    gpio number
    */
-  int8_t pinResetCodec() { get_reset_codec_gpio(); }
+  int8_t pinResetCodec() { return get_reset_codec_gpio(); }
 
   /**
    * @brief Get DSP reset gpio number
