@@ -1,0 +1,23 @@
+{
+    "files.associations": {
+        "displaysettings": "c",
+        "glextensions": "c",
+        "graphicscontext": "c",
+        "types": "cpp",
+        "*.tcc": "cpp",
+        "complex": "cpp",
+        "list": "cpp",
+        "functional": "cpp",
+        "limits": "cpp",
+        "random": "cpp",
+        "bit": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp",
+        "thread": "cpp",
+        "version": "cpp",
+        "boundingbox": "cpp",
+        "image": "cpp",
+        "node": "cpp",
+        "state": "cpp"
+    }
+}
