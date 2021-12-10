@@ -86,6 +86,9 @@ audio_board_handle_t audio_board_get_handle(void);
  */
 esp_err_t audio_board_deinit(audio_board_handle_t audio_board);
 
+
+int8_t get_es8311_mclk_src(void);
+
 #ifdef __cplusplus
 }
 #endif

@@ -23,9 +23,9 @@
  */
 
 #include "AudioKitSettings.h"
-#if AUDIOKIT_BOARD==7
+#if AUDIOKIT_BOARD==4
 
-#include "esp_log.h"
+#include "audiokit_logger.h"
 #include "audiokit_board.h"
 #include "audio_mem.h"
 //#include "periph_adc_button.h"
@@ -37,7 +37,7 @@ static audio_board_handle_t board_handle = NULL;
 audio_board_handle_t audio_board_init(void)
 {
     if (board_handle) {
-        ESP_LOGW(TAG, "The board has already been initialized!");
+        LOGW("The board has already been initialized!");
         return board_handle;
     }
     board_handle = (audio_board_handle_t) audio_calloc(1, sizeof(struct audio_board_handle));

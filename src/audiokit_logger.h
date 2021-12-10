@@ -1,9 +1,29 @@
 #pragma once
+/**
+ * @brief Simple Logger we need to support both C and C++ 
+ */
 
-const char* AUDIOKIT = "AUDIOKIT";
+// maximum size of log string
+#define AUDIOKIT_LOGLENGTH 215
 
+// Logging of method
+#define LOG_METHOD __PRETTY_FUNCTION__
 
-#define LOGD(...)  ESP_LOGD(AUDIOKIT,__VA_ARGS__)
-#define LOGI(...)  ESP_LOGI(AUDIOKIT,__VA_ARGS__)
-#define LOGW(...)  ESP_LOGW(AUDIOKIT,__VA_ARGS__)
-#define LOGE(...)  ESP_LOGE(AUDIOKIT,__VA_ARGS__)
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// define supported log levels
+enum AudioKitLogLevels {Debug, Info, Warning, Error};
+
+// define default log level
+static int AUDIOKIT_LOG_LEVEL = Warning;
+
+void LOGD(const char* fmr,...);
+void LOGI(const char* fmr,...);
+void LOGW(const char* fmr,...);
+void LOGE(const char* fmr,...);
+
+#ifdef __cplusplus
+}
+#endif

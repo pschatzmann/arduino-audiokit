@@ -25,7 +25,7 @@
 #include <string.h>
 #include "i2c_bus.h"
 #include "audiokit_board.h"
-#include "esp_log.h"
+#include "audiokit_logger.h"
 #include "es8311.h"
 
 /* ES8311 address
@@ -191,7 +191,7 @@ static char *TAG = "DRV8311";
 
 #define ES_ASSERT(a, format, b, ...) \
     if ((a) != 0) { \
-        ESP_LOGE(TAG, format, ##__VA_ARGS__); \
+        LOGE( format, ##__VA_ARGS__); \
         return b;\
     }
 
@@ -244,7 +244,7 @@ static int get_coeff(uint32_t mclk, uint32_t rate)
 static void es8311_mute(int mute)
 {
     uint8_t regv;
-    ESP_LOGI(TAG, "Enter into es8311_mute(), mute = %d\n", mute);
+    LOGI( "Enter into es8311_mute(), mute = %d\n", mute);
     regv = es8311_read_reg(ES8311_DAC_REG31) & 0x9f;
     if (mute) {
         es8311_write_reg(ES8311_SYSTEM_REG12, 0x02);
@@ -262,7 +262,7 @@ static void es8311_mute(int mute)
 */
 static void es8311_suspend(void)
 {
-    ESP_LOGI(TAG, "Enter into es8311_suspend()");
+    LOGI( "Enter into es8311_suspend()");
     es8311_write_reg(ES8311_DAC_REG32, 0x00);
     es8311_write_reg(ES8311_ADC_REG17, 0x00);
     es8311_write_reg(ES8311_SYSTEM_REG0E, 0xFF);
@@ -321,11 +321,11 @@ esp_err_t es8311_codec_init(audio_hal_codec_config_t *codec_cfg)
     audio_hal_codec_i2s_iface_t *i2s_cfg = &(codec_cfg->i2s_iface);
     switch (i2s_cfg->mode) {
         case AUDIO_HAL_MODE_MASTER:    /* MASTER MODE */
-            ESP_LOGI(TAG, "ES8311 in Master mode");
+            LOGI( "ES8311 in Master mode");
             regv |= 0x40;
             break;
         case AUDIO_HAL_MODE_SLAVE:    /* SLAVE MODE */
-            ESP_LOGI(TAG, "ES8311 in Slave mode");
+            LOGI( "ES8311 in Slave mode");
             regv &= 0xBF;
             break;
         default:
@@ -381,13 +381,13 @@ esp_err_t es8311_codec_init(audio_hal_codec_config_t *codec_cfg)
             sample_fre = 48000;
             break;
         default:
-            ESP_LOGE(TAG, "Unable to configure sample rate %dHz", sample_fre);
+            LOGE( "Unable to configure sample rate %dHz", sample_fre);
             break;
     }
     mclk_fre = sample_fre * MCLK_DIV_FRE;
     coeff = get_coeff(mclk_fre, sample_fre);
     if (coeff < 0) {
-        ESP_LOGE(TAG, "Unable to configure sample rate %dHz with %dHz MCLK", sample_fre, mclk_fre);
+        LOGE( "Unable to configure sample rate %dHz with %dHz MCLK", sample_fre, mclk_fre);
         return ESP_FAIL;
     }
     /*
@@ -498,20 +498,20 @@ esp_err_t es8311_config_fmt(es_i2s_fmt_t fmt)
     adc_iface = es8311_read_reg(ES8311_SDPOUT_REG0A);
     switch (fmt) {
         case AUDIO_HAL_I2S_NORMAL:
-            ESP_LOGD(TAG, "ES8311 in I2S Format");
+            LOGD( "ES8311 in I2S Format");
             dac_iface &= 0xFC;
             adc_iface &= 0xFC;
             break;
         case AUDIO_HAL_I2S_LEFT:
         case AUDIO_HAL_I2S_RIGHT:
-            ESP_LOGD(TAG, "ES8311 in LJ Format");
+            LOGD( "ES8311 in LJ Format");
             adc_iface &= 0xFC;
             dac_iface &= 0xFC;
             adc_iface |= 0x01;
             dac_iface |= 0x01;
             break;
         case AUDIO_HAL_I2S_DSP:
-            ESP_LOGD(TAG, "ES8311 in DSP-A Format");
+            LOGD( "ES8311 in DSP-A Format");
             adc_iface &= 0xDC;
             dac_iface &= 0xDC;
             adc_iface |= 0x03;
@@ -585,14 +585,14 @@ esp_err_t es8311_codec_ctrl_state(audio_hal_codec_mode_t mode, audio_hal_ctrl_t 
             break;
         default:
             es_mode = ES_MODULE_DAC;
-            ESP_LOGW(TAG, "Codec mode not support, default is decode mode");
+            LOGW("Codec mode not support, default is decode mode");
             break;
     }
 
     if (ctrl_state == AUDIO_HAL_CTRL_START) {
         ret |= es8311_start(es_mode);
     } else {
-        ESP_LOGW(TAG, "The codec is about to stop");
+        LOGW("The codec is about to stop");
         ret |= es8311_stop(es_mode);
     }
 
@@ -610,7 +610,7 @@ esp_err_t es8311_start(es_module_t mode)
     dac_iface |= BIT(6);
 
     if (mode == ES_MODULE_LINE) {
-        ESP_LOGE(TAG, "The codec es8311 doesn't support ES_MODULE_LINE mode");
+        LOGE( "The codec es8311 doesn't support ES_MODULE_LINE mode");
         return ESP_FAIL;
     }
     if (mode == ES_MODULE_ADC || mode == ES_MODULE_ADC_DAC) {
@@ -666,7 +666,7 @@ esp_err_t es8311_codec_set_voice_volume(int volume)
         volume = 100;
     }
     int vol = (volume) * 2550 / 1000;
-    ESP_LOGD(TAG, "SET: volume:%d", vol);
+    LOGD( "SET: volume:%d", vol);
     es8311_write_reg(ES8311_DAC_REG32, vol);
     return res;
 }
@@ -682,13 +682,13 @@ esp_err_t es8311_codec_get_voice_volume(int *volume)
     } else {
         *volume = regv * 100 / 256;
     }
-    ESP_LOGD(TAG, "GET: res:%d, volume:%d", regv, *volume);
+    LOGD( "GET: res:%d, volume:%d", regv, *volume);
     return res;
 }
 
 esp_err_t es8311_set_voice_mute(bool enable)
 {
-    ESP_LOGD(TAG, "Es8311SetVoiceMute volume:%d", enable);
+    LOGD( "Es8311SetVoiceMute volume:%d", enable);
     es8311_mute(enable);
     return ESP_OK;
 }

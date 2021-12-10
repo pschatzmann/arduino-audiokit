@@ -153,7 +153,9 @@ typedef struct audio_hal {
 } audio_hal_func_t;
 
 
+
 /**
+ * 
  * @brief Initialize media codec driver
  *
  * @note If selected codec has already been installed, it'll return the audio_hal handle.

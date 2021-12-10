@@ -26,7 +26,7 @@
 #if AUDIOKIT_BOARD==2
 
 
-#include "esp_log.h"
+#include "audiokit_logger.h"
 #include "driver/gpio.h"
 #include <string.h>
 #include "audiokit_board.h"
@@ -44,7 +44,7 @@ esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
     } else {
         i2c_config->sda_io_num = -1;
         i2c_config->scl_io_num = -1;
-        ESP_LOGE(TAG, "i2c port %d is not supported", port);
+        LOGE( "i2c port %d is not supported", port);
         return ESP_FAIL;
     }
     return ESP_OK;
@@ -60,7 +60,7 @@ esp_err_t get_i2s_pins(i2s_port_t port, i2s_pin_config_t *i2s_config)
         i2s_config->data_in_num = GPIO_NUM_35;
     } else {
         memset(i2s_config, -1, sizeof(i2s_pin_config_t));
-        ESP_LOGE(TAG, "i2s port %d is not supported", port);
+        LOGE( "i2s port %d is not supported", port);
         return ESP_FAIL;
     }
     return ESP_OK;
@@ -79,21 +79,21 @@ esp_err_t get_spi_pins(spi_bus_config_t *spi_config, spi_device_interface_config
 
     spi_device_interface_config->spics_io_num = -1;
 
-    ESP_LOGW(TAG, "SPI interface is not is not supported");
+    LOGW("SPI interface is not is not supported");
     return ESP_OK;
 }
 
 esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num)
 {
     if (i2s_num >= I2S_NUM_MAX) {
-        ESP_LOGE(TAG, "Does not support i2s number(%d)", i2s_num);
+        LOGE( "Does not support i2s number(%d)", i2s_num);
         return ESP_ERR_INVALID_ARG;
     }
     if (gpio_num != GPIO_NUM_0 && gpio_num != GPIO_NUM_1 && gpio_num != GPIO_NUM_3) {
-        ESP_LOGE(TAG, "Only support GPIO0/GPIO1/GPIO3, gpio_num:%d", gpio_num);
+        LOGE( "Only support GPIO0/GPIO1/GPIO3, gpio_num:%d", gpio_num);
         return ESP_ERR_INVALID_ARG;
     }
-    ESP_LOGI(TAG, "I2S%d, MCLK output by GPIO%d", i2s_num, gpio_num);
+    LOGI( "I2S%d, MCLK output by GPIO%d", i2s_num, gpio_num);
     if (i2s_num == I2S_NUM_0) {
         if (gpio_num == GPIO_NUM_0) {
             PIN_FUNC_SELECT(PERIPHS_IO_MUX_GPIO0_U, FUNC_GPIO0_CLK_OUT1);

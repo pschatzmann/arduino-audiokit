@@ -30,7 +30,7 @@
 #include "freertos/queue.h"
 #include "freertos/timers.h"
 #include "driver/gpio.h"
-#include "esp_log.h"
+#include "audiokit_logger.h"
 #include "es8388.h"
 #include "audiokit_board.h"
 
@@ -46,14 +46,14 @@ static void hp_timer_cb(TimerHandle_t xTimer)
     int num = (int)pvTimerGetTimerID(xTimer);
     int res = gpio_get_level(num);
     es8388_pa_power(res);
-    ESP_LOGW(TAG, "Headphone jack %s", res ? "removed" : "inserted");
+    LOGW("Headphone jack %s", res ? "removed" : "inserted");
 }
 
 static int hp_timer_init(int num)
 {
     timer_headphone = xTimerCreate("hp_timer0", HP_DELAY_TIME_MS / portTICK_RATE_MS, pdFALSE, (void *) num, hp_timer_cb);
     if (timer_headphone == NULL) {
-        ESP_LOGE(TAG, "hp_timer create err");
+        LOGE( "hp_timer create err");
         return ESP_FAIL;
     }
     return ESP_OK;

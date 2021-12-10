@@ -12,7 +12,7 @@
  */
 
 #ifndef AUDIOKIT_BOARD
-#define AUDIOKIT_BOARD 1
+#define AUDIOKIT_BOARD 5
 #endif
 
 #define AUDIOKIT_DEFAULT_INPUT          AUDIO_HAL_ADC_INPUT_LINE1

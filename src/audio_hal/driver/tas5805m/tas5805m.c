@@ -24,7 +24,7 @@
 
 #include "i2c_bus.h"
 #include "audiokit_board.h"
-#include "esp_log.h"
+#include "audiokit_logger.h"
 #include "tas5805m.h"
 #include "tas5805m_reg_cfg.h"
 
@@ -37,7 +37,7 @@ static const char *TAG = "TAS5805M";
 
 #define TAS5805M_ASSERT(a, format, b, ...) \
     if ((a) != 0) { \
-        ESP_LOGE(TAG, format, ##__VA_ARGS__); \
+        LOGE( format, ##__VA_ARGS__); \
         return b;\
     }
 
@@ -88,7 +88,7 @@ static esp_err_t tas5805m_transmit_registers(const tas5805m_cfg_reg_t *conf_buf,
                 break;
             case CFG_END_1:
                 if (CFG_END_2 == conf_buf[i + 1].offset && CFG_END_3 == conf_buf[i + 2].offset) {
-                    ESP_LOGI(TAG, "End of tms5805m reg: %d\n", i);
+                    LOGI( "End of tms5805m reg: %d\n", i);
                 }
                 break;
             default:
@@ -98,17 +98,17 @@ static esp_err_t tas5805m_transmit_registers(const tas5805m_cfg_reg_t *conf_buf,
         i++;
     }
     if (ret != ESP_OK) {
-        ESP_LOGE(TAG, "Fail to load configuration to tas5805m");
+        LOGE( "Fail to load configuration to tas5805m");
         return ESP_FAIL;
     }
-    ESP_LOGI(TAG, "%s:  write %d reg done", __FUNCTION__, i);
+    LOGI( "%s:  write %d reg done", __FUNCTION__, i);
     return ret;
 }
 
 esp_err_t tas5805m_init(audio_hal_codec_config_t *codec_cfg)
 {
     esp_err_t ret = ESP_OK;
-    ESP_LOGI(TAG, "Power ON CODEC with GPIO %d", TAS5805M_RST_GPIO);
+    LOGI( "Power ON CODEC with GPIO %d", TAS5805M_RST_GPIO);
     gpio_config_t io_conf;
     io_conf.pin_bit_mask = BIT64(TAS5805M_RST_GPIO);
     io_conf.mode = GPIO_MODE_OUTPUT;
@@ -122,7 +122,7 @@ esp_err_t tas5805m_init(audio_hal_codec_config_t *codec_cfg)
     ret = get_i2c_pins(I2C_NUM_0, &i2c_cfg);
     i2c_handler = i2c_bus_create(I2C_NUM_0, &i2c_cfg);
     if (i2c_handler == NULL) {
-        ESP_LOGW(TAG, "failed to create i2c bus handler\n");
+        LOGW("failed to create i2c bus handler\n");
         return ESP_FAIL;
     }
 
@@ -150,7 +150,7 @@ esp_err_t tas5805m_set_volume(int vol)
     cmd[0] = MASTER_VOL_REG_ADDR;
     cmd[1] = tas5805m_volume[vol_idx];
     ret = i2c_bus_write_bytes(i2c_handler, TAS5805M_ADDR, &cmd[0], 1, &cmd[1], 1);
-    ESP_LOGW(TAG, "volume = 0x%x", cmd[1]);
+    LOGW("volume = 0x%x", cmd[1]);
     return ret;
 }
 
@@ -165,7 +165,7 @@ esp_err_t tas5805m_get_volume(int *value)
         if (cmd[1] >= tas5805m_volume[i])
             break;
     }
-    ESP_LOGI(TAG, "Volume is %d", i * 5);
+    LOGI( "Volume is %d", i * 5);
     *value = 5 * i;
     return ret;
 }
@@ -195,7 +195,7 @@ esp_err_t tas5805m_get_mute(int *value)
 
     TAS5805M_ASSERT(ret, "Fail to get mute", ESP_FAIL);
     *value = (cmd[1] & 0x08) >> 4;
-    ESP_LOGI(TAG, "Get mute value: 0x%x", *value);
+    LOGI( "Get mute value: 0x%x", *value);
     return ret;
 }
 
@@ -234,7 +234,7 @@ esp_err_t tas5805m_set_mute_fade(int value)
 
     ret |= i2c_bus_write_bytes(i2c_handler, TAS5805M_ADDR, &cmd[0], 1, &cmd[1], 1);
     TAS5805M_ASSERT(ret, "Fail to set mute fade", ESP_FAIL);
-    ESP_LOGI(TAG, "Set mute fade, value:%d, 0x%x", value, cmd[1]);
+    LOGI( "Set mute fade, value:%d, 0x%x", value, cmd[1]);
     return ret;
 }
 

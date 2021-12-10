@@ -10,6 +10,7 @@
 #include "audio_hal/driver/es8388/es8388.h"
 #include "audio_hal/driver/tas5805m/tas5805m.h"
 #include "audiokit_board.h"
+#include "audiokit_logger.h"
 #include "driver/i2s.h"
 #include "esp_a2dp_api.h"
 #include "esp_system.h"
@@ -64,6 +65,7 @@ struct AudioKitConfig {
       case AUDIO_HAL_BIT_LENGTH_32BITS:
         return 32;
     }
+    // LOGE("bits_per_sample not supported: %d", bits_per_sample);
     return 0;
   }
 
@@ -87,12 +89,14 @@ struct AudioKitConfig {
       case AUDIO_HAL_48K_SAMPLES: /*!< set to 48k samples per second */
         return 48000;
     }
+    // LOGE("sample rate not supported: %d", sample_rate);
     return 0;
   }
 
   /// Provides the ESP32 i2s_config_t
   i2s_config_t i2sConfig() {
-    int mode = isMaster() ? I2S_MODE_MASTER : I2S_MODE_SLAVE;
+    // use just the oposite of the CODEC setting
+    int mode = isMaster() ? I2S_MODE_SLAVE : I2S_MODE_MASTER;
     if (codec_mode == AUDIO_HAL_CODEC_MODE_DECODE) {
       mode = mode | I2S_MODE_TX;
     } else if (codec_mode == AUDIO_HAL_CODEC_MODE_ENCODE) {
@@ -114,11 +118,11 @@ struct AudioKitConfig {
     return i2s_config;
   }
 
-  i2s_pin_config_t i2sPins() { 
+  i2s_pin_config_t i2sPins() {
     i2s_pin_config_t result;
     get_i2s_pins(i2s_num, &result);
     return result;
-   }
+  }
 };
 
 /**
@@ -148,46 +152,47 @@ class AudioKit {
 
   /// Starts the codec
   bool begin(AudioKitConfig cnfg) {
-    cfg = cnfg;
+    LOGI(LOG_METHOD);
+    LOGI("Selected board: %d", AUDIOKIT_BOARD);
+
     audio_hal_conf.adc_input = cfg.adc_input;
     audio_hal_conf.dac_output = cfg.dac_output;
     audio_hal_conf.codec_mode = cfg.codec_mode;
-    // audio_hal_conf.i2s_iface = cfg.master_slave_mode;
-    if (audio_hal_init(&audio_hal_conf, &audio_hal) != ESP_OK) {
+    audio_hal_conf.i2s_iface.mode = cfg.master_slave_mode;
+    audio_hal_conf.i2s_iface.fmt = cfg.fmt;
+    audio_hal_conf.i2s_iface.samples = cfg.sample_rate;
+    audio_hal_conf.i2s_iface.bits = cfg.bits_per_sample;
+
+    hal_handle = audio_hal_init(&audio_hal_conf, &AUDIO_DRIVER);
+    if (hal_handle == 0) {
+      LOGE("audio_hal_init");
       return false;
     }
 
-    // setup audio_hal_codec_i2s_iface_t
-    iface.mode = cfg.master_slave_mode;
-    iface.fmt = cfg.fmt;
-    iface.samples = cfg.sample_rate;
-    iface.bits = cfg.bits_per_sample;
+    cfg = cnfg;
 
-    // configure codec
-    if (audio_hal_codec_iface_config(&audio_hal, cfg.codec_mode, &iface) !=
-        ESP_OK) {
-      return false;
-    }
-
-    // start codec driver
-    if (audio_hal_ctrl_codec(&audio_hal, cfg.codec_mode,
-                             AUDIO_HAL_CTRL_START) != ESP_OK) {
-      return false;
-    }
-
-    // setup i2s driver
+    // setup i2s driver - with no queue
     i2s_config_t i2s_config = cfg.i2sConfig();
-    if (i2s_driver_install(cfg.i2s_num, &i2s_config, 0, NULL)) {
+    if (i2s_driver_install(cfg.i2s_num, &i2s_config, 0, NULL) != ESP_OK) {
+      LOGE("i2s_driver_install");
       return false;
     }
 
     // define i2s pins
     i2s_pin_config_t pin_config = cfg.i2sPins();
-    if (i2s_set_pin(cfg.i2s_num, &pin_config)!=ESP_OK){
+    if (i2s_set_pin(cfg.i2s_num, &pin_config) != ESP_OK) {
+      LOGE("i2s_set_pin");
       return false;
     }
 
     if (i2s_mclk_gpio_select(cfg.i2s_num, cfg.mclk_gpio) != ESP_OK) {
+      LOGE("i2s_mclk_gpio_select");
+      return false;
+    }
+
+    // call start
+    if (!setActive(true)) {
+      LOGE("setActive");
       return false;
     }
 
@@ -196,41 +201,40 @@ class AudioKit {
 
   /// Stops the CODEC
   bool end() {
+    LOGI(LOG_METHOD);
     // uninstall i2s driver
     i2s_driver_uninstall(cfg.i2s_num);
     // stop codec driver
-    audio_hal_ctrl_codec(&audio_hal, cfg.codec_mode, AUDIO_HAL_CTRL_STOP);
+    audio_hal_ctrl_codec(hal_handle, cfg.codec_mode, AUDIO_HAL_CTRL_STOP);
     // deinit
-    audio_hal_deinit(&audio_hal);
+    audio_hal_deinit(hal_handle);
     return true;
   }
 
   /// Provides the actual configuration
-  AudioKitConfig config() {
-      return cfg;
-  }
+  AudioKitConfig config() { return cfg; }
 
   /// Sets the codec active / inactive
   bool setActive(bool active) {
     return audio_hal_ctrl_codec(
-               &audio_hal, cfg.codec_mode,
+               hal_handle, cfg.codec_mode,
                active ? AUDIO_HAL_CTRL_START : AUDIO_HAL_CTRL_STOP) == ESP_OK;
   }
 
   /// Mutes the output
   bool setMute(bool mute) {
-    return audio_hal_set_mute(&audio_hal, mute) == ESP_OK;
+    return audio_hal_set_mute(hal_handle, mute) == ESP_OK;
   }
 
   /// Defines the Volume
   bool setVolume(int vol) {
-    return (vol > 0) ? audio_hal_set_volume(&audio_hal, vol) == ESP_OK : false;
+    return (vol > 0) ? audio_hal_set_volume(hal_handle, vol) == ESP_OK : false;
   }
 
   /// Determines the volume
   int volume() {
     int volume;
-    if (audio_hal_get_volume(&audio_hal, &volume) != ESP_OK) {
+    if (audio_hal_get_volume(hal_handle, &volume) != ESP_OK) {
       volume = -1;
     }
     return volume;
@@ -239,16 +243,24 @@ class AudioKit {
   /// Writes the audio data via i2s to the DAC
   size_t write(const void *src, size_t size,
                TickType_t ticks_to_wait = portMAX_DELAY) {
+    LOGD("write: %zu", size);
     size_t bytes_written = 0;
-    i2s_write(cfg.i2s_num, src, size, &bytes_written, ticks_to_wait);
+    if (i2s_write(cfg.i2s_num, src, size, &bytes_written, ticks_to_wait) !=
+        ESP_OK) {
+      LOGE("i2s_write");
+    }
     return bytes_written;
   }
 
   /// Reads the audio data via i2s from the ADC
   size_t read(void *dest, size_t size,
               TickType_t ticks_to_wait = portMAX_DELAY) {
+    LOGD("read: %zu", size);
     size_t bytes_read = 0;
-    i2s_read(cfg.i2s_num, dest, size, &bytes_read, ticks_to_wait);
+    if (i2s_read(cfg.i2s_num, dest, size, &bytes_read, ticks_to_wait) !=
+        ESP_OK) {
+      LOGE("i2s_read");
+    }
     return bytes_read;
   }
 
@@ -373,8 +385,8 @@ class AudioKit {
   int8_t pinBlueLed() { return get_blue_led_gpio(); }
 
  protected:
-  audio_hal_func_t audio_hal;
-  audio_hal_codec_config_t audio_hal_conf;
-  audio_hal_codec_i2s_iface_t iface;
   AudioKitConfig cfg;
+  audio_hal_codec_config_t audio_hal_conf;
+  audio_hal_handle_t hal_handle;
+  audio_hal_codec_i2s_iface_t iface;
 };

@@ -10,6 +10,7 @@ const int BUFFER_SIZE = 1024;
 uint8_t buffer[BUFFER_SIZE];
 
 void setup() {
+  Serial.begin(115200);
   // open in write mode
   auto cfg = kit.defaultConfig(true);
   kit.begin(cfg);

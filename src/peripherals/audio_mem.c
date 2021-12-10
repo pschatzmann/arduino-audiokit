@@ -26,7 +26,7 @@
 #include "string.h"
 #include "sdkconfig.h"
 #include "esp_system.h"
-#include "esp_log.h"
+#include "audiokit_logger.h"
 #include "audio_mem.h"
 #include "esp_heap_caps.h"
 #include "esp_efuse.h"
@@ -42,7 +42,7 @@ void *audio_malloc(size_t size)
     data = malloc(size);
 #endif
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    ESP_LOGI("AUDIO_MEM", "malloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
+    LOGI( "malloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
 #endif
     return data;
 }
@@ -81,7 +81,7 @@ void *audio_realloc(void *ptr, size_t size)
     p = heap_caps_realloc(ptr, size, MALLOC_CAP_8BIT);
 #endif
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    ESP_LOGI("AUDIO_MEM", "realloc,new:%p, ptr:%p size:%d, called:0x%08x", p, ptr, size, (intptr_t)__builtin_return_address(0) - 2);
+    LOGI( "realloc,new:%p, ptr:%p size:%d, called:0x%08x", p, ptr, size, (intptr_t)__builtin_return_address(0) - 2);
 #endif
     return p;
 }
@@ -97,7 +97,7 @@ char *audio_strdup(const char *str)
         strcpy(copy, str);
     }
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    ESP_LOGI("AUDIO_MEM", "strdup:%p, size:%d, called:0x%08x", copy, strlen(copy), (intptr_t)__builtin_return_address(0) - 2);
+    LOGI( "strdup:%p, size:%d, called:0x%08x", copy, strlen(copy), (intptr_t)__builtin_return_address(0) - 2);
 #endif
     return copy;
 }
@@ -120,10 +120,10 @@ void *audio_calloc_inner(size_t n, size_t size)
 void audio_mem_print(const char *tag, int line, const char *func)
 {
 #ifdef CONFIG_SPIRAM_BOOT_INIT
-    ESP_LOGI(tag, "Func:%s, Line:%d, MEM Total:%d Bytes, Inter:%d Bytes, Dram:%d Bytes\r\n", func, line, esp_get_free_heap_size(),
+    LOGI( "Func:%s, Line:%d, MEM Total:%d Bytes, Inter:%d Bytes, Dram:%d Bytes\r\n", func, line, esp_get_free_heap_size(),
              heap_caps_get_free_size(MALLOC_CAP_INTERNAL), heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT));
 #else
-    ESP_LOGI(tag, "Func:%s, Line:%d, MEM Total:%d Bytes\r\n", func, line, esp_get_free_heap_size());
+    LOGI( "Func:%s, Line:%d, MEM Total:%d Bytes\r\n", func, line, esp_get_free_heap_size());
 #endif
 }
 
@@ -146,7 +146,7 @@ bool audio_mem_spiram_stack_is_enabled(void)
 #if CONFIG_IDF_TARGET_ESP32
     uint8_t chip_ver = esp_efuse_get_chip_ver();
     if (chip_ver < 3) {
-        ESP_LOGW("AUIDO_MEM", "Can't support stack on external memory due to ESP32 chip is %d", chip_ver);
+        LOGW("Can't support stack on external memory due to ESP32 chip is %d", chip_ver);
         ret = false;
     }
 #endif

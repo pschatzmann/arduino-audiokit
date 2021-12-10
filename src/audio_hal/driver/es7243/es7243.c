@@ -26,12 +26,12 @@
 #include "es7243.h"
 #include "i2c_bus.h"
 #include "audiokit_board.h"
-#include "esp_log.h"
+#include "audiokit_logger.h"
 
 #define MCLK_PULSES_NUMBER    (20)
 #define ES_ASSERT(a, format, b, ...) \
     if ((a) != 0) { \
-        ESP_LOGE(TAG, format, ##__VA_ARGS__); \
+        LOGE( format, ##__VA_ARGS__); \
         return b;\
     }
 
@@ -107,7 +107,7 @@ esp_err_t es7243_adc_init(audio_hal_codec_config_t *codec_cfg)
     ret |= es7243_write_reg(0x08, 0x43);
     ret |= es7243_write_reg(0x05, 0x13);
     if (ret) {
-        ESP_LOGE(TAG, "Es7243 initialize failed!");
+        LOGE( "Es7243 initialize failed!");
         return ESP_FAIL;
     }
     return ret;
@@ -130,7 +130,7 @@ esp_err_t es7243_adc_config_i2s(audio_hal_codec_mode_t mode, audio_hal_codec_i2s
 
 esp_err_t es7243_adc_set_voice_mute(bool mute)
 {
-    ESP_LOGI(TAG, "Enter into es7243_mute(), mute = %d\n", mute);
+    LOGI( "Enter into es7243_mute(), mute = %d\n", mute);
     if (mute) {
         es7243_write_reg(0x05, 0x1B);
     } else {

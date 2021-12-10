@@ -28,7 +28,7 @@
 
 #include "audio_mutex.h"
 #include "audio_idf_version.h"
-#include "esp_log.h"
+#include "audiokit_logger.h"
 
 #if (ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(4, 3, 0))
 

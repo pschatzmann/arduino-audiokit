@@ -17,16 +17,14 @@ You can define your board and the default settings in the ```AudioKitSettings.h`
  * 1) lyrat_v4_3
  * 2) lyrat_v4_2
  * 3) lyrat_mini_v1_1
- * 4) lyratd_msc_v2_2
- * 5) lyratd_msc_v2_1
- * 6) ai_thinker_v2_2
- * 7) esp32_s2_kaluga_1_v1_2
+ * 4) esp32_s2_kaluga_1_v1_2
+ * 5) ai_thinker_v2_2
  */
 
 #define AUDIOKIT_BOARD 1
 
 ```
-Here the lyrat v3.4 has been selected. Alternatively you can specify the board in a sketch with a #define before the #includes as shown in the next example.
+Here the lyrat v3.4 has been selected. 
 
 
 ## Example Sketch
@@ -36,8 +34,6 @@ Here is an example sketch that writes audio data to the audio kit board via I2S.
 You can adjust these parameters by setting your requested values in the cfg below:
 
 ```
-#define AUDIOKIT_BOARD 7
-
 #include "AudioKit.h"
 #include "SineWaveGenerator.h"
 
@@ -63,6 +59,15 @@ void loop() {
 }
 
 ```
+## Logging
+
+The functionality has a built in logger. The default log level has been set to Warning. You can change it like this:
+
+```
+  AUDIOKIT_LOG_LEVEL = Debug;
+
+```
+
 
 ## Documentation
 
