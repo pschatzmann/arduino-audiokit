@@ -23,7 +23,7 @@
  */
 
 #include "i2c_bus.h"
-#include "board.h"
+#include "audiokit_board.h"
 #include "esp_log.h"
 #include "tas5805m.h"
 #include "tas5805m_reg_cfg.h"

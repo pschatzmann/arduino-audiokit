@@ -25,7 +25,7 @@
 #include <string.h>
 #include "es7243.h"
 #include "i2c_bus.h"
-#include "board.h"
+#include "audiokit_board.h"
 #include "esp_log.h"
 
 #define MCLK_PULSES_NUMBER    (20)

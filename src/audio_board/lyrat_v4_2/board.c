@@ -26,7 +26,7 @@
 #if AUDIOKIT_BOARD==2
 
 #include "esp_log.h"
-#include "board.h"
+#include "audiokit_board.h"
 #include "audio_mem.h"
 
 static const char *TAG = "AUDIO_BOARD";
@@ -52,6 +52,7 @@ audio_board_handle_t audio_board_get_handle(void)
 {
     return board_handle;
 }
+
 
 esp_err_t audio_board_deinit(audio_board_handle_t audio_board)
 {

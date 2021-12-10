@@ -25,7 +25,7 @@
 #include "esp_log.h"
 #include "es7148.h"
 #include "driver/gpio.h"
-#include "board.h"
+#include "audiokit_board.h"
 
 
 static const char *TAG = "es7148";

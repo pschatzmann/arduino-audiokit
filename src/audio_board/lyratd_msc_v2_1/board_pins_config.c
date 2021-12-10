@@ -28,7 +28,7 @@
 #include "esp_log.h"
 #include "driver/gpio.h"
 #include <string.h>
-#include "board.h"
+#include "audiokit_board.h"
 #include "audio_error.h"
 #include "audio_mem.h"
 

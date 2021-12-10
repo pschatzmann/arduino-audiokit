@@ -24,7 +24,7 @@
 
 #include <string.h>
 #include "esp_log.h"
-#include "board.h"
+#include "audiokit_board.h"
 #include "i2c_bus.h"
 #include "es7210.h"
 

@@ -26,11 +26,9 @@
 #if AUDIOKIT_BOARD==4
 
 #include "esp_log.h"
-#include "board.h"
+#include "audiokit_board.h"
 #include "audio_mem.h"
 
-#include "periph_sdcard.h"
-//#include "periph_adc_button.h"
 #include "led_bar_is31x.h"
 
 static const char *TAG = "AUDIO_BOARD";
@@ -58,71 +56,7 @@ audio_hal_handle_t audio_board_codec_init(void)
     return codec_hal;
 }
 
-// display_service_handle_t audio_board_led_init(void)
-// {
-//     esp_periph_handle_t led = led_bar_is31x_init();
-//     AUDIO_NULL_CHECK(TAG, led, return NULL);
-//     display_service_config_t display = {
-//         .based_cfg = {
-//             .task_stack = 0,
-//             .task_prio  = 0,
-//             .task_core  = 0,
-//             .task_func  = NULL,
-//             .service_start = NULL,
-//             .service_stop = NULL,
-//             .service_destroy = NULL,
-//             .service_ioctl = led_bar_is31x_pattern,
-//             .service_name = "DISPLAY_serv",
-//             .user_data = NULL,
-//         },
-//         .instance = led,
-//     };
 
-//     return display_service_create(&display);
-// }
-
-// esp_err_t audio_board_key_init(esp_periph_set_handle_t set)
-// {
-//     periph_adc_button_cfg_t adc_btn_cfg = PERIPH_ADC_BUTTON_DEFAULT_CONFIG();
-//     adc_arr_t adc_btn_tag = ADC_DEFAULT_ARR();
-//     adc_btn_cfg.arr = &adc_btn_tag;
-//     adc_btn_cfg.arr_size = 1;
-//     esp_periph_handle_t adc_btn_handle = periph_adc_button_init(&adc_btn_cfg);
-//     AUDIO_NULL_CHECK(TAG, adc_btn_handle, return ESP_ERR_ADF_MEMORY_LACK);
-//     return esp_periph_start(set, adc_btn_handle);
-// }
-
-esp_err_t audio_board_sdcard_init(esp_periph_set_handle_t set, periph_sdcard_mode_t mode)
-{
-    if (mode != SD_MODE_1_LINE) {
-        ESP_LOGE(TAG, "current board only support 1-line SD mode!");
-        return ESP_FAIL;
-    }
-    periph_sdcard_cfg_t sdcard_cfg = {
-        .root = "/sdcard",
-        .card_detect_pin = get_sdcard_intr_gpio(), // GPIO_NUM_34
-        .mode = mode
-    };
-    esp_periph_handle_t sdcard_handle = periph_sdcard_init(&sdcard_cfg);
-    // esp_err_t ret = esp_periph_start(set, sdcard_handle);
-    // int retry_time = 5;
-    // bool mount_flag = false;
-    // while (retry_time --) {
-    //     if (periph_sdcard_is_mounted(sdcard_handle)) {
-    //         mount_flag = true;
-    //         break;
-    //     } else {
-    //         vTaskDelay(500 / portTICK_PERIOD_MS);
-    //     }
-    // }
-    // if (mount_flag == false) {
-    //     ESP_LOGE(TAG, "Sdcard mount failed");
-    //     return ESP_FAIL;
-    // }
-    // return ret;
-    return ESP_OK;
-
-}
 
 audio_board_handle_t audio_board_get_handle(void)
 {

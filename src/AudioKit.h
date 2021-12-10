@@ -9,7 +9,7 @@
 #include "audio_hal/driver/es8374/es8374.h"
 #include "audio_hal/driver/es8388/es8388.h"
 #include "audio_hal/driver/tas5805m/tas5805m.h"
-#include "board.h"
+#include "audiokit_board.h"
 #include "driver/i2s.h"
 #include "esp_a2dp_api.h"
 #include "esp_system.h"
