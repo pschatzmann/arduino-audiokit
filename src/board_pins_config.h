@@ -22,14 +22,21 @@
  *
  */
 
-#ifndef _BOARD_PINS_CONFIG_H_
-#define _BOARD_PINS_CONFIG_H_
+#pragma once
+
+#ifdef ESP32
 
 #include "driver/i2c.h"
 #include "driver/i2s.h"
 #include "driver/spi_common.h"
 #include "driver/spi_master.h"
 #include "driver/spi_slave.h"
+
+#else
+
+#include "audio_gpio.h"
+
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -223,8 +230,8 @@ int8_t get_green_led_gpio(void);
  */
 int8_t get_blue_led_gpio(void);
 
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif

@@ -24,13 +24,23 @@
 #ifndef _IOT_I2C_BUS_H_
 #define _IOT_I2C_BUS_H_
 
+#ifdef ESP32
 #include "driver/i2c.h"
+#else
+#include "audio_error.h"
+#include "board_pins_config.h"
+#define GPIO_PULLUP_ENABLE 1
+#endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 typedef void *i2c_bus_handle_t;
+
+#ifndef ESP32
+typedef int portBASE_TYPE;
+typedef void* i2c_cmd_handle_t;
+#endif
 
 /**
  * @brief Create and init I2C bus and return a I2C bus handle
@@ -100,18 +110,18 @@ esp_err_t i2c_bus_read_bytes(i2c_bus_handle_t bus, int addr, uint8_t *reg, int r
  */
 esp_err_t i2c_bus_delete(i2c_bus_handle_t bus);
 
-/**
- * @brief I2C start sending buffered commands
- *
- * @param bus            I2C bus handle
- * @param cmd            I2C cmd handle
- * @param ticks_to_wait  Maximum blocking time
- *
- * @return
- *     - ESP_OK Success
- *     - ESP_FAIL Fail
- */
-esp_err_t i2c_bus_cmd_begin(i2c_bus_handle_t bus, i2c_cmd_handle_t cmd, portBASE_TYPE ticks_to_wait);
+// /**
+//  * @brief I2C start sending buffered commands
+//  *
+//  * @param bus            I2C bus handle
+//  * @param cmd            I2C cmd handle
+//  * @param ticks_to_wait  Maximum blocking time
+//  *
+//  * @return
+//  *     - ESP_OK Success
+//  *     - ESP_FAIL Fail
+//  */
+// esp_err_t i2c_bus_cmd_begin(i2c_bus_handle_t bus, i2c_cmd_handle_t cmd, portBASE_TYPE ticks_to_wait);
 
 #ifdef __cplusplus
 }

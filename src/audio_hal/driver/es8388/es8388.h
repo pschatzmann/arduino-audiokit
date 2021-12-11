@@ -25,10 +25,12 @@
 #ifndef __ES8388_H__
 #define __ES8388_H__
 
-#include "esp_types.h"
+#include "audio_types.h"
 #include "audio_hal.h"
-#include "driver/i2c.h"
 #include "esxxx_common.h"
+#ifdef ESP32
+#include "driver/i2c.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {

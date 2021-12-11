@@ -26,7 +26,16 @@
 #ifndef _AUDIO_ERROR_H_
 #define _AUDIO_ERROR_H_
 
+#ifdef ESP32
 #include "esp_err.h"
+#else
+typedef int esp_err_t;
+
+/* Definitions for error constants. */
+#define ESP_OK          0       /*!< esp_err_t value indicating success (no error) */
+#define ESP_FAIL        -1      /*!< Generic esp_err_t code indicating failure */
+#define ESP_ERR_INVALID_ARG 1
+#endif
 
 #ifdef __cplusplus
 extern "C" {

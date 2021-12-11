@@ -23,7 +23,7 @@
  */
 
 #include <string.h>
-#include "esp_system.h"
+#include "audio_system.h"
 #include "audiokit_logger.h"
 #include "i2c_bus.h"
 #include "es8374.h"

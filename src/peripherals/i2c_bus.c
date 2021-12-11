@@ -22,6 +22,9 @@
   *
   */
 
+#include "AudioKitSettings.h"
+#ifndef AUDIOKIT_USE_WIRE
+
 #include <stdio.h>
 #include "audiokit_logger.h"
 #include "driver/i2c.h"
@@ -43,7 +46,6 @@ typedef struct {
     i2c_port_t i2c_port;     /*!<I2C port number */
 } i2c_bus_t;
 
-static const char *TAG = "I2C_BUS";
 
 static i2c_bus_t *i2c_bus[I2C_NUM_MAX];
 
@@ -182,13 +184,15 @@ esp_err_t i2c_bus_delete(i2c_bus_handle_t bus)
     return ESP_OK;
 }
 
-esp_err_t i2c_bus_cmd_begin(i2c_bus_handle_t bus, i2c_cmd_handle_t cmd, portBASE_TYPE ticks_to_wait)
-{
-    LOGD(LOG_METHOD);
-    I2C_BUS_CHECK(bus != NULL, "Handle error", ESP_FAIL);
-    I2C_BUS_CHECK(cmd != NULL, "I2C cmd error", ESP_FAIL);
-    i2c_bus_t *p_bus = (i2c_bus_t *) bus;
+// esp_err_t i2c_bus_cmd_begin(i2c_bus_handle_t bus, i2c_cmd_handle_t cmd, portBASE_TYPE ticks_to_wait)
+// {
+//     LOGD(LOG_METHOD);
+//     I2C_BUS_CHECK(bus != NULL, "Handle error", ESP_FAIL);
+//     I2C_BUS_CHECK(cmd != NULL, "I2C cmd error", ESP_FAIL);
+//     i2c_bus_t *p_bus = (i2c_bus_t *) bus;
 
-    esp_err_t ret = i2c_master_cmd_begin(p_bus->i2c_port, cmd, ticks_to_wait);
-    return ret;
-}
+//     esp_err_t ret = i2c_master_cmd_begin(p_bus->i2c_port, cmd, ticks_to_wait);
+//     return ret;
+// }
+
+#endif

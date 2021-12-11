@@ -27,16 +27,36 @@
 
 #ifndef _AUDIO_HAL_H_
 #define _AUDIO_HAL_H_
+
+#include "AudioKitSettings.h"
+#include "audio_error.h"
+
+#ifdef AUDIOKIT_FREE_RTOS
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include "freertos/task.h"
+#else
+#define portTICK_PERIOD_MS 1 
+#define portTICK_RATE_MS              portTICK_PERIOD_MS
+typedef void* xSemaphoreHandle;
+#endif
+
+#ifndef ESP32 
+#include <stdint.h>
+#include <stdbool.h>
 #include "audio_error.h"
+
+#endif
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define AUDIO_HAL_VOL_DEFAULT 70
+
+#define AUDIO_HAL_VOL_DEFAULT 20
+#define ets_printf LOGD
+
 typedef struct audio_hal *audio_hal_handle_t;
 
 /**

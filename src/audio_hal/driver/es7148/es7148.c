@@ -24,7 +24,7 @@
 
 #include "audiokit_logger.h"
 #include "es7148.h"
-#include "driver/gpio.h"
+#include "audio_gpio.h"
 #include "audiokit_board.h"
 
 

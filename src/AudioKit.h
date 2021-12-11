@@ -11,9 +11,12 @@
 #include "audio_hal/driver/tas5805m/tas5805m.h"
 #include "audiokit_board.h"
 #include "audiokit_logger.h"
-#include "driver/i2s.h"
+#include "SPI.h"
+#ifdef ESP32
 #include "esp_a2dp_api.h"
-#include "esp_system.h"
+#include "audio_system.h"
+#include "driver/i2s.h"
+#endif
 
 #if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
 #define I2S_COMM_FORMAT_STAND_I2S \
@@ -93,7 +96,8 @@ struct AudioKitConfig {
     return 0;
   }
 
-  /// Provides the ESP32 i2s_config_t
+#ifdef ESP32
+  /// Provides the ESP32 i2s_config_t to configure I2S
   i2s_config_t i2sConfig() {
     // use just the oposite of the CODEC setting
     int mode = isMaster() ? I2S_MODE_SLAVE : I2S_MODE_MASTER;
@@ -118,11 +122,13 @@ struct AudioKitConfig {
     return i2s_config;
   }
 
+  /// Provides the ESP32 i2s_pin_config_t to configure the pins for I2S
   i2s_pin_config_t i2sPins() {
     i2s_pin_config_t result;
     get_i2s_pins(i2s_num, &result);
     return result;
   }
+#endif
 };
 
 /**
@@ -131,7 +137,13 @@ struct AudioKitConfig {
  */
 
 class AudioKit {
+
  public:
+  AudioKit() {
+    // setup SPI for SD drives
+    setupSPI();
+  }
+
   /// Provides a default configuration for input & output
   AudioKitConfig defaultConfig() {
     AudioKitConfig result;
@@ -171,6 +183,8 @@ class AudioKit {
 
     cfg = cnfg;
 
+#ifdef ESP32
+
     // setup i2s driver - with no queue
     i2s_config_t i2s_config = cfg.i2sConfig();
     if (i2s_driver_install(cfg.i2s_num, &i2s_config, 0, NULL) != ESP_OK) {
@@ -190,6 +204,8 @@ class AudioKit {
       return false;
     }
 
+#endif
+
     // call start
     if (!setActive(true)) {
       LOGE("setActive");
@@ -202,8 +218,11 @@ class AudioKit {
   /// Stops the CODEC
   bool end() {
     LOGI(LOG_METHOD);
+
+#ifdef ESP32
     // uninstall i2s driver
     i2s_driver_uninstall(cfg.i2s_num);
+#endif
     // stop codec driver
     audio_hal_ctrl_codec(hal_handle, cfg.codec_mode, AUDIO_HAL_CTRL_STOP);
     // deinit
@@ -240,6 +259,8 @@ class AudioKit {
     return volume;
   }
 
+#ifdef ESP32
+
   /// Writes the audio data via i2s to the DAC
   size_t write(const void *src, size_t size,
                TickType_t ticks_to_wait = portMAX_DELAY) {
@@ -263,6 +284,8 @@ class AudioKit {
     }
     return bytes_read;
   }
+
+#endif
 
   /**
    * @brief  Get the gpio number for auxin detection
@@ -384,9 +407,54 @@ class AudioKit {
    */
   int8_t pinBlueLed() { return get_blue_led_gpio(); }
 
+  /**
+   * @brief SPI CS Pin for SD Drive
+   * 
+   * @return int8_t 
+   */
+  int8_t pinSpiCs() {
+    return spi_cs_pin;
+  }
+
  protected:
   AudioKitConfig cfg;
   audio_hal_codec_config_t audio_hal_conf;
   audio_hal_handle_t hal_handle;
   audio_hal_codec_i2s_iface_t iface;
+  int8_t spi_cs_pin;
+ 
+
+  /**
+   * @brief Setup the SPI so that we can access the SD Drive
+   */
+  void setupSPI() {
+    LOGD(LOG_METHOD);
+
+#ifdef ESP32
+    spi_bus_config_t cfg;
+    spi_device_interface_config_t if_cfg;
+
+    // determine the pins from the hal
+    get_spi_pins(&cfg, &if_cfg);
+    spi_cs_pin = if_cfg.spics_io_num;
+
+    if (cfg.sclk_io_num!=-1){
+
+      // LOGI("SPI sclk: %d", cfg.sclk_io_num);
+      // LOGI("SPI miso: %d", cfg.miso_io_num);
+      // LOGI("SPI mosi: %d", cfg.mosi_io_num);
+      // LOGI("SPI cs: %d", spi_cs_pin);
+
+      // Open the SPI bus with the pins for this board
+      SPI.begin(cfg.sclk_io_num, cfg.miso_io_num, cfg.mosi_io_num, spi_cs_pin);
+    } else {
+      SPI.begin(14, 2, 15, 13);
+    }
+#else
+    #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
+#endif
+  }
+
+
+
 };

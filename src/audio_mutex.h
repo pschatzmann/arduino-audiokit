@@ -25,10 +25,6 @@
 #ifndef __AUDIO_MUTEX_H__
 #define __AUDIO_MUTEX_H__
 
-#include "freertos/FreeRTOS.h"
-#include "freertos/semphr.h"
-#include "freertos/task.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif

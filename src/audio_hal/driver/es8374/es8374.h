@@ -25,7 +25,7 @@
 #ifndef __ES8374_H__
 #define __ES8374_H__
 
-#include "esp_types.h"
+#include "audio_types.h"
 #include "audio_hal.h"
 #include "esxxx_common.h"
 

@@ -25,7 +25,7 @@
 #ifndef _ES7243_H_
 #define _ES7243_H_
 
-#include "esp_err.h"
+#include "audio_error.h"
 #include "audio_hal.h"
 
 #ifdef __cplusplus

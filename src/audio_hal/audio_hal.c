@@ -24,7 +24,7 @@
 
 #include "audiokit_logger.h"
 #include <string.h>
-#include "driver/gpio.h"
+#include "audio_gpio.h"
 #include "audiokit_logger.h"
 #include "audio_hal.h"
 

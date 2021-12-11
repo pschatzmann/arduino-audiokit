@@ -26,7 +26,7 @@
 #define _ES8311_H
 
 #include "audio_hal.h"
-#include "esp_types.h"
+#include "audio_types.h"
 #include "esxxx_common.h"
 
 #ifdef __cplusplus

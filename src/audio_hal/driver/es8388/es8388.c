@@ -28,10 +28,6 @@
 #include "board_pins_config.h"
 #include "audiokit_logger.h"
 
-#ifdef CONFIG_ESP_LYRAT_V4_3_BOARD
-#include "headphone_detect.h"
-#endif
-
 static i2c_bus_handle_t i2c_handle;
 
 #define ES_ASSERT(a, format, b, ...) \
@@ -462,7 +458,7 @@ esp_err_t es8388_get_voice_mute(void)
  *     - (-1) Parameter error
  *     - (0)   Success
  */
-esp_err_t es8388_config_dac_output(int output)
+esp_err_t es8388_config_dac_output(es_dac_output_t output)
 {
     LOGD(LOG_METHOD);
     esp_err_t res;

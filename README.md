@@ -4,9 +4,13 @@ There are different ESP32 AudioKit boards available that can be programmed with 
 
 <img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" />
 
-The ADF Framework contains an abstractioin layer to support different CODEC chips. Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.
+The ADF Framework contains an abstraction layer to support different CODEC chips. Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.
 
-I converted the __audio_boards__ and their related __drivers__ into an __Arduino Library__ and provide an easy to use C++ class which configures both the CODEC and I2S. With this project it should get quite easy to use these boards also in Arduino.
+Because I wanted to have a proper support of the AudioKit for my [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools) library and since my Audio Tools are  header only, I decided to provide this functionality in a separate project.
+
+I converted the __audio_boards__ and their related __drivers__ into an __Arduino Library__ and provide an easy to use C++ class which configures both the CODEC and I2S. I also tried to abstract away all ESP32 specific funcationality. 
+
+So with this project it should now get quite easy to use these boards also in Arduino.
 
 ## Configuration
 
@@ -29,7 +33,7 @@ Here the lyrat v3.4 has been selected.
 
 ## Example Sketch
 
-Here is an example sketch that writes audio data to the audio kit board via I2S. By default I2S is set up as master, the CODEC as slave, the sample size is 16 bits and the sample rate is 44.1k/sec if you did not change the default settings. 
+Here is an example sketch that writes audio data to the audio kit board via I2S. By default I2S is set up as master and the codec as slave, the sample size is 16 bits and the sample rate is 44.1k/sec - if you did not change the default settings. 
 
 You can adjust these parameters by setting your requested values in the cfg below:
 
@@ -64,7 +68,7 @@ void loop() {
 The functionality has a built in logger. The default log level has been set to Warning. You can change it like this:
 
 ```
-  AUDIOKIT_LOG_LEVEL = Debug;
+  AUDIOKIT_LOG_LEVEL = Debug; // or Info, Warning, Error
 
 ```
 
@@ -73,9 +77,22 @@ The functionality has a built in logger. The default log level has been set to W
 
 Here is the documentaion of the [AudioKit class](https://pschatzmann.github.io/arduino-audiokit-hal/html/class_audio_kit.html)
 
-## Status
 
-Early Development
+## Installation in Arduino
 
+You can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
+
+```
+cd  ~/Documents/Arduino/libraries
+git clone https://github.com/pschatzmann/arduino-audiokit-hal.git
+
+```
+
+If you want to use the library in PlatformIO, you can find a [detailed description in the Wiki](https://github.com/pschatzmann/arduino-audiokit-hal/wiki/PlatformIO).
+
+
+## Supprted Devices / Processors
+
+The examples have been tested with a AI Thinker v2.2.  I do not own any other AudioKit devices, so I can't guarantee that they work properly. I also made sure that the code is compiling on other processors, but I did not perform any tests. Please note that because I2S is not standardized in Arduino, you need to take care of the I2S initialization  and processing yourself on other processors.
 
 
