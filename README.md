@@ -85,7 +85,7 @@ You can download the library as zip and call include Library -> zip library. Or 
 
 ```
 cd  ~/Documents/Arduino/libraries
-git clone https://github.com/pschatzmann/arduino-audiokit-hal.git
+git clone https://github.com/pschatzmann/arduino-audiokit.git
 
 ```
 
