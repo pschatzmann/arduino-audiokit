@@ -18,11 +18,14 @@
 #include "driver/i2s.h"
 #endif
 
+// Support for old IDF versions
 #if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
 #define I2S_COMM_FORMAT_STAND_I2S \
-  (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
+  (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
 #define I2S_COMM_FORMAT_STAND_MSB \
   (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
+#define I2S_COMM_FORMAT_STAND_LSB \
+  (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
 #define I2S_COMM_FORMAT_STAND_PCM_LONG \
   (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_LONG)
 #define I2S_COMM_FORMAT_STAND_PCM_SHORT \
@@ -100,25 +103,19 @@ struct AudioKitConfig {
   /// Provides the ESP32 i2s_config_t to configure I2S
   i2s_config_t i2sConfig() {
     // use just the oposite of the CODEC setting
-    int mode = isMaster() ? I2S_MODE_SLAVE : I2S_MODE_MASTER;
-    if (codec_mode == AUDIO_HAL_CODEC_MODE_DECODE) {
-      mode = mode | I2S_MODE_TX;
-    } else if (codec_mode == AUDIO_HAL_CODEC_MODE_ENCODE) {
-      mode = mode | I2S_MODE_RX;
-    } else if (codec_mode == AUDIO_HAL_CODEC_MODE_BOTH) {
-      mode = mode | I2S_MODE_RX | I2S_MODE_TX;
-    }
-
     const i2s_config_t i2s_config = {
-        .mode = (i2s_mode_t)mode,
+        .mode = i2sMode(),
         .sample_rate = sampleRate(),
         .bits_per_sample = (i2s_bits_per_sample_t)bitsPerSample(),
         .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
-        .communication_format = (i2s_comm_format_t)I2S_COMM_FORMAT_STAND_I2S,
-        .intr_alloc_flags = 0,  // default interrupt priority
-        .dma_buf_count = 8,
-        .dma_buf_len = 64,
-        .use_apll = true};
+        .communication_format = (i2s_comm_format_t)i2sFormat(),
+        .intr_alloc_flags = ESP_INTR_FLAG_LEVEL2 | ESP_INTR_FLAG_IRAM,          
+        .dma_buf_count = 3,
+        .dma_buf_len = 320,                                                     
+        .use_apll = true,
+        .tx_desc_auto_clear = true,                                             
+        .fixed_mclk = 0 
+    };                                                        
     return i2s_config;
   }
 
@@ -128,6 +125,44 @@ struct AudioKitConfig {
     get_i2s_pins(i2s_num, &result);
     return result;
   }
+
+  protected:
+    i2s_comm_format_t i2sFormat(){
+        i2s_comm_format_t its_com_fmt = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_I2S;
+        if (fmt==AUDIO_HAL_I2S_LEFT){
+          its_com_fmt = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;
+        } else if(fmt==AUDIO_HAL_I2S_RIGHT){
+          its_com_fmt = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_LSB;
+        } else if(fmt==AUDIO_HAL_I2S_DSP){
+          its_com_fmt = (i2s_comm_format_t )I2S_COMM_FORMAT_STAND_PCM_SHORT;
+        }
+        return its_com_fmt;
+    }
+
+    i2s_mode_t i2sMode() {
+      int mode = isMaster() ? I2S_MODE_SLAVE : I2S_MODE_MASTER;
+      // using ESP32 dac/adc
+      if (fmt == AUDIO_HAL_I2S_DSP){
+        if (codec_mode == AUDIO_HAL_CODEC_MODE_DECODE) {
+          mode = mode | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN;
+        } else if (codec_mode == AUDIO_HAL_CODEC_MODE_ENCODE) {
+          mode = mode | I2S_MODE_RX | I2S_MODE_ADC_BUILT_IN;
+        } else if (codec_mode == AUDIO_HAL_CODEC_MODE_BOTH) {
+          mode = mode | I2S_MODE_RX | I2S_MODE_TX | I2S_MODE_ADC_BUILT_IN | I2S_MODE_DAC_BUILT_IN;
+        } 
+      } else {
+        // I2S
+        if (codec_mode == AUDIO_HAL_CODEC_MODE_DECODE) {
+          mode = mode | I2S_MODE_TX;
+        } else if (codec_mode == AUDIO_HAL_CODEC_MODE_ENCODE) {
+          mode = mode | I2S_MODE_RX;
+        } else if (codec_mode == AUDIO_HAL_CODEC_MODE_BOTH) {
+          mode = mode | I2S_MODE_RX | I2S_MODE_TX;
+        } 
+      }
+      return (i2s_mode_t) mode;
+    }
+
 #endif
 };
 
