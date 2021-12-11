@@ -429,27 +429,10 @@ class AudioKit {
    */
   void setupSPI() {
     LOGD(LOG_METHOD);
-
-#ifdef ESP32
-    spi_bus_config_t cfg;
-    spi_device_interface_config_t if_cfg;
-
-    // determine the pins from the hal
-    get_spi_pins(&cfg, &if_cfg);
-    spi_cs_pin = if_cfg.spics_io_num;
-
-    if (cfg.sclk_io_num!=-1){
-
-      // LOGI("SPI sclk: %d", cfg.sclk_io_num);
-      // LOGI("SPI miso: %d", cfg.miso_io_num);
-      // LOGI("SPI mosi: %d", cfg.mosi_io_num);
-      // LOGI("SPI cs: %d", spi_cs_pin);
-
-      // Open the SPI bus with the pins for this board
-      SPI.begin(cfg.sclk_io_num, cfg.miso_io_num, cfg.mosi_io_num, spi_cs_pin);
-    } else {
-      SPI.begin(14, 2, 15, 13);
-    }
+//  I assume this is valid for all AudioKits!
+#if defined(ESP32) && defined(AUDIOKIT_SETUP_SD)
+      spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
+      SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
 #else
     #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
 #endif

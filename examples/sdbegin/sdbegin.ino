@@ -1,5 +1,5 @@
 /**
- * @file sdtest.ino
+ * @file sdbegin.ino
  * @author Phil Schatzmann
  * @brief  A simple test if we can start the SD of the AudioKit
  * @version 0.1
@@ -9,7 +9,7 @@
  * 
  */
 #include "AudioKit.h"
-#include "SineWaveGenerator.h"
+#include "SD.h"
 
 AudioKit kit;
 

@@ -24,11 +24,19 @@
 #define AUDIOKIT_DEFAULT_I2S_FMT        AUDIO_HAL_I2S_NORMAL
 
 // Activate or deactivate the following
-#define AUDIOKIT_USE_WIRE
+// #define AUDIOKIT_USE_WIRE
 
 #ifdef ESP32
+
 #define AUDIOKIT_FREE_RTOS
 #define AUDIOKIT_MUTEX_SUPPORT
+#define AUDIOKIT_SETUP_SD
+
+#define PIN_AUDIO_KIT_SD_CARD_CS 13
+#define PIN_AUDIO_KIT_SD_CARD_MISO 2
+#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
+#define PIN_AUDIO_KIT_SD_CARD_CLK  14
+
 #else
 
 #endif
