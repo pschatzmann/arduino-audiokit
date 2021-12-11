@@ -76,6 +76,7 @@ The functionality has a built in logger. The default log level has been set to W
 ## Documentation
 
 Here is the documentaion of the [AudioKit class](https://pschatzmann.github.io/arduino-audiokit-hal/html/class_audio_kit.html)
+Further information can be found in my [Blogs](https://www.pschatzmann.ch/home/tag/esp32audiokit/).
 
 
 ## Installation in Arduino
