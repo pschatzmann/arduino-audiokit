@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['lclk_5fdiv_172',['lclk_div',['../structes__i2s__clock__t.html#ad14575ccca5b42636a240cb4b0e364d8',1,'es_i2s_clock_t']]],
-  ['led_5fduty_5fresolution_173',['led_duty_resolution',['../structperiph__led__cfg__t.html#ac1b0c7b6dc0ac96e307f10cb277b63a2',1,'periph_led_cfg_t']]],
-  ['led_5ffreq_5fhz_174',['led_freq_hz',['../structperiph__led__cfg__t.html#a09bf72eaeb7f9cff55dd2d2dc0c04b2a',1,'periph_led_cfg_t']]],
-  ['led_5fspeed_5fmode_175',['led_speed_mode',['../structperiph__led__cfg__t.html#a5d0460c20c66c34a87fd9151f0d0a9db',1,'periph_led_cfg_t']]],
-  ['led_5ftimer_5fnum_176',['led_timer_num',['../structperiph__led__cfg__t.html#a8aadd944877b5e24720e9c62c1afe01b',1,'periph_led_cfg_t']]]
+  ['master_5fslave_5fmode_280',['master_slave_mode',['../struct_audio_kit_config.html#add6c0604564d301e8582d8fc5a18d815',1,'AudioKitConfig']]],
+  ['miso_5fio_5fnum_281',['miso_io_num',['../audio__gpio_8h.html#a68f9b7c3c9f3b359de590fd8b70d0824',1,'spi_bus_config_t']]],
+  ['mode_282',['mode',['../audio__hal_8h.html#a730344407f659f0d733401a8c98b01de',1,'audio_hal_codec_i2s_iface_t::mode()'],['../audio__gpio_8h.html#aff5e0ac442828c29d581b8b9d9f4f194',1,'i2c_config_t::mode()'],['../audio__gpio_8h.html#a7f8f7be11a8edef4f9d7b14e66e6f081',1,'gpio_config_t::mode()']]],
+  ['mosi_5fio_5fnum_283',['mosi_io_num',['../audio__gpio_8h.html#acb6c97389e9618d4680c5784999ff952',1,'spi_bus_config_t']]]
 ];

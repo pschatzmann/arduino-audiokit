@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['i2sconfig_131',['i2sConfig',['../struct_audio_kit_config.html#a9c99eef02d163307ee03575933d8ed63',1,'AudioKitConfig']]],
-  ['ismaster_132',['isMaster',['../struct_audio_kit_config.html#a73b36d53ff8bc857cd626a6e2091944a',1,'AudioKitConfig']]]
+  ['get_5fcodec_5fext_237',['get_codec_ext',['../audio__type__def_8h.html#a792e6054b2fd059731f371d7d5a804ff',1,'audio_type_def.h']]]
 ];

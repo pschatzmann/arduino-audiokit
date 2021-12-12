@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['master_5fslave_5fmode_177',['master_slave_mode',['../struct_audio_kit_config.html#add6c0604564d301e8582d8fc5a18d815',1,'AudioKitConfig']]],
-  ['mode_178',['mode',['../audio__hal_8h.html#a730344407f659f0d733401a8c98b01de',1,'audio_hal_codec_i2s_iface_t']]]
+  ['pin_5fbit_5fmask_284',['pin_bit_mask',['../audio__gpio_8h.html#a3679172743d7afb9cf10a24af23f9350',1,'gpio_config_t']]],
+  ['pull_5fdown_5fen_285',['pull_down_en',['../audio__gpio_8h.html#acdebbcb40d1198d01223fc3a74cd27e2',1,'gpio_config_t']]],
+  ['pull_5fup_5fen_286',['pull_up_en',['../audio__gpio_8h.html#a5b989c99b1a8969aa645bf09ac76789d',1,'gpio_config_t']]]
 ];

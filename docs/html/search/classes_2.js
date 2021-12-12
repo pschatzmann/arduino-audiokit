@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['periph_5fled_5fcfg_5ft_117',['periph_led_cfg_t',['../structperiph__led__cfg__t.html',1,'']]]
+  ['gpio_5fconfig_5ft_208',['gpio_config_t',['../audio__gpio_8h.html#structgpio__config__t',1,'']]]
 ];

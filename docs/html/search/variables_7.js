@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['i2s_5fiface_171',['i2s_iface',['../audio__hal_8h.html#aafae699e5e15d11414f7d536c7383af6',1,'audio_hal_codec_config_t']]]
+  ['lclk_5fdiv_279',['lclk_div',['../structes__i2s__clock__t.html#ad14575ccca5b42636a240cb4b0e364d8',1,'es_i2s_clock_t']]]
 ];

@@ -63,6 +63,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_audio_kit-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -79,15 +80,15 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abdddcc14e2b658f322701da22dfa4050"><td class="memItemLeft" align="right" valign="top"><a id="abdddcc14e2b658f322701da22dfa4050"></a>
 <a class="el" href="struct_audio_kit_config.html">AudioKitConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#abdddcc14e2b658f322701da22dfa4050">defaultConfig</a> ()</td></tr>
-<tr class="memdesc:abdddcc14e2b658f322701da22dfa4050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the configuration for input &amp; output. <br /></td></tr>
+<tr class="memdesc:abdddcc14e2b658f322701da22dfa4050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a default configuration for input &amp; output. <br /></td></tr>
 <tr class="separator:abdddcc14e2b658f322701da22dfa4050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ec29ac969c1e1d0537f6012d4385c29"><td class="memItemLeft" align="right" valign="top"><a id="a1ec29ac969c1e1d0537f6012d4385c29"></a>
 <a class="el" href="struct_audio_kit_config.html">AudioKitConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#a1ec29ac969c1e1d0537f6012d4385c29">defaultConfig</a> (bool isOutput)</td></tr>
-<tr class="memdesc:a1ec29ac969c1e1d0537f6012d4385c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the configuration for input or output. <br /></td></tr>
+<tr class="memdesc:a1ec29ac969c1e1d0537f6012d4385c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration for input or output. <br /></td></tr>
 <tr class="separator:a1ec29ac969c1e1d0537f6012d4385c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a903b3aee6597dfcb1de40f72f2b18a1b"><td class="memItemLeft" align="right" valign="top"><a id="a903b3aee6597dfcb1de40f72f2b18a1b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#a903b3aee6597dfcb1de40f72f2b18a1b">begin</a> (<a class="el" href="struct_audio_kit_config.html">AudioKitConfig</a> cnfg)</td></tr>
-<tr class="memdesc:a903b3aee6597dfcb1de40f72f2b18a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the CODEC. <br /></td></tr>
+<tr class="memdesc:a903b3aee6597dfcb1de40f72f2b18a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the codec. <br /></td></tr>
 <tr class="separator:a903b3aee6597dfcb1de40f72f2b18a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6a8fa774b9a73c208418aa4fa9299cd"><td class="memItemLeft" align="right" valign="top"><a id="ab6a8fa774b9a73c208418aa4fa9299cd"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#ab6a8fa774b9a73c208418aa4fa9299cd">end</a> ()</td></tr>
@@ -113,14 +114,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#a7d8fe8f564faf19535f9686aa23ed414">volume</a> ()</td></tr>
 <tr class="memdesc:a7d8fe8f564faf19535f9686aa23ed414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the volume. <br /></td></tr>
 <tr class="separator:a7d8fe8f564faf19535f9686aa23ed414"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ed9008870c1aecc8d31f859e9e8f94b"><td class="memItemLeft" align="right" valign="top"><a id="a9ed9008870c1aecc8d31f859e9e8f94b"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#a9ed9008870c1aecc8d31f859e9e8f94b">write</a> (const void *src, size_t size, TickType_t ticks_to_wait=portMAX_DELAY)</td></tr>
-<tr class="memdesc:a9ed9008870c1aecc8d31f859e9e8f94b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the audio data via i2s to the DAC. <br /></td></tr>
-<tr class="separator:a9ed9008870c1aecc8d31f859e9e8f94b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4391c1fb579f295184d58bcd2d2450e7"><td class="memItemLeft" align="right" valign="top"><a id="a4391c1fb579f295184d58bcd2d2450e7"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#a4391c1fb579f295184d58bcd2d2450e7">read</a> (void *dest, size_t size, TickType_t ticks_to_wait=portMAX_DELAY)</td></tr>
-<tr class="memdesc:a4391c1fb579f295184d58bcd2d2450e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the audio data via i2s from the ADC. <br /></td></tr>
-<tr class="separator:a4391c1fb579f295184d58bcd2d2450e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8409bf2cc841dc21d541e411e7971b08"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#a8409bf2cc841dc21d541e411e7971b08">pinAuxin</a> ()</td></tr>
 <tr class="memdesc:a8409bf2cc841dc21d541e411e7971b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the gpio number for auxin detection.  <a href="class_audio_kit.html#a8409bf2cc841dc21d541e411e7971b08">More...</a><br /></td></tr>
 <tr class="separator:a8409bf2cc841dc21d541e411e7971b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,26 +159,39 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <tr class="memitem:ae86795128c627c1aa3b2814e1b621dbc"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#ae86795128c627c1aa3b2814e1b621dbc">pinBlueLed</a> ()</td></tr>
 <tr class="memdesc:ae86795128c627c1aa3b2814e1b621dbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get green led gpio number.  <a href="class_audio_kit.html#ae86795128c627c1aa3b2814e1b621dbc">More...</a><br /></td></tr>
 <tr class="separator:ae86795128c627c1aa3b2814e1b621dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e651dc5d8d90c1e89edc833b5188951"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#a3e651dc5d8d90c1e89edc833b5188951">pinSpiCs</a> ()</td></tr>
+<tr class="memdesc:a3e651dc5d8d90c1e89edc833b5188951"><td class="mdescLeft">&#160;</td><td class="mdescRight">SPI CS Pin for SD Drive.  <a href="class_audio_kit.html#a3e651dc5d8d90c1e89edc833b5188951">More...</a><br /></td></tr>
+<tr class="separator:a3e651dc5d8d90c1e89edc833b5188951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a8a690db491b4d735b5c405d17b6efcb0"><td class="memItemLeft" align="right" valign="top"><a id="a8a690db491b4d735b5c405d17b6efcb0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_kit.html#a8a690db491b4d735b5c405d17b6efcb0">setupSPI</a> ()</td></tr>
+<tr class="memdesc:a8a690db491b4d735b5c405d17b6efcb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the SPI so that we can access the SD Drive. <br /></td></tr>
+<tr class="separator:a8a690db491b4d735b5c405d17b6efcb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a426ab1aea96d37f26d0f82ee259454c5"><td class="memItemLeft" align="right" valign="top"><a id="a426ab1aea96d37f26d0f82ee259454c5"></a>
-<a class="el" href="audio__hal_8h.html#a9857e9583f1ce122105cc8e80ca158ab">audio_hal_func_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audio_hal</b></td></tr>
-<tr class="separator:a426ab1aea96d37f26d0f82ee259454c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa41e2c821c6f241a73087cef961584c6"><td class="memItemLeft" align="right" valign="top"><a id="aa41e2c821c6f241a73087cef961584c6"></a>
-<a class="el" href="audio__hal_8h.html#structaudio__hal__codec__config__t">audio_hal_codec_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audio_hal_conf</b></td></tr>
-<tr class="separator:aa41e2c821c6f241a73087cef961584c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49abf7c51694cbfd5f11e013a6e6f687"><td class="memItemLeft" align="right" valign="top"><a id="a49abf7c51694cbfd5f11e013a6e6f687"></a>
-<a class="el" href="audio__hal_8h.html#structaudio__hal__codec__i2s__iface__t">audio_hal_codec_i2s_iface_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>iface</b></td></tr>
-<tr class="separator:a49abf7c51694cbfd5f11e013a6e6f687"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0010684767aaabad3a17e814de29a706"><td class="memItemLeft" align="right" valign="top"><a id="a0010684767aaabad3a17e814de29a706"></a>
 <a class="el" href="struct_audio_kit_config.html">AudioKitConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:a0010684767aaabad3a17e814de29a706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa41e2c821c6f241a73087cef961584c6"><td class="memItemLeft" align="right" valign="top"><a id="aa41e2c821c6f241a73087cef961584c6"></a>
+<a class="el" href="audio__hal_8h.html#structaudio__hal__codec__config__t">audio_hal_codec_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>audio_hal_conf</b></td></tr>
+<tr class="separator:aa41e2c821c6f241a73087cef961584c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd988074ddfa3dfd5af0c5abb49cd813"><td class="memItemLeft" align="right" valign="top"><a id="afd988074ddfa3dfd5af0c5abb49cd813"></a>
+<a class="el" href="structaudio__hal.html">audio_hal_handle_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>hal_handle</b></td></tr>
+<tr class="separator:afd988074ddfa3dfd5af0c5abb49cd813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49abf7c51694cbfd5f11e013a6e6f687"><td class="memItemLeft" align="right" valign="top"><a id="a49abf7c51694cbfd5f11e013a6e6f687"></a>
+<a class="el" href="audio__hal_8h.html#structaudio__hal__codec__i2s__iface__t">audio_hal_codec_i2s_iface_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>iface</b></td></tr>
+<tr class="separator:a49abf7c51694cbfd5f11e013a6e6f687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a770158e788b901e35a0ac9a97392a67c"><td class="memItemLeft" align="right" valign="top"><a id="a770158e788b901e35a0ac9a97392a67c"></a>
+int8_t&#160;</td><td class="memItemRight" valign="bottom"><b>spi_cs_pin</b></td></tr>
+<tr class="separator:a770158e788b901e35a0ac9a97392a67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_audio_kit.html" title="AudioKit API using the audio_hal.">AudioKit</a> API using the <a class="el" href="structaudio__hal.html" title="Configuration of functions and variables used to operate audio codec chip.">audio_hal</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00125">125</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00186">186</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2f9a343c9f16b16ecf8f792b42914bc4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f9a343c9f16b16ecf8f792b42914bc4">&#9670;&nbsp;</a></span>pinAdcDetect()</h2>
@@ -213,8 +219,8 @@ Protected Attributes</h2></td></tr>
 <p>Get the gpio number for adc detection. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00273">273</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;{ <span class="keywordflow">return</span> get_adc_detect_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00367">367</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;{ <span class="keywordflow">return</span> get_adc_detect_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -244,8 +250,8 @@ Protected Attributes</h2></td></tr>
 <p>Get the gpio number for auxin detection. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00249">249</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;{ <span class="keywordflow">return</span> get_auxin_detect_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00343">343</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;{ <span class="keywordflow">return</span> get_auxin_detect_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -275,8 +281,8 @@ Protected Attributes</h2></td></tr>
 <p>Get green led gpio number. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00361">361</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;{ <span class="keywordflow">return</span> get_blue_led_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00455">455</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;{ <span class="keywordflow">return</span> get_blue_led_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -306,8 +312,8 @@ Protected Attributes</h2></td></tr>
 <p>Get the mclk gpio number of es7243. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00281">281</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;{ <span class="keywordflow">return</span> get_es7243_mclk_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00375">375</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;{ <span class="keywordflow">return</span> get_es7243_mclk_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -337,8 +343,8 @@ Protected Attributes</h2></td></tr>
 <p>Get DSP reset gpio number. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00353">353</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;{ <span class="keywordflow">return</span> get_green_led_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00447">447</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;{ <span class="keywordflow">return</span> get_green_led_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -368,8 +374,8 @@ Protected Attributes</h2></td></tr>
 <p>Get the gpio number for headphone detection. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00257">257</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;{ <span class="keywordflow">return</span> get_headphone_detect_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00351">351</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;{ <span class="keywordflow">return</span> get_headphone_detect_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -399,8 +405,8 @@ Protected Attributes</h2></td></tr>
 <p>Get the number for mode-button. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00297">297</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;{ <span class="keywordflow">return</span> get_input_mode_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00391">391</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;{ <span class="keywordflow">return</span> get_input_mode_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -430,8 +436,8 @@ Protected Attributes</h2></td></tr>
 <p>Get number for play function. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00313">313</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;{ <span class="keywordflow">return</span> get_input_play_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00407">407</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;{ <span class="keywordflow">return</span> get_input_play_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -461,8 +467,8 @@ Protected Attributes</h2></td></tr>
 <p>Get the record-button id for adc-button. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others button id </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00289">289</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;{ <span class="keywordflow">return</span> get_input_rec_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00383">383</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;{ <span class="keywordflow">return</span> get_input_rec_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -492,8 +498,8 @@ Protected Attributes</h2></td></tr>
 <p>Get number for set function. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00305">305</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;{ <span class="keywordflow">return</span> get_input_set_id(); };</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00399">399</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;{ <span class="keywordflow">return</span> get_input_set_id(); };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -523,8 +529,8 @@ Protected Attributes</h2></td></tr>
 <p>Get the gpio number for PA enable. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00265">265</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;{ <span class="keywordflow">return</span> get_pa_enable_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00359">359</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;{ <span class="keywordflow">return</span> get_pa_enable_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -554,8 +560,8 @@ Protected Attributes</h2></td></tr>
 <p>Get DSP reset gpio number. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00345">345</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;{ <span class="keywordflow">return</span> get_reset_board_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00439">439</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;{ <span class="keywordflow">return</span> get_reset_board_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -585,8 +591,41 @@ Protected Attributes</h2></td></tr>
 <p>Get green led gpio number. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00337">337</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;{ get_reset_codec_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00431">431</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;{ <span class="keywordflow">return</span> get_reset_codec_gpio(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3e651dc5d8d90c1e89edc833b5188951"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e651dc5d8d90c1e89edc833b5188951">&#9670;&nbsp;</a></span>pinSpiCs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t AudioKit::pinSpiCs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>SPI CS Pin for SD Drive. </p>
+<dl class="section return"><dt>Returns</dt><dd>int8_t </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00462">462</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;                    {</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="keywordflow">return</span> spi_cs_pin;</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -616,8 +655,8 @@ Protected Attributes</h2></td></tr>
 <p>Get number for volume down function. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00329">329</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;{ <span class="keywordflow">return</span> get_input_voldown_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00423">423</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;{ <span class="keywordflow">return</span> get_input_voldown_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -647,8 +686,8 @@ Protected Attributes</h2></td></tr>
 <p>number for volume up function </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00321">321</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;{ <span class="keywordflow">return</span> get_input_volup_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_8h_source.html#l00415">415</a> of file <a class="el" href="_audio_kit_8h_source.html">AudioKit.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;{ <span class="keywordflow">return</span> get_input_volup_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>

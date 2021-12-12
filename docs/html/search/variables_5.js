@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gpio_5fnum_169',['gpio_num',['../structperiph__led__cfg__t.html#a1ec574164b4efc1546a5fd1e3dc5aef9',1,'periph_led_cfg_t']]]
+  ['handle_276',['handle',['../structaudio__hal.html#abb564ff4a29c59228bfb8910740dfca2',1,'audio_hal']]]
 ];
