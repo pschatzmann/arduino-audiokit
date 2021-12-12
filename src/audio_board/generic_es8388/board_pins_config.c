@@ -1,69 +1,60 @@
-/*
- * ESPRESSIF MIT License
- *
- * Copyright (c) 2019 <ESPRESSIF SYSTEMS (SHANGHAI) CO., LTD>
- *
- * Permission is hereby granted for use on all ESPRESSIF SYSTEMS products, in which case,
- * it is free of charge, to any person obtaining a copy of this software and associated
- * documentation files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the Software is furnished
- * to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or
- * substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- */
 
 #include "AudioKitSettings.h"
-#if AUDIOKIT_BOARD==1
+#if AUDIOKIT_BOARD==6
 
 #include "audiokit_logger.h"
 #include "audio_gpio.h"
+#include "board_def.h"
 #include <string.h>
 #include "audiokit_board.h"
 #include "audio_error.h"
 #include "audio_mem.h"
 
-static const char *TAG = "LYRAT_V4_3";
+static const char *TAG = "GENERIC";
 
 esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
 {
     AUDIO_NULL_CHECK(TAG, i2c_config, return ESP_FAIL);
     if (port == I2C_NUM_0 || port == I2C_NUM_1) {
-        i2c_config->sda_io_num = GPIO_NUM_18;
-        i2c_config->scl_io_num = GPIO_NUM_23;
+        i2c_config->sda_io_num = I2C_MASTER_SDA_IO;
+        i2c_config->scl_io_num = I2C_MASTER_SCL_IO;
     } else {
         i2c_config->sda_io_num = -1;
         i2c_config->scl_io_num = -1;
         KIT_LOGE( "i2c port %d is not supported", port);
         return ESP_FAIL;
     }
+
+    KIT_LOGI("i2c port: %d", port);
+    KIT_LOGI("i2c sda: %d", i2c_config->sda_io_num);
+    KIT_LOGI("i2c scl: %d", i2c_config->scl_io_num);
+
     return ESP_OK;
 }
+
 
 esp_err_t get_i2s_pins(i2s_port_t port, i2s_pin_config_t *i2s_config)
 {
     AUDIO_NULL_CHECK(TAG, i2s_config, return ESP_FAIL);
     if (port == I2S_NUM_0 || port == I2S_NUM_1) {
-        i2s_config->bck_io_num = GPIO_NUM_5;
-        i2s_config->ws_io_num = GPIO_NUM_25;
-        i2s_config->data_out_num = GPIO_NUM_26;
-        i2s_config->data_in_num = GPIO_NUM_35;
+        i2s_config->bck_io_num = PIN_I2S_AUDIO_KIT_BCK;
+        i2s_config->ws_io_num = PIN_I2S_AUDIO_KIT_WS;
+        i2s_config->data_out_num = PIN_I2S_AUDIO_KIT_DATA_OUT;
+        i2s_config->data_in_num = PIN_I2S_AUDIO_KIT_DATA_IN;
     } else {
         memset(i2s_config, -1, sizeof(i2s_pin_config_t));
         KIT_LOGE( "i2s port %d is not supported", port);
         return ESP_FAIL;
     }
+
+    KIT_LOGI("i2s bck_io_num: %d", i2s_config->bck_io_num);
+    KIT_LOGI("i2s ws_io_num: %d", i2s_config->ws_io_num);
+    KIT_LOGI("i2s data_out_num: %d", i2s_config->data_out_num);
+    KIT_LOGI("i2s data_in_num: %d", i2s_config->data_in_num);
+
     return ESP_OK;
 }
+
 
 esp_err_t get_spi_pins(spi_bus_config_t *spi_config, spi_device_interface_config_t *spi_device_interface_config)
 {

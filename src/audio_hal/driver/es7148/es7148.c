@@ -53,7 +53,7 @@ static bool es7148_codec_initialized()
 esp_err_t es7148_codec_init(audio_hal_codec_config_t *cfg)
 {
     if (es7148_codec_initialized()) {
-        LOGW("The es7148 codec has been already initialized");
+        KIT_LOGW("The es7148 codec has been already initialized");
         return ESP_OK;
     }
     codec_init_flag = true;

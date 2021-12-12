@@ -1,3 +1,12 @@
+/**
+ * @file audiokit_board.h
+ * @author Phil Schatzmann
+ * @brief Select bard.h based on AUDIOKIT_BOARD definition in configuration file
+ * @date 2021-12-12
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #pragma once
 
 #include "AudioKitSettings.h"
@@ -18,6 +27,9 @@
 #define AUDIO_DRIVER AUDIO_CODEC_ES8311_DEFAULT_HANDLE
 #elif AUDIOKIT_BOARD==5
 #include "audio_board/ai_thinker_v2_2/board.h"
+#define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
+#elif AUDIOKIT_BOARD==6
+#include "audio_board/generic_es8388/board.h"
 #define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
 #endif
 

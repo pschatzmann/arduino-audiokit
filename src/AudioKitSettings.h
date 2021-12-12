@@ -1,18 +1,23 @@
-#pragma once
-
 /**
+ * @file AudioKitSettings.h
+ * @author Phil Schatzmann
  * @brief AUDIOKIT_BOARD selects a specic board:
- * 1) lyrat_v4_3
- * 2) lyrat_v4_2
- * 3) lyrat_mini_v1_1
- * 4) lyratd_msc_v2_2
- * 5) lyratd_msc_v2_1
- * 6) ai_thinker_v2_2
- * 7) esp32_s2_kaluga_1_v1_2
+ *  1) lyrat_v4_3
+ *  2) lyrat_v4_2
+ *  3) lyrat_mini_v1_1
+ *  4) esp32_s2_kaluga_1_v1_2
+ *  5) ai_thinker_v2_2
+ *  6) generci_es8388
+ * @version 0.1
+ * @date 2021-12-12
+ * 
+ * @copyright Copyright (c) 2021
  */
 
+#pragma once
+
 #ifndef AUDIOKIT_BOARD
-#define AUDIOKIT_BOARD 5
+#define AUDIOKIT_BOARD 6
 #endif
 
 // Default settings

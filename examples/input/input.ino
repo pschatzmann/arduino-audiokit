@@ -2,7 +2,6 @@
  * @file input.ino
  * @author Phil Schatzmann
  * @brief Input of audio data from the AudioKit microphones
- * @version 0.1
  * @date 2021-12-10
  * 
  * @copyright Copyright (c) 2021
@@ -26,7 +25,7 @@ void printBuffer(int len){
 
 void setup() {
   Serial.begin(115200);
-  // open in write mode
+  // open in read mode
   auto cfg = kit.defaultConfig(false);
   cfg.adc_input = AUDIO_HAL_ADC_INPUT_LINE1; // microphone
   cfg.sample_rate = AUDIO_HAL_16K_SAMPLES;

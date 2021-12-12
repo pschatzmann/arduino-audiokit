@@ -3,9 +3,10 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+
 int AUDIOKIT_LOG_LEVEL = Warning;
 
-void LOGD(const char* fmr, ...) {
+void KIT_LOGD(const char* fmr, ...) {
   if (AUDIOKIT_LOG_LEVEL <= Debug) { // AUDIOKIT_LOG_LEVEL = Debug
     char log_buffer[AUDIOKIT_LOGLENGTH+1];
     strcpy(log_buffer, "Debug:   ");
@@ -18,7 +19,7 @@ void LOGD(const char* fmr, ...) {
   }
 }
 
-void LOGI(const char* fmr, ...) {
+void KIT_LOGI(const char* fmr, ...) {
   if (AUDIOKIT_LOG_LEVEL <= Info) { // AUDIOKIT_LOG_LEVEL = Info, Debug
     char log_buffer[AUDIOKIT_LOGLENGTH+1];
     strcpy(log_buffer, "Info:    ");
@@ -31,7 +32,7 @@ void LOGI(const char* fmr, ...) {
   }
 }
 
-void LOGW(const char* fmr, ...) {
+void KIT_LOGW(const char* fmr, ...) {
   if (AUDIOKIT_LOG_LEVEL <= Warning) { // AUDIOKIT_LOG_LEVEL = Warning, Info, Debug
     char log_buffer[AUDIOKIT_LOGLENGTH+1];
     strcpy(log_buffer, "Warning:  ");
@@ -44,7 +45,7 @@ void LOGW(const char* fmr, ...) {
   }
 }
 
-void LOGE(const char* fmr, ...) {
+void KIT_LOGE(const char* fmr, ...) {
   if (AUDIOKIT_LOG_LEVEL <= Error) { // for all levels
     char log_buffer[AUDIOKIT_LOGLENGTH+1];
     strcpy(log_buffer, "Error:   ");
@@ -57,3 +58,4 @@ void LOGE(const char* fmr, ...) {
   }
 
 }
+

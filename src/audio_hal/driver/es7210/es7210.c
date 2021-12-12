@@ -218,13 +218,13 @@ esp_err_t es7210_config_sample(audio_hal_iface_samples_t sample)
             sample_fre = 48000;
             break;
         default:
-            LOGE( "Unable to configure sample rate %dHz", sample_fre);
+            KIT_LOGE( "Unable to configure sample rate %dHz", sample_fre);
             break;
     }
     mclk_fre = sample_fre * MCLK_DIV_FRE;
     coeff = get_coeff(mclk_fre, sample_fre);
     if (coeff < 0) {
-        LOGE( "Unable to configure sample rate %dHz with %dHz MCLK", sample_fre, mclk_fre);
+        KIT_LOGE( "Unable to configure sample rate %dHz with %dHz MCLK", sample_fre, mclk_fre);
         return ESP_FAIL;
     }
     /* Set clock parammeters */
@@ -258,31 +258,31 @@ esp_err_t es7210_mic_select(es7210_input_mics_t mic)
         ret |= es7210_write_reg(ES7210_MIC12_POWER_REG4B, 0xff);
         ret |= es7210_write_reg(ES7210_MIC34_POWER_REG4C, 0xff);
         if (mic_select & ES7210_INPUT_MIC1) {
-            LOGI( "Enable ES7210_INPUT_MIC1");
+            KIT_LOGI( "Enable ES7210_INPUT_MIC1");
             ret |= es7210_update_reg_bit(ES7210_CLOCK_OFF_REG01, 0x0b, 0x00);
             ret |= es7210_write_reg(ES7210_MIC12_POWER_REG4B, 0x00);
             ret |= es7210_update_reg_bit(ES7210_MIC1_GAIN_REG43, 0x10, 0x10);
         }
         if (mic_select & ES7210_INPUT_MIC2) {
-            LOGI( "Enable ES7210_INPUT_MIC2");
+            KIT_LOGI( "Enable ES7210_INPUT_MIC2");
             ret |= es7210_update_reg_bit(ES7210_CLOCK_OFF_REG01, 0x0b, 0x00);
             ret |= es7210_write_reg(ES7210_MIC12_POWER_REG4B, 0x00);
             ret |= es7210_update_reg_bit(ES7210_MIC2_GAIN_REG44, 0x10, 0x10);
         }
         if (mic_select & ES7210_INPUT_MIC3) {
-            LOGI( "Enable ES7210_INPUT_MIC3");
+            KIT_LOGI( "Enable ES7210_INPUT_MIC3");
             ret |= es7210_update_reg_bit(ES7210_CLOCK_OFF_REG01, 0x15, 0x00);
             ret |= es7210_write_reg(ES7210_MIC34_POWER_REG4C, 0x00);
             ret |= es7210_update_reg_bit(ES7210_MIC3_GAIN_REG45, 0x10, 0x10);
         }
         if (mic_select & ES7210_INPUT_MIC4) {
-            LOGI( "Enable ES7210_INPUT_MIC4");
+            KIT_LOGI( "Enable ES7210_INPUT_MIC4");
             ret |= es7210_update_reg_bit(ES7210_CLOCK_OFF_REG01, 0x15, 0x00);
             ret |= es7210_write_reg(ES7210_MIC34_POWER_REG4C, 0x00);
             ret |= es7210_update_reg_bit(ES7210_MIC4_GAIN_REG46, 0x10, 0x10);
         }
     } else {
-        LOGE( "Microphone selection error");
+        KIT_LOGE( "Microphone selection error");
         return ESP_FAIL;
     }
     return ret;
@@ -305,7 +305,7 @@ esp_err_t es7210_adc_init(audio_hal_codec_config_t *codec_cfg)
     audio_hal_codec_i2s_iface_t *i2s_cfg = & (codec_cfg->i2s_iface);
     switch (i2s_cfg->mode) {
         case AUDIO_HAL_MODE_MASTER:    /* MASTER MODE */
-            LOGI( "ES7210 in Master mode");
+            KIT_LOGI( "ES7210 in Master mode");
             ret |= es7210_update_reg_bit(ES7210_MODE_CONFIG_REG08, 0x01, 0x01);
             /* Select clock source for internal mclk */
             switch (get_es7210_mclk_src()) {
@@ -321,7 +321,7 @@ esp_err_t es7210_adc_init(audio_hal_codec_config_t *codec_cfg)
             }
             break;
         case AUDIO_HAL_MODE_SLAVE:    /* SLAVE MODE */
-            LOGI( "ES7210 in Slave mode");
+            KIT_LOGI( "ES7210 in Slave mode");
             ret |= es7210_update_reg_bit(ES7210_MODE_CONFIG_REG08, 0x01, 0x00);
             break;
         default:
@@ -352,20 +352,20 @@ esp_err_t es7210_config_fmt(audio_hal_iface_format_t fmt)
     adc_iface &= 0xfc;
     switch (fmt) {
         case AUDIO_HAL_I2S_NORMAL:
-            LOGD( "ES7210 in I2S Format");
+            KIT_LOGD( "ES7210 in I2S Format");
             adc_iface |= 0x00;
             break;
         case AUDIO_HAL_I2S_LEFT:
         case AUDIO_HAL_I2S_RIGHT:
-            LOGD( "ES7210 in LJ Format");
+            KIT_LOGD( "ES7210 in LJ Format");
             adc_iface |= 0x01;
             break;
         case AUDIO_HAL_I2S_DSP:
             if (I2S_DSP_MODE) {
-                LOGD( "ES7210 in DSP-A Format");
+                KIT_LOGD( "ES7210 in DSP-A Format");
                 adc_iface |= 0x13;
             } else {
-                LOGD( "ES7210 in DSP-B Format");
+                KIT_LOGD( "ES7210 in DSP-B Format");
                 adc_iface |= 0x03;
             }
             break;
@@ -443,16 +443,16 @@ esp_err_t es7210_adc_ctrl_state(audio_hal_codec_mode_t mode, audio_hal_ctrl_t ct
 {
     static uint8_t regv;
     esp_err_t ret = ESP_OK;
-    LOGW("ES7210 only supports ADC mode");
+    KIT_LOGW("ES7210 only supports ADC mode");
     ret = es7210_read_reg(ES7210_CLOCK_OFF_REG01);
     if ((ret != 0x7f) && (ret != 0xff)) {
         regv = es7210_read_reg(ES7210_CLOCK_OFF_REG01);
     }
     if (ctrl_state == AUDIO_HAL_CTRL_START) {
-        LOGI( "The ES7210_CLOCK_OFF_REG01 value before stop is %x",regv);
+        KIT_LOGI( "The ES7210_CLOCK_OFF_REG01 value before stop is %x",regv);
         ret |= es7210_start(regv);
     } else {
-        LOGW("The codec is about to stop");
+        KIT_LOGW("The codec is about to stop");
         regv = es7210_read_reg(ES7210_CLOCK_OFF_REG01);
         ret |= es7210_stop();
     }
@@ -468,7 +468,7 @@ esp_err_t es7210_adc_set_gain(es7210_gain_value_t gain)
     } else if (gain > max_gain_vaule) {
         gain = max_gain_vaule;
     }
-    LOGD( "SET: gain:%d", gain);
+    KIT_LOGD( "SET: gain:%d", gain);
     if (mic_select & ES7210_INPUT_MIC1) {
         ret |= es7210_update_reg_bit(ES7210_MIC1_GAIN_REG43, 0x0f, gain);
     }
@@ -497,27 +497,27 @@ esp_err_t es7210_adc_get_gain(void)
     } else if (mic_select & ES7210_INPUT_MIC4) {
         regv = es7210_read_reg(ES7210_MIC4_GAIN_REG46);
     } else {
-        LOGE( "No MIC selected");
+        KIT_LOGE( "No MIC selected");
         return ESP_FAIL;
     }
     if (regv == ESP_FAIL) {
         return regv;
     }
     gain_value = (regv & 0x0f);     /* Retain the last four bits for gain */
-    LOGI( "GET: gain_value:%d", gain_value);
+    KIT_LOGI( "GET: gain_value:%d", gain_value);
     return gain_value;
 }
 
 esp_err_t es7210_adc_set_volume(int volume)
 {
     esp_err_t ret = ESP_OK;
-    LOGD( "ADC can adjust gain");
+    KIT_LOGD( "ADC can adjust gain");
     return ret;
 }
 
 esp_err_t es7210_set_mute(bool enable)
 {
-    LOGD( "ES7210 SetMute :%d", enable);
+    KIT_LOGD( "ES7210 SetMute :%d", enable);
     return ESP_OK;
 }
 

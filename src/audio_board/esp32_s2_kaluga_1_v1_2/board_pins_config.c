@@ -43,7 +43,7 @@ esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
     } else {
         i2c_config->sda_io_num = -1;
         i2c_config->scl_io_num = -1;
-        LOGE( "i2c port %d is not supported", port);
+        KIT_LOGE( "i2c port %d is not supported", port);
         return ESP_FAIL;
     }
     return ESP_OK;
@@ -74,18 +74,18 @@ esp_err_t get_spi_pins(spi_bus_config_t *spi_config, spi_device_interface_config
 
     spi_device_interface_config->spics_io_num = -1;
 
-    LOGW("SPI interface is not supported");
+    KIT_LOGW("SPI interface is not supported");
     return ESP_OK;
 }
 
 esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num)
 {
     if (i2s_num >= I2S_NUM_MAX) {
-        LOGE( "Does not support i2s number(%d)", i2s_num);
+        KIT_LOGE( "Does not support i2s number(%d)", i2s_num);
         return ESP_ERR_INVALID_ARG;
     }
     gpio_num = (gpio_num_t)GPIO_NUM_35;
-    LOGD( "I2S%d, MCLK output by GPIO%d", i2s_num, gpio_num);
+    KIT_LOGD( "I2S%d, MCLK output by GPIO%d", i2s_num, gpio_num);
     gpio_matrix_out(gpio_num, CLK_I2S_MUX_IDX, 0, 0);
 
     return ESP_OK;

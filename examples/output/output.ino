@@ -2,7 +2,6 @@
  * @file output.ino
  * @author Phil Schatzmann
  * @brief Output of audio data to the AudioKit
- * @version 0.1
  * @date 2021-12-10
  * 
  * @copyright Copyright (c) 2021

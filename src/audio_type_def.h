@@ -1,6 +1,12 @@
-// Copyright 2018 Espressif Systems (Shanghai) PTE LTD
-// All rights reserved.
-
+/**
+ * @file audio_type_def.h
+ * @author Phil Schatzmann
+ * @brief Audio Types used by the HAL 
+ * @date 2021-12-12
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #ifndef _AUDIO_TYPE_DEF_H_
 #define _AUDIO_TYPE_DEF_H_
 

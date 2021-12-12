@@ -2,7 +2,6 @@
  * @file sdbegin.ino
  * @author Phil Schatzmann
  * @brief  A simple test if we can start the SD of the AudioKit
- * @version 0.1
  * @date 2021-12-10
  * 
  * @copyright Copyright (c) 2021

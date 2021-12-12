@@ -32,7 +32,7 @@
 #endif
 
 #include "audio_mutex.h"
-#include "audio_idf_version.h"
+#include "audio_version.h"
 #include "audiokit_logger.h"
 
 #if defined(AUDIOKIT_MUTEX_SUPPORT) && (ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(4, 3, 0))

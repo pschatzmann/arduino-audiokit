@@ -1,3 +1,13 @@
+/**
+ * @file AudioKit.h
+ * @author Phil Schatzmann
+ * @brief Arduino API for AudioKit
+ * @version 0.1
+ * @date 2021-12-12
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #pragma once
 #include "AudioKitSettings.h"
 
@@ -12,9 +22,11 @@
 #include "audiokit_board.h"
 #include "audiokit_logger.h"
 #include "SPI.h"
+
 #ifdef ESP32
 #include "esp_a2dp_api.h"
 #include "audio_system.h"
+#include "audio_version.h"
 #include "driver/i2s.h"
 #endif
 
@@ -30,9 +42,9 @@
   (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_LONG)
 #define I2S_COMM_FORMAT_STAND_PCM_SHORT \
   (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_SHORT)
-typedef int eps32_i2s_sample_rate_type;
+typedef int eps32_i2s_audio_sample_rate_type;
 #else
-typedef uint32_t eps32_i2s_sample_rate_type;
+typedef uint32_t eps32_i2s_audio_sample_rate_type;
 #endif
 
 /**
@@ -71,7 +83,7 @@ struct AudioKitConfig {
       case AUDIO_HAL_BIT_LENGTH_32BITS:
         return 32;
     }
-    // LOGE("bits_per_sample not supported: %d", bits_per_sample);
+    // KIT_LOGE("bits_per_sample not supported: %d", bits_per_sample);
     return 0;
   }
 
@@ -95,7 +107,7 @@ struct AudioKitConfig {
       case AUDIO_HAL_48K_SAMPLES: /*!< set to 48k samples per second */
         return 48000;
     }
-    // LOGE("sample rate not supported: %d", sample_rate);
+    // KIT_LOGE("sample rate not supported: %d", sample_rate);
     return 0;
   }
 
@@ -199,8 +211,8 @@ class AudioKit {
 
   /// Starts the codec
   bool begin(AudioKitConfig cnfg) {
-    LOGI(LOG_METHOD);
-    LOGI("Selected board: %d", AUDIOKIT_BOARD);
+    KIT_LOGI(LOG_METHOD);
+    KIT_LOGI("Selected board: %d", AUDIOKIT_BOARD);
 
     audio_hal_conf.adc_input = cfg.adc_input;
     audio_hal_conf.dac_output = cfg.dac_output;
@@ -212,7 +224,7 @@ class AudioKit {
 
     hal_handle = audio_hal_init(&audio_hal_conf, &AUDIO_DRIVER);
     if (hal_handle == 0) {
-      LOGE("audio_hal_init");
+      KIT_LOGE("audio_hal_init");
       return false;
     }
 
@@ -223,19 +235,19 @@ class AudioKit {
     // setup i2s driver - with no queue
     i2s_config_t i2s_config = cfg.i2sConfig();
     if (i2s_driver_install(cfg.i2s_num, &i2s_config, 0, NULL) != ESP_OK) {
-      LOGE("i2s_driver_install");
+      KIT_LOGE("i2s_driver_install");
       return false;
     }
 
     // define i2s pins
     i2s_pin_config_t pin_config = cfg.i2sPins();
     if (i2s_set_pin(cfg.i2s_num, &pin_config) != ESP_OK) {
-      LOGE("i2s_set_pin");
+      KIT_LOGE("i2s_set_pin");
       return false;
     }
 
     if (i2s_mclk_gpio_select(cfg.i2s_num, cfg.mclk_gpio) != ESP_OK) {
-      LOGE("i2s_mclk_gpio_select");
+      KIT_LOGE("i2s_mclk_gpio_select");
       return false;
     }
 
@@ -243,7 +255,7 @@ class AudioKit {
 
     // call start
     if (!setActive(true)) {
-      LOGE("setActive");
+      KIT_LOGE("setActive");
       return false;
     }
 
@@ -252,7 +264,7 @@ class AudioKit {
 
   /// Stops the CODEC
   bool end() {
-    LOGI(LOG_METHOD);
+    KIT_LOGI(LOG_METHOD);
 
 #ifdef ESP32
     // uninstall i2s driver
@@ -299,11 +311,11 @@ class AudioKit {
   /// Writes the audio data via i2s to the DAC
   size_t write(const void *src, size_t size,
                TickType_t ticks_to_wait = portMAX_DELAY) {
-    LOGD("write: %zu", size);
+    KIT_LOGD("write: %zu", size);
     size_t bytes_written = 0;
     if (i2s_write(cfg.i2s_num, src, size, &bytes_written, ticks_to_wait) !=
         ESP_OK) {
-      LOGE("i2s_write");
+      KIT_LOGE("i2s_write");
     }
     return bytes_written;
   }
@@ -311,11 +323,11 @@ class AudioKit {
   /// Reads the audio data via i2s from the ADC
   size_t read(void *dest, size_t size,
               TickType_t ticks_to_wait = portMAX_DELAY) {
-    LOGD("read: %zu", size);
+    KIT_LOGD("read: %zu", size);
     size_t bytes_read = 0;
     if (i2s_read(cfg.i2s_num, dest, size, &bytes_read, ticks_to_wait) !=
         ESP_OK) {
-      LOGE("i2s_read");
+      KIT_LOGE("i2s_read");
     }
     return bytes_read;
   }
@@ -463,7 +475,7 @@ class AudioKit {
    * @brief Setup the SPI so that we can access the SD Drive
    */
   void setupSPI() {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
 //  I assume this is valid for all AudioKits!
 #if defined(ESP32) && defined(AUDIOKIT_SETUP_SD)
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;

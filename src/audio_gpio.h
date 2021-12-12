@@ -1,3 +1,12 @@
+/**
+ * @file audio_gpio.h
+ * @author Phil Schatzmann
+ * @brief GPIO related functionality
+ * @date 2021-12-12
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #pragma once
 #ifdef ESP32
 #include "driver/gpio.h"

@@ -35,11 +35,11 @@
 
 void *audio_malloc(size_t size)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     void *data =  NULL;
     data = heap_caps_malloc(size, MALLOC_CAP_8BIT);
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    LOGI( "malloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
+    KIT_LOGI( "malloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
 #endif
     return data;
 }
@@ -47,14 +47,14 @@ void *audio_malloc(size_t size)
 
 void *audio_calloc(size_t nmemb, size_t size)
 {
-    LOGD("audio_calloc: %d * %d", nmemb, size);
+    KIT_LOGD("audio_calloc: %d * %d", nmemb, size);
     void *data =  NULL;
     data = heap_caps_malloc(nmemb * size,  MALLOC_CAP_8BIT);
     if (data) {
         memset(data, 0, nmemb * size);
     }
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    ESP_LOGI("AUIDO_MEM", "calloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
+    ESP_KIT_LOGI("AUIDO_MEM", "calloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
 #endif
     return data;
 }
@@ -63,22 +63,22 @@ void *audio_calloc(size_t nmemb, size_t size)
 
 void *audio_malloc(size_t size)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     void *data =  NULL;
     data = malloc(size);
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    LOGI( "malloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
+    KIT_LOGI( "malloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
 #endif
     return data;
 }
 
 void *audio_calloc(size_t nmemb, size_t size)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     void *data =  NULL;
     data = calloc(nmemb, size);
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    ESP_LOGI("AUIDO_MEM", "calloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
+    ESP_KIT_LOGI("AUIDO_MEM", "calloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
 #endif
     return data;
 }
@@ -88,10 +88,10 @@ void *audio_calloc(size_t nmemb, size_t size)
 
 void audio_free(void *ptr)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     free(ptr);
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    ESP_LOGI("AUIDO_MEM", "free:%p, called:0x%08x", ptr, (intptr_t)__builtin_return_address(0) - 2);
+    ESP_KIT_LOGI("AUIDO_MEM", "free:%p, called:0x%08x", ptr, (intptr_t)__builtin_return_address(0) - 2);
 #endif
 }
 

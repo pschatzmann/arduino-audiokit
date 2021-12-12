@@ -1,3 +1,13 @@
+/**
+ * @file SineWaveGenerator.h
+ * @author Phil Schatzmann
+ * @brief A simple sine wave generator 
+ * @version 0.1
+ * @date 2021-12-12
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #pragma once
 
 #include <stdint.h>

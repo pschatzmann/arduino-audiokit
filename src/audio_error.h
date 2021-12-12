@@ -77,7 +77,7 @@ extern "C" {
 
 
 #define AUDIO_CHECK(TAG, a, action, msg) if (!(a)) {                                       \
-        LOGE("%s:%d (%s): %s", __FILENAME__, __LINE__, __FUNCTION__, msg);       \
+        KIT_LOGE("%s:%d (%s): %s", __FILENAME__, __LINE__, __FUNCTION__, msg);       \
         action;                                                                   \
         }
 
@@ -85,7 +85,7 @@ extern "C" {
 
 #define AUDIO_NULL_CHECK(TAG, a, action) AUDIO_CHECK(TAG, a, action, "Got NULL Pointer")
 
-#define AUDIO_ERROR(TAG, str) LOGE("%s:%d (%s): %s", __FILENAME__, __LINE__, __FUNCTION__, str)
+#define AUDIO_ERROR(TAG, str) KIT_LOGE("%s:%d (%s): %s", __FILENAME__, __LINE__, __FUNCTION__, str)
 
 #define ESP_EXISTS   (ESP_OK + 1)
 

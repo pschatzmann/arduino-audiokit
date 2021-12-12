@@ -35,7 +35,7 @@ static const char *TAG = "AUDIO_HAL";
 
 #define AUDIO_HAL_CHECK_NULL(a, format, b, ...) \
     if ((a) == 0) { \
-        LOGE( format, ##__VA_ARGS__); \
+        KIT_LOGE( format, ##__VA_ARGS__); \
         return b;\
     }
 
@@ -43,7 +43,7 @@ static const char *TAG = "AUDIO_HAL";
 
 audio_hal_handle_t audio_hal_init(audio_hal_codec_config_t *audio_hal_conf, audio_hal_func_t *audio_hal_func)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     esp_err_t ret = 0;
     audio_hal_handle_t audio_hal = (audio_hal_handle_t) audio_calloc(1, sizeof(audio_hal_func_t));
     AUDIO_MEM_CHECK(TAG, audio_hal, return NULL);
@@ -51,7 +51,7 @@ audio_hal_handle_t audio_hal_init(audio_hal_codec_config_t *audio_hal_conf, audi
     audio_hal->audio_hal_lock = mutex_create();
 
     AUDIO_MEM_CHECK(TAG, audio_hal->audio_hal_lock, {
-        LOGE("AUDIO_MEM_CHECK");
+        KIT_LOGE("AUDIO_MEM_CHECK");
         audio_free(audio_hal);
         return NULL;
     });
@@ -59,17 +59,17 @@ audio_hal_handle_t audio_hal_init(audio_hal_codec_config_t *audio_hal_conf, audi
     mutex_lock(audio_hal->audio_hal_lock);
 
     ret  = audio_hal->audio_codec_initialize(audio_hal_conf);
-    LOGD("audio_codec_initialize -> %d", ret);
+    KIT_LOGD("audio_codec_initialize -> %d", ret);
     if (ret == ESP_FAIL) {
         audio_free(audio_hal);
         if (audio_hal_func->handle) {
             return audio_hal_func->handle;
         } else {
-            LOGE( "codec init failed!");
+            KIT_LOGE( "codec init failed!");
             return NULL;
         }
     } else {
-        LOGI("audio_codec_initialize-END-OK");
+        KIT_LOGI("audio_codec_initialize-END-OK");
     }
 
     ret |= audio_hal->audio_codec_config_iface(audio_hal_conf->codec_mode, &audio_hal_conf->i2s_iface);
@@ -84,7 +84,7 @@ audio_hal_handle_t audio_hal_init(audio_hal_codec_config_t *audio_hal_conf, audi
 
 esp_err_t audio_hal_deinit(audio_hal_handle_t audio_hal)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     esp_err_t ret;
     AUDIO_HAL_CHECK_NULL(audio_hal, "audio_hal handle is null", -1);
     mutex_destroy(audio_hal->audio_hal_lock);
@@ -98,11 +98,11 @@ esp_err_t audio_hal_deinit(audio_hal_handle_t audio_hal)
 
 esp_err_t audio_hal_ctrl_codec(audio_hal_handle_t audio_hal, audio_hal_codec_mode_t mode, audio_hal_ctrl_t audio_hal_state)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     esp_err_t ret;
     AUDIO_HAL_CHECK_NULL(audio_hal, "audio_hal handle is null", -1);
     mutex_lock(audio_hal->audio_hal_lock);
-    LOGI( "Codec mode is %d, Ctrl:%d", mode, audio_hal_state);
+    KIT_LOGI( "Codec mode is %d, Ctrl:%d", mode, audio_hal_state);
     ret = audio_hal->audio_codec_ctrl(mode, audio_hal_state);
     mutex_unlock(audio_hal->audio_hal_lock);
     return ret;
@@ -110,7 +110,7 @@ esp_err_t audio_hal_ctrl_codec(audio_hal_handle_t audio_hal, audio_hal_codec_mod
 
 esp_err_t audio_hal_codec_iface_config(audio_hal_handle_t audio_hal, audio_hal_codec_mode_t mode, audio_hal_codec_i2s_iface_t *iface)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     esp_err_t ret = 0;
     AUDIO_HAL_CHECK_NULL(audio_hal, "audio_hal handle is null", -1);
     AUDIO_HAL_CHECK_NULL(iface, "Get volume para is null", -1);
@@ -122,7 +122,7 @@ esp_err_t audio_hal_codec_iface_config(audio_hal_handle_t audio_hal, audio_hal_c
 
 esp_err_t audio_hal_set_mute(audio_hal_handle_t audio_hal, bool mute)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     esp_err_t ret;
     AUDIO_HAL_CHECK_NULL(audio_hal, "audio_hal handle is null", -1);
     mutex_lock(audio_hal->audio_hal_lock);
@@ -133,7 +133,7 @@ esp_err_t audio_hal_set_mute(audio_hal_handle_t audio_hal, bool mute)
 
 esp_err_t audio_hal_set_volume(audio_hal_handle_t audio_hal, int volume)
 {
-    LOGD("audio_hal_set_volume: %d", volume);
+    KIT_LOGD("audio_hal_set_volume: %d", volume);
     esp_err_t ret;
     AUDIO_HAL_CHECK_NULL(audio_hal, "audio_hal handle is null", -1);
     mutex_lock(audio_hal->audio_hal_lock);
@@ -144,7 +144,7 @@ esp_err_t audio_hal_set_volume(audio_hal_handle_t audio_hal, int volume)
 
 esp_err_t audio_hal_get_volume(audio_hal_handle_t audio_hal, int *volume)
 {
-    LOGD(LOG_METHOD);
+    KIT_LOGD(LOG_METHOD);
     esp_err_t ret;
     AUDIO_HAL_CHECK_NULL(audio_hal, "audio_hal handle is null", -1);
     AUDIO_HAL_CHECK_NULL(volume, "Get volume para is null", -1);

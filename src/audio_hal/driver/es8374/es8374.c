@@ -32,7 +32,7 @@
 
 #define ES_ASSERT(a, format, b, ...) \
     if ((a) != 0) { \
-        LOGE(format, ##__VA_ARGS__); \
+        KIT_LOGE(format, ##__VA_ARGS__); \
         return b;\
     }
 
@@ -96,7 +96,7 @@ int es8374_read_reg(uint8_t reg_add, uint8_t *regv)
         *regv = regdata;
         return res;
     } else {
-        LOGI("Read Audio Codec Register Failed!");
+        KIT_LOGI("Read Audio Codec Register Failed!");
         res = -1;
         return res;
     }
@@ -107,7 +107,7 @@ void es8374_read_all()
     for (int i = 0; i < 50; i++) {
         uint8_t reg = 0;
         es8374_read_reg(i, &reg);
-        LOGI( "%x: %x", i, reg);
+        KIT_LOGI( "%x: %x", i, reg);
     }
 }
 
@@ -551,7 +551,7 @@ esp_err_t es8374_set_mic_gain(es_mic_gain_t gain)
         res = es8374_write_reg(0x22, gain_n | (gain_n << 4)); //MIC PGA
     } else {
         res = -1;
-        LOGI("invalid microphone gain!");
+        KIT_LOGI("invalid microphone gain!");
     }
 
     return res;
@@ -598,7 +598,7 @@ static int es8374_set_adc_dac_volume(int mode, int volume, int dot)
     int res = 0;
 
     if ( volume < -96 || volume > 0 ) {
-        LOGI("Warning: volume < -96! or > 0!");
+        KIT_LOGI("Warning: volume < -96! or > 0!");
         if (volume < -96) {
             volume = -96;
         } else {
@@ -629,7 +629,7 @@ static int es8374_set_d2se_pga(es_d2se_pga_t gain)
         res = es8374_write_reg(0x21, reg); //MIC PGA
     } else {
         res = 0xff;
-        LOGI("invalid microphone gain!");
+        KIT_LOGI("invalid microphone gain!");
     }
 
     return res;
@@ -707,7 +707,7 @@ static int es8374_init_reg(audio_hal_codec_mode_t ms_mode, es_i2s_fmt_t fmt, es_
 esp_err_t es8374_codec_init(audio_hal_codec_config_t *cfg)
 {
     if (es8374_codec_initialized()) {
-        LOGW( "The es8374 codec has already been initialized!");
+        KIT_LOGW( "The es8374 codec has already been initialized!");
         return ESP_FAIL;
     }
     esp_err_t res = ESP_OK;
@@ -770,14 +770,14 @@ esp_err_t es8374_codec_ctrl_state(audio_hal_codec_mode_t mode, audio_hal_ctrl_t 
             break;
         default:
             es_mode_t = ES_MODULE_DAC;
-            LOGW( "Codec mode not support, default is decode mode");
+            KIT_LOGW( "Codec mode not support, default is decode mode");
             break;
     }
     if (AUDIO_HAL_CTRL_STOP == ctrl_state) {
         res = es8374_stop(es_mode_t);
     } else {
         res = es8374_start(es_mode_t);
-        LOGD( "start default is decode mode:%d", es_mode_t);
+        KIT_LOGD( "start default is decode mode:%d", es_mode_t);
     }
     return res;
 }
