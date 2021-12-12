@@ -179,6 +179,12 @@ struct AudioKitConfig {
 };
 
 /**
+ * @brief Do we read or write audio data - or both
+ * 
+ */
+enum AudioKitInOut {AudioOutput, AudioInput, AudioInputOutput };
+
+/**
  * @brief AudioKit API using the audio_hal
  *
  */
@@ -191,20 +197,16 @@ class AudioKit {
     setupSPI();
   }
 
-  /// Provides a default configuration for input & output
-  AudioKitConfig defaultConfig() {
-    AudioKitConfig result;
-    result.codec_mode = AUDIO_HAL_CODEC_MODE_BOTH;
-    return result;
-  }
-
   /// Provides the default configuration for input or output
-  AudioKitConfig defaultConfig(bool isOutput) {
+  AudioKitConfig defaultConfig(AudioKitInOut inout=AudioInputOutput) {
     AudioKitConfig result;
-    if (isOutput) {
-      result.codec_mode = AUDIO_HAL_CODEC_MODE_DECODE;  // dac
-    } else {
-      result.codec_mode = AUDIO_HAL_CODEC_MODE_ENCODE;  // adc
+    switch(inout){
+      case AudioOutput:
+        result.codec_mode = AUDIO_HAL_CODEC_MODE_DECODE; // dac
+      case AudioInput:
+        result.codec_mode =  AUDIO_HAL_CODEC_MODE_ENCODE; // adc
+      default:
+        result.codec_mode =  AUDIO_HAL_CODEC_MODE_BOTH;
     }
     return result;
   }

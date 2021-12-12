@@ -69,5 +69,6 @@ var searchData=
   ['audiokit_5fboard_2eh_66',['audiokit_board.h',['../audiokit__board_8h.html',1,'']]],
   ['audiokit_5flogger_2eh_67',['audiokit_logger.h',['../audiokit__logger_8h.html',1,'']]],
   ['audiokitconfig_68',['AudioKitConfig',['../struct_audio_kit_config.html',1,'']]],
-  ['audiokitsettings_2eh_69',['AudioKitSettings.h',['../_audio_kit_settings_8h.html',1,'']]]
+  ['audiokitinout_69',['AudioKitInOut',['../_audio_kit_8h.html#a4fbb4c5d274a095e778c62120bcea1cd',1,'AudioKit.h']]],
+  ['audiokitsettings_2eh_70',['AudioKitSettings.h',['../_audio_kit_settings_8h.html',1,'']]]
 ];

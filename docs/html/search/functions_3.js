@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['defaultconfig_235',['defaultConfig',['../class_audio_kit.html#abdddcc14e2b658f322701da22dfa4050',1,'AudioKit::defaultConfig()'],['../class_audio_kit.html#a1ec29ac969c1e1d0537f6012d4385c29',1,'AudioKit::defaultConfig(bool isOutput)']]]
+  ['defaultconfig_236',['defaultConfig',['../class_audio_kit.html#ae7f2a59c6f2bd31db85d75a65cec8ef0',1,'AudioKit']]]
 ];
