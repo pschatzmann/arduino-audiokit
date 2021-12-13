@@ -26,17 +26,21 @@ i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t* conf)
 {
     KIT_LOGD(LOG_METHOD);
 
+#if defined(ESP32)
     KIT_LOGD("sda: %d", conf->sda_io_num);
     KIT_LOGD("scl: %d", conf->scl_io_num);
     Wire.setPins(conf->sda_io_num, conf->scl_io_num);
-
     KIT_LOGD("clk_speed: %d", conf->master.clk_speed);
+#elif defined(ARDUINO_ARCH_RP2040)
+    Wire.setSDA(conf->sda_io_num);
+    bool setSCL(conf->scl_io_num);
+#else
+#warning "Pins in Wire Library ignored"
+#endif
+
     Wire.setClock(conf->master.clk_speed);
-
-    if (!Wire.begin()) {
-        KIT_LOGE("->Wire.begin");
-    }
-
+    Wire.begin();
+    
     return nullptr;
 }
 
