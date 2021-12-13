@@ -110,18 +110,6 @@ esp_err_t i2c_bus_read_bytes(i2c_bus_handle_t bus, int addr, uint8_t *reg, int r
  */
 esp_err_t i2c_bus_delete(i2c_bus_handle_t bus);
 
-// /**
-//  * @brief I2C start sending buffered commands
-//  *
-//  * @param bus            I2C bus handle
-//  * @param cmd            I2C cmd handle
-//  * @param ticks_to_wait  Maximum blocking time
-//  *
-//  * @return
-//  *     - ESP_OK Success
-//  *     - ESP_FAIL Fail
-//  */
-// esp_err_t i2c_bus_cmd_begin(i2c_bus_handle_t bus, i2c_cmd_handle_t cmd, portBASE_TYPE ticks_to_wait);
 
 #ifdef __cplusplus
 }

@@ -1,100 +1,116 @@
+/**
+ * @file i2c_wire.cpp
+ * @author Phil Schatzmann
+ * @brief I2S Implementation using Arduino Wire Library
+ * @date 2021-12-12
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include "AudioKitSettings.h"
 
 #ifdef AUDIOKIT_USE_WIRE
 
 #include <Wire.h>
 #include <stdio.h>
-#include "i2c_bus.h"
-#include "audiokit_logger.h"
+
 #include "audio_error.h"
-
-
-i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t *conf){
-    // Wire.begin(I2C_SDA, I2C_SCL);
-    if (!Wire.begin(conf->sda_io_num,conf->scl_io_num)){
-        LOGE("->Wire.begin");
-    }
-    return nullptr;
-}
-
-esp_err_t i2c_bus_cmd_begin(i2c_bus_handle_t bus, i2c_cmd_handle_t cmd, portBASE_TYPE ticks_to_wait){
-    LOGD(LOG_METHOD);
-    return ESP_OK;
-}
+#include "audiokit_logger.h"
+#include "i2c_bus.h"
 
 // 0x20
 #define PORT 0x20
+#define END true
+
+i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t* conf)
+{
+    KIT_LOGD(LOG_METHOD);
+
+    KIT_LOGD("sda: %d", conf->sda_io_num);
+    KIT_LOGD("scl: %d", conf->scl_io_num);
+    Wire.setPins(conf->sda_io_num, conf->scl_io_num);
+
+    KIT_LOGD("clk_speed: %d", conf->master.clk_speed);
+    Wire.setClock(conf->master.clk_speed);
+
+    if (!Wire.begin()) {
+        KIT_LOGE("->Wire.begin");
+    }
+
+    return nullptr;
+}
+
+esp_err_t i2c_bus_cmd_begin(i2c_bus_handle_t bus, i2c_cmd_handle_t cmd, portBASE_TYPE ticks_to_wait)
+{
+    KIT_LOGD(LOG_METHOD);
+    return ESP_OK;
+}
 
 // this method is used !
-esp_err_t i2c_bus_write_bytes(i2c_bus_handle_t bus, int addr, uint8_t *reg, int reglen, uint8_t *data, int datalen){
-    LOGD(LOG_METHOD);
-    assert(addr == PORT);
-    LOGD("->i2c addr: %d", addr);
+esp_err_t i2c_bus_write_bytes(i2c_bus_handle_t bus, int addr, uint8_t* reg, int reglen, uint8_t* data, int datalen)
+{
+    KIT_LOGD("i2c_bus_write_bytes: addr=%d reglen=%d datalen=%d - reg=%d value=%d", addr, reglen, datalen, reg[0], data[0]);
+
+    assert(reglen == 1);
+    assert(datalen == 1);
+
     int result = ESP_OK;
-    Wire.beginTransmission(addr);
-    int len = Wire.write(reg, reglen);
-    if (len!=reglen){
-        LOGE("->Wire.write addr");
-        result = ESP_FAIL;
-    }
-    len = Wire.write(data, datalen);
-    if (len!=reglen){
-        LOGE("->Wire.write data");
-        result = ESP_FAIL;
-    }
-    int rc = Wire.endTransmission();
-    if (rc!=0){
-        LOGE("->Wire.endTransmission: %d",rc);
+    Wire.beginTransmission(addr >> 1);
+    Wire.write(reg[0]);
+    Wire.write(data[0]);
+    int rc = Wire.endTransmission(END);
+    if (rc != 0) {
+        KIT_LOGE("->Wire.endTransmission: %d", rc);
         result = ESP_FAIL;
     }
     return result;
 }
 
-esp_err_t i2c_bus_write_data(i2c_bus_handle_t bus, int addr, uint8_t *data, int datalen){
-    LOGD(LOG_METHOD);
-    assert(addr == PORT);
+esp_err_t i2c_bus_write_data(i2c_bus_handle_t bus, int addr, uint8_t* data, int datalen)
+{
+    KIT_LOGD("i2c_bus_write_data: addr=%d len=%d", addr, datalen);
+    assert(datalen == 1);
+
     int result = ESP_OK;
-    Wire.beginTransmission(addr);
-    int len = Wire.write(data,datalen);
-    if (len!=datalen){
-        LOGE("->Wire.write data");
-        result = ESP_FAIL;
-    }
-    int rc = Wire.endTransmission();
-    if (rc!=0){
-        LOGE("->Wire.endTransmission: %d", rc);
+    Wire.beginTransmission(addr >> 1);
+    Wire.write(data, datalen);
+    int rc = Wire.endTransmission(END);
+    if (rc != 0) {
+        KIT_LOGE("->Wire.endTransmission: %d", rc);
         result = ESP_FAIL;
     }
     return result;
 }
 
 /// This method is used
-esp_err_t i2c_bus_read_bytes(i2c_bus_handle_t bus, int addr, uint8_t *reg, int reglen, uint8_t *outdata, int datalen){
-    LOGD(LOG_METHOD);
-    assert(addr == PORT);
-    int result = i2c_bus_write_bytes(bus, addr, reg, reglen, outdata, datalen);
+esp_err_t i2c_bus_read_bytes(i2c_bus_handle_t bus, int addr, uint8_t* reg, int reglen, uint8_t* outdata, int datalen)
+{
+    KIT_LOGD("i2c_bus_read_bytes: addr=%d reglen=%d datalen=%d - reg=%d", addr, reglen, datalen, reg[0]);
+    assert(reglen == 1);
+    assert(datalen == 1);
 
-    uint8_t result_len = Wire.requestFrom((uint16_t)addr, (uint8_t)datalen,(bool) true);
-    LOGD("->Wire.requestFrom %d->%d", datalen, result_len);
-    // wait for result
-    while(Wire.available()<datalen){
-         delay(10);
-    }
-    LOGD("->Wire.available %d->%d", datalen, Wire.available());
-    for (int j=0;j<datalen;j++){
-        outdata[j]=Wire.read();
+    outdata[0] = 0;
+    int result = ESP_OK;
+
+    Wire.beginTransmission(addr >> 1);
+    Wire.write(reg[0]);
+    int rc = Wire.endTransmission();
+
+    uint8_t result_len = Wire.requestFrom((uint16_t)(addr >> 1), (uint8_t)1, true);
+    if (result_len > 0) {
+        result_len = Wire.readBytes(outdata, datalen);
+    } else {
+        KIT_LOGE("->Wire.requestFrom %d->%d", datalen, result_len);
+        result = ESP_FAIL;
     }
     return result;
 }
 
-esp_err_t i2c_bus_delete(i2c_bus_handle_t bus){
-    LOGD(LOG_METHOD);
-#ifndef ESP32
+esp_err_t i2c_bus_delete(i2c_bus_handle_t bus)
+{
+    KIT_LOGD(LOG_METHOD);
     Wire.end();
-#endif
     return ESP_OK;
 }
-
-
 
 #endif

@@ -55,7 +55,7 @@ extern "C" {
 
 
 #define AUDIO_HAL_VOL_DEFAULT 20
-#define ets_printf KIT_LOGD
+#define ets_printf KIT_LOGI
 
 typedef struct audio_hal *audio_hal_handle_t;
 

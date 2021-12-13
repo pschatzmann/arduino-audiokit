@@ -50,12 +50,20 @@
 #define SDCARD_OPEN_FILE_NUM_MAX  5
 #define SDCARD_INTR_GPIO          GPIO_NUM_34
 
-#define BUTTON_REC_ID             GPIO_NUM_36
-#define BUTTON_MODE_ID            GPIO_NUM_39
-#define BUTTON_SET_ID             TOUCH_PAD_NUM9
-#define BUTTON_PLAY_ID            TOUCH_PAD_NUM8
-#define BUTTON_VOLUP_ID           TOUCH_PAD_NUM7
-#define BUTTON_VOLDOWN_ID         TOUCH_PAD_NUM4
+#define PIN_KEY1 36
+#define PIN_KEY2 13
+#define PIN_KEY3 19
+#define PIN_KEY4 23
+#define PIN_KEY5 18
+#define PIN_KEY6 5
+
+#define BUTTON_REC_ID             PIN_KEY1
+#define BUTTON_MODE_ID            PIN_KEY2
+#define BUTTON_SET_ID             PIN_KEY3
+#define BUTTON_PLAY_ID            PIN_KEY4
+#define BUTTON_VOLUP_ID           PIN_KEY5
+#define BUTTON_VOLDOWN_ID         PIN_KEY6
+
 
 #define AUXIN_DETECT_GPIO         GPIO_NUM_12
 #define HEADPHONE_DETECT          GPIO_NUM_39

@@ -65,8 +65,6 @@ i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t *conf)
     KIT_LOGI("scl: %d",conf->scl_io_num);
     KIT_LOGI("port: %d",port);
 
-
-
     i2c_bus[port] = (i2c_bus_t *) audio_calloc(1, sizeof(i2c_bus_t));
     i2c_bus[port]->i2c_conf = *conf;
     i2c_bus[port]->i2c_port = port;
@@ -183,16 +181,5 @@ esp_err_t i2c_bus_delete(i2c_bus_handle_t bus)
     _busLock = NULL;
     return ESP_OK;
 }
-
-// esp_err_t i2c_bus_cmd_begin(i2c_bus_handle_t bus, i2c_cmd_handle_t cmd, portBASE_TYPE ticks_to_wait)
-// {
-//     KIT_LOGD(LOG_METHOD);
-//     I2C_BUS_CHECK(bus != NULL, "Handle error", ESP_FAIL);
-//     I2C_BUS_CHECK(cmd != NULL, "I2C cmd error", ESP_FAIL);
-//     i2c_bus_t *p_bus = (i2c_bus_t *) bus;
-
-//     esp_err_t ret = i2c_master_cmd_begin(p_bus->i2c_port, cmd, ticks_to_wait);
-//     return ret;
-// }
 
 #endif

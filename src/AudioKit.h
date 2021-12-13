@@ -35,8 +35,6 @@
 #define I2S_COMM_FORMAT_STAND_I2S \
   (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
 #define I2S_COMM_FORMAT_STAND_MSB \
-  (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
-#define I2S_COMM_FORMAT_STAND_LSB \
   (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
 #define I2S_COMM_FORMAT_STAND_PCM_LONG \
   (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_LONG)
@@ -88,7 +86,7 @@ struct AudioKitConfig {
   }
 
   /// Provides the sample rate in samples per second
-  int sampleRate() {
+  uint32_t sampleRate() {
     switch (sample_rate) {
       case AUDIO_HAL_08K_SAMPLES: /*!< set to  8k samples per second */
         return 8000;
@@ -144,7 +142,7 @@ struct AudioKitConfig {
         if (fmt==AUDIO_HAL_I2S_LEFT){
           its_com_fmt = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;
         } else if(fmt==AUDIO_HAL_I2S_RIGHT){
-          its_com_fmt = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_LSB;
+          its_com_fmt = (i2s_comm_format_t) I2S_COMM_FORMAT_STAND_MSB;
         } else if(fmt==AUDIO_HAL_I2S_DSP){
           its_com_fmt = (i2s_comm_format_t )I2S_COMM_FORMAT_STAND_PCM_SHORT;
         }
