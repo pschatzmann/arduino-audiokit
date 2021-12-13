@@ -45,6 +45,9 @@ typedef int eps32_i2s_audio_sample_rate_type;
 typedef uint32_t eps32_i2s_audio_sample_rate_type;
 #endif
 
+class AudioKit;
+class AudioKit* selfAudioKit = nullptr;
+
 /**
  * @brief Configuation for AudioKit
  *
@@ -53,20 +56,13 @@ struct AudioKitConfig {
   i2s_port_t i2s_num = (i2s_port_t)0;
   gpio_num_t mclk_gpio = (gpio_num_t)0;
 
-  audio_hal_adc_input_t adc_input =
-      AUDIOKIT_DEFAULT_INPUT; /*!<  set adc channel with audio_hal_adc_input_t
-                               */
-  audio_hal_dac_output_t dac_output =
-      AUDIOKIT_DEFAULT_OUTPUT;       /*!< set dac channel */
+  audio_hal_adc_input_t adc_input = AUDIOKIT_DEFAULT_INPUT; /*!<  set adc channel with audio_hal_adc_input_t*/
+  audio_hal_dac_output_t dac_output =AUDIOKIT_DEFAULT_OUTPUT;       /*!< set dac channel */
   audio_hal_codec_mode_t codec_mode; /*!< select codec mode: adc, dac or both */
-  audio_hal_iface_mode_t master_slave_mode =
-      AUDIOKIT_DEFAULT_MASTER_SLAVE; /*!< audio codec chip mode */
-  audio_hal_iface_format_t fmt =
-      AUDIOKIT_DEFAULT_I2S_FMT; /*!< I2S interface format */
-  audio_hal_iface_samples_t sample_rate =
-      AUDIOKIT_DEFAULT_RATE; /*!< I2S interface samples per second */
-  audio_hal_iface_bits_t bits_per_sample =
-      AUDIOKIT_DEFAULT_BITSIZE; /*!< i2s interface number of bits per sample */
+  audio_hal_iface_mode_t master_slave_mode = AUDIOKIT_DEFAULT_MASTER_SLAVE; /*!< audio codec chip mode */
+  audio_hal_iface_format_t fmt = AUDIOKIT_DEFAULT_I2S_FMT; /*!< I2S interface format */
+  audio_hal_iface_samples_t sample_rate = AUDIOKIT_DEFAULT_RATE; /*!< I2S interface samples per second */
+  audio_hal_iface_bits_t bits_per_sample = AUDIOKIT_DEFAULT_BITSIZE; /*!< i2s interface number of bits per sample */
 
   /// Returns true if the CODEC is the master
   bool isMaster() { return master_slave_mode == AUDIO_HAL_MODE_MASTER; }
@@ -192,6 +188,7 @@ class AudioKit {
  public:
   AudioKit() {
     // setup SPI for SD drives
+    selfAudioKit = this;
     setupSPI();
   }
 
@@ -213,6 +210,9 @@ class AudioKit {
   bool begin(AudioKitConfig cnfg) {
     KIT_LOGI(LOG_METHOD);
     KIT_LOGI("Selected board: %d", AUDIOKIT_BOARD);
+
+    // setup headphone if necessary
+    setupHeadphoneDetection();
 
     audio_hal_conf.adc_input = cfg.adc_input;
     audio_hal_conf.dac_output = cfg.dac_output;
@@ -282,9 +282,7 @@ class AudioKit {
 
   /// Sets the codec active / inactive
   bool setActive(bool active) {
-    return audio_hal_ctrl_codec(
-               hal_handle, cfg.codec_mode,
-               active ? AUDIO_HAL_CTRL_START : AUDIO_HAL_CTRL_STOP) == ESP_OK;
+    return audio_hal_ctrl_codec( hal_handle, cfg.codec_mode, active ? AUDIO_HAL_CTRL_START : AUDIO_HAL_CTRL_STOP) == ESP_OK;
   }
 
   /// Mutes the output
@@ -463,13 +461,88 @@ class AudioKit {
     return spi_cs_pin;
   }
 
+  /**
+   * @brief Activates/deactivates the speaker amplifier output
+   * This is working only if the driver is supporting the functionality
+   * @param active 
+   */
+  void setSpeakerActive(bool active) {
+    int paPin = get_pa_enable_gpio();
+    if (paPin>0){
+        digitalWrite(paPin, active);
+    } else {
+      KIT_LOGW("setSpeakerActive not supported");
+    }
+  }
+
+  /**
+   * @brief Switch off the PA if the headphone in plugged in 
+   * and switch it on again if the headphone is unplugged
+   * 
+   */
+  static void actionHeadphoneDetection() {
+    if (selfAudioKit->headphonePin>0){
+
+      // detect changes
+      bool isConnected = selfAudioKit->headphoneStatus();
+      if (selfAudioKit->headphoneIsConnected != isConnected) {
+        KIT_LOGD("actionHeadphoneDetection -> %s", isConnected ? "inserted" : "removed");
+        selfAudioKit->speakerChangeTimeout = millis()+600;
+        selfAudioKit->headphoneIsConnected = isConnected;
+      }
+
+      // update when changes have stabilized
+      if (millis()>selfAudioKit->speakerChangeTimeout){
+        // update if things have stabilized
+        bool isConnected = selfAudioKit->headphoneStatus();
+        bool powerActive = !isConnected;
+        KIT_LOGW("Headphone jack has been %s", isConnected ? "inserted" : "removed");
+        selfAudioKit->setSpeakerActive(powerActive);
+        selfAudioKit->speakerChangeTimeout = millis()+1000*60*50*30; // 30 days
+      }
+    }
+    yield();
+  }
+
+
+  /**
+   * @brief Returns true if the headphone was detected
+   * 
+   * @return true 
+   * @return false 
+   */
+  bool headphoneStatus() {
+    return headphonePin>0 ? !digitalRead(headphonePin) : false;
+  }
+
  protected:
   AudioKitConfig cfg;
   audio_hal_codec_config_t audio_hal_conf;
   audio_hal_handle_t hal_handle;
   audio_hal_codec_i2s_iface_t iface;
   int8_t spi_cs_pin;
- 
+  bool headphoneIsConnected = false;
+  unsigned long speakerChangeTimeout = 0;
+  int8_t headphonePin = -1;
+
+  /**
+   * @brief Setup the headphone detection
+   */
+  void setupHeadphoneDetection() {
+    int8_t paPin = pinPaEnable();
+    if (paPin>0){
+      headphonePin = pinHeadphoneDetect();
+      if (headphonePin>0){
+        pinMode(headphonePin, INPUT_PULLUP);
+        pinMode(paPin, OUTPUT);
+        KIT_LOGI("headphone detection is active");
+      } else {
+        KIT_LOGI("headphone detection not supported");    
+      }
+    } else {
+      KIT_LOGI("headphone detection: PA not supported");
+    }
+  }
 
   /**
    * @brief Setup the SPI so that we can access the SD Drive

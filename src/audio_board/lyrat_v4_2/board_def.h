@@ -26,6 +26,7 @@
 #define _AUDIO_BOARD_DEFINITION_H_
 
 //#include "driver/touch_pad.h"
+#define ES8388
 
 #define SDCARD_OPEN_FILE_NUM_MAX  5
 #define SDCARD_INTR_GPIO          GPIO_NUM_34

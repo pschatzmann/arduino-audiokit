@@ -75,6 +75,13 @@ audio_board_handle_t audio_board_get_handle(void);
  */
 esp_err_t audio_board_deinit(audio_board_handle_t audio_board);
 
+
+/**
+ * @brief Updates the headphone status - switches the PA power of when the headphone is connected
+ * 
+ */
+void audio_board_update_headphone_status();
+
 #ifdef __cplusplus
 }
 #endif

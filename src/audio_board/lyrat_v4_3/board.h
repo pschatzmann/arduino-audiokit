@@ -29,7 +29,6 @@
 #include "board_def.h"
 #include "board_pins_config.h"
 //#include "esp_peripherals.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif

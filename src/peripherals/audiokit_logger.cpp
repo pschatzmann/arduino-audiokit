@@ -4,10 +4,10 @@
 #include <stdarg.h>
 
 
-int AUDIOKIT_LOG_LEVEL = Warning;
+int AUDIOKIT_LOG_LEVEL = AudioKitWarning;
 
 void KIT_LOGD(const char* fmr, ...) {
-  if (AUDIOKIT_LOG_LEVEL <= Debug) { // AUDIOKIT_LOG_LEVEL = Debug
+  if (AUDIOKIT_LOG_LEVEL <= AudioKitDebug) { // AUDIOKIT_LOG_LEVEL = Debug
     char log_buffer[AUDIOKIT_LOGLENGTH+1];
     strcpy(log_buffer, "Debug:   ");
     va_list arg;
@@ -20,7 +20,7 @@ void KIT_LOGD(const char* fmr, ...) {
 }
 
 void KIT_LOGI(const char* fmr, ...) {
-  if (AUDIOKIT_LOG_LEVEL <= Info) { // AUDIOKIT_LOG_LEVEL = Info, Debug
+  if (AUDIOKIT_LOG_LEVEL <= AudioKitInfo) { // AUDIOKIT_LOG_LEVEL = Info, Debug
     char log_buffer[AUDIOKIT_LOGLENGTH+1];
     strcpy(log_buffer, "Info:    ");
     va_list arg;
@@ -33,7 +33,7 @@ void KIT_LOGI(const char* fmr, ...) {
 }
 
 void KIT_LOGW(const char* fmr, ...) {
-  if (AUDIOKIT_LOG_LEVEL <= Warning) { // AUDIOKIT_LOG_LEVEL = Warning, Info, Debug
+  if (AUDIOKIT_LOG_LEVEL <= AudioKitWarning) { // AUDIOKIT_LOG_LEVEL = Warning, Info, Debug
     char log_buffer[AUDIOKIT_LOGLENGTH+1];
     strcpy(log_buffer, "Warning:  ");
     va_list arg;
@@ -46,7 +46,7 @@ void KIT_LOGW(const char* fmr, ...) {
 }
 
 void KIT_LOGE(const char* fmr, ...) {
-  if (AUDIOKIT_LOG_LEVEL <= Error) { // for all levels
+  if (AUDIOKIT_LOG_LEVEL <= AudioKitError) { // for all levels
     char log_buffer[AUDIOKIT_LOGLENGTH+1];
     strcpy(log_buffer, "Error:   ");
     va_list arg;

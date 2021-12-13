@@ -153,3 +153,4 @@ esp_err_t audio_hal_get_volume(audio_hal_handle_t audio_hal, int *volume)
     mutex_unlock(audio_hal->audio_hal_lock);
     return ret;
 }
+

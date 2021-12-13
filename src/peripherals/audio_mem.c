@@ -54,7 +54,7 @@ void *audio_calloc(size_t nmemb, size_t size)
         memset(data, 0, nmemb * size);
     }
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    ESP_KIT_LOGI("AUIDO_MEM", "calloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
+    KIT_LOGI( "calloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
 #endif
     return data;
 }
@@ -78,7 +78,7 @@ void *audio_calloc(size_t nmemb, size_t size)
     void *data =  NULL;
     data = calloc(nmemb, size);
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    ESP_KIT_LOGI("AUIDO_MEM", "calloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
+    KIT_LOGI( "calloc:%p, size:%d, called:0x%08x", data, size, (intptr_t)__builtin_return_address(0) - 2);
 #endif
     return data;
 }
@@ -91,7 +91,7 @@ void audio_free(void *ptr)
     KIT_LOGD(LOG_METHOD);
     free(ptr);
 #ifdef ENABLE_AUDIO_MEM_TRACE
-    ESP_KIT_LOGI("AUIDO_MEM", "free:%p, called:0x%08x", ptr, (intptr_t)__builtin_return_address(0) - 2);
+    KIT_LOGI("free:%p, called:0x%08x", ptr, (intptr_t)__builtin_return_address(0) - 2);
 #endif
 }
 

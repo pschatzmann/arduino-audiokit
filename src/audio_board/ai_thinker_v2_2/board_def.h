@@ -26,6 +26,7 @@
 #define _AUDIO_BOARD_DEFINITION_H_
 
 //#include "driver/touch_pad.h"
+#define ES8388
 
 #define SDCARD_OPEN_FILE_NUM_MAX  5
 #define SDCARD_INTR_GPIO          GPIO_NUM_34
@@ -41,8 +42,8 @@
 #define BUTTON_MODE_ID            PIN_KEY2
 #define BUTTON_SET_ID             PIN_KEY3
 #define BUTTON_PLAY_ID            PIN_KEY4
-#define BUTTON_VOLUP_ID           PIN_KEY5
-#define BUTTON_VOLDOWN_ID         PIN_KEY6
+#define BUTTON_VOLDOWN_ID         PIN_KEY5
+#define BUTTON_VOLUP_ID           PIN_KEY6
 
 #define AUXIN_DETECT_GPIO         GPIO_NUM_12
 #define HEADPHONE_DETECT          GPIO_NUM_39

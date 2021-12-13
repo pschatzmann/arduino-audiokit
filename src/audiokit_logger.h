@@ -20,7 +20,7 @@ extern "C" {
 #endif
 
 // define supported log levels
-enum AudioKitLogLevels {Debug, Info, Warning, Error};
+enum AudioKitLogLevels {AudioKitDebug, AudioKitInfo, AudioKitWarning, AudioKitError};
 
 // define default log level
 extern int AUDIOKIT_LOG_LEVEL;
