@@ -113,7 +113,11 @@ esp_err_t i2c_bus_read_bytes(i2c_bus_handle_t bus, int addr, uint8_t* reg, int r
 esp_err_t i2c_bus_delete(i2c_bus_handle_t bus)
 {
     KIT_LOGD(LOG_METHOD);
+// All arduino implementations except old IDF versions
+#if !defined(ESP32) || ESP_IDF_VERSION_MAJOR >= 4    
     Wire.end();
+#endif
+
     return ESP_OK;
 }
 

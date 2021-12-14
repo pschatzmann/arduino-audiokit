@@ -129,6 +129,9 @@ struct AudioKitConfig {
   i2s_pin_config_t i2sPins() {
     i2s_pin_config_t result;
     get_i2s_pins(i2s_num, &result);
+#if ESP_IDF_VERSION_MAJOR >= 4    
+    result.mck_io_num = mclk_gpio;
+#endif
     return result;
   }
 
@@ -209,6 +212,7 @@ class AudioKit {
   /// Starts the codec
   bool begin(AudioKitConfig cnfg) {
     KIT_LOGI(LOG_METHOD);
+    cfg = cnfg;
     KIT_LOGI("Selected board: %d", AUDIOKIT_BOARD);
 
     // setup headphone if necessary
@@ -222,13 +226,13 @@ class AudioKit {
     audio_hal_conf.i2s_iface.samples = cfg.sample_rate;
     audio_hal_conf.i2s_iface.bits = cfg.bits_per_sample;
 
+    // init HAL
     hal_handle = audio_hal_init(&audio_hal_conf, &AUDIO_DRIVER);
     if (hal_handle == 0) {
       KIT_LOGE("audio_hal_init");
       return false;
     }
 
-    cfg = cnfg;
 
 #ifdef ESP32
 
@@ -241,6 +245,7 @@ class AudioKit {
 
     // define i2s pins
     i2s_pin_config_t pin_config = cfg.i2sPins();
+    KIT_LOGI("i2s_set_pin");
     if (i2s_set_pin(cfg.i2s_num, &pin_config) != ESP_OK) {
       KIT_LOGE("i2s_set_pin");
       return false;
