@@ -7,7 +7,8 @@
  * @copyright Copyright (c) 2021
  * 
  */
-#include "AudioKit.h"
+#include "AudioKitHAL.h"
+
 #include "SD.h"
 
 AudioKit kit;

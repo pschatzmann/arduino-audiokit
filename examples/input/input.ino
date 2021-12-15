@@ -7,7 +7,8 @@
  * @copyright Copyright (c) 2021
  * 
  */
-#include "AudioKit.h"
+#include "AudioKitHAL.h"
+
 
 AudioKit kit;
 const int BUFFER_SIZE = 1024;
