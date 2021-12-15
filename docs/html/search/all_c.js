@@ -1,7 +1,7 @@
 var searchData=
 [
   ['sample_5frate_175',['sample_rate',['../struct_audio_kit_config.html#adefddc85df8f2a25c605ce58b6dde31a',1,'AudioKitConfig']]],
-  ['samplerate_176',['sampleRate',['../struct_audio_kit_config.html#a529a82292760e9ba5de9af677a805858',1,'AudioKitConfig']]],
+  ['samplerate_176',['sampleRate',['../struct_audio_kit_config.html#a33b28874f411a9c353f6a0fa62261289',1,'AudioKitConfig']]],
   ['samples_177',['samples',['../audio__hal_8h.html#a2150600c54d6c38a3360d96583991084',1,'audio_hal_codec_i2s_iface_t']]],
   ['scl_5fio_5fnum_178',['scl_io_num',['../audio__gpio_8h.html#ada27de59d612ca9b8a1113ca6fe880ec',1,'i2c_config_t']]],
   ['scl_5fpullup_5fen_179',['scl_pullup_en',['../audio__gpio_8h.html#aa34aad87ac08d75c13d9307c48815baa',1,'i2c_config_t']]],
@@ -11,9 +11,11 @@ var searchData=
   ['sda_5fpullup_5fen_183',['sda_pullup_en',['../audio__gpio_8h.html#a97b18b2329ef69ff7ea2b7cd2cd09801',1,'i2c_config_t']]],
   ['setactive_184',['setActive',['../class_audio_kit.html#a64f95fca0a6f059803268dab33bf5d2c',1,'AudioKit']]],
   ['setmute_185',['setMute',['../class_audio_kit.html#aac99fb5dfb87a965451e076f404224fd',1,'AudioKit']]],
-  ['setupspi_186',['setupSPI',['../class_audio_kit.html#a8a690db491b4d735b5c405d17b6efcb0',1,'AudioKit']]],
-  ['setvolume_187',['setVolume',['../class_audio_kit.html#adae205b1d34fa8c3c00ac891f980a7dd',1,'AudioKit']]],
-  ['spi_5fbus_5fconfig_5ft_188',['spi_bus_config_t',['../audio__gpio_8h.html#structspi__bus__config__t',1,'']]],
-  ['spi_5fdevice_5finterface_5fconfig_5ft_189',['spi_device_interface_config_t',['../audio__gpio_8h.html#structspi__device__interface__config__t',1,'']]],
-  ['spics_5fio_5fnum_190',['spics_io_num',['../audio__gpio_8h.html#a125057d318b9467a5dd3f1b8a72342f6',1,'spi_device_interface_config_t']]]
+  ['setspeakeractive_186',['setSpeakerActive',['../class_audio_kit.html#aff34dc957824c6618a02e517a3b20221',1,'AudioKit']]],
+  ['setupheadphonedetection_187',['setupHeadphoneDetection',['../class_audio_kit.html#accb5ea6f7ee146cbd512552e039ac5ac',1,'AudioKit']]],
+  ['setupspi_188',['setupSPI',['../class_audio_kit.html#a8a690db491b4d735b5c405d17b6efcb0',1,'AudioKit']]],
+  ['setvolume_189',['setVolume',['../class_audio_kit.html#adae205b1d34fa8c3c00ac891f980a7dd',1,'AudioKit']]],
+  ['spi_5fbus_5fconfig_5ft_190',['spi_bus_config_t',['../audio__gpio_8h.html#structspi__bus__config__t',1,'']]],
+  ['spi_5fdevice_5finterface_5fconfig_5ft_191',['spi_device_interface_config_t',['../audio__gpio_8h.html#structspi__device__interface__config__t',1,'']]],
+  ['spics_5fio_5fnum_192',['spics_io_num',['../audio__gpio_8h.html#a125057d318b9467a5dd3f1b8a72342f6',1,'spi_device_interface_config_t']]]
 ];

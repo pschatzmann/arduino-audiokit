@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ismaster_239',['isMaster',['../struct_audio_kit_config.html#a73b36d53ff8bc857cd626a6e2091944a',1,'AudioKitConfig']]]
+  ['headphonestatus_241',['headphoneStatus',['../class_audio_kit.html#a0ad4e2e3004efe2769f9746df240b22a',1,'AudioKit']]]
 ];
