@@ -55,6 +55,7 @@ class AudioKit* selfAudioKit = nullptr;
 struct AudioKitConfig {
   i2s_port_t i2s_num = (i2s_port_t)0;
   gpio_num_t mclk_gpio = (gpio_num_t)0;
+  bool sd_active = true;
 
   audio_hal_adc_input_t adc_input = AUDIOKIT_DEFAULT_INPUT; /*!<  set adc channel with audio_hal_adc_input_t*/
   audio_hal_dac_output_t dac_output =AUDIOKIT_DEFAULT_OUTPUT;       /*!< set dac channel */
@@ -119,8 +120,10 @@ struct AudioKitConfig {
         .dma_buf_count = 3,
         .dma_buf_len = 320,                                                     
         .use_apll = true,
-        .tx_desc_auto_clear = true,                                             
-        .fixed_mclk = 0 
+        .tx_desc_auto_clear = true,
+        // #if ESP_IDF_VERSION_MAJOR >= 4                  
+        // .fixed_mclk = 2000000,
+        // #endif
     };                                                        
     return i2s_config;
   }
@@ -129,9 +132,9 @@ struct AudioKitConfig {
   i2s_pin_config_t i2sPins() {
     i2s_pin_config_t result;
     get_i2s_pins(i2s_num, &result);
-#if ESP_IDF_VERSION_MAJOR >= 4    
-    result.mck_io_num = mclk_gpio;
-#endif
+ #if ESP_IDF_VERSION_MAJOR >= 4    
+     result.mck_io_num = I2S_PIN_NO_CHANGE; //mclk_gpio;
+ #endif
     return result;
   }
 
@@ -251,10 +254,12 @@ class AudioKit {
       return false;
     }
 
+//#if ESP_IDF_VERSION_MAJOR < 4                  
     if (i2s_mclk_gpio_select(cfg.i2s_num, cfg.mclk_gpio) != ESP_OK) {
       KIT_LOGE("i2s_mclk_gpio_select");
       return false;
     }
+//#endif
 
 #endif
 
@@ -556,8 +561,10 @@ class AudioKit {
     KIT_LOGD(LOG_METHOD);
 //  I assume this is valid for all AudioKits!
 #if defined(ESP32) && defined(AUDIOKIT_SETUP_SD)
+    if (cfg.sd_active){
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
       SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
+    }
 #else
     #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
 #endif
