@@ -34,6 +34,13 @@
 #define BUTTON_MODE_ID            4
 #define BUTTON_REC_ID             5
 
+#define PIN_KEY1 BUTTON_REC_ID
+#define PIN_KEY2 BUTTON_MODE_ID
+#define PIN_KEY3 BUTTON_SET_ID
+#define PIN_KEY4 BUTTON_PLAY_ID
+#define PIN_KEY5 BUTTON_VOLUP_ID
+#define PIN_KEY6 BUTTON_VOLDOWN_ID
+
 #define PA_ENABLE_GPIO            10
 #define BUTTON_ADC                6
 #define WS2812_LED_GPIO           45

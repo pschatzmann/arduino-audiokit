@@ -37,6 +37,14 @@
 #define BUTTON_MODE_ID            4
 #define BUTTON_REC_ID             5
 
+#define PIN_KEY1 BUTTON_REC_ID
+#define PIN_KEY2 BUTTON_MODE_ID
+#define PIN_KEY3 BUTTON_SET_ID
+#define PIN_KEY4 BUTTON_PLAY_ID
+#define PIN_KEY5 BUTTON_VOLUP_ID
+#define PIN_KEY6 BUTTON_VOLDOWN_ID
+
+
 #define ES8311_MCLK_SOURCE        0   /* 0 From MCLK of esp32   1 From BCLK */
 
 

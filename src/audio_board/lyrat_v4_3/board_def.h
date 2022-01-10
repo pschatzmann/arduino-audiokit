@@ -24,7 +24,7 @@
 
 #ifndef _AUDIO_BOARD_DEFINITION_H_
 #define _AUDIO_BOARD_DEFINITION_H_
-
+#include "hal/touch_sensor_types.h"
 //#include "driver/touch_pad.h"
 #define ES8388
 
@@ -37,6 +37,14 @@
 #define BUTTON_PLAY_ID            TOUCH_PAD_NUM8
 #define BUTTON_VOLUP_ID           TOUCH_PAD_NUM7
 #define BUTTON_VOLDOWN_ID         TOUCH_PAD_NUM4
+
+
+#define PIN_KEY1 BUTTON_REC_ID
+#define PIN_KEY2 BUTTON_MODE_ID
+#define PIN_KEY3 BUTTON_SET_ID
+#define PIN_KEY4 BUTTON_PLAY_ID
+#define PIN_KEY5 BUTTON_VOLUP_ID
+#define PIN_KEY6 BUTTON_VOLDOWN_ID
 
 #define AUXIN_DETECT_GPIO         GPIO_NUM_12
 #define HEADPHONE_DETECT          GPIO_NUM_19
