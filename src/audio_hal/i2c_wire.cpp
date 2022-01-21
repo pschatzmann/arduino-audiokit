@@ -9,7 +9,7 @@
  */
 #include "AudioKitSettings.h"
 
-#if AUDIOKIT_USE_WIRE
+#if defined(AUDIOKIT_USE_WIRE) && AUDIOKIT_USE_WIRE
 
 #include <Wire.h>
 #include <stdio.h>
