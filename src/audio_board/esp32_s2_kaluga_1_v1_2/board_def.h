@@ -26,7 +26,7 @@
 #define _AUDIO_BOARD_DEFINITION_H_
 
 //#include "driver/touch_pad.h"
-#define PIN_AUDIO_KIT_SD_CARD_CS 3
+#define PIN_AUDIO_KIT_SD_CARD_CS 13
 #define PIN_AUDIO_KIT_SD_CARD_MISO 2
 #define PIN_AUDIO_KIT_SD_CARD_MOSI 15
 #define PIN_AUDIO_KIT_SD_CARD_CLK  14
