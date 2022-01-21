@@ -5,11 +5,10 @@
  * @date 2021-12-12
  *
  * @copyright Copyright (c) 2021
- *
  */
-#include "AudioKitSettings.h"
 
-#if defined(AUDIOKIT_USE_WIRE) && AUDIOKIT_USE_WIRE
+#include "AudioKitSettings.h"
+#if AUDIOKIT_USE_WIRE
 
 #include <Wire.h>
 #include <stdio.h>
