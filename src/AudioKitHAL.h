@@ -28,6 +28,8 @@
 #include "audio_system.h"
 #include "audio_version.h"
 #include "driver/i2s.h"
+#include "audio_type_def.h"
+
 #endif
 
 // Support for old IDF versions
@@ -55,7 +57,7 @@ class AudioKit* selfAudioKit = nullptr;
 struct AudioKitConfig {
   i2s_port_t i2s_num = (i2s_port_t)0;
   gpio_num_t mclk_gpio = (gpio_num_t)0;
-  bool sd_active = true;
+  bool sd_active = false;
 
   audio_hal_adc_input_t adc_input = AUDIOKIT_DEFAULT_INPUT; /*!<  set adc channel with audio_hal_adc_input_t*/
   audio_hal_dac_output_t dac_output =AUDIOKIT_DEFAULT_OUTPUT;       /*!< set dac channel */
@@ -562,13 +564,14 @@ class AudioKit {
   void setupSPI() {
     KIT_LOGD(LOG_METHOD);
 //  I assume this is valid for all AudioKits!
-#if defined(ESP32) && defined(AUDIOKIT_SETUP_SD)
+#if AUDIOKIT_SETUP_SD==1
     if (cfg.sd_active){
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
       pinMode(spi_cs_pin, OUTPUT);
       digitalWrite(spi_cs_pin, HIGH);
 
       SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
+      KIT_LOGW("setupSPI for SD");
     }
 #else
     #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 

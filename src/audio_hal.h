@@ -31,7 +31,7 @@
 #include "AudioKitSettings.h"
 #include "audio_error.h"
 
-#ifdef AUDIOKIT_FREE_RTOS
+#if AUDIOKIT_FREE_RTOS==1
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include "freertos/task.h"

@@ -80,6 +80,38 @@ typedef enum
     ESP_CODEC_ERR_NO_MEM         = -10,
 } esp_codec_err_t;
 
+typedef enum {
+    PERIPH_ID_BUTTON     =  1,
+    PERIPH_ID_TOUCH      =  2,
+} esp_periph_button_t;
+
+typedef enum {
+    INPUT_KEY_USER_ID_UNKNOWN                   = -1,   /*!< unknown user id */
+    INPUT_KEY_USER_ID_REC                       = 0x01, /*!< user id for recording */
+    INPUT_KEY_USER_ID_SET                       = 0x02, /*!< user id for settings */
+    INPUT_KEY_USER_ID_PLAY                      = 0x03, /*!< user id for playing */
+    INPUT_KEY_USER_ID_MODE                      = 0x04, /*!< user id for mode */
+    INPUT_KEY_USER_ID_VOLDOWN                   = 0x05, /*!< user id for volume down */
+    INPUT_KEY_USER_ID_VOLUP                     = 0x06, /*!< user id for volume up */
+    INPUT_KEY_USER_ID_MUTE                      = 0x07, /*!< user id for mute */
+    INPUT_KEY_USER_ID_CAPTURE                   = 0x08, /*!< user id for capture photo */
+    INPUT_KEY_USER_ID_MSG                       = 0x09, /*!< user id for message */
+    INPUT_KEY_USER_ID_BATTERY_CHARGING          = 0x0A, /*!< user id for battery charging */
+    INPUT_KEY_USER_ID_WAKEUP                    = 0x0B, /*!< user id for GPIO wakeup */
+
+    INPUT_KEY_USER_ID_MAX                       = 0x101,
+} input_KEY_user_id_t;
+
+
+/**
+ * @brief input key's infomation
+ */
+typedef struct {
+    esp_periph_button_t  type;             /*!< ID of peripherals */
+    input_KEY_user_id_t  user_id;          /*!< The key's user id */
+    int              act_id;           /*!< The key's action id */
+} input_key_service_info_t;
+
 /**
  * @brief      Gain codec extension. need to sync by `esp_codec_type_t`.
  *              eg. esp_codec_type_t codec_type = ESP_CODEC_TYPE_MP3;

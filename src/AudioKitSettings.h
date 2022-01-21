@@ -17,7 +17,7 @@
 #pragma once
 
 #ifndef AUDIOKIT_BOARD
-#define AUDIOKIT_BOARD 5
+#define AUDIOKIT_BOARD 1
 #endif
 
 // Default settings
@@ -33,10 +33,14 @@
 #define AUDIOKIT_USE_WIRE 1
 #endif
 
-#ifdef ESP32
-#define AUDIOKIT_FREE_RTOS
-#define AUDIOKIT_MUTEX_SUPPORT
-#define AUDIOKIT_SETUP_SD
-#else
+#ifndef AUDIOKIT_FREE_RTOS
+#define AUDIOKIT_FREE_RTOS 1
+#endif
 
+#ifndef AUDIOKIT_MUTEX_SUPPORT
+#define AUDIOKIT_MUTEX_SUPPORT 1
+#endif
+
+#ifndef AUDIOKIT_SETUP_SD
+#define AUDIOKIT_SETUP_SD 1
 #endif

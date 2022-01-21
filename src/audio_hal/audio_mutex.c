@@ -23,7 +23,7 @@
  */
 
 #include "AudioKitSettings.h"
-#if defined(AUDIOKIT_MUTEX_SUPPORT) 
+#if AUDIOKIT_MUTEX_SUPPORT==1
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include "freertos/task.h"
@@ -35,7 +35,7 @@
 #include "audio_version.h"
 #include "audiokit_logger.h"
 
-#if defined(AUDIOKIT_MUTEX_SUPPORT) && (ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(4, 3, 0))
+#if AUDIOKIT_MUTEX_SUPPORT==1 && (ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(4, 3, 0))
 // The xQueueSemaphoreTake is not available on FreeRTOS v8.2.0, it's compatible implementation.
 BaseType_t __attribute__((weak)) xQueueSemaphoreTake( QueueHandle_t xQueue, TickType_t xTicksToWait )
 {
@@ -47,7 +47,7 @@ BaseType_t __attribute__((weak)) xQueueSemaphoreTake( QueueHandle_t xQueue, Tick
 void *mutex_create(void)
 {
     void *handle = NULL;
-#ifdef AUDIOKIT_MUTEX_SUPPORT
+#if AUDIOKIT_MUTEX_SUPPORT==1
     handle = xSemaphoreCreateMutex();
 #endif
     return (void *) handle;
@@ -55,7 +55,7 @@ void *mutex_create(void)
 
 int mutex_destroy(void *mutex)
 {
-#ifdef AUDIOKIT_MUTEX_SUPPORT
+#if AUDIOKIT_MUTEX_SUPPORT==1
     vSemaphoreDelete((QueueHandle_t)mutex);
 #endif
     return 0;
@@ -63,7 +63,7 @@ int mutex_destroy(void *mutex)
 
 int mutex_lock(void *mutex)
 {
-#ifdef AUDIOKIT_MUTEX_SUPPORT
+#if AUDIOKIT_MUTEX_SUPPORT==1
 #if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 3, 0))
     while (xSemaphoreTake((QueueHandle_t)mutex, portMAX_DELAY) != pdPASS);
 #else
@@ -76,7 +76,7 @@ int mutex_lock(void *mutex)
 int mutex_unlock(void *mutex)
 {
     int ret = 0;
-#ifdef AUDIOKIT_MUTEX_SUPPORT
+#if AUDIOKIT_MUTEX_SUPPORT==1
     ret = xSemaphoreGive((QueueHandle_t)mutex);
 #endif
     return ret;
