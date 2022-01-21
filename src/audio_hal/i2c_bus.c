@@ -23,7 +23,7 @@
   */
 
 #include "AudioKitSettings.h"
-#if !AUDIOKIT_USE_WIRE
+#if AUDIOKIT_USE_WIRE==0
 
 #include <stdio.h>
 #include "audiokit_logger.h"

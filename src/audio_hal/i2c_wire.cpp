@@ -8,7 +8,7 @@
  */
 
 #include "AudioKitSettings.h"
-#if AUDIOKIT_USE_WIRE
+#if AUDIOKIT_USE_WIRE==1
 
 #include <Wire.h>
 #include <stdio.h>
