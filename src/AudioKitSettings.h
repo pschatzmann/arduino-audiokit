@@ -28,9 +28,9 @@
 #define AUDIOKIT_DEFAULT_BITSIZE        AUDIO_HAL_BIT_LENGTH_16BITS
 #define AUDIOKIT_DEFAULT_I2S_FMT        AUDIO_HAL_I2S_NORMAL
 
-// Activate or deactivate the following
+// 1 = Using Arduino Wire Library; 0 = Use ESP32 I2C API
 #ifndef AUDIOKIT_USE_WIRE
-#define AUDIOKIT_USE_WIRE true
+#define AUDIOKIT_USE_WIRE 1
 #endif
 
 #ifdef ESP32
