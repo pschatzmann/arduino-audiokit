@@ -28,8 +28,8 @@
 #define AUDIOKIT_DEFAULT_BITSIZE        AUDIO_HAL_BIT_LENGTH_16BITS
 #define AUDIOKIT_DEFAULT_I2S_FMT        AUDIO_HAL_I2S_NORMAL
 
-// Activate or deactivate the following
-#define AUDIOKIT_USE_WIRE
+// Activate or deactivate the following with true or false
+#define AUDIOKIT_USE_WIRE true
 
 
 #ifdef ESP32
