@@ -9,7 +9,7 @@
  */
 #include "AudioKitSettings.h"
 
-#ifdef AUDIOKIT_USE_WIRE
+#if defined(AUDIOKIT_USE_WIRE) && AUDIOKIT_USE_WIRE
 
 #include <Wire.h>
 #include <stdio.h>
@@ -99,6 +99,9 @@ esp_err_t i2c_bus_read_bytes(i2c_bus_handle_t bus, int addr, uint8_t* reg, int r
     Wire.beginTransmission(addr >> 1);
     Wire.write(reg[0]);
     int rc = Wire.endTransmission();
+    if (rc!=0){
+        KIT_LOGE("->Wire.endTransmission: %d", rc);
+    }
 
     uint8_t result_len = Wire.requestFrom((uint16_t)(addr >> 1), (uint8_t)1, true);
     if (result_len > 0) {
