@@ -230,10 +230,12 @@ class AudioKit {
     audio_hal_conf.i2s_iface.bits = cfg.bits_per_sample;
 
     // init HAL
-    hal_handle = audio_hal_init(&audio_hal_conf, &AUDIO_DRIVER);
     if (hal_handle == 0) {
-      KIT_LOGE("audio_hal_init");
-      return false;
+      hal_handle = audio_hal_init(&audio_hal_conf, &AUDIO_DRIVER);
+      if (hal_handle == 0) {
+        KIT_LOGE("audio_hal_init");
+        return false;
+      }
     }
 
 
@@ -528,7 +530,7 @@ class AudioKit {
  protected:
   AudioKitConfig cfg;
   audio_hal_codec_config_t audio_hal_conf;
-  audio_hal_handle_t hal_handle;
+  audio_hal_handle_t hal_handle = 0;
   audio_hal_codec_i2s_iface_t iface;
   int8_t spi_cs_pin;
   bool headphoneIsConnected = false;
@@ -563,6 +565,9 @@ class AudioKit {
 #if defined(ESP32) && defined(AUDIOKIT_SETUP_SD)
     if (cfg.sd_active){
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
+      pinMode(spi_cs_pin, OUTPUT);
+      digitalWrite(spi_cs_pin, HIGH);
+
       SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
     }
 #else

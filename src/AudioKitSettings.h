@@ -17,7 +17,7 @@
 #pragma once
 
 #ifndef AUDIOKIT_BOARD
-#define AUDIOKIT_BOARD 1
+#define AUDIOKIT_BOARD 5
 #endif
 
 // Default settings
@@ -29,17 +29,14 @@
 #define AUDIOKIT_DEFAULT_I2S_FMT        AUDIO_HAL_I2S_NORMAL
 
 // Activate or deactivate the following
-#define AUDIOKIT_USE_WIRE
-
+#ifndef AUDIOKIT_USE_WIRE
+#define AUDIOKIT_USE_WIRE true
+#endif
 
 #ifdef ESP32
 #define AUDIOKIT_FREE_RTOS
 #define AUDIOKIT_MUTEX_SUPPORT
 #define AUDIOKIT_SETUP_SD
-#define PIN_AUDIO_KIT_SD_CARD_CS 13
-#define PIN_AUDIO_KIT_SD_CARD_MISO 2
-#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#define PIN_AUDIO_KIT_SD_CARD_CLK  14
 #else
 
 #endif

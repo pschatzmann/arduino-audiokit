@@ -27,6 +27,12 @@
 //#include "driver/touch_pad.h"
 #define ES8388
 
+#define PIN_AUDIO_KIT_SD_CARD_CS 13
+#define PIN_AUDIO_KIT_SD_CARD_MISO 2
+#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
+#define PIN_AUDIO_KIT_SD_CARD_CLK  14
+
+
 #define SDCARD_OPEN_FILE_NUM_MAX  5
 #define SDCARD_INTR_GPIO          GPIO_NUM_34
 
