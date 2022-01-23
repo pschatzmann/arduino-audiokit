@@ -35,7 +35,6 @@
         return b;\
     }
 
-static char *TAG = "DRV7243";
 static i2c_bus_handle_t i2c_handle;
 static int es7243_addr = 0x26;
 

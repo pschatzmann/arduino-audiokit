@@ -15,22 +15,32 @@
 #if AUDIOKIT_BOARD==1
 #include "audio_board/lyrat_v4_3/board.h"
 #define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
+#define KIT_DRIVER 1
 #elif AUDIOKIT_BOARD==2
 #include "audio_board/lyrat_v4_2/board.h"
 #define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
+#define KIT_DRIVER 1
 #elif AUDIOKIT_BOARD==3
 #include "audio_board/lyrat_mini_v1_1/board.h"
 //#define AUDIO_DRIVER AUDIO_CODEC_ES7243_DEFAULT_HANDLE
 #define AUDIO_DRIVER AUDIO_CODEC_ES8311_DEFAULT_HANDLE
+#define KIT_DRIVER 1
 #elif AUDIOKIT_BOARD==4
 #include "audio_board/esp32_s2_kaluga_1_v1_2/board.h"
 #define AUDIO_DRIVER AUDIO_CODEC_ES8311_DEFAULT_HANDLE
+#define KIT_DRIVER 2
 #elif AUDIOKIT_BOARD==5
 #include "audio_board/ai_thinker_v2_2/board.h"
 #define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
+#define KIT_DRIVER 1
 #elif AUDIOKIT_BOARD==6
+#include "audio_board/ai_thinker_ac101/board.h"
+#define AUDIO_DRIVER AUDIO_CODEC_AC101_CODEC_HANDLE
+#define KIT_DRIVER 3
+#elif AUDIOKIT_BOARD==7
 #include "audio_board/generic_es8388/board.h"
 #define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
+#define KIT_DRIVER 1
 #endif
 
 

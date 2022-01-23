@@ -1,6 +1,6 @@
 
 #include "AudioKitSettings.h"
-#if AUDIOKIT_BOARD==6
+#if AUDIOKIT_BOARD==7
 
 #include "audiokit_logger.h"
 #include "audio_gpio.h"

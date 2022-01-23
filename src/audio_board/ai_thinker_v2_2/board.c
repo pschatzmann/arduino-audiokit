@@ -30,7 +30,7 @@
 #include "audio_mem.h"
 
 
-static const char *TAG = "AUDIO_BOARD";
+static const char *TAG_BOARD = "AUDIO_BOARD";
 
 static audio_board_handle_t board_handle = 0;
 
@@ -41,7 +41,7 @@ audio_board_handle_t audio_board_init(void)
         return board_handle;
     }
     board_handle = (audio_board_handle_t) audio_calloc(1, sizeof(struct audio_board_handle));
-    AUDIO_MEM_CHECK(TAG, board_handle, return NULL);
+    AUDIO_MEM_CHECK(TAG_BOARD, board_handle, return NULL);
     board_handle->audio_hal = audio_board_codec_init();
 
     return board_handle;
@@ -51,7 +51,7 @@ audio_hal_handle_t audio_board_codec_init(void)
 {
     audio_hal_codec_config_t audio_codec_cfg = AUDIO_CODEC_DEFAULT_CONFIG();
     audio_hal_handle_t codec_hal = audio_hal_init(&audio_codec_cfg, &AUDIO_CODEC_ES8388_DEFAULT_HANDLE);
-    AUDIO_NULL_CHECK(TAG, codec_hal, return NULL);
+    AUDIO_NULL_CHECK(TAG_BOARD, codec_hal, return NULL);
     return codec_hal;
 }
 

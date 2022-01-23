@@ -6,8 +6,9 @@
  *  2) lyrat_v4_2
  *  3) lyrat_mini_v1_1
  *  4) esp32_s2_kaluga_1_v1_2
- *  5) ai_thinker_v2_2
- *  6) generci_es8388
+ *  5) ai_thinker_v2_2 (ES8388)
+ *  6) ai_thinker_v2_2 (AC101) DRAFT UNTESTED !
+ *  7) generci_es8388
  * @version 0.1
  * @date 2021-12-12
  * 
@@ -17,7 +18,7 @@
 #pragma once
 
 #ifndef AUDIOKIT_BOARD
-#define AUDIOKIT_BOARD 1
+#define AUDIOKIT_BOARD 6
 #endif
 
 // Default settings

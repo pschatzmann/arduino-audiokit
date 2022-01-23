@@ -67,7 +67,6 @@ struct _coeff_div {
     uint32_t lrck_l;          /* The low 8 bits of lrck */
 };
 
-static char *TAG = "ES7210";
 static i2c_bus_handle_t i2c_handle;
 static es7210_input_mics_t mic_select = ES7210_INPUT_MIC1 | ES7210_INPUT_MIC2;         /* Number of microphones */
 
@@ -159,7 +158,7 @@ static int i2c_init()
         .master.clk_speed = 100000,
     };
     ret = get_i2c_pins(I2C_NUM_0, &es_i2c_cfg);
-    AUDIO_CHECK(TAG, !ret, return ESP_FAIL;, "getting i2c pins error");
+    AUDIO_CHECK(TAG_ES7210, !ret, return ESP_FAIL;, "getting i2c pins error");
     i2c_handle = i2c_bus_create(I2C_NUM_0, &es_i2c_cfg);
     return ret;
 }
