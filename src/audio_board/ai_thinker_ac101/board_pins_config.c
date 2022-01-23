@@ -41,13 +41,13 @@ esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
     {
         i2c_config->sda_io_num = GPIO_NUM_33;
         i2c_config->scl_io_num = GPIO_NUM_32;
-        KIT_LOGI(TAG_AC101, "i2c port configured!!!!");
+        KIT_LOGI("i2c port configured!!!!");
     }
     else
     {
         i2c_config->sda_io_num = -1;
         i2c_config->scl_io_num = -1;
-        KIT_LOGE(TAG_AC101, "i2c port %d is not supported", port);
+        KIT_LOGE("i2c port %d is not supported", port);
         return ESP_FAIL;
     }
     return ESP_OK;
@@ -62,12 +62,12 @@ esp_err_t get_i2s_pins(i2s_port_t port, i2s_pin_config_t *i2s_config)
         i2s_config->ws_io_num = GPIO_NUM_26;
         i2s_config->data_out_num = GPIO_NUM_25;
         i2s_config->data_in_num = GPIO_NUM_35;
-        KIT_LOGI(TAG_AC101, "i2s port configured!!!!");
+        KIT_LOGI("i2s port configured!!!!");
     }
     else
     {
         memset(i2s_config, -1, sizeof(i2s_pin_config_t));
-        KIT_LOGE(TAG_AC101, "i2s port %d is not supported", port);
+        KIT_LOGE( "i2s port %d is not supported", port);
         return ESP_FAIL;
     }
 
@@ -87,7 +87,7 @@ esp_err_t get_spi_pins(spi_bus_config_t *spi_config, spi_device_interface_config
 
     spi_device_interface_config->spics_io_num = -1;
 
-    KIT_LOGW(TAG_AC101, "SPI interface is not supported");
+    KIT_LOGW( "SPI interface is not supported");
     return ESP_OK;
 }
 
@@ -95,12 +95,12 @@ esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num)
 {
     if (i2s_num >= I2S_NUM_MAX)
     {
-        KIT_LOGE(TAG_AC101, "Does not support i2s number(%d)", i2s_num);
+        KIT_LOGE("Does not support i2s number(%d)", i2s_num);
         return ESP_ERR_INVALID_ARG;
     }
     if (gpio_num != GPIO_NUM_0 && gpio_num != GPIO_NUM_1 && gpio_num != GPIO_NUM_3)
     {
-        KIT_LOGE(TAG_AC101, "Only support GPIO0/GPIO1/GPIO3, gpio_num:%d", gpio_num);
+        KIT_LOGE("Only support GPIO0/GPIO1/GPIO3, gpio_num:%d", gpio_num);
         return ESP_ERR_INVALID_ARG;
     }
     if (i2s_num == I2S_NUM_0)
@@ -182,15 +182,10 @@ int8_t get_input_voldown_id(void)
     return TOUCH_VOLDWN;
 }
 
-// // sdcard
-// int8_t get_sdcard_intr_gpio(void){
-//     return SD_CARD_INTR_GPIO;
-// }
-
-// int8_t get_sdcard_open_file_num_max(void)
-// {
-//     return SD_CARD_OPEN_FILE_NUM_MAX;
-// }
+// sdcard
+int8_t get_sdcard_intr_gpio(void){
+    return SD_CARD_INTR_GPIO;
+}
 
 #endif
 
