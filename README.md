@@ -19,11 +19,12 @@ You can define your board and the default settings in the ```AudioKitSettings.h`
 ```
  * @brief AUDIOKIT_BOARD selects a specic board:
  * 1) lyrat_v4_3
- * 2) lyrat_v4_2
- * 3) lyrat_mini_v1_1
- * 4) esp32_s2_kaluga_1_v1_2
- * 5) ai_thinker_v2_2
- * 6) generic_es8388
+ * 2) lyrat_v4_2 - DRAFT Not Tested
+ * 3) lyrat_mini_v1_1 - DRAFT Not Tested
+ * 4) esp32_s2_kaluga_1_v1_2 - DRAFT Not Tested
+ * 5) ai_thinker_v2_2 (ES8388)
+ * 6) ai_thinker (AC101) - DRAFT Not Tested
+ * 7) generic_es8388
  */
 
 #define AUDIOKIT_BOARD 1
