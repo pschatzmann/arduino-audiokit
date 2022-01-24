@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['get_5fcodec_5fext_240',['get_codec_ext',['../audio__type__def_8h.html#a792e6054b2fd059731f371d7d5a804ff',1,'audio_type_def.h']]]
+  ['headphonestatus_52',['headphoneStatus',['../class_audio_kit.html#a0ad4e2e3004efe2769f9746df240b22a',1,'AudioKit']]]
 ];
