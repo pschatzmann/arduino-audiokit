@@ -25,10 +25,9 @@
 #ifndef _AUDIO_BOARD_H_
 #define _AUDIO_BOARD_H_
 
-#include "audio_hal.h"
+#include "audio_hal/audio_hal.h"
 #include "board_def.h"
-#include "board_pins_config.h"
-//#include "esp_peripherals.h"
+#include "audio_hal/board_pins_config.h"//#include "esp_peripherals.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

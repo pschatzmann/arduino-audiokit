@@ -24,9 +24,9 @@
 
 #include <string.h>
 #include "es7243.h"
-#include "i2c_bus.h"
-#include "audiokit_board.h"
-#include "audiokit_logger.h"
+#include "audio_hal/i2c_bus.h"
+#include "audio_hal/audiokit_board.h"
+#include "audio_hal/audiokit_logger.h"
 
 #define MCLK_PULSES_NUMBER    (20)
 #define ES_ASSERT(a, format, b, ...) \

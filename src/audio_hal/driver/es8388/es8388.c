@@ -23,10 +23,10 @@
  */
 
 #include <string.h>
-#include "i2c_bus.h"
+#include "audio_hal/i2c_bus.h"
 #include "es8388.h"
-#include "board_pins_config.h"
-#include "audiokit_logger.h"
+#include "audio_hal/board_pins_config.h"
+#include "audio_hal/audiokit_logger.h"
 
 static i2c_bus_handle_t i2c_handle;
 

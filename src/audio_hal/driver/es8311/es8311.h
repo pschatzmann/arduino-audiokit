@@ -25,10 +25,9 @@
 #ifndef _ES8311_H
 #define _ES8311_H
 
-#include "audio_hal.h"
-#include "audio_types.h"
-#include "esxxx_common.h"
-
+#include "audio_hal/audio_hal.h"
+#include "audio_hal/audio_types.h"
+#include "audio_hal/esxxx_common.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

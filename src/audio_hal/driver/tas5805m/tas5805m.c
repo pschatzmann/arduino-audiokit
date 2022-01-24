@@ -22,9 +22,9 @@
  *
  */
 
-#include "i2c_bus.h"
-#include "audiokit_board.h"
-#include "audiokit_logger.h"
+#include "audio_hal/i2c_bus.h"
+#include "audio_hal/audiokit_board.h"
+#include "audio_hal/audiokit_logger.h"
 #include "tas5805m.h"
 #include "tas5805m_reg_cfg.h"
 

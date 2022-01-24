@@ -23,9 +23,9 @@
  */
 
 #include <string.h>
-#include "i2c_bus.h"
-#include "audiokit_board.h"
-#include "audiokit_logger.h"
+#include "audio_hal/i2c_bus.h"
+#include "audio_hal/audiokit_board.h"
+#include "audio_hal/audiokit_logger.h"
 #include "es8311.h"
 
 /* ES8311 address

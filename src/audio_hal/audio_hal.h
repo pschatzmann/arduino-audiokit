@@ -29,8 +29,7 @@
 #define _AUDIO_HAL_H_
 
 #include "AudioKitSettings.h"
-#include "audio_error.h"
-
+#include "audio_hal/audio_error.h"
 #if AUDIOKIT_FREE_RTOS==1
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
@@ -44,8 +43,6 @@ typedef void* xSemaphoreHandle;
 #ifndef ESP32 
 #include <stdint.h>
 #include <stdbool.h>
-#include "audio_error.h"
-
 #endif
 
 

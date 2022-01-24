@@ -1,11 +1,11 @@
 // code from https://github.com/donny681/esp-adf/blob/master/components/audio_hal/driver/AC101/AC101.c
 
-#include "audiokit_board.h"
+#include "audio_hal/audiokit_board.h"
 #include <string.h>
-#include "i2c_bus.h"
+#include "audio_hal/i2c_bus.h"
 #include "ac101.h"
-#include "board_pins_config.h"
-#include "audiokit_logger.h"
+#include "audio_hal/board_pins_config.h"
+#include "audio_hal/audiokit_logger.h"
 
 static i2c_config_t ac_i2c_cfg = {
 	.mode = I2C_MODE_MASTER,

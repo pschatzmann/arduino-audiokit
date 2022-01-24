@@ -13,10 +13,9 @@
 #include <Wire.h>
 #include <stdio.h>
 
-#include "audio_error.h"
-#include "audiokit_logger.h"
-#include "i2c_bus.h"
-
+#include "audio_hal/audio_error.h"
+#include "audio_hal/audiokit_logger.h"
+#include "audio_hal/i2c_bus.h"
 // 0x20
 #define PORT 0x20
 #define END true

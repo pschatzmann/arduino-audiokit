@@ -31,9 +31,9 @@
 #define NULL 0
 #endif
 
-#include "audio_mutex.h"
-#include "audio_version.h"
-#include "audiokit_logger.h"
+#include "audio_hal/audio_mutex.h"
+#include "audio_hal/audio_version.h"
+#include "audio_hal/audiokit_logger.h"
 
 #if AUDIOKIT_MUTEX_SUPPORT==1 && (ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(4, 3, 0))
 // The xQueueSemaphoreTake is not available on FreeRTOS v8.2.0, it's compatible implementation.

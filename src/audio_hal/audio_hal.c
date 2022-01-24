@@ -22,14 +22,14 @@
  *
  */
 
-#include "audiokit_logger.h"
+#include "audio_hal/audiokit_logger.h"
 #include <string.h>
-#include "audio_gpio.h"
-#include "audiokit_logger.h"
-#include "audio_hal.h"
+#include "audio_hal/audio_gpio.h"
+#include "audio_hal/audiokit_logger.h"
+#include "audio_hal/audio_hal.h"
 
-#include "audio_mem.h"
-#include "audio_mutex.h"
+#include "audio_hal/audio_mem.h"
+#include "audio_hal/audio_mutex.h"
 
 static const char *TAG = "AUDIO_HAL";
 

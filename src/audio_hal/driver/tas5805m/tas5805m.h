@@ -25,9 +25,8 @@
 #ifndef _TAS5805M_H_
 #define _TAS5805M_H_
 
-#include "audio_hal.h"
-#include "audio_error.h"
-
+#include "audio_hal/audio_hal.h"
+#include "audio_hal/audio_error.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

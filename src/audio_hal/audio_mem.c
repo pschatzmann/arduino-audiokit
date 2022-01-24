@@ -25,9 +25,9 @@
 #include "AudioKitSettings.h"
 #include <stdlib.h>
 #include "string.h"
-#include "audio_system.h"
-#include "audiokit_logger.h"
-#include "audio_mem.h"
+#include "audio_hal/audio_system.h"
+#include "audio_hal/audiokit_logger.h"
+#include "audio_hal/audio_mem.h"
 
 #if defined(ESP32)
 #include "esp_heap_caps.h"

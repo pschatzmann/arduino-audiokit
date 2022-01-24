@@ -25,7 +25,7 @@
 #ifndef _AUDIO_MEM_H_
 #define _AUDIO_MEM_H_
 
-#include <audio_types.h>
+#include "audio_hal/audio_types.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -26,11 +26,11 @@
 #if AUDIOKIT_USE_WIRE==0
 
 #include <stdio.h>
-#include "audiokit_logger.h"
+#include "audio_hal/audiokit_logger.h"
 #include "driver/i2c.h"
-#include "i2c_bus.h"
-#include "audio_mutex.h"
-#include "audio_mem.h"
+#include "audio_hal/i2c_bus.h"
+#include "audio_hal/audio_mutex.h"
+#include "audio_hal/audio_mem.h"
 
 #define ESP_INTR_FLG_DEFAULT  (0)
 #define ESP_I2C_MASTER_BUF_LEN  (0)

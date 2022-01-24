@@ -4,8 +4,8 @@
 #define __AC101_H__
 
 //#include "sdkconfig.h"
-#include "audio_types.h"
-#include "audio_hal.h"
+#include "audio_hal/audio_types.h"
+#include "audio_hal/audio_hal.h"
 #ifdef ESP32
 #include "driver/i2c.h"
 #endif

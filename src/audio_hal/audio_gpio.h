@@ -11,9 +11,8 @@
 #ifdef ESP32
 #include "driver/gpio.h"
 #else
-#include "audio_types.h"
-#include "audio_error.h"
-
+#include "audio_hal/audio_types.h"
+#include "audio_hal/audio_error.h"
 #define I2S_NUM_0 0
 #define I2S_NUM_1 1
 #define I2S_NUM_MAX I2S_NUM_1

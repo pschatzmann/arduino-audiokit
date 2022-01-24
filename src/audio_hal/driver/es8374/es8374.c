@@ -23,12 +23,11 @@
  */
 
 #include <string.h>
-#include "audio_system.h"
-#include "audiokit_logger.h"
-#include "i2c_bus.h"
+#include "audio_hal/audio_system.h"
+#include "audio_hal/audiokit_logger.h"
+#include "audio_hal/i2c_bus.h"
 #include "es8374.h"
-#include "board_pins_config.h"
-
+#include "audio_hal/board_pins_config.h"
 
 #define ES_ASSERT(a, format, b, ...) \
     if ((a) != 0) { \

@@ -2,13 +2,13 @@
 #include "AudioKitSettings.h"
 #if AUDIOKIT_BOARD==7
 
-#include "audiokit_logger.h"
-#include "audio_gpio.h"
+#include "audio_hal/audiokit_logger.h"
+#include "audio_hal/audio_gpio.h"
 #include "board_def.h"
 #include <string.h>
-#include "audiokit_board.h"
-#include "audio_error.h"
-#include "audio_mem.h"
+#include "audio_hal/audiokit_board.h"
+#include "audio_hal/audio_error.h"
+#include "audio_hal/audio_mem.h"
 
 static const char *TAG = "GENERIC";
 

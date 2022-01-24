@@ -25,7 +25,7 @@
 #ifndef _AUDIO_BOARD_DEFINITION_H_
 #define _AUDIO_BOARD_DEFINITION_H_
 
-#include "audio_hal.h"
+#include "audio_hal/audio_hal.h"
 
 #define ES8388
 

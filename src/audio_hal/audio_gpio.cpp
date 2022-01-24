@@ -1,7 +1,7 @@
 #ifndef ESP32
 #include "Arduino.h"
-#include "audio_gpio.h"
-#include "audiokit_logger.h"
+#include "audio_hal/audio_gpio.h"
+#include "audio_hal/audiokit_logger.h"
 
 /**
  * @brief gpio_set_level using Arduino API

@@ -19,16 +19,16 @@
 #include "audio_hal/driver/es8374/es8374.h"
 #include "audio_hal/driver/es8388/es8388.h"
 #include "audio_hal/driver/tas5805m/tas5805m.h"
-#include "audiokit_board.h"
-#include "audiokit_logger.h"
+#include "audio_hal/audiokit_board.h"
+#include "audio_hal/audiokit_logger.h"
 #include "SPI.h"
 
 #ifdef ESP32
 #include "esp_a2dp_api.h"
-#include "audio_system.h"
-#include "audio_version.h"
+#include "audio_hal/audio_system.h"
+#include "audio_hal/audio_version.h"
 #include "driver/i2s.h"
-#include "audio_type_def.h"
+#include "audio_hal/audio_type_def.h"
 
 #endif
 

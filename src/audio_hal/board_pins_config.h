@@ -34,7 +34,7 @@
 
 #else
 
-#include "audio_gpio.h"
+#include "audio_hal/audio_gpio.h"
 
 #endif
 

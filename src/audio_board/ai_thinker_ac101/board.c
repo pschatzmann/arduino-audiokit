@@ -26,9 +26,9 @@
 
 #if AUDIOKIT_BOARD==6
 
-#include "audiokit_logger.h"
-#include "audiokit_board.h"
-#include "audio_mem.h"
+#include "audio_hal/audiokit_logger.h"
+#include "audio_hal/audiokit_board.h"
+#include "audio_hal/audio_mem.h"
 
 #define TAG_AC101 "AUDIO_BOARD"
 

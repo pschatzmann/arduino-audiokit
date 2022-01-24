@@ -25,7 +25,7 @@
 #ifndef _ES7210_H
 #define _ES7210_H
 
-#include "audio_hal.h"
+#include "audio_hal/audio_hal.h"
 
 #ifdef __cplusplus
 extern "C" {

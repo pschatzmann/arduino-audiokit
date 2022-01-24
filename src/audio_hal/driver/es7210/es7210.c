@@ -23,9 +23,9 @@
  */
 
 #include <string.h>
-#include "audiokit_logger.h"
-#include "audiokit_board.h"
-#include "i2c_bus.h"
+#include "audio_hal/audiokit_logger.h"
+#include "audio_hal/audiokit_board.h"
+#include "audio_hal/i2c_bus.h"
 #include "es7210.h"
 
 #define  I2S_DSP_MODE   0

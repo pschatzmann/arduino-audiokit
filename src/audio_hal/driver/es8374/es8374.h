@@ -25,10 +25,9 @@
 #ifndef __ES8374_H__
 #define __ES8374_H__
 
-#include "audio_types.h"
-#include "audio_hal.h"
-#include "esxxx_common.h"
-
+#include "audio_hal/audio_types.h"
+#include "audio_hal/audio_hal.h"
+#include "audio_hal/esxxx_common.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
