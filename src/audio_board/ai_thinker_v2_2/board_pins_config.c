@@ -32,11 +32,11 @@
 #include "audio_hal/audio_error.h"
 #include "audio_hal/audio_mem.h"
 
-static const char *TAG = "AI_V2_2";
+#define TAG_AI "AI_V2_2"
 
 esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
 {
-    AUDIO_NULL_CHECK(TAG, i2c_config, return ESP_FAIL);
+    AUDIO_NULL_CHECK(TAG_AI, i2c_config, return ESP_FAIL);
     if (port == I2C_NUM_0 || port == I2C_NUM_1) {
         i2c_config->sda_io_num = GPIO_NUM_33; // GPIO_NUM_18
         i2c_config->scl_io_num = GPIO_NUM_32; // GPIO_NUM_23
@@ -57,7 +57,7 @@ esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
 
 esp_err_t get_i2s_pins(i2s_port_t port, i2s_pin_config_t *i2s_config)
 {
-    AUDIO_NULL_CHECK(TAG, i2s_config, return ESP_FAIL);
+    AUDIO_NULL_CHECK(TAG_AI, i2s_config, return ESP_FAIL);
     if (port == I2S_NUM_0 || port == I2S_NUM_1) {
         i2s_config->bck_io_num = GPIO_NUM_27;
         i2s_config->ws_io_num = GPIO_NUM_25;
@@ -74,8 +74,8 @@ esp_err_t get_i2s_pins(i2s_port_t port, i2s_pin_config_t *i2s_config)
 
 esp_err_t get_spi_pins(spi_bus_config_t *spi_config, spi_device_interface_config_t *spi_device_interface_config)
 {
-    AUDIO_NULL_CHECK(TAG, spi_config, return ESP_FAIL);
-    AUDIO_NULL_CHECK(TAG, spi_device_interface_config, return ESP_FAIL);
+    AUDIO_NULL_CHECK(TAG_AI, spi_config, return ESP_FAIL);
+    AUDIO_NULL_CHECK(TAG_AI, spi_device_interface_config, return ESP_FAIL);
 
     spi_config->mosi_io_num = -1;
     spi_config->miso_io_num = -1;

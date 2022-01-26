@@ -30,7 +30,7 @@
 #include "audio_hal/audio_mem.h"
 
 
-static const char *TAG_BOARD = "AUDIO_BOARD";
+#define TAG_BOARD "AUDIO_BOARD"
 
 static audio_board_handle_t board_handle = 0;
 

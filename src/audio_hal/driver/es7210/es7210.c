@@ -30,6 +30,7 @@
 
 #define  I2S_DSP_MODE   0
 #define  MCLK_DIV_FRE   256
+#define TAG_ES7210 "ES7210"
 
 /* ES7210 address*/
 #define ES7210_ADDR                   ES7210_AD1_AD0_00
