@@ -28,9 +28,6 @@
 #include "audio_hal/audiokit_board.h"
 
 
-static const char *TAG = "es7148";
-
-
 static bool codec_init_flag = 0;
 
 audio_hal_func_t AUDIO_CODEC_ES7148_DEFAULT_HANDLE = {

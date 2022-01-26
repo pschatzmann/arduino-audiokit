@@ -28,7 +28,6 @@
 #include "tas5805m.h"
 #include "tas5805m_reg_cfg.h"
 
-static const char *TAG = "TAS5805M";
 
 #define TAS5805M_ADDR          0x5c
 #define TAS5805M_RST_GPIO      get_pa_enable_gpio()
