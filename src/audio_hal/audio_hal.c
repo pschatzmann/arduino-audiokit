@@ -31,7 +31,7 @@
 #include "audio_hal/audio_mem.h"
 #include "audio_hal/audio_mutex.h"
 
-static const char *TAG = "AUDIO_HAL";
+#define TAG_HAL "AUDIO_HAL"
 
 #define AUDIO_HAL_CHECK_NULL(a, format, b, ...) \
     if ((a) == 0) { \
@@ -46,11 +46,11 @@ audio_hal_handle_t audio_hal_init(audio_hal_codec_config_t *audio_hal_conf, audi
     KIT_LOGD(LOG_METHOD);
     esp_err_t ret = 0;
     audio_hal_handle_t audio_hal = (audio_hal_handle_t) audio_calloc(1, sizeof(audio_hal_func_t));
-    AUDIO_MEM_CHECK(TAG, audio_hal, return NULL);
+    AUDIO_MEM_CHECK(TAG_HAL, audio_hal, return NULL);
     memcpy(audio_hal, audio_hal_func, sizeof(audio_hal_func_t));
     audio_hal->audio_hal_lock = mutex_create();
 
-    AUDIO_MEM_CHECK(TAG, audio_hal->audio_hal_lock, {
+    AUDIO_MEM_CHECK(TAG_HAL, audio_hal->audio_hal_lock, {
         KIT_LOGE("AUDIO_MEM_CHECK");
         audio_free(audio_hal);
         return NULL;
