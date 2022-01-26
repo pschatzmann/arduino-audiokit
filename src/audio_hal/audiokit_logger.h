@@ -23,7 +23,7 @@ extern "C" {
 enum AudioKitLogLevels {AudioKitDebug, AudioKitInfo, AudioKitWarning, AudioKitError};
 
 // define default log level
-extern int AUDIOKIT_LOG_LEVEL;
+extern int LOGLEVEL_AUDIOKIT;
 
 void KIT_LOGD(const char* fmr,...);
 void KIT_LOGI(const char* fmr,...);
