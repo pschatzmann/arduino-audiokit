@@ -58,7 +58,6 @@ struct AudioKitConfig {
   i2s_port_t i2s_num = (i2s_port_t)0;
   gpio_num_t mclk_gpio = (gpio_num_t)0;
   bool sd_active = true;
-  bool spi_is_setup = false;
 
   audio_hal_adc_input_t adc_input = AUDIOKIT_DEFAULT_INPUT; /*!<  set adc channel with audio_hal_adc_input_t*/
   audio_hal_dac_output_t dac_output =AUDIOKIT_DEFAULT_OUTPUT;       /*!< set dac channel */
@@ -219,7 +218,7 @@ class AudioKit {
     KIT_LOGI(LOG_METHOD);
     cfg = cnfg;
     KIT_LOGI("Selected board: %d", AUDIOKIT_BOARD);
-    
+
     // setup SPI for SD card
     setupSPI();
 
@@ -541,6 +540,7 @@ class AudioKit {
   bool headphoneIsConnected = false;
   unsigned long speakerChangeTimeout = 0;
   int8_t headphonePin = -1;
+  bool spi_is_setup = false;
 
   /**
    * @brief Setup the headphone detection
