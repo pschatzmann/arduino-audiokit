@@ -18,7 +18,7 @@
 #pragma once
 
 #ifndef AUDIOKIT_BOARD
-#define AUDIOKIT_BOARD 5
+#define AUDIOKIT_BOARD 6
 #endif
 
 // Default settings

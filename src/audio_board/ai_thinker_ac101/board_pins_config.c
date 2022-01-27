@@ -164,22 +164,22 @@ int8_t get_input_mode_id(void)
 
 int8_t get_input_set_id(void)
 {
-    return TOUCH_SET;
+    return BUTTON_SEL_SET;
 }
 
 int8_t get_input_play_id(void)
 {
-    return TOUCH_PLAY;
+    return BUTTON_SEL_PLAY;
 }
 
 int8_t get_input_volup_id(void)
 {
-    return TOUCH_VOLUP;
+    return BUTTON_SEL_VOLUP;
 }
 
 int8_t get_input_voldown_id(void)
 {
-    return TOUCH_VOLDWN;
+    return BUTTON_SEL_VOLDWN;
 }
 
 // sdcard
