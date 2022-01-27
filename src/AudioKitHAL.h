@@ -197,6 +197,8 @@ class AudioKit {
   AudioKit() {
     // setup SPI for SD drives
     selfAudioKit = this;
+    // added to constructor so that SPI is setup as part of global variable setup
+    setupSPI();
   }
 
   /// Provides the default configuration for input or output
@@ -540,7 +542,7 @@ class AudioKit {
   bool headphoneIsConnected = false;
   unsigned long speakerChangeTimeout = 0;
   int8_t headphonePin = -1;
-  bool spi_is_setup = false;
+  bool setup_sd_spi = true;
 
   /**
    * @brief Setup the headphone detection
@@ -565,17 +567,17 @@ class AudioKit {
    * @brief Setup the SPI so that we can access the SD Drive
    */
   void setupSPI() {
-    KIT_LOGD(LOG_METHOD);
+    KIT_LOGI(LOG_METHOD);
 //  I assume this is valid for all AudioKits!
 #if AUDIOKIT_SETUP_SD==1
-    if (cfg.sd_active && !spi_is_setup){
+    if (cfg.sd_active && setup_sd_spi){
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
       pinMode(spi_cs_pin, OUTPUT);
       digitalWrite(spi_cs_pin, HIGH);
 
       SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
       KIT_LOGW("setupSPI for SD");
-      spi_is_setup = true;
+      setup_sd_spi = false;
     }
 #else
     #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
