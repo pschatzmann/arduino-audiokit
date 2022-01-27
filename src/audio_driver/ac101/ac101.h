@@ -1,4 +1,4 @@
-// code from https://github.com/donny681/esp-adf/blob/master/components/audio_hal/driver/AC101/AC101.h
+// code from https://github.com/donny681/esp-adf/blob/master/components/audio_driver/AC101/AC101.h
 
 #ifndef __AC101_H__
 #define __AC101_H__

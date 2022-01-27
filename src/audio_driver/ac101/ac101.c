@@ -1,4 +1,4 @@
-// code from https://github.com/donny681/esp-adf/blob/master/components/audio_hal/driver/AC101/AC101.c
+// code from https://github.com/donny681/esp-adf/blob/master/components/audio_driver/AC101/AC101.c
 
 #include "audio_hal/audiokit_board.h"
 #include <string.h>
