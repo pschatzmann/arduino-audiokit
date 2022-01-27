@@ -57,7 +57,8 @@ class AudioKit* selfAudioKit = nullptr;
 struct AudioKitConfig {
   i2s_port_t i2s_num = (i2s_port_t)0;
   gpio_num_t mclk_gpio = (gpio_num_t)0;
-  bool sd_active = false;
+  bool sd_active = true;
+  bool spi_is_setup = false;
 
   audio_hal_adc_input_t adc_input = AUDIOKIT_DEFAULT_INPUT; /*!<  set adc channel with audio_hal_adc_input_t*/
   audio_hal_dac_output_t dac_output =AUDIOKIT_DEFAULT_OUTPUT;       /*!< set dac channel */
@@ -197,7 +198,6 @@ class AudioKit {
   AudioKit() {
     // setup SPI for SD drives
     selfAudioKit = this;
-    setupSPI();
   }
 
   /// Provides the default configuration for input or output
@@ -219,6 +219,9 @@ class AudioKit {
     KIT_LOGI(LOG_METHOD);
     cfg = cnfg;
     KIT_LOGI("Selected board: %d", AUDIOKIT_BOARD);
+    
+    // setup SPI for SD card
+    setupSPI();
 
     // setup headphone if necessary
     setupHeadphoneDetection();
@@ -565,13 +568,14 @@ class AudioKit {
     KIT_LOGD(LOG_METHOD);
 //  I assume this is valid for all AudioKits!
 #if AUDIOKIT_SETUP_SD==1
-    if (cfg.sd_active){
+    if (cfg.sd_active && !spi_is_setup){
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
       pinMode(spi_cs_pin, OUTPUT);
       digitalWrite(spi_cs_pin, HIGH);
 
       SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
       KIT_LOGW("setupSPI for SD");
+      spi_is_setup = true;
     }
 #else
     #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
