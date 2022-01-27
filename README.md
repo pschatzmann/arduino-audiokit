@@ -70,7 +70,7 @@ void loop() {
 The functionality has a built in logger. The default log level has been set to Warning. You can change it like this:
 
 ```
-  AUDIOKIT_LOG_LEVEL = AudioKitDebug; // or AudiKitInfo, AudioKitWarning, AudioKitError
+  LOGLEVEL_AUDIOKIT = AudioKitDebug; // or AudiKitInfo, AudioKitWarning, AudioKitError
 
 ```
 
