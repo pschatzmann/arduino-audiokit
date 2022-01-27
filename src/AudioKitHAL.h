@@ -533,6 +533,11 @@ class AudioKit {
     return headphonePin>0 ? !digitalRead(headphonePin) : false;
   }
 
+  /// checks if the SD is active
+  bool isSDActive() {
+    return cfg.sd_active;
+  }
+
  protected:
   AudioKitConfig cfg;
   audio_hal_codec_config_t audio_hal_conf;
@@ -581,6 +586,7 @@ class AudioKit {
     }
 #else
     #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
+    cfg.sd_active = false;
 #endif
   }
 
