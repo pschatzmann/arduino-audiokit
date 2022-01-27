@@ -97,6 +97,6 @@ If you want to use the library in PlatformIO, you can find a [detailed descripti
 
 ## Supported Devices / Processors
 
-The examples have been tested with a AI Thinker v2.2.  I do not own any other AudioKit devices, so I can't guarantee that they work properly. I also made sure that the code is compiling on other processors, but I did not perform any tests. Please note that because I2S is not standardized in Arduino, you need to take care of the I2S initialization  and processing yourself on other processors.
+The examples have been tested with a AI Thinker v2.2.  I do not own any other AudioKit devices, so I can't guarantee that they work properly. I also made sure that the code is compiling on other processors, but I did not perform any tests. Please note that because I2S is not standardized in Arduino, you need to take care of the I2S initialization  and processing yourself on non ESP32 boards.
 
 
