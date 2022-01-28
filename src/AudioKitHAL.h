@@ -572,16 +572,15 @@ class AudioKit {
    * @brief Setup the SPI so that we can access the SD Drive
    */
   void setupSPI() {
-    KIT_LOGI(LOG_METHOD);
 //  I assume this is valid for all AudioKits!
 #if AUDIOKIT_SETUP_SD==1
     if (cfg.sd_active && setup_sd_spi){
+      KIT_LOGI(LOG_METHOD);
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
       pinMode(spi_cs_pin, OUTPUT);
       digitalWrite(spi_cs_pin, HIGH);
 
       SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
-      KIT_LOGW("setupSPI for SD");
       setup_sd_spi = false;
     }
 #else
