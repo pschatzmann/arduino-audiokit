@@ -80,7 +80,7 @@ struct AudioKitConfig {
       case AUDIO_HAL_BIT_LENGTH_32BITS:
         return 32;
     }
-    // KIT_LOGE("bits_per_sample not supported: %d", bits_per_sample);
+    KIT_LOGE("bits_per_sample not supported: %d", bits_per_sample);
     return 0;
   }
 
@@ -104,7 +104,7 @@ struct AudioKitConfig {
       case AUDIO_HAL_48K_SAMPLES: /*!< set to 48k samples per second */
         return 48000;
     }
-    // KIT_LOGE("sample rate not supported: %d", sample_rate);
+    KIT_LOGE("sample rate not supported: %d", sample_rate);
     return 0;
   }
 
