@@ -13,7 +13,7 @@
 AudioKit kit;
 
 void setup() {
-  AUDIOKIT_LOG_LEVEL = AudioKitInfo; 
+  LOGLEVEL_AUDIOKIT = AudioKitInfo; 
   Serial.begin(115200);
   // open in write mode
   auto cfg = kit.defaultConfig();
