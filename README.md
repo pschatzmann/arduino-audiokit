@@ -23,7 +23,7 @@ You can define your board and the default settings in the ```AudioKitSettings.h`
  * 3) lyrat_mini_v1_1 - DRAFT Not Tested
  * 4) esp32_s2_kaluga_1_v1_2 - DRAFT Not Tested
  * 5) ai_thinker_v2_2 (ES8388)
- * 6) ai_thinker (AC101) - DRAFT Not Tested
+ * 6) ai_thinker (AC101)
  * 7) generic_es8388
  */
 
@@ -97,6 +97,6 @@ If you want to use the library in PlatformIO, you can find a [detailed descripti
 
 ## Supported Devices / Processors
 
-The examples have been tested with a AI Thinker v2.2.  I do not own any other AudioKit devices, so I can't guarantee that they work properly. I also made sure that the code is compiling on other processors, but I did not perform any tests. Please note that because I2S is not standardized in Arduino, you need to take care of the I2S initialization  and processing yourself on non ESP32 boards.
+The examples have been tested with a __AI Thinker v2.2__: both versions - the one with the ES8388 and the other with the AC101. I also tested with a __LyraT__. I do not own any other AudioKit devices, so I can't guarantee that they work properly. I also made sure that the code is compiling on other processors, but I did not perform any tests. Please note that in this case because I2S is not standardized in Arduino, you need to take care of the I2S initialization  and processing yourself on non ESP32 boards.
 
 
