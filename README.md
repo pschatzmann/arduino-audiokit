@@ -68,6 +68,9 @@ void loop() {
 }
 
 ```
+
+However __I recommend__ to use my [Arduino Audio Tools Library](https://github.com/pschatzmann/arduino-audio-tools) which implements an easy to use Stream API with additional functionality on top of this and it has plenty of [examples](https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-audiokit).
+ 
 ## Logging
 
 The functionality has a built in logger. The default log level has been set to Warning. You can change it like this:
