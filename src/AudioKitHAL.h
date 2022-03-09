@@ -439,7 +439,7 @@ class AudioKit {
   int8_t pinVolumeDown() { return get_input_voldown_id(); }
 
   /**
-   * @brief Get green led gpio number
+   * @brief Get reset codec gpio number
    *
    * @return -1       non-existent
    *        Others    gpio number
@@ -447,7 +447,7 @@ class AudioKit {
   int8_t pinResetCodec() { return get_reset_codec_gpio(); }
 
   /**
-   * @brief Get DSP reset gpio number
+   * @brief Get  gpio number to reset the board
    *
    * @return -1       non-existent
    *         Others   gpio number
@@ -455,7 +455,7 @@ class AudioKit {
   int8_t pinResetBoard() { return get_reset_board_gpio(); }
 
   /**
-   * @brief Get DSP reset gpio number
+   * @brief Get gpio number for green led
    *
    * @return -1       non-existent
    *         Others   gpio number
@@ -463,7 +463,7 @@ class AudioKit {
   int8_t pinGreenLed() { return get_green_led_gpio(); }
 
   /**
-   * @brief Get green led gpio number
+   * @brief Get blue led gpio number
    *
    * @return -1       non-existent
    *         Others   gpio number
