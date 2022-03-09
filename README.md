@@ -22,15 +22,18 @@ You can define your board and the default settings in the ```AudioKitSettings.h`
  * 2) lyrat_v4_2 - DRAFT Not Tested
  * 3) lyrat_mini_v1_1 - DRAFT Not Tested
  * 4) esp32_s2_kaluga_1_v1_2 - DRAFT Not Tested
- * 5) ai_thinker_v2_2 (ES8388)
- * 6) ai_thinker (AC101)
- * 7) generic_es8388
+ * 5) ai_thinker_es8388 (ES8388) 3478
+ * 6) ai_thinker (AC101) 2762
+ * 7) ai_thinker_es8388 (ES8388) 2957
+ * 8) generic_es8388
  */
 
 #define AUDIOKIT_BOARD 1
 
 ```
 Here the lyrat v3.4 has been selected. 
+
+Unfortunately AI Thinker created a big mess with their boards using different Audio chips and pin assingments all of them using the same version number. You might need to make and educated guess by looking at the number after the version. 
 
 
 ## Example Sketch
