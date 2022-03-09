@@ -504,19 +504,12 @@ class AudioKit {
       // detect changes
       bool isConnected = selfAudioKit->headphoneStatus();
       if (selfAudioKit->headphoneIsConnected != isConnected) {
-        KIT_LOGD("actionHeadphoneDetection -> %s", isConnected ? "inserted" : "removed");
-        selfAudioKit->speakerChangeTimeout = millis()+600;
         selfAudioKit->headphoneIsConnected = isConnected;
-      }
 
-      // update when changes have stabilized
-      if (millis()>selfAudioKit->speakerChangeTimeout){
         // update if things have stabilized
-        bool isConnected = selfAudioKit->headphoneStatus();
         bool powerActive = !isConnected;
         KIT_LOGW("Headphone jack has been %s", isConnected ? "inserted" : "removed");
         selfAudioKit->setSpeakerActive(powerActive);
-        selfAudioKit->speakerChangeTimeout = millis()+1000*60*50*30; // 30 days
       }
     }
     yield();
