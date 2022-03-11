@@ -58,6 +58,11 @@ struct AudioKitConfig {
   i2s_port_t i2s_num = (i2s_port_t)0;
   gpio_num_t mclk_gpio = (gpio_num_t)0;
   bool sd_active = true;
+  bool auto_clear = true;
+  bool use_apll = true; 
+  int buffer_count = 6;
+  int buffer_size = 512;
+
 
   audio_hal_adc_input_t adc_input = AUDIOKIT_DEFAULT_INPUT; /*!<  set adc channel with audio_hal_adc_input_t*/
   audio_hal_dac_output_t dac_output =AUDIOKIT_DEFAULT_OUTPUT;       /*!< set dac channel */
@@ -119,13 +124,10 @@ struct AudioKitConfig {
         .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
         .communication_format = (i2s_comm_format_t)i2sFormat(),
         .intr_alloc_flags = ESP_INTR_FLAG_LEVEL2 | ESP_INTR_FLAG_IRAM,          
-        .dma_buf_count = 3,
-        .dma_buf_len = 320,                                                     
-        .use_apll = true,
-        .tx_desc_auto_clear = true,
-        // #if ESP_IDF_VERSION_MAJOR >= 4                  
-        // .fixed_mclk = 2000000,
-        // #endif
+        .dma_buf_count = buffer_count,
+        .dma_buf_len = buffer_size,                                                     
+        .use_apll = use_apll,
+        .tx_desc_auto_clear = auto_clear,
     };                                                        
     return i2s_config;
   }
