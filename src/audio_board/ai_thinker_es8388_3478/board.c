@@ -23,7 +23,7 @@
  */
 
 #include "AudioKitSettings.h"
-#if AUDIOKIT_BOARD==7
+#if AUDIOKIT_BOARD==5
 
 #include "audio_hal/audiokit_logger.h"
 #include "audio_hal/audiokit_board.h"
