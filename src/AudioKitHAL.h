@@ -95,17 +95,17 @@ struct AudioKitConfig {
       case AUDIO_HAL_08K_SAMPLES: /*!< set to  8k samples per second */
         return 8000;
       case AUDIO_HAL_11K_SAMPLES: /*!< set to 11.025k samples per second */
-        return 11000;
+        return 11025;
       case AUDIO_HAL_16K_SAMPLES: /*!< set to 16k samples in per second */
         return 16000;
       case AUDIO_HAL_22K_SAMPLES: /*!< set to 22.050k samples per second */
-        return 22000;
+        return 22050;
       case AUDIO_HAL_24K_SAMPLES: /*!< set to 24k samples in per second */
         return 24000;
       case AUDIO_HAL_32K_SAMPLES: /*!< set to 32k samples in per second */
         return 32000;
       case AUDIO_HAL_44K_SAMPLES: /*!< set to 44.1k samples per second */
-        return 44000;
+        return 44100;
       case AUDIO_HAL_48K_SAMPLES: /*!< set to 48k samples per second */
         return 48000;
     }
