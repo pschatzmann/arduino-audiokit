@@ -23,7 +23,7 @@ You can define your board and the default settings in the ```AudioKitSettings.h`
  * 3) lyrat_mini_v1_1 - DRAFT Not Tested
  * 4) esp32_s2_kaluga_1_v1_2 - DRAFT Not Tested
  * 5) ai_thinker (ES8388) 3478
- * 6) ai_thinker (AC101) 2762
+ * 6) ai_thinker (AC101) 2762 2957
  * 7) ai_thinker (ES8388) 2957
  * 8) generic_es8388
  */
