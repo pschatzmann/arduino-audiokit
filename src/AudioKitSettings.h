@@ -48,4 +48,6 @@
 #endif
 
 // to increase the max volume e.g. for ai_thinker (ES8388) 2957 -> set to 1
+#ifndef AI_THINKER_ES8388_VOLUME_HACK
 #define AI_THINKER_ES8388_VOLUME_HACK 0
+#endif
