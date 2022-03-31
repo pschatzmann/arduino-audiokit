@@ -22,6 +22,7 @@
  *
  */
 
+#include "AudioKitSettings.h"
 #include <string.h>
 #include "audio_hal/i2c_bus.h"
 #include "es8388.h"
@@ -352,6 +353,24 @@ esp_err_t es8388_config_fmt(es_module_t mode, es_i2s_fmt_t fmt)
  *     - (-1)  Error
  *     - (0)   Success
  */
+#if AI_THINKER_ES8388_VOLUME_HACK
+
+esp_err_t es8388_set_voice_volume(int volume) {
+  esp_err_t res = ESP_OK;
+  if (volume < 0) volume = 0;
+  else if (volume > 100) volume = 100;
+  volume /= 3;
+  res = es_write_reg(ES8388_ADDR, ES8388_DACCONTROL4, volume);
+  res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL5, volume);
+  res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL24, volume);
+  res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL25, volume);
+  res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL26, volume);
+  res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, volume);
+  return res;
+}
+
+#else
+
 esp_err_t es8388_set_voice_volume(int volume)
 {
     KIT_LOGD("es8388_set_voice_volume: %d", volume);
@@ -367,6 +386,7 @@ esp_err_t es8388_set_voice_volume(int volume)
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, 0);
     return res;
 }
+#endif
 
 /**
  *
