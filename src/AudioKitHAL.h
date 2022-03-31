@@ -209,10 +209,13 @@ class AudioKit {
     switch(inout){
       case AudioOutput:
         result.codec_mode = AUDIO_HAL_CODEC_MODE_DECODE; // dac
+        break;
       case AudioInput:
         result.codec_mode =  AUDIO_HAL_CODEC_MODE_ENCODE; // adc
+        break;
       default:
         result.codec_mode =  AUDIO_HAL_CODEC_MODE_BOTH;
+        break;
     }
     return result;
   }
