@@ -24,7 +24,7 @@
 #include "SPI.h"
 
 #ifdef ESP32
-#include "esp_a2dp_api.h"
+//#include "esp_a2dp_api.h"
 #include "audio_hal/audio_system.h"
 #include "audio_hal/audio_version.h"
 #include "driver/i2s.h"
@@ -159,6 +159,9 @@ struct AudioKitConfig {
       int mode = isMaster() ? I2S_MODE_SLAVE : I2S_MODE_MASTER;
       // using ESP32 dac/adc
       if (fmt == AUDIO_HAL_I2S_DSP){
+        #if AUDIOKIT_BOARD==4
+          KIT_LOGE("AUDIO_HAL_I2S_DSP not supported");
+        #else
         if (codec_mode == AUDIO_HAL_CODEC_MODE_DECODE) {
           mode = mode | I2S_MODE_TX | I2S_MODE_DAC_BUILT_IN;
         } else if (codec_mode == AUDIO_HAL_CODEC_MODE_ENCODE) {
@@ -166,6 +169,7 @@ struct AudioKitConfig {
         } else if (codec_mode == AUDIO_HAL_CODEC_MODE_BOTH) {
           mode = mode | I2S_MODE_RX | I2S_MODE_TX | I2S_MODE_ADC_BUILT_IN | I2S_MODE_DAC_BUILT_IN;
         } 
+        #endif
       } else {
         // I2S
         if (codec_mode == AUDIO_HAL_CODEC_MODE_DECODE) {

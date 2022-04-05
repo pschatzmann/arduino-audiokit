@@ -83,6 +83,7 @@ typedef enum
 typedef enum {
     PERIPH_ID_BUTTON     =  1,
     PERIPH_ID_TOUCH      =  2,
+    PERIPH_ID_ADC_BTN =  3,
 } esp_periph_button_t;
 
 typedef enum {
