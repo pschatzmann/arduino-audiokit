@@ -7,6 +7,11 @@
 #include "audio_hal/board_pins_config.h"
 #include "audio_hal/audiokit_logger.h"
 
+#ifndef ESP32
+#define GPIO_PIN_INTR_DISABLE 0
+#endif
+
+
 static i2c_config_t ac_i2c_cfg = {
 	.mode = I2C_MODE_MASTER,
 	.sda_pullup_en = GPIO_PULLUP_ENABLE,

@@ -8,6 +8,9 @@
 #include "audio_hal/audio_hal.h"
 #ifdef ESP32
 #include "driver/i2c.h"
+#else
+#define I2C_MASTER_WRITE 0
+#define I2C_MASTER_READ 1
 #endif
 
 

@@ -91,6 +91,11 @@ esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num)
     return ESP_OK;
 }
 
+int8_t get_headphone_detect_gpio(void)
+{
+    return -1;
+}
+
 // input-output pins
 int8_t get_pa_enable_gpio(void)
 {
