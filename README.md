@@ -14,7 +14,7 @@ So with this project it should now get quite easy to use these boards also in Ar
 
 ## Configuration
 
-You can define your board and the default settings in the ```AudioKitSettings.h``` file. 
+You must define your board and the default settings in the ```libraries/arduino-audiokit/src/AudioKitSettings.h``` file. Please note that the functionlity will __not work__ properly if this is done in the Sketch. 
 
 ```
  * @brief AUDIOKIT_BOARD selects a specic board:
