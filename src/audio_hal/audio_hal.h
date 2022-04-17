@@ -72,6 +72,7 @@ typedef enum {
 typedef enum {
     AUDIO_HAL_ADC_INPUT_LINE1 = 0x00,  /*!< mic input to adc channel 1 */
     AUDIO_HAL_ADC_INPUT_LINE2,         /*!< mic input to adc channel 2 */
+    AUDIO_HAL_ADC_INPUT_LINE3,         /*!< mic input to adc channel 3 */
     AUDIO_HAL_ADC_INPUT_ALL,           /*!< mic input to both channels of adc */
     AUDIO_HAL_ADC_INPUT_DIFFERENCE,    /*!< mic input to adc difference channel */
 } audio_hal_adc_input_t;
