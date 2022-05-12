@@ -33,6 +33,8 @@
 // 1 = Using Arduino Wire Library; 0 = Use ESP32 I2C API
 #ifndef AUDIOKIT_USE_WIRE
 #define AUDIOKIT_USE_WIRE 1
+// for AUDIOKIT_WIRE use Wire or Wire1
+#define AUDIOKIT_WIRE Wire1
 #endif
 
 #ifdef ESP32
@@ -45,8 +47,11 @@
 #define AUDIOKIT_MUTEX_SUPPORT 1
 #endif
 
+// This reserves a SPI port
 #ifndef AUDIOKIT_SETUP_SD
 #define AUDIOKIT_SETUP_SD 1
+// for AUDIOKIT_SD_SPI you can select SPI or SPI_VSPI
+#define AUDIOKIT_SD_SPI SPI
 #endif
 
 // to increase the max volume e.g. for ai_thinker (ES8388) 2957 -> set to 1
@@ -55,3 +60,5 @@
 #endif
 
 #endif
+
+

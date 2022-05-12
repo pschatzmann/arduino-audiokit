@@ -167,10 +167,8 @@ esp_err_t ac101_init(audio_hal_codec_config_t *codec_cfg)
 	{
 		KIT_LOGE("reset failed!");
 		return res;
-	}
-	else
-	{
-		KIT_LOGW("reset succeed");
+	} else {
+		KIT_LOGI("reset");
 	}
 	res |= ac101_write_reg(SPKOUT_CTRL, 0xe880);
 
