@@ -29,6 +29,7 @@
 #include "audio_hal/audio_version.h"
 #include "driver/i2s.h"
 #include "audio_hal/audio_type_def.h"
+SPIClass SPI_VSPI(VSPI);
 
 #endif
 
@@ -50,7 +51,6 @@ typedef uint32_t eps32_i2s_audio_sample_rate_type;
 class AudioKit;
 class AudioKit* selfAudioKit = nullptr;
 
-SPIClass SPI_VSPI(VSPI);
 
 /**
  * @brief Configuation for AudioKit
@@ -206,7 +206,9 @@ class AudioKit {
     // setup SPI for SD drives
     selfAudioKit = this;
     // added to constructor so that SPI is setup as part of global variable setup
+#ifdef ESP32
     setupSPI();
+#endif
   }
 
   /// Provides the default configuration for input or output
@@ -232,11 +234,12 @@ class AudioKit {
     cfg = cnfg;
     KIT_LOGI("Selected board: %d", AUDIOKIT_BOARD);
 
+#ifdef ESP32
     // release SPI for SD card if it is not necessary
     if (AUDIOKIT_SETUP_SD && !cfg.sd_active){
       p_spi->end();
     }
-
+#endif
     // setup headphone if necessary
     setupHeadphoneDetection();
 
@@ -553,8 +556,9 @@ class AudioKit {
   bool headphoneIsConnected = false;
   unsigned long speakerChangeTimeout = 0;
   int8_t headphonePin = -1;
+#ifdef ESP32
   SPIClass *p_spi = &AUDIOKIT_SD_SPI;
-
+#endif
   /**
    * @brief Setup the headphone detection
    */
@@ -574,6 +578,7 @@ class AudioKit {
     }
   }
 
+#if defined(ESP32) 
   /**
    * @brief Setup the SPI so that we can access the SD Drive
    */
@@ -591,7 +596,7 @@ class AudioKit {
     cfg.sd_active = false;
 #endif
   }
-
+#endif
 
 
 };
