@@ -25,7 +25,7 @@ You must define your board and the default settings in the ```libraries/arduino-
  * 5) ai_thinker (ES8388) 2957 3478
  * 6) ai_thinker (AC101) 2762 2957
  * 7) ai_thinker (ES8388) 2957
- * 8) generic_es8388
+ * 10) generic_es8388
  */
 
 #define AUDIOKIT_BOARD 1
