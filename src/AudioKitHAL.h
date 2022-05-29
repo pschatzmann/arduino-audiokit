@@ -235,6 +235,11 @@ class AudioKit {
     cfg = cnfg;
     KIT_LOGI("Selected board: %d", AUDIOKIT_BOARD);
 
+    // if already active we stop first
+    if (is_active){
+      end();
+    }
+
 #ifdef ESP32
     // release SPI for SD card if it is not necessary
     if (AUDIOKIT_SETUP_SD && !cfg.sd_active){
@@ -294,6 +299,7 @@ class AudioKit {
       return false;
     }
 
+    is_active = true;
     return true;
   }
 
@@ -309,6 +315,9 @@ class AudioKit {
     audio_hal_ctrl_codec(hal_handle, cfg.codec_mode, AUDIO_HAL_CTRL_STOP);
     // deinit
     audio_hal_deinit(hal_handle);
+
+    is_active = false;
+    hal_handle = 0;
     return true;
   }
 
@@ -549,6 +558,7 @@ class AudioKit {
   }
 
  protected:
+  bool is_active = false;
   AudioKitConfig cfg;
   audio_hal_codec_config_t audio_hal_conf;
   audio_hal_handle_t hal_handle = 0;
