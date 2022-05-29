@@ -64,11 +64,7 @@ int mutex_destroy(void *mutex)
 int mutex_lock(void *mutex)
 {
 #if AUDIOKIT_MUTEX_SUPPORT==1
-#if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 3, 0))
     while (xSemaphoreTake((QueueHandle_t)mutex, portMAX_DELAY) != pdPASS);
-#else
-    while (xSemaphoreTake((QueueHandle_t)mutex, portMAX_DELAY) != pdPASS);
-#endif
 #endif
     return 0;
 }
