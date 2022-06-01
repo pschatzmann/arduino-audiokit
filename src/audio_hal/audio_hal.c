@@ -50,12 +50,13 @@ audio_hal_handle_t audio_hal_init(audio_hal_codec_config_t *audio_hal_conf, audi
     memcpy(audio_hal, audio_hal_func, sizeof(audio_hal_func_t));
     audio_hal->audio_hal_lock = mutex_create();
 
+#if AUDIOKIT_MUTEX_SUPPORT==1
     AUDIO_MEM_CHECK(TAG_HAL, audio_hal->audio_hal_lock, {
         KIT_LOGE("AUDIO_MEM_CHECK");
         audio_free(audio_hal);
         return NULL;
     });
-
+#endif
     mutex_lock(audio_hal->audio_hal_lock);
 
     ret  = audio_hal->audio_codec_initialize(audio_hal_conf);
