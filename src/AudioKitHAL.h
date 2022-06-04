@@ -376,6 +376,33 @@ class AudioKit {
 
 #endif
 
+
+  /// Just update the sample rate
+  bool setSampleRate(audio_hal_iface_samples_t sample_rate){
+    bool result = true;
+    // update values
+    audio_hal_conf.i2s_iface.samples = cfg.sample_rate = sample_rate;
+
+    // apply new value
+    if (is_active){
+      // esp_err_t audio_hal_codec_iface_config(audio_hal_handle_t audio_hal, audio_hal_codec_mode_t mode, audio_hal_codec_i2s_iface_t *iface)
+      if (audio_hal_codec_iface_config(hal_handle, audio_hal_conf.codec_mode, &audio_hal_conf.i2s_iface) != ESP_OK) {
+        KIT_LOGE("audio_hal_ctrl_codec");
+        result = false;
+      }
+#ifdef ESP32
+      // update I2S
+      if (i2s_set_sample_rates(cfg.i2s_num, cfg.sampleRate()) != ESP_OK)  {
+        KIT_LOGE("i2s_set_sample_rates");
+        result = false;
+      }
+#endif
+    }
+
+    return result;
+  }
+
+
   /**
    * @brief  Get the gpio number for auxin detection
    *
