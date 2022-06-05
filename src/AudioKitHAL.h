@@ -334,12 +334,12 @@ class AudioKit {
     return audio_hal_set_mute(hal_handle, mute) == ESP_OK;
   }
 
-  /// Defines the Volume
+  /// Defines the Volume (in %) if volume is 0, mute is enabled,range is 0-100.
   bool setVolume(int vol) {
     return (vol > 0) ? audio_hal_set_volume(hal_handle, vol) == ESP_OK : false;
   }
 
-  /// Determines the volume
+  /// Determines the volume %
   int volume() {
     int volume;
     if (audio_hal_get_volume(hal_handle, &volume) != ESP_OK) {
