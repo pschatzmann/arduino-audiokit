@@ -102,8 +102,8 @@ esp_err_t audio_hal_ctrl_codec(audio_hal_handle_t audio_hal, audio_hal_codec_mod
     KIT_LOGD(LOG_METHOD);
     esp_err_t ret;
     AUDIO_HAL_CHECK_NULL(audio_hal, "audio_hal handle is null", -1);
-    mutex_lock(audio_hal->audio_hal_lock);
     KIT_LOGI( "Codec mode is %d, Ctrl:%d", mode, audio_hal_state);
+    mutex_lock(audio_hal->audio_hal_lock);
     ret = audio_hal->audio_codec_ctrl(mode, audio_hal_state);
     mutex_unlock(audio_hal->audio_hal_lock);
     return ret;
