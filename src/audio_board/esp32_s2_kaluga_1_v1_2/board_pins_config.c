@@ -57,6 +57,9 @@ esp_err_t get_i2s_pins(i2s_port_t port, i2s_pin_config_t *i2s_config)
     i2s_config->ws_io_num = GPIO_NUM_17;
     i2s_config->data_out_num = GPIO_NUM_12;
     i2s_config->data_in_num = GPIO_NUM_46;
+#if ESP_IDF_VERSION_MAJOR >= 4    
+        i2s_config->mck_io_num = GPIO_NUM_0;
+#endif
 
     return ESP_OK;
 }

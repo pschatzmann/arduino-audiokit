@@ -59,7 +59,11 @@ class AudioKit* selfAudioKit = nullptr;
  */
 struct AudioKitConfig {
   i2s_port_t i2s_num = (i2s_port_t)0;
-  gpio_num_t mclk_gpio = (gpio_num_t)0;
+#if ESP_IDF_VERSION_MAJOR < 4                  
+  int mclk_gpio = 0; // default value
+#else
+  int mclk_gpio = -1; // take definition from board_pins_config.c
+#endif
   bool sd_active = true;
   bool auto_clear = true;
   bool use_apll = true; 
@@ -139,9 +143,10 @@ struct AudioKitConfig {
   i2s_pin_config_t i2sPins() {
     i2s_pin_config_t result;
     get_i2s_pins(i2s_num, &result);
- #if ESP_IDF_VERSION_MAJOR >= 4    
-     result.mck_io_num = I2S_PIN_NO_CHANGE; //mclk_gpio;
- #endif
+    // overwrite mclk from board def if necessary
+     if (mclk_gpio>=0){
+      result.mck_io_num = (gpio_num_t)mclk_gpio; //mclk_gpio;
+     }
     return result;
   }
 
@@ -284,12 +289,12 @@ class AudioKit {
       return false;
     }
 
-//#if ESP_IDF_VERSION_MAJOR < 4                  
-    if (i2s_mclk_gpio_select(cfg.i2s_num, cfg.mclk_gpio) != ESP_OK) {
+#if ESP_IDF_VERSION_MAJOR < 4                  
+    if (i2s_mclk_gpio_select(cfg.i2s_num,(gpio_num_t)cfg.mclk_gpio) != ESP_OK) {
       KIT_LOGE("i2s_mclk_gpio_select");
       return false;
     }
-//#endif
+#endif
 
 #endif
 
