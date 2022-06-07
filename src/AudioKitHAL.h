@@ -143,10 +143,12 @@ struct AudioKitConfig {
   i2s_pin_config_t i2sPins() {
     i2s_pin_config_t result;
     get_i2s_pins(i2s_num, &result);
+#if ESP_IDF_VERSION_MAJOR >= 4                  
     // overwrite mclk from board def if necessary
      if (mclk_gpio>=0){
       result.mck_io_num = (gpio_num_t)mclk_gpio; //mclk_gpio;
      }
+#endif
     return result;
   }
 
