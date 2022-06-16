@@ -38,8 +38,8 @@ i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t* conf)
 #warning "Pins in Wire Library ignored"
 #endif
 
-    p_wire->setClock(conf->master.clk_speed);
     p_wire->begin();
+    p_wire->setClock(conf->master.clk_speed);
     
     return nullptr;
 }
