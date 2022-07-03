@@ -6,7 +6,7 @@
  *  2) lyrat_v4_2
  *  3) lyrat_mini_v1_1
  *  4) esp32_s2_kaluga_1_v1_2
- *  5) ai_thinker (ES8388) 2957 3478
+ *  5) ai_thinker (ES8388) 2957 3478 A149
  *  6) ai_thinker (AC101) 2762 2957
  *  7) ai_thinker (ES8388) 2957
  *  10) generci_es8388
