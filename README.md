@@ -31,7 +31,7 @@ You must define your board and the default settings in the ```libraries/arduino-
 #define AUDIOKIT_BOARD 1
 
 ```
-Here the lyrat v3.4 has been selected. 
+Here the lyrat v4.3 has been selected. 
 
 Unfortunately AI Thinker created a big mess with their boards using different Audio chips and pin assingments, all of them using the same version number. You might need to make an educated guess by looking at the number after the version and if you have a 2957 board, you need to check all 3 options!
 
