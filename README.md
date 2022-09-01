@@ -1,6 +1,6 @@
-# Arduino AudioKit HAL
+# Arduino ADF/AudioKit HAL
 
-There are different ESP32 AudioKit boards available that can be programmed with the Espressif ADF Framework.
+There are different ESP32 Audio boards available that can be programmed with the Espressif ADF Framework.
 
 <img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" />
 
