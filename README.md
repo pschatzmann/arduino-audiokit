@@ -22,7 +22,7 @@ You must define your board and the default settings in the ```libraries/arduino-
  * 2) lyrat_v4_2 - DRAFT Not Tested
  * 3) lyrat_mini_v1_1 - DRAFT Not Tested
  * 4) esp32_s2_kaluga_1_v1_2 - DRAFT Not Tested
- * 5) ai_thinker (ES8388) 2957 3478 A149
+ * 5) ai_thinker (ES8388) 2957 3478 A149 2762
  * 6) ai_thinker (AC101) 2762 2957
  * 7) ai_thinker (ES8388) 2957
  * 10) generic_es8388
