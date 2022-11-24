@@ -348,8 +348,6 @@ esp_err_t es8388_config_fmt(es_module_t mode, es_i2s_fmt_t fmt)
 
 /**
  * @brief Sets the output volume
- * 
- */
  * @param volume: 0 ~ 100
  *
  * @return
@@ -392,8 +390,7 @@ esp_err_t es8388_set_voice_volume(int volume) {
 
 #else
 
-esp_err_t es8388_set_voice_volume(int volume)
-{
+esp_err_t es8388_set_voice_volume(int volume) {
     KIT_LOGD("es8388_set_voice_volume: %d", volume);
     esp_err_t res = ESP_OK;
     if (volume < 0)
