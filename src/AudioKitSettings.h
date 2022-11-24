@@ -54,7 +54,7 @@
 #define AUDIOKIT_SD_SPI SPI
 #endif
 
-// to increase the max volume e.g. for ai_thinker (ES8388) 2957 -> set to 1
+// to increase the max volume e.g. for ai_thinker (ES8388) 2957 or A202 -> set to 1 or 2
 #ifndef AI_THINKER_ES8388_VOLUME_HACK
 #define AI_THINKER_ES8388_VOLUME_HACK 0
 #endif

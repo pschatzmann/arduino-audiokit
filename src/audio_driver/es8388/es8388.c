@@ -353,9 +353,10 @@ esp_err_t es8388_config_fmt(es_module_t mode, es_i2s_fmt_t fmt)
  *     - (-1)  Error
  *     - (0)   Success
  */
-#if AI_THINKER_ES8388_VOLUME_HACK
+#if AI_THINKER_ES8388_VOLUME_HACK==1
 
 esp_err_t es8388_set_voice_volume(int volume) {
+  KIT_LOGD("es8388_set_voice_volume (HACK 1): %d", volume);
   esp_err_t res = ESP_OK;
   if (volume < 0) volume = 0;
   else if (volume > 100) volume = 100;
@@ -367,6 +368,23 @@ esp_err_t es8388_set_voice_volume(int volume) {
   res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL26, volume);
   res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, volume);
   return res;
+}  
+
+#elif AI_THINKER_ES8388_VOLUME_HACK==2
+
+esp_err_t es8388_set_voice_volume(int volume) {
+    KIT_LOGD("es8388_set_voice_volume (HACK 2): %d", volume);
+    esp_err_t res = ESP_OK;
+    if (volume < 0) volume = 0;
+    else if (volume > 100) volume = 100;
+    volume = (volume*63)/100; // dataheet says only 6 bits
+    res = es_write_reg(ES8388_ADDR, ES8388_DACCONTROL24, volume);
+    res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL25, volume);
+    res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL26, 0);
+    res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, 0);
+    res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL8, 192 >> 2);
+    res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL9, 192 >> 2);
+    return res;
 }
 
 #else
