@@ -30,6 +30,11 @@
 #define AUDIOKIT_DEFAULT_BITSIZE        AUDIO_HAL_BIT_LENGTH_16BITS
 #define AUDIOKIT_DEFAULT_I2S_FMT        AUDIO_HAL_I2S_NORMAL
 
+// Define the default gain for the microphone amp 0xbb=9DB; 0x00=0DB
+// Alternativly you can call es8388_set_mic_gain(es_mic_gain_t gain) if you prefer to use
+// value from an comprehensive enum
+#define ES8388_DEFAULT_MIC_GAIN         0xbb
+
 // 1 = Using Arduino Wire Library; 0 = Use ESP32 I2C API
 #ifndef AUDIOKIT_USE_WIRE
 #define AUDIOKIT_USE_WIRE 1
@@ -56,7 +61,7 @@
 
 // to increase the max volume e.g. for ai_thinker (ES8388) 2957 or A202 -> set to 1 or 2
 #ifndef AI_THINKER_ES8388_VOLUME_HACK
-#define AI_THINKER_ES8388_VOLUME_HACK 0
+#define AI_THINKER_ES8388_VOLUME_HACK 2
 #endif
 
 #endif
