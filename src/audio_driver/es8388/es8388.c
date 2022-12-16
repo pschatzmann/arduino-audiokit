@@ -366,8 +366,10 @@ esp_err_t es8388_set_voice_volume(int volume) {
   volume /= 3;
   res = es_write_reg(ES8388_ADDR, ES8388_DACCONTROL4, 0);
   res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL5, 0);
+  // LOUT1 RLOUT1 volume: dataheet says only 6 bits
   res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL24, volume);
   res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL25, volume);
+  // DAC LDACVOL RDACVOL default 0 = 0DB; Default value 192 = – -96 dB
   res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL26, volume);
   res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, volume);
   return res;
@@ -380,11 +382,14 @@ esp_err_t es8388_set_voice_volume(int volume) {
     esp_err_t res = ESP_OK;
     if (volume < 0) volume = 0;
     else if (volume > 100) volume = 100;
-    volume = (volume*63)/100; // dataheet says only 6 bits
+    volume = (volume*63)/100; 
+    // LOUT1 RLOUT1 volume: dataheet says only 6 bits
     res = es_write_reg(ES8388_ADDR, ES8388_DACCONTROL24, volume);
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL25, volume);
+    // DAC LDACVOL RDACVOL default 0 = 0DB; Default value 192 = – -96 dB
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL26, 0);
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, 0);
+    // 30-bit a coefficient for shelving filter
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL8, 192 >> 2);
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL9, 192 >> 2);
     return res;
@@ -400,8 +405,10 @@ esp_err_t es8388_set_voice_volume(int volume) {
     else if (volume > 100)
         volume = 100;
     volume /= 3;
+    // ROUT1VOL LOUT1VOL 0 -> -45dB; 33 -> – 4.5dB
     res = es_write_reg(ES8388_ADDR, ES8388_DACCONTROL24, volume);
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL25, volume);
+    // DAC LDACVOL RDACVOL default 0 = 0DB; Default value 192 = – -96 dB
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL26, 0);
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL27, 0);
     return res;
