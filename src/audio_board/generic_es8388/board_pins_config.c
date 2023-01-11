@@ -41,7 +41,7 @@ esp_err_t get_i2s_pins(i2s_port_t port, i2s_pin_config_t *i2s_config)
         i2s_config->ws_io_num = PIN_I2S_AUDIO_KIT_WS;
         i2s_config->data_out_num = PIN_I2S_AUDIO_KIT_DATA_OUT;
         i2s_config->data_in_num = PIN_I2S_AUDIO_KIT_DATA_IN;
-#if ESP_IDF_VERSION_MAJOR >= 4    
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
         i2s_config->mck_io_num = GPIO_NUM_0;
 #endif
     } else {

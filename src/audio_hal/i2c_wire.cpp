@@ -117,7 +117,7 @@ esp_err_t i2c_bus_delete(i2c_bus_handle_t bus)
 {
     KIT_LOGD(LOG_METHOD);
 // All arduino implementations except old IDF versions
-#if !defined(ESP32) || ESP_IDF_VERSION_MAJOR >= 4    
+#if !defined(ESP32) || ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
     p_wire->end();
 #endif
 
