@@ -119,7 +119,11 @@
 #  define PA_ENABLE_GPIO            GPIO_NUM_21
 #endif
 
+
 #ifndef GREEN_LED_GPIO
+#  ifndef GPIO_NUM_22
+#    define GPIO_NUM_22              -1
+#  endif
 #  define GREEN_LED_GPIO            GPIO_NUM_22
 #endif
 

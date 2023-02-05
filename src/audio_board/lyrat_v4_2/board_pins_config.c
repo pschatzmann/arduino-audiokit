@@ -86,6 +86,7 @@ esp_err_t get_spi_pins(spi_bus_config_t *spi_config, spi_device_interface_config
     return ESP_OK;
 }
 
+#if ESP_IDF_VERSION_MAJOR < 4                  
 esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num)
 {
     if (i2s_num >= I2S_NUM_MAX) {
@@ -122,7 +123,7 @@ esp_err_t i2s_mclk_gpio_select(i2s_port_t i2s_num, gpio_num_t gpio_num)
     }
     return ESP_OK;
 }
-
+#endif
 // sdcard
 
 int8_t get_sdcard_intr_gpio(void)
