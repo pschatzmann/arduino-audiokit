@@ -30,34 +30,76 @@
 #define ES8388
 
 // SD Card
-#define PIN_AUDIO_KIT_SD_CARD_CS 13
-#define PIN_AUDIO_KIT_SD_CARD_MISO 2
-#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#define PIN_AUDIO_KIT_SD_CARD_CLK  14
+#ifndef PIN_AUDIO_KIT_SD_CARD_CS
+#  define PIN_AUDIO_KIT_SD_CARD_CS 13
+#endif
+#ifndef PIN_AUDIO_KIT_SD_CARD_MISO
+#  define PIN_AUDIO_KIT_SD_CARD_MISO 2
+#endif
+#ifndef PIN_AUDIO_KIT_SD_CARD_MOSI
+#  define PIN_AUDIO_KIT_SD_CARD_MOSI 15
+#endif
+#ifndef PIN_AUDIO_KIT_SD_CARD_CLK
+#  define PIN_AUDIO_KIT_SD_CARD_CLK  14
+#endif
 
 // I2S
-#define PIN_I2S_AUDIO_KIT_MCLK 0
-#define PIN_I2S_AUDIO_KIT_BCK 27
-#define PIN_I2S_AUDIO_KIT_WS 25
-#define PIN_I2S_AUDIO_KIT_DATA_OUT 26
-#define PIN_I2S_AUDIO_KIT_DATA_IN 35
+#ifndef PIN_I2S_AUDIO_KIT_MCLK
+#  define PIN_I2S_AUDIO_KIT_MCLK 0
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_BCK
+#  define PIN_I2S_AUDIO_KIT_BCK 27
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_WS
+#  define PIN_I2S_AUDIO_KIT_WS 25
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_DATA_OUT
+#  define PIN_I2S_AUDIO_KIT_DATA_OUT 26
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_DATA_IN
+#  define PIN_I2S_AUDIO_KIT_DATA_IN 35
+#endif
 
 // I2C
-#define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
-#define I2C_MASTER_SCL_IO 32     
-#define I2C_MASTER_SDA_IO 33    
-#define I2C_MASTER_ADDR 0x10
+#ifndef I2C_MASTER_NUM
+#  define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
+#endif
+#ifndef I2C_MASTER_SCL_IO
+#  define I2C_MASTER_SCL_IO 32     
+#endif
+#ifndef I2C_MASTER_SDA_IO
+#  define I2C_MASTER_SDA_IO 33    
+#endif
+#ifndef I2C_MASTER_ADDR
+#  define I2C_MASTER_ADDR 0x10
+#endif
 
 
-#define SDCARD_OPEN_FILE_NUM_MAX  5
-#define SDCARD_INTR_GPIO          GPIO_NUM_34
+#ifndef SDCARD_OPEN_FILE_NUM_MAX
+#  define SDCARD_OPEN_FILE_NUM_MAX  5
+#endif
+#ifndef SDCARD_INTR_GPIO
+#  define SDCARD_INTR_GPIO          GPIO_NUM_34
+#endif
 
-#define PIN_KEY1 36
-#define PIN_KEY2 13
-#define PIN_KEY3 19
-#define PIN_KEY4 23
-#define PIN_KEY5 18
-#define PIN_KEY6 5
+#ifndef PIN_KEY1
+#  define PIN_KEY1 36
+#endif
+#ifndef PIN_KEY2
+#  define PIN_KEY2 13
+#endif
+#ifndef PIN_KEY3
+#  define PIN_KEY3 19
+#endif
+#ifndef PIN_KEY4
+#  define PIN_KEY4 23
+#endif
+#ifndef PIN_KEY5
+#  define PIN_KEY5 18
+#endif
+#ifndef PIN_KEY6
+#  define PIN_KEY6 5
+#endif
 
 #define BUTTON_REC_ID             PIN_KEY1
 #define BUTTON_MODE_ID            PIN_KEY2
@@ -67,11 +109,19 @@
 #define BUTTON_VOLUP_ID           PIN_KEY6
 
 
-#define AUXIN_DETECT_GPIO         GPIO_NUM_12
-#define HEADPHONE_DETECT          GPIO_NUM_39
-#define PA_ENABLE_GPIO            GPIO_NUM_21
+#ifndef AUXIN_DETECT_GPIO
+#  define AUXIN_DETECT_GPIO         GPIO_NUM_12
+#endif
+#ifndef HEADPHONE_DETECT
+#  define HEADPHONE_DETECT          GPIO_NUM_39
+#endif
+#ifndef PA_ENABLE_GPIO
+#  define PA_ENABLE_GPIO            GPIO_NUM_21
+#endif
 
-#define GREEN_LED_GPIO            GPIO_NUM_22
+#ifndef GREEN_LED_GPIO
+#  define GREEN_LED_GPIO            GPIO_NUM_22
+#endif
 
 extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
 
@@ -87,7 +137,9 @@ extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
         },                                              \
 };
 
-#define INPUT_KEY_NUM     6
+#ifndef INPUT_KEY_NUM
+#  define   INPUT_KEY_NUM     6
+#endif
 
 #define INPUT_KEY_DEFAULT_INFO() {                      \
      {                                                  \
