@@ -21,7 +21,6 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-
 #include "AudioKitSettings.h"
 #include <string.h>
 #include "audio_hal/i2c_bus.h"
@@ -30,6 +29,7 @@
 #include "audio_hal/audiokit_logger.h"
 
 static i2c_bus_handle_t i2c_handle;
+static int dac_power = 0x3c;
 
 #define ES_ASSERT(a, format, b, ...) \
     if ((a) != 0) { \
@@ -162,7 +162,7 @@ esp_err_t es8388_start(es_module_t mode)
         KIT_LOGD("es8388_start default is mode:%d", mode);
     }
     if (mode == ES_MODULE_DAC || mode == ES_MODULE_ADC_DAC || mode == ES_MODULE_LINE) {
-        res |= es_write_reg(ES8388_ADDR, ES8388_DACPOWER, 0x3c);   //power up dac and line out
+        res |= es_write_reg(ES8388_ADDR, ES8388_DACPOWER, dac_power);   //power up dac and line out
         res |= es8388_set_voice_mute(false);
         KIT_LOGD("es8388_start default is mode:%d", mode);
     }
@@ -285,21 +285,22 @@ esp_err_t es8388_init(audio_hal_codec_config_t *cfg)
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL21, 0x80); //set internal ADC and DAC use the same LRCK clock, ADC LRCK as internal LRCK
     res |= es_write_reg(ES8388_ADDR, ES8388_DACCONTROL23, 0x00);   //vroi=0
     res |= es8388_set_adc_dac_volume(ES_MODULE_DAC, 0, 0);          // 0db
-    int tmp = 0;
+    dac_power = 0;
+    KIT_LOGI("dac_output %d",cfg->dac_output);
     if (AUDIO_HAL_DAC_OUTPUT_LINE2 == cfg->dac_output) {
-        tmp = DAC_OUTPUT_LOUT1 | DAC_OUTPUT_ROUT1;
+        dac_power = DAC_OUTPUT_LOUT1 | DAC_OUTPUT_ROUT1;
     } else if (AUDIO_HAL_DAC_OUTPUT_LINE1 == cfg->dac_output) {
-        tmp = DAC_OUTPUT_LOUT2 | DAC_OUTPUT_ROUT2;
+        dac_power = DAC_OUTPUT_LOUT2 | DAC_OUTPUT_ROUT2;
     } else {
-        tmp = DAC_OUTPUT_LOUT1 | DAC_OUTPUT_LOUT2 | DAC_OUTPUT_ROUT1 | DAC_OUTPUT_ROUT2;
+        dac_power = DAC_OUTPUT_LOUT1 | DAC_OUTPUT_LOUT2 | DAC_OUTPUT_ROUT1 | DAC_OUTPUT_ROUT2;
     }
-    res |= es_write_reg(ES8388_ADDR, ES8388_DACPOWER, tmp);  //0x3c Enable DAC and Enable Lout/Rout/1/2
+    res |= es_write_reg(ES8388_ADDR, ES8388_DACPOWER, dac_power);  //0x3c Enable DAC and Enable Lout/Rout/1/2
     /* adc */
     res |= es_write_reg(ES8388_ADDR, ES8388_ADCPOWER, 0xFF);
     //
     //res |= es_write_reg(ES8388_ADDR, ES8388_ADCCONTROL1, 0xbb); // MIC Left and Right channel PGA gain
     res |= es_write_reg(ES8388_ADDR, ES8388_ADCCONTROL1, ES8388_DEFAULT_MIC_GAIN); // MIC Left and Right channel PGA gain
-    tmp = 0;
+    int tmp = 0;
     if (AUDIO_HAL_ADC_INPUT_LINE1 == cfg->adc_input) {
         tmp = ADC_INPUT_LINPUT1_RINPUT1;
     } else if (AUDIO_HAL_ADC_INPUT_LINE2 == cfg->adc_input) {
@@ -314,8 +315,7 @@ esp_err_t es8388_init(audio_hal_codec_config_t *cfg)
     //ALC for Microphone
     res |= es8388_set_adc_dac_volume(ES_MODULE_ADC, 0, 0);      // 0db
     res |= es_write_reg(ES8388_ADDR, ES8388_ADCPOWER, 0x09); //Power on ADC, Enable LIN&RIN, Power off MICBIAS, set int1lp to low power mode
-    /* enable es8388 PA */
-    es8388_pa_power(true);
+    //es8388_pa_power(cfg->dac_output!=AUDIO_HAL_DAC_OUTPUT_LINE2);
     // KIT_LOGI("init,out:%02x, in:%02x", cfg->dac_output, cfg->adc_input);
     return res;
 }

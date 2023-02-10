@@ -306,6 +306,9 @@ class AudioKit {
       return false;
     }
 
+    // activate speaker when output not earphones only
+    setSpeakerActive(cfg.dac_output!=AUDIO_HAL_DAC_OUTPUT_LINE1);
+
     is_active = true;
     return true;
   }
