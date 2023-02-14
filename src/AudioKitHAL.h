@@ -50,7 +50,8 @@ typedef uint32_t eps32_i2s_audio_sample_rate_type;
 #endif
 
 // Define LED_BUILTIN 
-#if defined(GREEN_LED_GPIO) && !defined(LED_BUILTIN)
+#undef LED_BUILTIN
+#if defined(GREEN_LED_GPIO) 
 #  define LED_BUILTIN GREEN_LED_GPIO
 #endif
 
