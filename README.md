@@ -2,7 +2,7 @@
 
 There are different ESP32 Audio boards available that can be programmed with the Espressif ADF Framework.
 
-<img src="https://pschatzmann.github.io/arduino-audio-tools/resources/audio-toolkit.png" alt="Audio Kit" />
+<img src="https://pschatzmann.github.io/Resources/img/audio-toolkit.png" alt="Audio Kit" />
 
 The ADF Framework contains an abstraction layer to support different CODEC chips. Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.
 
