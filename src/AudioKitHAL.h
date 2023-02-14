@@ -49,6 +49,11 @@ typedef int eps32_i2s_audio_sample_rate_type;
 typedef uint32_t eps32_i2s_audio_sample_rate_type;
 #endif
 
+// Define LED_BUILTIN 
+#if defined(GREEN_LED_GPIO) && !defined(LED_BUILTIN)
+#  define LED_BUILTIN GREEN_LED_GPIO
+#endif
+
 class AudioKit;
 class AudioKit* selfAudioKit = nullptr;
 
