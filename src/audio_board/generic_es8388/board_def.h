@@ -25,7 +25,10 @@
 #ifndef _AUDIO_BOARD_DEFINITION_H_
 #define _AUDIO_BOARD_DEFINITION_H_
 
-#include "audio_hal/audio_hal.h"
+#if __has_include("kit_custom_pins.h") 
+# include "kit_custom_pins.h"
+#endif
+#include "audio_hal/audio_hal.h" // for audio_hal_func_t
 
 #define ES8388
 
@@ -121,9 +124,6 @@
 
 
 #ifndef GREEN_LED_GPIO
-#  ifndef GPIO_NUM_22
-#    define GPIO_NUM_22              -1
-#  endif
 #  define GREEN_LED_GPIO            GPIO_NUM_22
 #endif
 

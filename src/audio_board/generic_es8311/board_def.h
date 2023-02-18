@@ -28,6 +28,7 @@
 #if __has_include("kit_custom_pins.h")
 # include "kit_custom_pins.h"
 #endif
+#include "audio_hal/audio_hal.h" // for audio_hal_func_t
 
 // SD
 #ifndef PIN_AUDIO_KIT_SD_CARD_CS

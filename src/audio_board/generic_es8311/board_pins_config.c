@@ -32,10 +32,6 @@
 #include "audio_hal/audiokit_board.h"
 #include "audio_hal/audio_error.h"
 #include "audio_hal/audio_mem.h"
-#i
-#if __has_include("kit_custom_pins.h") 
-# include "kit_custom_pins.h"
-#endif
 
 static const char *TAG = "ES8311";
 
