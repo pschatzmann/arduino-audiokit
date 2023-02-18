@@ -10,7 +10,7 @@
 #include "audio_hal/audio_error.h"
 #include "audio_hal/audio_mem.h"
 
-static const char *TAG = "GENERIC";
+static const char *TAG = "ES8388";
 
 esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
 {
