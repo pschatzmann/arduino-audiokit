@@ -292,6 +292,12 @@ class AudioKit {
     // define i2s pins
     i2s_pin_config_t pin_config = cfg.i2sPins();
     KIT_LOGI("i2s_set_pin");
+
+    KIT_LOGI("- bck_io_num: %d", pin_config.bck_io_num);
+    KIT_LOGI("- ws_io_num: %d", pin_config.ws_io_num);
+    KIT_LOGI("- data_out_num: %d", pin_config.data_out_num);
+    KIT_LOGI("- data_in_num: %d", pin_config.data_in_num);
+
     if (i2s_set_pin(cfg.i2s_num, &pin_config) != ESP_OK) {
       KIT_LOGE("i2s_set_pin");
       return false;
