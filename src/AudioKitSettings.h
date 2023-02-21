@@ -18,8 +18,9 @@
 
 #pragma once
 
+// Select your specific board
 #ifndef AUDIOKIT_BOARD
-#define AUDIOKIT_BOARD 5
+#  define AUDIOKIT_BOARD 5
 #endif
 
 // Default settings
@@ -42,34 +43,34 @@
 #  define AUDIOKIT_WIRE Wire1
 #endif
 
+// Set to 0 if you want to deactivate the ESP32 I2S functionality
 #ifndef SETUP_ESP32_I2S
 #  define SETUP_ESP32_I2S 1
 #endif
 
-#ifdef ESP32
-
-#ifndef AUDIOKIT_FREE_RTOS
-#  define AUDIOKIT_FREE_RTOS 1
-#endif
-
-#ifndef AUDIOKIT_MUTEX_SUPPORT
-#  define AUDIOKIT_MUTEX_SUPPORT 1
-#endif
-
-// This reserves a SPI port
+// USE SD ? Set to 0 to deactivate the SD
 #ifndef AUDIOKIT_SETUP_SD
 #  define AUDIOKIT_SETUP_SD 1
 // for AUDIOKIT_SD_SPI you can select SPI or SPI_VSPI
 #  define AUDIOKIT_SD_SPI SPI
 #endif
 
-// to increase the max volume e.g. for ai_thinker (ES8388) 2957 or A202 -> set to 1 or 2
+// To increase the max volume e.g. for ai_thinker (ES8388) 2957 or A202 -> set to 1 or 2
 // 0 AUX volume is LINE level
 // 1 you can control the AUX volume with setVolume()
 #ifndef AI_THINKER_ES8388_VOLUME_HACK
 #  define AI_THINKER_ES8388_VOLUME_HACK 1
 #endif
 
+// ESP32 Specific Settings
+#ifdef ESP32
+#  ifndef AUDIOKIT_FREE_RTOS
+#    define AUDIOKIT_FREE_RTOS 1
+#  endif
+
+#  ifndef AUDIOKIT_MUTEX_SUPPORT
+#    define AUDIOKIT_MUTEX_SUPPORT 1
+#  endif
 #endif
 
 
