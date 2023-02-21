@@ -126,7 +126,7 @@ struct AudioKitConfig {
     return 0;
   }
 
-#ifdef ESP32
+#if SETUP_ESP32_I2S && defined(ESP32)
   /// Provides the ESP32 i2s_config_t to configure I2S
   i2s_config_t i2sConfig() {
     // use just the oposite of the CODEC setting
@@ -220,7 +220,7 @@ class AudioKit {
     // setup SPI for SD drives
     selfAudioKit = this;
     // added to constructor so that SPI is setup as part of global variable setup
-#ifdef ESP32
+#if SETUP_ESP32_I2S && defined(ESP32)
     setupSPI();
 #endif
   }
@@ -253,7 +253,7 @@ class AudioKit {
       end();
     }
 
-#ifdef ESP32
+#if SETUP_ESP32_I2S && defined(ESP32)
     // release SPI for SD card if it is not necessary
     if (AUDIOKIT_SETUP_SD && !cfg.sd_active){
       p_spi->end();
@@ -280,7 +280,7 @@ class AudioKit {
     }
 
 
-#ifdef ESP32
+#if SETUP_ESP32_I2S && defined(ESP32)
 
     // setup i2s driver - with no queue
     i2s_config_t i2s_config = cfg.i2sConfig();
@@ -329,7 +329,7 @@ class AudioKit {
   bool end() {
     KIT_LOGI(LOG_METHOD);
 
-#ifdef ESP32
+#if SETUP_ESP32_I2S && defined(ESP32)
     // uninstall i2s driver
     i2s_driver_uninstall(cfg.i2s_num);
 #endif
@@ -370,7 +370,7 @@ class AudioKit {
     return volume;
   }
 
-#ifdef ESP32
+#if SETUP_ESP32_I2S && defined(ESP32)
 
   /// Writes the audio data via i2s to the DAC
   size_t write(const void *src, size_t size,
@@ -412,7 +412,7 @@ class AudioKit {
         KIT_LOGE("audio_hal_ctrl_codec");
         result = false;
       }
-#ifdef ESP32
+#if SETUP_ESP32_I2S && defined(ESP32)
       // update I2S
       if (i2s_set_sample_rates(cfg.i2s_num, cfg.sampleRate()) != ESP_OK)  {
         KIT_LOGE("i2s_set_sample_rates");
@@ -616,7 +616,7 @@ class AudioKit {
   bool headphoneIsConnected = false;
   unsigned long speakerChangeTimeout = 0;
   int8_t headphonePin = -1;
-#ifdef ESP32
+#if SETUP_ESP32_I2S && defined(ESP32)
   SPIClass *p_spi = &AUDIOKIT_SD_SPI;
 #endif
   /**
