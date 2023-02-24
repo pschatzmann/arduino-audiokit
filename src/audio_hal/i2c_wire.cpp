@@ -21,6 +21,7 @@
 #define END true
 
 TwoWire *p_wire = &AUDIOKIT_WIRE;
+bool is_i2c_init = false;
 
 i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t* conf)
 {
@@ -37,8 +38,9 @@ i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t* conf)
 #else
 #warning "Pins in Wire Library ignored"
 #endif
-
-    p_wire->begin();
+    if (!is_i2c_init){
+        is_i2c_init = p_wire->begin();
+    }
     p_wire->setClock(conf->master.clk_speed);
     
     return nullptr;
@@ -120,7 +122,7 @@ esp_err_t i2c_bus_delete(i2c_bus_handle_t bus)
 #if !defined(ESP32) || ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)                 
     p_wire->end();
 #endif
-
+    is_i2c_init = false;
     return ESP_OK;
 }
 
