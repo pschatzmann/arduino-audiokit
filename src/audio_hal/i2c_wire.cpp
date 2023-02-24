@@ -28,8 +28,6 @@ i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t* conf)
     KIT_LOGD(LOG_METHOD);
 
 #if defined(ESP32)
-    KIT_LOGI("i2c sda: %d", conf->sda_io_num);
-    KIT_LOGI("i2c scl: %d", conf->scl_io_num);
     p_wire->setPins(conf->sda_io_num, conf->scl_io_num);
     KIT_LOGI("i2c clk_speed: %d", conf->master.clk_speed);
 #elif defined(ARDUINO_ARCH_RP2040)
