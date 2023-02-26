@@ -297,7 +297,6 @@ class AudioKit {
       KIT_LOGI("- ws_io_num: %d", pin_config.ws_io_num);
       KIT_LOGI("- data_out_num: %d", pin_config.data_out_num);
       KIT_LOGI("- data_in_num: %d", pin_config.data_in_num);
-      KIT_LOGI("- mck_io_num: %d", pin_config.mck_io_num);
 
       if (i2s_set_pin(cfg.i2s_num, &pin_config) != ESP_OK) {
         KIT_LOGE("i2s_set_pin");
