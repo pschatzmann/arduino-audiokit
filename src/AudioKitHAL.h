@@ -55,6 +55,8 @@ typedef uint32_t eps32_i2s_audio_sample_rate_type;
 #  define LED_BUILTIN GREEN_LED_GPIO
 #endif
 
+namespace audiokit {
+
 class AudioKit;
 class AudioKit* selfAudioKit = nullptr;
 
@@ -668,3 +670,7 @@ class AudioKit {
 
 
 };
+
+} // namespace
+
+using namespace audiokit;
