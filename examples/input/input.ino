@@ -28,7 +28,7 @@ void setup() {
   Serial.begin(115200);
   // open in read mode
   auto cfg = kit.defaultConfig(AudioInput);
-  cfg.adc_input = AUDIO_HAL_ADC_INPUT_LINE1; // microphone
+  cfg.adc_input = AUDIO_HAL_ADC_INPUT_LINE2; // microphone?
   cfg.sample_rate = AUDIO_HAL_16K_SAMPLES;
   kit.begin(cfg);
 }
