@@ -43,7 +43,7 @@ Here is an example sketch that writes audio data to the audio kit board via I2S.
 
 You can adjust these parameters by setting your requested values in the cfg below:
 
-```
+```C++
 #include "AudioKit.h"
 #include "SineWaveGenerator.h"
 
@@ -78,14 +78,14 @@ You can also use this functionality just to set up the codec chip w/o doing any 
 
 The functionality has a built in logger. The default log level has been set to Warning. You can change it like this:
 
-```
+```C++
   LOGLEVEL_AUDIOKIT = AudioKitDebug; // or AudiKitInfo, AudioKitWarning, AudioKitError
 
 ```
 
 ## Documentation
 
-Here is the documentaion of the [AudioKit class](https://pschatzmann.github.io/arduino-audiokit/html/class_audio_kit.html).
+Here is the documentaion of the [AudioKit class](https://pschatzmann.github.io/arduino-audiokit/html/classaudiokit_1_1_audio_kit.html).
 
 Further information can be found in the [Wiki](https://github.com/pschatzmann/arduino-audiokit/wiki) and my [Blogs](https://www.pschatzmann.ch/home/tag/esp32audiokit/).
 
