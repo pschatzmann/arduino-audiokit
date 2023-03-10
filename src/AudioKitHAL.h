@@ -75,7 +75,7 @@ struct AudioKitConfig {
   bool sd_active = true;
   bool auto_clear = true;
   bool use_apll = true; 
-  bool is_i2s_active = true;
+  bool i2s_active = true;
   int buffer_count = 6;
   int buffer_size = 512;
 
@@ -222,7 +222,7 @@ class AudioKit {
     // setup SPI for SD drives
     selfAudioKit = this;
     // added to constructor so that SPI is setup as part of global variable setup
-#if SETUP_ESP32_I2S && defined(ESP32)
+#if AUDIOKIT_SETUP_SD
     setupSPI();
 #endif
   }
@@ -255,7 +255,7 @@ class AudioKit {
       end();
     }
 
-#if SETUP_ESP32_I2S && defined(ESP32)
+#if AUDIOKIT_SETUP_SD
     // release SPI for SD card if it is not necessary
     if (AUDIOKIT_SETUP_SD && !cfg.sd_active){
       p_spi->end();
@@ -281,41 +281,8 @@ class AudioKit {
       }
     }
 
-    if (cfg.is_i2s_active){
-
-#if SETUP_ESP32_I2S && defined(ESP32)
-      // setup i2s driver - with no queue
-      i2s_config_t i2s_config = cfg.i2sConfig();
-      if (i2s_driver_install(cfg.i2s_num, &i2s_config, 0, NULL) != ESP_OK) {
-        KIT_LOGE("i2s_driver_install");
-        return false;
-      }
-
-      // define i2s pins
-      i2s_pin_config_t pin_config = cfg.i2sPins();
-      KIT_LOGI("i2s_set_pin");
-
-      KIT_LOGI("- bck_io_num: %d", pin_config.bck_io_num);
-      KIT_LOGI("- ws_io_num: %d", pin_config.ws_io_num);
-      KIT_LOGI("- data_out_num: %d", pin_config.data_out_num);
-      KIT_LOGI("- data_in_num: %d", pin_config.data_in_num);
-#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)
-      KIT_LOGI("- mck_io_num: %d", pin_config.mck_io_num);
-#endif
-
-      if (i2s_set_pin(cfg.i2s_num, &pin_config) != ESP_OK) {
-        KIT_LOGE("i2s_set_pin");
-        return false;
-      }
-
-#if ESP_IDF_VERSION_MAJOR < 4                  
-      if (i2s_mclk_gpio_select(cfg.i2s_num,(gpio_num_t)cfg.mclk_gpio) != ESP_OK) {
-        KIT_LOGE("i2s_mclk_gpio_select");
-        return false;
-      }
-#endif
-
-#endif
+    if (cfg.i2s_active){
+      setupI2S(cfg);
     }
 
     // call start
@@ -336,7 +303,7 @@ class AudioKit {
     KIT_LOGI(LOG_METHOD);
 
 #if SETUP_ESP32_I2S && defined(ESP32)
-    if (cfg.is_i2s_active){
+    if (cfg.i2s_active){
       // uninstall i2s driver
       i2s_driver_uninstall(cfg.i2s_num);
     }
@@ -409,6 +376,7 @@ class AudioKit {
 
   /// Just update the sample rate
   bool setSampleRate(audio_hal_iface_samples_t sample_rate){
+    KIT_LOGD("setSampleRate");
     bool result = true;
     // update values
     audio_hal_conf.i2s_iface.samples = cfg.sample_rate = sample_rate;
@@ -422,7 +390,7 @@ class AudioKit {
       }
 #if SETUP_ESP32_I2S && defined(ESP32)
       // update I2S
-      if (cfg.is_i2s_active){
+      if (cfg.i2s_active){
         if (i2s_set_sample_rates(cfg.i2s_num, cfg.sampleRate()) != ESP_OK)  {
           KIT_LOGE("i2s_set_sample_rates");
           result = false;
@@ -668,6 +636,43 @@ class AudioKit {
   }
 #endif
 
+bool setupI2S(AudioKitConfig cnfg) {
+#if SETUP_ESP32_I2S && defined(ESP32)
+    KIT_LOGD("setupI2S");
+    // setup i2s driver - with no queue
+    i2s_config_t i2s_config = cfg.i2sConfig();
+    if (i2s_driver_install(cfg.i2s_num, &i2s_config, 0, NULL) != ESP_OK) {
+      KIT_LOGE("i2s_driver_install");
+      return false;
+    }
+
+    // define i2s pins
+    i2s_pin_config_t pin_config = cfg.i2sPins();
+    KIT_LOGI("i2s_set_pin");
+
+    KIT_LOGI("- bck_io_num: %d", pin_config.bck_io_num);
+    KIT_LOGI("- ws_io_num: %d", pin_config.ws_io_num);
+    KIT_LOGI("- data_out_num: %d", pin_config.data_out_num);
+    KIT_LOGI("- data_in_num: %d", pin_config.data_in_num);
+#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)
+    KIT_LOGI("- mck_io_num: %d", pin_config.mck_io_num);
+#endif
+
+    if (i2s_set_pin(cfg.i2s_num, &pin_config) != ESP_OK) {
+      KIT_LOGE("i2s_set_pin");
+      return false;
+    }
+
+#if ESP_IDF_VERSION_MAJOR < 4                  
+    if (i2s_mclk_gpio_select(cfg.i2s_num,(gpio_num_t)cfg.mclk_gpio) != ESP_OK) {
+      KIT_LOGE("i2s_mclk_gpio_select");
+      return false;
+    }
+#endif
+
+#endif
+  return true;
+}
 
 };
 
