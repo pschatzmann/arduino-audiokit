@@ -32,7 +32,7 @@ void setup() {
     .mode = i2s_mode_t(I2S_MODE_MASTER | I2S_MODE_TX),
     .sample_rate = 8000,
     .bits_per_sample = i2s_bits_per_sample_t(16),
-    .channel_format = I2S_CHANNEL_FMT_ONLY_LEFT,
+    .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
     .communication_format = i2s_comm_format_t(I2S_COMM_FORMAT_STAND_I2S),
     .intr_alloc_flags = 0,
     .dma_buf_count = 8,
