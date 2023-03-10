@@ -27,7 +27,7 @@ void setup() {
   cfg.sample_rate = AUDIO_HAL_08K_SAMPLES;
   kit.begin(cfg);
 
-  // setup i2s 
+  // setup I2S using esp32 API
   const i2s_config_t i2s_config = {
     .mode = i2s_mode_t(I2S_MODE_MASTER | I2S_MODE_TX),
     .sample_rate = 8000,
@@ -40,7 +40,7 @@ void setup() {
     .use_apll = false
   };
   i2s_driver_install(I2S_NUM_0, &i2s_config, 0, NULL);
-  get_i2s_pins(I2S_NUM_0, &pin_config);  
+  get_i2s_pins(I2S_NUM_0, &pin_config);  // get default i2s pins from audiokit 
   i2s_set_pin(I2S_NUM_0, &pin_config);
   i2s_start(I2S_NUM_0);
 
@@ -52,5 +52,6 @@ void setup() {
 
 void loop() {
   size_t l = wave.read(buffer, BUFFER_SIZE);
+  // esp32 I2S API
   i2s_write(I2S_NUM_0, buffer, l, &bytesWritten, portMAX_DELAY); 
 }
