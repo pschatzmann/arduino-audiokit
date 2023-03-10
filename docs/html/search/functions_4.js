@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['end_0',['end',['../class_audio_kit.html#ab6a8fa774b9a73c208418aa4fa9299cd',1,'AudioKit']]]
+  ['end_0',['end',['../classaudiokit_1_1_audio_kit.html#ac39fb8f5b739d2a4f3126ba5e10c8ead',1,'audiokit::AudioKit']]]
 ];

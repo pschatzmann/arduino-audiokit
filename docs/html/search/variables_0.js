@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['adc_5finput_0',['adc_input',['../struct_audio_kit_config.html#a8ae224cfd264634f4e09e6208cbcf6c0',1,'AudioKitConfig']]]
+  ['adc_5finput_0',['adc_input',['../structaudiokit_1_1_audio_kit_config.html#a1f05c59296cca5f9616053f53400fd37',1,'audiokit::AudioKitConfig']]]
 ];

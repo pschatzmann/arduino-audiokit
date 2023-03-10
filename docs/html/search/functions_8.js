@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['samplerate_0',['sampleRate',['../struct_audio_kit_config.html#a33b28874f411a9c353f6a0fa62261289',1,'AudioKitConfig']]],
-  ['setactive_1',['setActive',['../class_audio_kit.html#a64f95fca0a6f059803268dab33bf5d2c',1,'AudioKit']]],
-  ['setmute_2',['setMute',['../class_audio_kit.html#aac99fb5dfb87a965451e076f404224fd',1,'AudioKit']]],
-  ['setsamplerate_3',['setSampleRate',['../class_audio_kit.html#a752aaff497b20ea1ea4e9840f61dae80',1,'AudioKit']]],
-  ['setspeakeractive_4',['setSpeakerActive',['../class_audio_kit.html#aff34dc957824c6618a02e517a3b20221',1,'AudioKit']]],
-  ['setupheadphonedetection_5',['setupHeadphoneDetection',['../class_audio_kit.html#accb5ea6f7ee146cbd512552e039ac5ac',1,'AudioKit']]],
-  ['setvolume_6',['setVolume',['../class_audio_kit.html#adae205b1d34fa8c3c00ac891f980a7dd',1,'AudioKit']]]
+  ['samplerate_0',['sampleRate',['../structaudiokit_1_1_audio_kit_config.html#ab3e8df85a89b5f55eb5e6dcb5accf690',1,'audiokit::AudioKitConfig']]],
+  ['setactive_1',['setActive',['../classaudiokit_1_1_audio_kit.html#a50906c46b29710805167bda317233623',1,'audiokit::AudioKit']]],
+  ['setmute_2',['setMute',['../classaudiokit_1_1_audio_kit.html#aaa16731bd7186b72525d25447e08a134',1,'audiokit::AudioKit']]],
+  ['setsamplerate_3',['setSampleRate',['../classaudiokit_1_1_audio_kit.html#a9d8f1f16e792c3baaa99405437c97bbb',1,'audiokit::AudioKit']]],
+  ['setspeakeractive_4',['setSpeakerActive',['../classaudiokit_1_1_audio_kit.html#abd0d962ee607bda3eaea1649a23a2483',1,'audiokit::AudioKit']]],
+  ['setupheadphonedetection_5',['setupHeadphoneDetection',['../classaudiokit_1_1_audio_kit.html#a58c06483a574a87204e2af9d590addf0',1,'audiokit::AudioKit']]],
+  ['setvolume_6',['setVolume',['../classaudiokit_1_1_audio_kit.html#a06815b05d142e3c1147e94e05a331c2a',1,'audiokit::AudioKit']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['actionheadphonedetection_0',['actionHeadphoneDetection',['../class_audio_kit.html#a75fc2200b171c9b477f2f100b8a18104',1,'AudioKit']]]
+  ['actionheadphonedetection_0',['actionHeadphoneDetection',['../classaudiokit_1_1_audio_kit.html#a06a8ffc60859dab237371bb5f3cf63b0',1,'audiokit::AudioKit']]]
 ];

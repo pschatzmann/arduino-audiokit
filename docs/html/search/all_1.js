@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['begin_0',['begin',['../class_audio_kit.html#a903b3aee6597dfcb1de40f72f2b18a1b',1,'AudioKit']]],
-  ['bits_5fper_5fsample_1',['bits_per_sample',['../struct_audio_kit_config.html#a33583d45c4ab81f76d34712847e93907',1,'AudioKitConfig']]],
-  ['bitspersample_2',['bitsPerSample',['../struct_audio_kit_config.html#a3c15d27c3e5d9f8dbb304d21992bbbda',1,'AudioKitConfig']]]
+  ['begin_0',['begin',['../classaudiokit_1_1_audio_kit.html#a6726d645c935d08d1cc01cdb46571684',1,'audiokit::AudioKit']]],
+  ['bits_5fper_5fsample_1',['bits_per_sample',['../structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79',1,'audiokit::AudioKitConfig']]],
+  ['bitspersample_2',['bitsPerSample',['../structaudiokit_1_1_audio_kit_config.html#aaaef96c0f87b147eda7542638fbcdc36',1,'audiokit::AudioKitConfig']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['headphonestatus_0',['headphoneStatus',['../class_audio_kit.html#a0ad4e2e3004efe2769f9746df240b22a',1,'AudioKit']]]
+  ['headphonestatus_0',['headphoneStatus',['../classaudiokit_1_1_audio_kit.html#a322effdd6fa1cb61095a0483e2aa87cd',1,'audiokit::AudioKit']]]
 ];

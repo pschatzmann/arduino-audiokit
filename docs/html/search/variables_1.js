@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bits_5fper_5fsample_0',['bits_per_sample',['../struct_audio_kit_config.html#a33583d45c4ab81f76d34712847e93907',1,'AudioKitConfig']]]
+  ['bits_5fper_5fsample_0',['bits_per_sample',['../structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79',1,'audiokit::AudioKitConfig']]]
 ];

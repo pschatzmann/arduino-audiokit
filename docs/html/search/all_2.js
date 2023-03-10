@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['codec_5fmode_0',['codec_mode',['../struct_audio_kit_config.html#ae4d2ebbeffb709eda313ff5dffdbb2ab',1,'AudioKitConfig']]],
-  ['config_1',['config',['../class_audio_kit.html#afca95325642573eab6c4ad5ce0924063',1,'AudioKit']]]
+  ['codec_5fmode_0',['codec_mode',['../structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02',1,'audiokit::AudioKitConfig']]],
+  ['config_1',['config',['../classaudiokit_1_1_audio_kit.html#a9d48cb69b462c74a514093e367399332',1,'audiokit::AudioKit']]]
 ];

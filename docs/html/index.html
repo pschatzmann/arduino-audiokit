@@ -75,7 +75,7 @@ $(function() {
 <div class="textblock"><p><a class="anchor" id="md_README"></a> There are different ESP32 Audio boards available that can be programmed with the Espressif ADF Framework.</p>
 <p><img src="https://pschatzmann.github.io/Resources/img/audio-toolkit.png" alt="Audio Kit" class="inline"/></p>
 <p>The ADF Framework contains an abstraction layer to support different CODEC chips. Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.</p>
-<p>Because I wanted to have a proper support of the <a class="el" href="class_audio_kit.html" title="AudioKit API using the audio_hal.">AudioKit</a> for my <a href="https://github.com/pschatzmann/arduino-audio-tools">Arduino Audio Tools</a> library and since my Audio Tools are header only, I decided to provide this functionality in a separate project.</p>
+<p>Because I wanted to have a proper support of the AudioKit for my <a href="https://github.com/pschatzmann/arduino-audio-tools">Arduino Audio Tools</a> library and since my Audio Tools are header only, I decided to provide this functionality in a separate project.</p>
 <p>I converted the <b>audio_boards</b> and their related <b>drivers</b> into an <b>Arduino Library</b> and provide an easy to use C++ class which configures both the CODEC and I2S. I also tried to abstract away all ESP32 specific funcationality.</p>
 <p>So with this project it should now get quite easy to use these boards also in Arduino.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
@@ -124,6 +124,7 @@ Example Sketch</h1>
 <div class="line">  kit.write(buffer, l);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>However <b>I recommend</b> to use my <a href="https://github.com/pschatzmann/arduino-audio-tools">Arduino Audio Tools Library</a> which implements an easy to use Stream API with additional functionality on top of this and it has plenty of <a href="https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-audiokit">examples</a>.</p>
+<p>You can also use this functionality just to set up the codec chip w/o doing any intput or output. In this case you can set cfg.is_i2s_active = false;</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Logging</h1>
 <p>The functionality has a built in logger. The default log level has been set to Warning. You can change it like this:</p>
@@ -140,7 +141,7 @@ Installation in Arduino</h1>
 </div><!-- fragment --><p>If you want to use the library in PlatformIO, you can find a <a href="https://github.com/pschatzmann/arduino-audiokit-hal/wiki/PlatformIO">detailed description in the Wiki</a>.</p>
 <h1><a class="anchor" id="autotoc_md6"></a>
 Supported Devices / Processors</h1>
-<p>The examples have been tested with a <b>AI Thinker v2.2</b>: both versions - the one with the ES8388 and the other with the AC101. I also tested with a <b>LyraT</b>. I do not own any other <a class="el" href="class_audio_kit.html" title="AudioKit API using the audio_hal.">AudioKit</a> devices, so I can't guarantee that they work properly. I also made sure that the code is compiling on other processors, but I did not perform any tests. Please note that in this case because I2S is not standardized in Arduino, you need to take care of the I2S initialization and processing yourself on non ESP32 boards. </p>
+<p>The examples have been tested with a <b>AI Thinker v2.2</b>: both versions - the one with the ES8388 and the other with the AC101. I also tested with a <b>LyraT</b>. I do not own any other AudioKit devices, so I can't guarantee that they work properly. I also made sure that the code is compiling on other processors, but I did not perform any tests. Please note that in this case because I2S is not standardized in Arduino, you need to take care of the I2S initialization and processing yourself on non ESP32 boards. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
