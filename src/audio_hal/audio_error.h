@@ -26,7 +26,7 @@
 #ifndef _AUDIO_ERROR_H_
 #define _AUDIO_ERROR_H_
 
-#ifdef ESP32
+#if defined(ESP32) && __has_include("esp_err.h")
 #include "esp_err.h"
 #else
 typedef int esp_err_t;

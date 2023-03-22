@@ -1,4 +1,4 @@
-#ifndef ESP32
+#if defined(ARDUINO) && !defined(ESP32)
 #include "Arduino.h"
 #include "audio_hal/audio_gpio.h"
 #include "audio_hal/audiokit_logger.h"

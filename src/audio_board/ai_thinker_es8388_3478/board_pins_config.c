@@ -34,6 +34,10 @@
 
 #define TAG_AI "AI_V2_2"
 
+#ifndef ESP_IDF_VERSION_VAL
+#  define ESP_IDF_VERSION_VAL(major, minor, patch) ((major << 16) | (minor << 8) | (patch))
+#endif
+
 esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
 {
     AUDIO_NULL_CHECK(TAG_AI, i2c_config, return ESP_FAIL);

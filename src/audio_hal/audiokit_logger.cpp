@@ -15,7 +15,7 @@ void KIT_LOGD(const char* fmr, ...) {
     vsprintf(log_buffer+9, fmr, arg);
     va_end(arg);
     strcat(log_buffer, "\n");
-    printf(log_buffer);
+    printf("%s",log_buffer);
   }
 }
 
@@ -28,7 +28,7 @@ void KIT_LOGI(const char* fmr, ...) {
     vsprintf(log_buffer+9, fmr, arg);
     va_end(arg);
     strcat(log_buffer, "\n");
-    printf(log_buffer);
+    printf("%s",log_buffer);
   }
 }
 
@@ -41,7 +41,7 @@ void KIT_LOGW(const char* fmr, ...) {
     vsprintf(log_buffer+9, fmr, arg);
     va_end(arg);
     strcat(log_buffer, "\n");
-    printf(log_buffer);
+    printf("%s",log_buffer);
   }
 }
 
@@ -54,7 +54,7 @@ void KIT_LOGE(const char* fmr, ...) {
     vsprintf(log_buffer+9, fmr, arg);
     va_end(arg);
     strcat(log_buffer, "\n");
-    printf(log_buffer);
+    printf("%s",log_buffer);
   }
 
 }

@@ -218,3 +218,5 @@ pip-log.txt
 # Doxygen
 .DS_Store
 /.vs
+
+build/

@@ -1,6 +1,8 @@
 // code from https://github.com/donny681/esp-adf/blob/master/components/audio_driver/AC101/AC101.c
 // documentation see https://usermanual.wiki/Document/xpowers20AC10120User20Manual20v11.447217432/html#pf25
 
+#ifndef USE_CMAKE
+
 #include "audio_hal/audiokit_board.h"
 #include <string.h>
 #include "audio_hal/i2c_bus.h"
@@ -506,3 +508,5 @@ void ac101_pa_power(bool enable)
 		gpio_set_level(PA_ENABLE_GPIO, 0);
 	}
 }
+
+#endif
