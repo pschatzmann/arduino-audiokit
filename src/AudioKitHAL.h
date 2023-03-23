@@ -21,11 +21,11 @@
 #include "audio_driver/tas5805m/tas5805m.h"
 #include "audio_hal/audiokit_board.h"
 #include "audio_hal/audiokit_logger.h"
+
 #if AUDIOKIT_SETUP_SD
 # include "SPI.h"
 
 #ifdef ESP32
-//#include "esp_a2dp_api.h"
 #include "audio_hal/audio_system.h"
 #include "audio_hal/audio_version.h"
 #include "driver/i2s.h"
@@ -37,18 +37,20 @@ SPIClass SPI_VSPI(VSPI);
 #endif
 
 // Support for old IDF versions
-#if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
-#define I2S_COMM_FORMAT_STAND_I2S \
-  (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
-#define I2S_COMM_FORMAT_STAND_MSB \
-  (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
-#define I2S_COMM_FORMAT_STAND_PCM_LONG \
-  (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_LONG)
-#define I2S_COMM_FORMAT_STAND_PCM_SHORT \
-  (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_SHORT)
-typedef int eps32_i2s_audio_sample_rate_type;
-#else
-typedef uint32_t eps32_i2s_audio_sample_rate_type;
+#if AUDIOKIT_ESP32_I2S
+#  if ESP_IDF_VERSION_MAJOR < 4 && !defined(I2S_COMM_FORMAT_STAND_I2S)
+#  define I2S_COMM_FORMAT_STAND_I2S \
+    (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_MSB)
+#  define I2S_COMM_FORMAT_STAND_MSB \
+    (I2S_COMM_FORMAT_I2S | I2S_COMM_FORMAT_I2S_LSB)
+#  define I2S_COMM_FORMAT_STAND_PCM_LONG \
+    (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_LONG)
+#  define I2S_COMM_FORMAT_STAND_PCM_SHORT \
+    (I2S_COMM_FORMAT_PCM | I2S_COMM_FORMAT_PCM_SHORT)
+  typedef int eps32_i2s_audio_sample_rate_type;
+#  else
+  typedef uint32_t eps32_i2s_audio_sample_rate_type;
+#  endif
 #endif
 
 // Define LED_BUILTIN 
