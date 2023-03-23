@@ -57,6 +57,18 @@ typedef uint32_t eps32_i2s_audio_sample_rate_type;
 #  define LED_BUILTIN GREEN_LED_GPIO
 #endif
 
+// When we do not have Arduino we need to provide the following implementations
+#ifndef ARDUINO 
+#  define INPUT 0x0
+#  define OUTPUT 0x1
+#  define INPUT_PULLUP 0x2
+typedef int pin_t;
+void pintMode(pint_t, int);
+int digitalRead(pint_t);
+void yield();
+#endif
+
+
 namespace audiokit {
 
 class AudioKit;
