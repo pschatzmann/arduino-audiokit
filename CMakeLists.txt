@@ -10,7 +10,8 @@ set_property(
   PROPERTY STRINGS
   "1" "2" "3" "4" "5" "6" "7" "10"
 )
-
+option(SETUP_ESP32_I2S "Acivate I2S" OFF)
+option(AUDIOKIT_SETUP_SD "Acivate SD" OFF)
 
 # define source files
 file(GLOB_RECURSE SRC_LIST_CPP CONFIGURE_DEPENDS  "${PROJECT_SOURCE_DIR}/src/*.cpp" )
@@ -21,4 +22,4 @@ add_library (arduino-audiokit STATIC ${SRC_LIST_CPP} ${SRC_LIST_C})
 
 # define location for header files
 target_include_directories(arduino-audiokit PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src )
-target_compile_definitions(arduino-audiokit PUBLIC -DUSE_CMAKE -DAUDIOKIT_BOARD=${BOARD_SELECTION})
+target_compile_definitions(arduino-audiokit PUBLIC -DUSE_CMAKE -DAUDIOKIT_BOARD=${BOARD_SELECTION} -DSETUP_ESP32_I2S=${SETUP_ESP32_I2S} -DAUDIOKIT_SETUP_SD=${AUDIOKIT_SETUP_SD})
