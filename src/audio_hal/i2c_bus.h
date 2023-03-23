@@ -24,7 +24,7 @@
 #ifndef _IOT_I2C_BUS_H_
 #define _IOT_I2C_BUS_H_
 
-#ifdef ESP32
+#if defined(ESP32) || defined(ESP32_CMAKE)
 #include "driver/i2c.h"
 #else
 #include "audio_hal/audio_error.h"

@@ -8,7 +8,7 @@
  * 
  */
 #pragma once
-#ifdef ESP32
+#if defined(ESP32) || defined(ESP32_CMAKE)
 #include "driver/gpio.h"
 #else
 #include "audio_hal/audio_types.h"
