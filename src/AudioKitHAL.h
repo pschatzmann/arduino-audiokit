@@ -63,8 +63,9 @@ typedef uint32_t eps32_i2s_audio_sample_rate_type;
 #  define OUTPUT 0x1
 #  define INPUT_PULLUP 0x2
 typedef int pin_t;
-void pintMode(pint_t, int);
-int digitalRead(pint_t);
+void pinMode(pin_t, int);
+int digitalRead(pin_t);
+void digitalWrite(pint_t, int);
 void yield();
 #endif
 
