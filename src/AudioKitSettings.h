@@ -44,8 +44,8 @@
 #endif
 
 // Set to 0 if you want to deactivate the ESP32 I2S functionality
-#ifndef SETUP_ESP32_I2S
-#  define SETUP_ESP32_I2S 1
+#ifndef AUDIOKIT_ESP32_I2S
+#  define AUDIOKIT_ESP32_I2S 1
 #endif
 
 // USE SD ? Set to 0 to deactivate the SD

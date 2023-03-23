@@ -143,7 +143,7 @@ struct AudioKitConfig {
     return 0;
   }
 
-#if SETUP_ESP32_I2S && defined(ESP32)
+#if AUDIOKIT_ESP32_I2S && defined(ESP32)
   /// Provides the ESP32 i2s_config_t to configure I2S
   i2s_config_t i2sConfig() {
     // use just the oposite of the CODEC setting
@@ -317,7 +317,7 @@ class AudioKit {
   bool end() {
     KIT_LOGI(LOG_METHOD);
 
-#if SETUP_ESP32_I2S && defined(ESP32)
+#if AUDIOKIT_ESP32_I2S && defined(ESP32)
     if (cfg.i2s_active){
       // uninstall i2s driver
       i2s_driver_uninstall(cfg.i2s_num);
@@ -360,7 +360,7 @@ class AudioKit {
     return volume;
   }
 
-#if SETUP_ESP32_I2S && defined(ESP32)
+#if AUDIOKIT_ESP32_I2S && defined(ESP32)
 
   /// Writes the audio data via i2s to the DAC
   size_t write(const void *src, size_t size,
@@ -403,7 +403,7 @@ class AudioKit {
         KIT_LOGE("audio_hal_ctrl_codec");
         result = false;
       }
-#if SETUP_ESP32_I2S && defined(ESP32)
+#if AUDIOKIT_ESP32_I2S && defined(ESP32)
       // update I2S
       if (cfg.i2s_active){
         if (i2s_set_sample_rates(cfg.i2s_num, cfg.sampleRate()) != ESP_OK)  {
@@ -609,7 +609,7 @@ class AudioKit {
   bool headphoneIsConnected = false;
   unsigned long speakerChangeTimeout = 0;
   int8_t headphonePin = -1;
-#if SETUP_ESP32_I2S && defined(ESP32)
+#if AUDIOKIT_ESP32_I2S && defined(ESP32)
   SPIClass *p_spi = &AUDIOKIT_SD_SPI;
 #endif
   /**
@@ -652,7 +652,7 @@ class AudioKit {
 #endif
 
 bool setupI2S(AudioKitConfig cnfg) {
-#if SETUP_ESP32_I2S && defined(ESP32)
+#if AUDIOKIT_ESP32_I2S && defined(ESP32)
     KIT_LOGD("setupI2S");
     // setup i2s driver - with no queue
     i2s_config_t i2s_config = cfg.i2sConfig();
