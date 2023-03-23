@@ -23,7 +23,7 @@
   */
 
 #include "AudioKitSettings.h"
-#if AUDIOKIT_USE_WIRE==0
+#if AUDIOKIT_USE_WIRE==0 || !defined(ARDUINO)
 
 #include <stdio.h>
 #include "audio_hal/audiokit_logger.h"

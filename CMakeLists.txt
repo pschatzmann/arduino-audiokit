@@ -20,6 +20,7 @@ file(GLOB_RECURSE SRC_LIST_C CONFIGURE_DEPENDS  "${PROJECT_SOURCE_DIR}/src/*.c" 
 
 # define libraries
 add_library (arduino-audiokit STATIC ${SRC_LIST_CPP} ${SRC_LIST_C})
+include_directories("${COMPONENT_DIR}")
 
 # define location for header files
 target_include_directories(arduino-audiokit PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src )
