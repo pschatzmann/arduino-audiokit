@@ -59,14 +59,11 @@ typedef uint32_t eps32_i2s_audio_sample_rate_type;
 
 // When we do not have Arduino we need to provide the following implementations
 #ifndef ARDUINO 
-#  define INPUT 0x0
-#  define OUTPUT 0x1
-#  define INPUT_PULLUP 0x2
-typedef int pin_t;
-void pinMode(pin_t, int);
-int digitalRead(pin_t);
-void digitalWrite(pin_t, int);
-void yield();
+#  ifdef AUDIOKIT_FREE_RTOS
+void yield() {taskYIELD();}
+#  else 
+void yield() {}
+#  endif
 #endif
 
 
@@ -555,7 +552,7 @@ class AudioKit {
   void setSpeakerActive(bool active) {
     int paPin = get_pa_enable_gpio();
     if (paPin>0){
-        digitalWrite(paPin, active);
+        gpio_set_level((gpio_num_t)paPin, active);
     } else {
       KIT_LOGW("setSpeakerActive not supported");
     }
@@ -591,7 +588,7 @@ class AudioKit {
    * @return false 
    */
   bool headphoneStatus() {
-    return headphonePin>0 ? !digitalRead(headphonePin) : false;
+    return headphonePin>0 ? !gpio_get_level((gpio_num_t)headphonePin) : false;
   }
 
   /// checks if the SD is active
@@ -620,8 +617,19 @@ class AudioKit {
     if (paPin>0){
       headphonePin = pinHeadphoneDetect();
       if (headphonePin>0){
-        pinMode(headphonePin, INPUT_PULLUP);
-        pinMode(paPin, OUTPUT);
+        // pinMode(headphonePin, INPUT_PULLUP);
+        gpio_config_t headphone_io_conf;
+        headphone_io_conf.pin_bit_mask = BIT64(headphonePin);
+        headphone_io_conf.mode = GPIO_MODE_INPUT;
+        headphone_io_conf.pull_up_en = GPIO_PULLUP_ENABLE;
+        gpio_config(&headphone_io_conf);
+
+        //pinMode(paPin, OUTPUT);
+        gpio_config_t pa_io_conf;
+        pa_io_conf.pin_bit_mask = BIT64(paPin);
+        pa_io_conf.mode = GPIO_MODE_OUTPUT;
+        gpio_config(&pa_io_conf);
+
         KIT_LOGI("headphone detection is active");
       } else {
         KIT_LOGI("headphone detection not supported");    
@@ -640,8 +648,12 @@ class AudioKit {
 #if AUDIOKIT_SETUP_SD==1
       KIT_LOGI(LOG_METHOD);
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
-      pinMode(spi_cs_pin, OUTPUT);
-      digitalWrite(spi_cs_pin, HIGH);
+      //pinMode(spi_cs_pin, OUTPUT);
+      gpio_config_t cs_conf;
+      cs_conf.pin_bit_mask = BIT64(spi_cs_pin);
+      cs_conf.mode = GPIO_MODE_OUTPUT;
+      gpio_config(&cs_conf);
+      gpio_set_level((gpio_num_t)spi_cs_pin, HIGH);
 
       p_spi->begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);    
 #else

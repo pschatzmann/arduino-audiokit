@@ -176,6 +176,7 @@ esp_err_t gpio_config(const gpio_config_t *pGPIOConfig);
 esp_err_t gpio_pad_select_gpio(gpio_num_t);
 esp_err_t gpio_set_direction(gpio_num_t, int);
 esp_err_t gpio_set_level(gpio_num_t, int);
+int gpio_get_level(gpio_num_t gpio_num);
 esp_err_t vTaskDelay(TickType_t delay);
 
 #ifdef __cplusplus
