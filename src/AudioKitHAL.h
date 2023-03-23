@@ -21,7 +21,8 @@
 #include "audio_driver/tas5805m/tas5805m.h"
 #include "audio_hal/audiokit_board.h"
 #include "audio_hal/audiokit_logger.h"
-#include "SPI.h"
+#if AUDIOKIT_SETUP_SD
+# include "SPI.h"
 
 #ifdef ESP32
 //#include "esp_a2dp_api.h"
@@ -31,6 +32,7 @@
 #include "audio_hal/audio_type_def.h"
 #if !defined(ARDUINO_ESP32S3_DEV) && !defined(ARDUINO_ESP32S2_DEV)  && !defined(ARDUINO_ESP32C3_DEV)
 SPIClass SPI_VSPI(VSPI);
+#endif
 #endif
 #endif
 
