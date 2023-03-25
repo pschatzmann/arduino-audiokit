@@ -23,14 +23,14 @@
   */
 
 #include "AudioKitSettings.h"
-#if AUDIOKIT_USE_WIRE==0 || !defined(ARDUINO)
+#if AUDIOKIT_USE_WIRE==0 || defined(AUDIOKIT_USE_IDF)
 
 #include <stdio.h>
 #include "audio_hal/audiokit_logger.h"
-#include "driver/i2c.h"
 #include "audio_hal/i2c_bus.h"
 #include "audio_hal/audio_mutex.h"
 #include "audio_hal/audio_mem.h"
+#include "driver/i2c.h"
 
 #define ESP_INTR_FLG_DEFAULT  (0)
 #define ESP_I2C_MASTER_BUF_LEN  (0)
@@ -49,7 +49,7 @@ typedef struct {
 
 static i2c_bus_t *i2c_bus[I2C_NUM_MAX];
 
-static xSemaphoreHandle _busLock;
+static SemaphoreHandle_t _busLock;
 
 i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t *conf)
 {
@@ -104,7 +104,7 @@ esp_err_t i2c_bus_write_bytes(i2c_bus_handle_t bus, int addr, uint8_t *reg, int 
     ret |= i2c_master_write(cmd, reg, regLen, I2C_ACK_CHECK_EN);
     ret |= i2c_master_write(cmd, data, datalen, I2C_ACK_CHECK_EN);
     ret |= i2c_master_stop(cmd);
-    ret |= i2c_master_cmd_begin(p_bus->i2c_port, cmd, 1000 / portTICK_RATE_MS);
+    ret |= i2c_master_cmd_begin(p_bus->i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     mutex_unlock(_busLock);
     I2C_BUS_CHECK(ret == 0, "I2C Bus WriteReg Error", ESP_FAIL);
@@ -125,7 +125,7 @@ esp_err_t i2c_bus_write_data(i2c_bus_handle_t bus, int addr, uint8_t *data, int 
     ret |= i2c_master_write_byte(cmd, addr, 1);
     ret |= i2c_master_write(cmd, data, datalen, I2C_ACK_CHECK_EN);
     ret |= i2c_master_stop(cmd);
-    ret |= i2c_master_cmd_begin(p_bus->i2c_port, cmd, 1000 / portTICK_RATE_MS);
+    ret |= i2c_master_cmd_begin(p_bus->i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     mutex_unlock(_busLock);
     I2C_BUS_CHECK(ret == 0, "I2C Bus WriteReg Error", ESP_FAIL);
@@ -147,7 +147,7 @@ esp_err_t i2c_bus_read_bytes(i2c_bus_handle_t bus, int addr, uint8_t *reg, int r
     ret |= i2c_master_write_byte(cmd, addr, I2C_ACK_CHECK_EN);
     ret |= i2c_master_write(cmd, reg, reglen, I2C_ACK_CHECK_EN);
     ret |= i2c_master_stop(cmd);
-    ret |= i2c_master_cmd_begin(p_bus->i2c_port, cmd, 1000 / portTICK_RATE_MS);
+    ret |= i2c_master_cmd_begin(p_bus->i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
 
     cmd = i2c_cmd_link_create();
@@ -160,7 +160,7 @@ esp_err_t i2c_bus_read_bytes(i2c_bus_handle_t bus, int addr, uint8_t *reg, int r
     ret |= i2c_master_read_byte(cmd, &outdata[datalen - 1], 1);
 
     ret = i2c_master_stop(cmd);
-    ret = i2c_master_cmd_begin(p_bus->i2c_port, cmd, 1000 / portTICK_RATE_MS);
+    ret = i2c_master_cmd_begin(p_bus->i2c_port, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
 
     mutex_unlock(_busLock);
@@ -181,5 +181,5 @@ esp_err_t i2c_bus_delete(i2c_bus_handle_t bus)
     _busLock = NULL;
     return ESP_OK;
 }
-
 #endif
+

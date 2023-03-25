@@ -1,17 +1,13 @@
 // code from https://github.com/donny681/esp-adf/blob/master/components/audio_driver/AC101/AC101.h
 
-#ifndef __AC101_H__
-#define __AC101_H__
+#pragma once
 
-//#include "sdkconfig.h"
 #include "audio_hal/audio_types.h"
 #include "audio_hal/audio_hal.h"
-#ifdef ESP32
-#include "driver/i2c.h"
-#else
+#include "audio_hal/i2c_bus.h"
+
 #define I2C_MASTER_WRITE 0
 #define I2C_MASTER_READ 1
-#endif
 
 
 #define AC101_ADDR			0x1a				/*!< Device address*/
@@ -174,5 +170,4 @@ esp_err_t ac101_set_voice_volume(int volume);
 esp_err_t ac101_get_voice_volume(int* volume);
 void ac101_pa_power(bool enable);
 
-#endif
 

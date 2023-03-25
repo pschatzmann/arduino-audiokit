@@ -24,7 +24,8 @@
 #ifndef _IOT_I2C_BUS_H_
 #define _IOT_I2C_BUS_H_
 
-#if defined(ESP32) || defined(ESP32_CMAKE)
+#include "AudioKitSettings.h"
+#if defined(ESP32) || defined(AUDIOKIT_USE_IDF)
 #include "driver/i2c.h"
 #else
 #include "audio_hal/audio_error.h"
@@ -37,7 +38,7 @@ extern "C" {
 #endif
 typedef void *i2c_bus_handle_t;
 
-#ifndef ESP32
+#if !defined(ESP32) && defined(ARDUINO)
 typedef int portBASE_TYPE;
 typedef void* i2c_cmd_handle_t;
 #endif

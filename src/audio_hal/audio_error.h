@@ -26,15 +26,15 @@
 #ifndef _AUDIO_ERROR_H_
 #define _AUDIO_ERROR_H_
 
-#if defined(ESP32) && __has_include("esp_err.h")
-#include "esp_err.h"
+#include "AudioKitSettings.h"
+#if defined(ESP32) || defined(AUDIOKIT_USE_IDF)
+#  include "esp_err.h"
 #else
-typedef int esp_err_t;
-
 /* Definitions for error constants. */
-#define ESP_OK          0       /*!< esp_err_t value indicating success (no error) */
-#define ESP_FAIL        -1      /*!< Generic esp_err_t code indicating failure */
-#define ESP_ERR_INVALID_ARG 1
+#  define ESP_OK          0       /*!< esp_err_t value indicating success (no error) */
+#  define ESP_FAIL        -1      /*!< Generic esp_err_t code indicating failure */
+#  define ESP_ERR_INVALID_ARG 1
+typedef int esp_err_t;
 #endif
 
 #ifdef __cplusplus

@@ -2,12 +2,32 @@
 option(ESP_COMPONENT "Is IDF Component" ON)
 
 if(ESP_COMPONENT)
-    file(GLOB_RECURSE SRC_LIST_CPP CONFIGURE_DEPENDS  "${PROJECT_SOURCE_DIR}/src/*.cpp" )
-    file(GLOB_RECURSE SRC_LIST_C CONFIGURE_DEPENDS  "${PROJECT_SOURCE_DIR}/src/*.c" )
+    # Logic for IDF Component
+    set (SRC_DIR_C 
+        "src/audio_driver/es8388" 
+        "src/audio_driver/ac101" 
+        "src/audio_hal" 
+        "src/audio_board/ai_thinker_ac101"  
+        "src/audio_board/ai_thinker_es8388_2957"  
+        "src/audio_board/ai_thinker_es8388_3478"  
+        "src/audio_board/esp32_s2_kaluga_1_v1_2"  
+        "src/audio_board/generic_es8311"  
+        "src/audio_board/generic_es8388"  
+        "src/audio_board/lyrat_mini_v1_1"  
+        "src/audio_board/lyrat_v4_2"  
+        "src/audio_board/lyrat_v4_3"
+    )
+    
+    idf_component_register(
+        SRC_DIRS ${SRC_DIR_C} 
+        INCLUDE_DIRS "src"
+        REQUIRES driver
+    )
 
-    idf_component_register(SRCS SRC_LIST_CPP SRC_LIST_C
-    INCLUDE_DIRS "src"
-    REQUIRES driver)
+    target_compile_definitions(${COMPONENT_LIB} PUBLIC 
+        -DAUDIOKIT_USE_IDF
+        -DAUDIOKIT_BOARD=5
+    )
 
 else()
     cmake_minimum_required(VERSION 3.16)

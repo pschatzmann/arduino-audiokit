@@ -1,14 +1,14 @@
 // code from https://github.com/donny681/esp-adf/blob/master/components/audio_driver/AC101/AC101.c
 // documentation see https://usermanual.wiki/Document/xpowers20AC10120User20Manual20v11.447217432/html#pf25
 
-#ifndef USE_CMAKE
+#ifdef ESP32
 
-#include "audio_hal/audiokit_board.h"
 #include <string.h>
+#include "audio_hal/audiokit_board.h"
 #include "audio_hal/i2c_bus.h"
-#include "ac101.h"
 #include "audio_hal/board_pins_config.h"
 #include "audio_hal/audiokit_logger.h"
+#include "ac101.h"
 
 #ifndef ESP32
 #define GPIO_PIN_INTR_DISABLE 0
@@ -19,7 +19,8 @@ static i2c_config_t ac_i2c_cfg = {
 	.mode = I2C_MODE_MASTER,
 	.sda_pullup_en = GPIO_PULLUP_ENABLE,
 	.scl_pullup_en = GPIO_PULLUP_ENABLE,
-	.master.clk_speed = 100000};
+	.master.clk_speed = 100000
+};
 
 /*
  * operate function of codec
@@ -53,7 +54,7 @@ static esp_err_t ac101_write_reg(uint8_t reg_addr, uint16_t val)
 	ret |= i2c_master_start(cmd);
 	ret |= i2c_master_write(cmd, send_buff, 4, ACK_CHECK_EN);
 	ret |= i2c_master_stop(cmd);
-	ret |= i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_RATE_MS);
+	ret |= i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 	return ret;
 }
@@ -72,7 +73,7 @@ static esp_err_t i2c_example_master_read_slave(uint8_t DevAddr, uint8_t reg, uin
 	i2c_master_write_byte(cmd, (DevAddr << 1) | READ_BIT, ACK_CHECK_EN); //check or not
 	i2c_master_read(cmd, data_rd, size, ACK_VAL);
 	i2c_master_stop(cmd);
-	esp_err_t ret = i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_RATE_MS);
+	esp_err_t ret = i2c_master_cmd_begin(I2C_NUM_0, cmd, 1000 / portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 	return ret;
 }
@@ -510,3 +511,4 @@ void ac101_pa_power(bool enable)
 }
 
 #endif
+

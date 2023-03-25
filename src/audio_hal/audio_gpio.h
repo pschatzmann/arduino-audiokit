@@ -8,9 +8,15 @@
  * 
  */
 #pragma once
-#if defined(ESP32) || defined(ESP32_CMAKE)
+#include "AudioKitSettings.h"
+#if defined(ESP32) || defined(AUDIOKIT_USE_IDF) 
+
 #include "driver/gpio.h"
+#include "driver/rtc_io.h"
+#include "hal/gpio_types.h"
+
 #else
+
 #include "audio_hal/audio_types.h"
 #include "audio_hal/audio_error.h"
 #define I2S_NUM_0 0
@@ -18,8 +24,12 @@
 #define I2S_NUM_MAX I2S_NUM_1
 #define I2C_NUM_0 0
 #define I2C_NUM_1 1
-#define GPIO_MODE_OUTPUT 1 
-#define GPIO_MODE_INPUT 0
+#ifndef GPIO_MODE_OUTPUT
+#  define GPIO_MODE_OUTPUT 1 
+#endif
+#ifndef GPIO_MODE_INPUT
+#  define GPIO_MODE_INPUT 0
+#endif
 #define BIT64(nr)               (1ULL << (nr))
 #define BIT(nr)                 (1 << (nr))
 
@@ -183,5 +193,4 @@ esp_err_t vTaskDelay(TickType_t delay);
 }
 #endif
 
-
-#endif
+#endif // ESP32

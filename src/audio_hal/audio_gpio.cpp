@@ -26,16 +26,16 @@ esp_err_t gpio_set_level(gpio_num_t pin, int mode) {
 esp_err_t gpio_config(const gpio_config_t *pGPIOConfig){
     int mode = OUTPUT;
     switch(pGPIOConfig->mode){
-        case: GPIO_MODE_INPUT:
+        case GPIO_MODE_INPUT:
             mode = pGPIOConfig->pull_up_en ? INPUT_PULLUP : INPUT;
             break;
-        case: GPIO_MODE_OUTPUT:
+        case GPIO_MODE_OUTPUT:
             mode = OUTPUT;
             break;
 
     }
     for (int pin=0;pin<32;pin++){
-        if (pGPIOConfig->pin_bit_mask>j & 1){
+        if (pGPIOConfig->pin_bit_mask>pin & 1){
           pinMode(pin, mode);
           KIT_LOGI("pinMode: %d", pin, mode);
         }

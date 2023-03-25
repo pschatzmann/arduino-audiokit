@@ -28,6 +28,8 @@
 #include "audio_hal/audio_hal.h"
 #include "audio_hal/audio_types.h"
 #include "audio_hal/esxxx_common.h"
+#include "audio_hal/i2c_bus.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

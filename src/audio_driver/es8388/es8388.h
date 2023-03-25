@@ -28,9 +28,7 @@
 #include "audio_hal/audio_types.h"
 #include "audio_hal/audio_hal.h"
 #include "audio_hal/esxxx_common.h"
-#ifdef ESP32
-#include "driver/i2c.h"
-#endif
+#include "audio_hal/i2c_bus.h"
 
 #ifdef __cplusplus
 extern "C" {

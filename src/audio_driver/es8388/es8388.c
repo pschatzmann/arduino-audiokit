@@ -21,9 +21,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-#include "AudioKitSettings.h"
 #include <string.h>
-#include "audio_hal/i2c_bus.h"
+#include "AudioKitSettings.h"
 #include "es8388.h"
 #include "audio_hal/board_pins_config.h"
 #include "audio_hal/audiokit_logger.h"

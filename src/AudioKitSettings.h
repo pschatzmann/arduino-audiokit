@@ -36,11 +36,23 @@
 // value from an comprehensive enum
 #define ES8388_DEFAULT_MIC_GAIN         0xbb
 
+// Special rules for IDF build
+#if defined(AUDIOKIT_USE_IDF) 
+  #define AUDIOKIT_SETUP_SD 0
+  #define AUDIOKIT_FREE_RTOS 1
+  #define AUDIOKIT_ESP32_I2S 0
+  #define AUDIOKIT_ESP32_AUDIOKIT_USE_WIRE 0
+#endif
+
 // 1 = Using Arduino Wire Library; 0 = Use ESP32 I2C API
 #ifndef AUDIOKIT_USE_WIRE
 #  define AUDIOKIT_USE_WIRE 1
 // for AUDIOKIT_WIRE use Wire or Wire1
-#  define AUDIOKIT_WIRE Wire1
+#  if defined(ARDUINO_ARCH_STM32)
+#    define AUDIOKIT_WIRE Wire
+#  else
+#    define AUDIOKIT_WIRE Wire1
+#  endif
 #endif
 
 // Set to 0 if you want to deactivate the ESP32 I2S functionality

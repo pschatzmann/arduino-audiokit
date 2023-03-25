@@ -24,14 +24,16 @@
 
 #pragma once
 
-#ifdef ESP32
+#if defined(ESP32) || defined(AUDIOKIT_USE_IDF) 
 
 #include "driver/i2c.h"
-#include "driver/i2s.h"
 #include "driver/spi_common.h"
 #include "driver/spi_master.h"
 #include "driver/spi_slave.h"
-
+#include "driver/i2s.h"
+#ifndef ARDUINO
+#  include "driver/i2s_types.h"
+#endif
 #else
 
 #include "audio_hal/audio_gpio.h"

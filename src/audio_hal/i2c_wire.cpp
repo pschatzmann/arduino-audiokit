@@ -12,7 +12,7 @@
 
 #include <Wire.h>
 #include <stdio.h>
-
+#include <cassert>
 #include "audio_hal/audio_error.h"
 #include "audio_hal/audiokit_logger.h"
 #include "audio_hal/i2c_bus.h"
@@ -37,7 +37,8 @@ i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t* conf)
 #warning "Pins in Wire Library ignored"
 #endif
     if (!is_i2c_init){
-        is_i2c_init = p_wire->begin();
+         p_wire->begin();
+         is_i2c_init = true;
     }
     p_wire->setClock(conf->master.clk_speed);
     
@@ -112,6 +113,10 @@ esp_err_t i2c_bus_read_bytes(i2c_bus_handle_t bus, int addr, uint8_t* reg, int r
     }
     return result;
 }
+
+#ifndef ESP_IDF_VERSION_VAL
+#define ESP_IDF_VERSION_VAL(a,b,c) 0
+#endif
 
 esp_err_t i2c_bus_delete(i2c_bus_handle_t bus)
 {

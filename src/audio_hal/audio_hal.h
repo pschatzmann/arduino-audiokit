@@ -30,19 +30,19 @@
 
 #include "AudioKitSettings.h"
 #include "audio_hal/audio_error.h"
-#if AUDIOKIT_FREE_RTOS==1
+#include <stdint.h>
+#include <stdbool.h>
+
+#if AUDIOKIT_FREE_RTOS==1 || defined(AUDIOKIT_USE_IDF)
+
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include "freertos/task.h"
-#else
-#define portTICK_PERIOD_MS 1 
-#define portTICK_RATE_MS              portTICK_PERIOD_MS
-typedef void* xSemaphoreHandle;
-#endif
 
-#ifndef ESP32 
-#include <stdint.h>
-#include <stdbool.h>
+#else
+
+#define portTICK_PERIOD_MS 1 
+//typedef void* SemaphoreHandle_t;
 #endif
 
 
@@ -166,8 +166,9 @@ typedef struct audio_hal {
     esp_err_t (*audio_codec_set_mute) (bool mute);                                                           /*!< set codec mute */
     esp_err_t (*audio_codec_set_volume)(int volume);                                                         /*!< set codec volume */
     esp_err_t (*audio_codec_get_volume)(int *volume);                                                        /*!< get codec volume */
-    xSemaphoreHandle audio_hal_lock;                                                                         /*!< semaphore of codec */
-    void *handle;                                                                                            /*!< handle of audio codec */
+//    SemaphoreHandle_t audio_hal_lock;  
+    void* audio_hal_lock;
+    void* handle;                                                                                            /*!< handle of audio codec */
 } audio_hal_func_t;
 
 

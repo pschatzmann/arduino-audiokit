@@ -608,7 +608,7 @@ class AudioKit {
   bool headphoneIsConnected = false;
   unsigned long speakerChangeTimeout = 0;
   int8_t headphonePin = -1;
-#if AUDIOKIT_ESP32_I2S && defined(ESP32)
+#if AUDIOKIT_SETUP_SD
   SPIClass *p_spi = &AUDIOKIT_SD_SPI;
 #endif
   /**
@@ -641,7 +641,7 @@ class AudioKit {
     }
   }
 
-#if defined(ESP32) 
+#if defined(AUDIOKIT_SETUP_SD) 
   /**
    * @brief Setup the SPI so that we can access the SD Drive
    */
@@ -656,10 +656,15 @@ class AudioKit {
       cs_conf.mode = GPIO_MODE_OUTPUT;
       gpio_config(&cs_conf);
       gpio_set_level((gpio_num_t)spi_cs_pin, HIGH);
-
-      p_spi->begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);    
+#ifdef ESP32
+      p_spi->begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS); 
 #else
-    #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
+      p_spi->begin();
+#endif   
+#else
+#  if defined(ARDUINO)
+      #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
+#  endif
     cfg.sd_active = false;
 #endif
   }
