@@ -13,8 +13,10 @@
 
 #include "driver/gpio.h"
 #include "driver/rtc_io.h"
-#include "hal/gpio_types.h"
-
+// on old arduino releases this gives an error
+#ifndef ARDUINO
+#  include "hal/gpio_types.h"
+#endif
 #else
 
 #include "audio_hal/audio_types.h"
