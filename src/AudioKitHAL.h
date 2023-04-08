@@ -21,6 +21,7 @@
 #include "audio_driver/tas5805m/tas5805m.h"
 #include "audio_hal/audiokit_board.h"
 #include "audio_hal/audiokit_logger.h"
+#include "audio_hal/audio_gpio.h"
 
 #if AUDIOKIT_SETUP_SD
 # include "SPI.h"
@@ -81,7 +82,7 @@ class AudioKit* selfAudioKit = nullptr;
  */
 struct AudioKitConfig {
   i2s_port_t i2s_num = (i2s_port_t)0;
-#if ESP_IDF_VERSION_MAJOR < 4                  
+#if defined(ESP32) && ESP_IDF_VERSION_MAJOR < 4                  
   int mclk_gpio = 0; // default value
 #else
   int mclk_gpio = -1; // take definition from board_pins_config.c
@@ -554,7 +555,7 @@ class AudioKit {
   void setSpeakerActive(bool active) {
     int paPin = get_pa_enable_gpio();
     if (paPin>0){
-        gpio_set_level((gpio_num_t)paPin, active);
+        digitalWrite(paPin, active);
     } else {
       KIT_LOGW("setSpeakerActive not supported");
     }
@@ -590,7 +591,7 @@ class AudioKit {
    * @return false 
    */
   bool headphoneStatus() {
-    return headphonePin>0 ? !gpio_get_level((gpio_num_t)headphonePin) : false;
+    return headphonePin>0 ? !digitalRead(headphonePin) : false;
   }
 
   /// checks if the SD is active
@@ -619,19 +620,8 @@ class AudioKit {
     if (paPin>0){
       headphonePin = pinHeadphoneDetect();
       if (headphonePin>0){
-        // pinMode(headphonePin, INPUT_PULLUP);
-        gpio_config_t headphone_io_conf;
-        headphone_io_conf.pin_bit_mask = BIT64(headphonePin);
-        headphone_io_conf.mode = GPIO_MODE_INPUT;
-        headphone_io_conf.pull_up_en = GPIO_PULLUP_ENABLE;
-        gpio_config(&headphone_io_conf);
-
-        //pinMode(paPin, OUTPUT);
-        gpio_config_t pa_io_conf;
-        pa_io_conf.pin_bit_mask = BIT64(paPin);
-        pa_io_conf.mode = GPIO_MODE_OUTPUT;
-        gpio_config(&pa_io_conf);
-
+        pinMode(headphonePin, INPUT_PULLUP);
+        pinMode(paPin, OUTPUT);
         KIT_LOGI("headphone detection is active");
       } else {
         KIT_LOGI("headphone detection not supported");    
@@ -650,12 +640,8 @@ class AudioKit {
 #if AUDIOKIT_SETUP_SD==1
       KIT_LOGI(LOG_METHOD);
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
-      //pinMode(spi_cs_pin, OUTPUT);
-      gpio_config_t cs_conf;
-      cs_conf.pin_bit_mask = BIT64(spi_cs_pin);
-      cs_conf.mode = GPIO_MODE_OUTPUT;
-      gpio_config(&cs_conf);
-      gpio_set_level((gpio_num_t)spi_cs_pin, HIGH);
+      pinMode(spi_cs_pin, OUTPUT);
+      digitalWrite(spi_cs_pin, HIGH);
 #ifdef ESP32
       p_spi->begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS); 
 #else
@@ -697,7 +683,7 @@ bool setupI2S(AudioKitConfig cnfg) {
       return false;
     }
 
-#if ESP_IDF_VERSION_MAJOR < 4                  
+#if defined(ESP32) && ESP_IDF_VERSION_MAJOR < 4                  
     if (i2s_mclk_gpio_select(cfg.i2s_num,(gpio_num_t)cfg.mclk_gpio) != ESP_OK) {
       KIT_LOGE("i2s_mclk_gpio_select");
       return false;

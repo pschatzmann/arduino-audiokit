@@ -25,6 +25,7 @@
 #include "audio_hal/i2c_bus.h"
 #include "audio_hal/audiokit_board.h"
 #include "audio_hal/audiokit_logger.h"
+#include "audio_hal/audio_gpio.h"
 #include "tas5805m.h"
 #include "tas5805m_reg_cfg.h"
 
@@ -79,7 +80,7 @@ static esp_err_t tas5805m_transmit_registers(const tas5805m_cfg_reg_t *conf_buf,
                 // Used in legacy applications.  Ignored here.
                 break;
             case CFG_META_DELAY:
-                vTaskDelay(conf_buf[i].value / portTICK_PERIOD_MS);
+                delay(conf_buf[i].value);
                 break;
             case CFG_META_BURST:
                 ret = i2c_bus_write_bytes(i2c_handler, TAS5805M_ADDR, (unsigned char *)(&conf_buf[i + 1].offset), 1, (unsigned char *)(&conf_buf[i + 1].value), conf_buf[i].value);
@@ -108,15 +109,11 @@ esp_err_t tas5805m_init(audio_hal_codec_config_t *codec_cfg)
 {
     esp_err_t ret = ESP_OK;
     KIT_LOGI( "Power ON CODEC with GPIO %d", TAS5805M_RST_GPIO);
-    gpio_config_t io_conf;
-    io_conf.pin_bit_mask = BIT64(TAS5805M_RST_GPIO);
-    io_conf.mode = GPIO_MODE_OUTPUT;
-    io_conf.intr_type = GPIO_INTR_DISABLE;
-    gpio_config(&io_conf);
-    gpio_set_level(TAS5805M_RST_GPIO, 0);
-    vTaskDelay(20 / portTICK_PERIOD_MS);
-    gpio_set_level(TAS5805M_RST_GPIO, 1);
-    vTaskDelay(200 / portTICK_PERIOD_MS);
+    pinMode(TAS5805M_RST_GPIO, OUTPUT);
+    digitalWrite(TAS5805M_RST_GPIO, 0);
+    delay(20);
+    digitalWrite(TAS5805M_RST_GPIO, 1);
+    delay(200 / portTICK_PERIOD_MS);
 
     ret = get_i2c_pins(I2C_NUM_0, &i2c_cfg);
     i2c_handler = i2c_bus_create(I2C_NUM_0, &i2c_cfg);

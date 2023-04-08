@@ -26,6 +26,7 @@
 #include "audio_hal/audio_system.h"
 #include "audio_hal/audiokit_logger.h"
 #include "audio_hal/i2c_bus.h"
+#include "audio_hal/audio_gpio.h"
 #include "es8374.h"
 #include "audio_hal/board_pins_config.h"
 
@@ -783,16 +784,11 @@ esp_err_t es8374_codec_ctrl_state(audio_hal_codec_mode_t mode, audio_hal_ctrl_t 
 
 void es8374_pa_power(bool enable)
 {
-    gpio_config_t  io_conf;
-    memset(&io_conf, 0, sizeof(io_conf));
-    io_conf.mode = GPIO_MODE_OUTPUT;
-    io_conf.pin_bit_mask = BIT64(get_pa_enable_gpio());
-    io_conf.pull_down_en = 0;
-    io_conf.pull_up_en = 0;
-    gpio_config(&io_conf);
+    	pinMode(get_pa_enable_gpio(), OUTPUT);
     if (enable) {
-        gpio_set_level(get_pa_enable_gpio(), 1);
+        digitalWrite(get_pa_enable_gpio(), HIGH); 
     } else {
-        gpio_set_level(get_pa_enable_gpio(), 0);
+        digitalWrite(get_pa_enable_gpio(), LOW); 
     }
+
 }

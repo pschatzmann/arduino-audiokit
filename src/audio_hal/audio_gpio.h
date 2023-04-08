@@ -9,39 +9,54 @@
  */
 #pragma once
 #include "AudioKitSettings.h"
-#if defined(ESP32) || defined(AUDIOKIT_USE_IDF) 
+#ifdef ARDUINO
+#  include "Arduino.h"
+#else
+// Arduino definitions used by this framwork
+#ifndef HIGH
+#  define HIGH 1
+#endif
+#ifndef LOW
+#  define LOW 0
+#endif
+#define INPUT 0x0
+#define OUTPUT 0x1
+#define INPUT_PULLUP 0x2
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void digitalWrite(int, int);
+int digitalRead(int);
+void pinMode(int, int);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+
+#if defined(ESP32) || defined(AUDIOKIT_USE_IDF)  
+#include "esp_err.h"
 #include "driver/gpio.h"
 #include "driver/rtc_io.h"
-// on old arduino releases this gives an error
 #ifndef ARDUINO
 #  include "hal/gpio_types.h"
 #endif
-#else
 
-#include "audio_hal/audio_types.h"
-#include "audio_hal/audio_error.h"
+#else // no ESP32
+#include <stdbool.h>
+
 #define I2S_NUM_0 0
 #define I2S_NUM_1 1
 #define I2S_NUM_MAX I2S_NUM_1
 #define I2C_NUM_0 0
 #define I2C_NUM_1 1
-#ifndef GPIO_MODE_OUTPUT
-#  define GPIO_MODE_OUTPUT 1 
-#endif
-#ifndef GPIO_MODE_INPUT
-#  define GPIO_MODE_INPUT 0
-#endif
 #define BIT64(nr)               (1ULL << (nr))
 #define BIT(nr)                 (1 << (nr))
 
-// Suppress the following macros
-#define PIN_FUNC_SELECT(a,b)
-#define WRITE_PERI_REG(a,b)
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 typedef int i2s_port_t;
 typedef int i2c_port_t;
@@ -92,21 +107,12 @@ typedef enum {
 /** @endcond */
 } gpio_num_t;
 
+
 typedef enum{
     I2C_MODE_SLAVE = 0,   /*!< I2C slave mode */
     I2C_MODE_MASTER,      /*!< I2C master mode */
     I2C_MODE_MAX,
 } i2c_mode_t;
-
-typedef enum {
-    GPIO_INTR_DISABLE = 0,     /*!< Disable GPIO interrupt                             */
-    GPIO_INTR_POSEDGE = 1,     /*!< GPIO interrupt type : rising edge                  */
-    GPIO_INTR_NEGEDGE = 2,     /*!< GPIO interrupt type : falling edge                 */
-    GPIO_INTR_ANYEDGE = 3,     /*!< GPIO interrupt type : both rising and falling edge */
-    GPIO_INTR_LOW_LEVEL = 4,   /*!< GPIO interrupt type : input low level trigger      */
-    GPIO_INTR_HIGH_LEVEL = 5,  /*!< GPIO interrupt type : input high level trigger     */
-    GPIO_INTR_MAX,
-} gpio_int_type_t;
 
 
 /// I2C pins
@@ -152,47 +158,5 @@ typedef struct {
     int spics_io_num;               ///< CS GPIO pin for this device, or -1 if not used
 } spi_device_interface_config_t;
 
-typedef enum {
-    TOUCH_PAD_NUM0 = 0, /*!< Touch pad channel 0 is GPIO4 */
-    TOUCH_PAD_NUM1,    /*!< Touch pad channel 0 is GPIO0 */
-    TOUCH_PAD_NUM2,    /*!< Touch pad channel 0 is GPIO2 */
-    TOUCH_PAD_NUM3,    /*!< Touch pad channel 0 is GPIO15 */
-    TOUCH_PAD_NUM4,    /*!< Touch pad channel 0 is GPIO13 */
-    TOUCH_PAD_NUM5,    /*!< Touch pad channel 0 is GPIO12 */
-    TOUCH_PAD_NUM6,    /*!< Touch pad channel 0 is GPIO14 */
-    TOUCH_PAD_NUM7,    /*!< Touch pad channel 0 is GPIO27*/
-    TOUCH_PAD_NUM8,    /*!< Touch pad channel 0 is GPIO33*/
-    TOUCH_PAD_NUM9,    /*!< Touch pad channel 0 is GPIO32*/
-    TOUCH_PAD_MAX,
-} touch_pad_t;
-
-
-
-typedef struct {
-    uint64_t pin_bit_mask;          /*!< GPIO pin: set with bit mask, each bit maps to a GPIO */
-    int mode;               /*!< GPIO mode: set input/output mode                     */
-    int pull_up_en;       /*!< GPIO pull-up                                         */
-    int pull_down_en;   /*!< GPIO pull-down                                       */
-    int intr_type;      /*!< GPIO interrupt type                                  */
-} gpio_config_t;
-
-typedef enum {
-    GPIO_PULLUP_ONLY,               /*!< Pad pull up            */
-    GPIO_PULLDOWN_ONLY,             /*!< Pad pull down          */
-    GPIO_PULLUP_PULLDOWN,           /*!< Pad pull up + pull down*/
-    GPIO_FLOATING,                  /*!< Pad floating           */
-} gpio_pull_mode_t;
-
-
-esp_err_t gpio_config(const gpio_config_t *pGPIOConfig);
-esp_err_t gpio_pad_select_gpio(gpio_num_t);
-esp_err_t gpio_set_direction(gpio_num_t, int);
-esp_err_t gpio_set_level(gpio_num_t, int);
-int gpio_get_level(gpio_num_t gpio_num);
-esp_err_t vTaskDelay(TickType_t delay);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // ESP32

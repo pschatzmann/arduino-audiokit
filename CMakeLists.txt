@@ -25,7 +25,6 @@ if(ESP_COMPONENT)
     )
 
     target_compile_definitions(${COMPONENT_LIB} PUBLIC 
-        -DAUDIOKIT_USE_IDF
         -DAUDIOKIT_BOARD=5
     )
 

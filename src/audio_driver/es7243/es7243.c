@@ -26,6 +26,7 @@
 #include "audio_hal/i2c_bus.h"
 #include "audio_hal/audiokit_board.h"
 #include "audio_hal/audiokit_logger.h"
+#include "audio_hal/audio_gpio.h"
 #include "es7243.h"
 
 #define MCLK_PULSES_NUMBER    (20)
@@ -76,20 +77,25 @@ esp_err_t es7243_adc_set_addr(int addr)
     return ESP_OK;
 }
 
+
 static esp_err_t es7243_mclk_active(uint8_t mclk_gpio)
 {
+#ifdef ESP32
     gpio_pad_select_gpio(mclk_gpio);
     gpio_set_direction(mclk_gpio, GPIO_MODE_OUTPUT);
+#else
+    pinMode(mclk_gpio, OUTPUT);
+#endif
     /*
         Before initializing es7243, it is necessary to output
         mclk to es7243 to activate the I2C configuration.
         So give some clocks to active es7243.
     */
     for (int i = 0; i < MCLK_PULSES_NUMBER; ++i) {
-        gpio_set_level(mclk_gpio, 0);
-        vTaskDelay(1 / portTICK_PERIOD_MS);
-        gpio_set_level(mclk_gpio, 1);
-        vTaskDelay(1 / portTICK_PERIOD_MS);
+        digitalWrite(mclk_gpio, 0);
+        delay(1);
+        digitalWrite(mclk_gpio, 1);
+        delay(1);
     }
     return ESP_OK;
 }

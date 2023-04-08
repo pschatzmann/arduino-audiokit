@@ -8,6 +8,7 @@
 #include "audio_hal/i2c_bus.h"
 #include "audio_hal/board_pins_config.h"
 #include "audio_hal/audiokit_logger.h"
+#include "audio_hal/audio_gpio.h"
 #include "ac101.h"
 
 #ifndef ESP32
@@ -164,7 +165,7 @@ esp_err_t ac101_init(audio_hal_codec_config_t *codec_cfg)
 	i2c_init(); // ESP32 in master mode
 
 	res = ac101_write_reg(CHIP_AUDIO_RS, 0x123);
-	vTaskDelay(1000 / portTICK_PERIOD_MS);
+	delay(1000);
 
 	if (res != ESP_OK)
 	{
@@ -311,12 +312,12 @@ esp_err_t AC101_start(ac_module_t mode)
 		res |= ac101_write_reg(OMIXER_DACA_CTRL, 0xff80);
 		res |= ac101_write_reg(HPOUT_CTRL, 0xc3c1);
 		res |= ac101_write_reg(HPOUT_CTRL, 0xcb00);
-		vTaskDelay(100 / portTICK_PERIOD_MS);
+		delay(100);
 		res |= ac101_write_reg(HPOUT_CTRL, 0xfbc0);
 
 		//* Enable Speaker output
 		res |= ac101_write_reg(SPKOUT_CTRL, 0xeabd);
-		vTaskDelay(10 / portTICK_PERIOD_MS);
+		delay(10);
 		ac101_set_voice_volume(30);
 	}
 
@@ -492,22 +493,11 @@ esp_err_t ac101_get_voice_volume(int *volume)
 
 void ac101_pa_power(bool enable)
 {
-	gpio_config_t io_conf;
-	memset(&io_conf, 0, sizeof(io_conf));
-	io_conf.intr_type = GPIO_PIN_INTR_DISABLE;
-	io_conf.mode = GPIO_MODE_OUTPUT;
-	io_conf.pin_bit_mask = BIT(PA_ENABLE_GPIO);
-	io_conf.pull_down_en = 0;
-	io_conf.pull_up_en = 0;
-	gpio_config(&io_conf);
-	if (enable)
-	{
-		gpio_set_level(PA_ENABLE_GPIO, 1);
+
+	if (enable){
+		pinMode(PA_ENABLE_GPIO, INPUT);
 	}
-	else
-	{
-		gpio_set_level(PA_ENABLE_GPIO, 0);
-	}
+	
 }
 
 #endif
