@@ -327,6 +327,8 @@ class AudioKit {
     audio_hal_ctrl_codec(hal_handle, cfg.codec_mode, AUDIO_HAL_CTRL_STOP);
     // deinit
     audio_hal_deinit(hal_handle);
+    // this will save power
+    setSpeakerActive(false);
 
     is_active = false;
     hal_handle = 0;
