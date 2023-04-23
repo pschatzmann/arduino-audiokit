@@ -4,6 +4,7 @@
 #ifdef ESP32
 
 #include <string.h>
+#include "AudioKitSettings.h"
 #include "audio_hal/audiokit_board.h"
 #include "audio_hal/i2c_bus.h"
 #include "audio_hal/board_pins_config.h"
@@ -20,7 +21,7 @@ static i2c_config_t ac_i2c_cfg = {
 	.mode = I2C_MODE_MASTER,
 	.sda_pullup_en = GPIO_PULLUP_ENABLE,
 	.scl_pullup_en = GPIO_PULLUP_ENABLE,
-	.master.clk_speed = 100000
+	.master.clk_speed = I2C_CLOCK_SPEED
 };
 
 /*

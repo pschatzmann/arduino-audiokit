@@ -55,6 +55,11 @@
 #  endif
 #endif
 
+// define Wire/I2C clock speed
+#ifndef I2C_CLOCK_SPEED
+#  define I2C_CLOCK_SPEED 100000
+#endif
+
 // Set to 0 if you want to deactivate the ESP32 I2S functionality
 #ifndef AUDIOKIT_ESP32_I2S
 #  define AUDIOKIT_ESP32_I2S 1
