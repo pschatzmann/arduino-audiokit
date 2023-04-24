@@ -24,17 +24,16 @@
 #include "audio_hal/audio_gpio.h"
 
 #if AUDIOKIT_SETUP_SD
-# include "SPI.h"
-
-#ifdef ESP32
-#include "audio_hal/audio_system.h"
-#include "audio_hal/audio_version.h"
-#include "driver/i2s.h"
-#include "audio_hal/audio_type_def.h"
-#if !defined(ARDUINO_ESP32S3_DEV) && !defined(ARDUINO_ESP32S2_DEV)  && !defined(ARDUINO_ESP32C3_DEV)
+#  include "SPI.h"
+#  ifdef ESP32
+#    include "audio_hal/audio_system.h"
+#    include "audio_hal/audio_version.h"
+#    include "driver/i2s.h"
+#    include "audio_hal/audio_type_def.h"
+#    if !defined(ARDUINO_ESP32S3_DEV) && !defined(ARDUINO_ESP32S2_DEV)  && !defined(ARDUINO_ESP32C3_DEV)
 SPIClass SPI_VSPI(VSPI);
-#endif
-#endif
+#    endif
+#  endif
 #endif
 
 // Support for old IDF versions
@@ -639,22 +638,22 @@ class AudioKit {
    */
   void setupSPI() {
 //  I assume this is valid for all AudioKits!
-#if AUDIOKIT_SETUP_SD==1
+#  if AUDIOKIT_SETUP_SD==1
       KIT_LOGI(LOG_METHOD);
       spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;
       pinMode(spi_cs_pin, OUTPUT);
       digitalWrite(spi_cs_pin, HIGH);
-#ifdef ESP32
+#    ifdef ESP32
       p_spi->begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS); 
-#else
+#    else
       p_spi->begin();
-#endif   
-#else
-#  if defined(ARDUINO)
-      #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
-#  endif
+#    endif   
+#  else
+#    if defined(ARDUINO)
+        #warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself" 
+#    endif
     cfg.sd_active = false;
-#endif
+#  endif
   }
 #endif
 
@@ -676,21 +675,21 @@ bool setupI2S(AudioKitConfig cnfg) {
     KIT_LOGI("- ws_io_num: %d", pin_config.ws_io_num);
     KIT_LOGI("- data_out_num: %d", pin_config.data_out_num);
     KIT_LOGI("- data_in_num: %d", pin_config.data_in_num);
-#if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)
+#  if ESP_IDF_VERSION > ESP_IDF_VERSION_VAL(4, 4, 0)
     KIT_LOGI("- mck_io_num: %d", pin_config.mck_io_num);
-#endif
+#  endif
 
     if (i2s_set_pin(cfg.i2s_num, &pin_config) != ESP_OK) {
       KIT_LOGE("i2s_set_pin");
       return false;
     }
 
-#if defined(ESP32) && ESP_IDF_VERSION_MAJOR < 4                  
+#  if defined(ESP32) && ESP_IDF_VERSION_MAJOR < 4                  
     if (i2s_mclk_gpio_select(cfg.i2s_num,(gpio_num_t)cfg.mclk_gpio) != ESP_OK) {
       KIT_LOGE("i2s_mclk_gpio_select");
       return false;
     }
-#endif
+#  endif
 
 #endif
   return true;
