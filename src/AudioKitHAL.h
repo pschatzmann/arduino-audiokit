@@ -30,7 +30,7 @@
 #    include "audio_hal/audio_version.h"
 #    include "driver/i2s.h"
 #    include "audio_hal/audio_type_def.h"
-#    if !defined(ARDUINO_ESP32S3_DEV) && !defined(ARDUINO_ESP32S2_DEV)  && !defined(ARDUINO_ESP32C3_DEV)
+#    if !defined(CONFIG_IDF_TARGET_ESP32S3) && !defined(CONFIG_IDF_TARGET_ESP32S2)  && !defined(CONFIG_IDF_TARGET_ESP32C3)
 SPIClass SPI_VSPI(VSPI);
 #    endif
 #  endif
