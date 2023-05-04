@@ -191,7 +191,7 @@ struct AudioKitConfig {
       int mode = isMaster() ? I2S_MODE_SLAVE : I2S_MODE_MASTER;
       // using ESP32 dac/adc
       if (fmt == AUDIO_HAL_I2S_DSP){
-        #if AUDIOKIT_BOARD==4 || defined(ARDUINO_ESP32S3_DEV) || defined(ARDUINO_ESP32S2_DEV)|| defined(ARDUINO_ESP32C3_DEV)
+        #if AUDIOKIT_BOARD==4 || defined(CONFIG_IDF_TARGET_ESP32S3) || defined(CONFIG_IDF_TARGET_ESP32S2)|| defined(CONFIG_IDF_TARGET_ESP32C3)
           KIT_LOGE("AUDIO_HAL_I2S_DSP not supported");
         #else
         if (codec_mode == AUDIO_HAL_CODEC_MODE_DECODE) {

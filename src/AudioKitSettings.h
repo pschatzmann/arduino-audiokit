@@ -10,6 +10,7 @@
  *  6) ai_thinker (AC101) 2473 2762 2957
  *  7) ai_thinker (ES8388) 2957
  *  10) generci_es8388
+ *  11) generic_es8311
  * @version 0.1
  * @date 2021-12-12
  * 
