@@ -35,7 +35,9 @@
 // Define the default gain for the microphone amp 0xbb=9DB; 0x00=0DB
 // Alternativly you can call es8388_set_mic_gain(es_mic_gain_t gain) if you prefer to use
 // value from an comprehensive enum
-#define ES8388_DEFAULT_MIC_GAIN         0xbb
+#ifndef ES8388_DEFAULT_MIC_GAIN
+  #define ES8388_DEFAULT_MIC_GAIN         0xbb
+#endif
 
 // Special rules for IDF build
 #if defined(AUDIOKIT_USE_IDF) 
