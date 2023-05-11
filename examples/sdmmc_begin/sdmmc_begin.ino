@@ -18,7 +18,7 @@ AudioKit kit;
 void setup(){
     Serial.begin(115200);
     auto cfg = kit.defaultConfig();
-    cfg.sd_active = false
+    cfg.sd_active = false;
     kit.begin(cfg);
     if(!SD_MMC.begin("/sdcard", true)){    // 1-bit mode
         Serial.println("Card Mount Failed");
