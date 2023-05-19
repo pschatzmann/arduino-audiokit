@@ -84,6 +84,8 @@
 
 //Workaround for line in and mixed with a lot of nois
 //See https://www.pschatzmann.ch/home/2021/12/15/the-ai-thinker-audiokit-audio-input-bug/
+//The comment of Mike R. explain the real problem due to a hardware bug
+//If enabled AUDIO_HAL_ADC_INPUT_LINE1 is just simulate using AUDIO_HAL_ADC_INPUT_LINE2 and putting to 0 the microphone gain
 #define WORKAROUND_MIC_LINEIN_MIXED 
 
 // ESP32 Specific Settings
