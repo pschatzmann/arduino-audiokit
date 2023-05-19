@@ -82,6 +82,10 @@
 #  define AI_THINKER_ES8388_VOLUME_HACK 1
 #endif
 
+//Workaround for line in and mixed with a lot of nois
+//See https://www.pschatzmann.ch/home/2021/12/15/the-ai-thinker-audiokit-audio-input-bug/
+#define WORKAROUND_MIC_LINEIN_MIXED 
+
 // ESP32 Specific Settings
 #ifdef ESP32
 #  ifndef AUDIOKIT_FREE_RTOS

@@ -302,8 +302,13 @@ esp_err_t es8388_init(audio_hal_codec_config_t *cfg)
     res |= es_write_reg(ES8388_ADDR, ES8388_ADCCONTROL1, ES8388_DEFAULT_MIC_GAIN); // MIC Left and Right channel PGA gain
     int tmp = 0;
     if (AUDIO_HAL_ADC_INPUT_LINE1 == cfg->adc_input) {
+#ifdef WORKAROUND_MIC_LINEIN_MIXED //See https://www.pschatzmann.ch/home/2021/12/15/the-ai-thinker-audiokit-audio-input-bug/
+		es8388_set_mic_gain(MIC_GAIN_MIN); // Mute mic as work around for HW bug of mixed microphone and LineIN
+		tmp = ADC_INPUT_LINPUT2_RINPUT2;
+#else
         tmp = ADC_INPUT_LINPUT1_RINPUT1;
-    } else if (AUDIO_HAL_ADC_INPUT_LINE2 == cfg->adc_input) {
+#endif
+    } else if (AUDIO_HAL_ADC_INPUT_LINE2 == cfg->adc_input) { 
         tmp = ADC_INPUT_LINPUT2_RINPUT2;
     } else {
         tmp = ADC_INPUT_DIFFERENCE;
