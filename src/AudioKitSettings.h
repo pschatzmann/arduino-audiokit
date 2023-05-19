@@ -44,10 +44,14 @@
 // mixed but with different gains defined by WORKAROUND_ES8388_LINE1_GAIN and
 // ES8388_DEFAULT_INPUT_GAIN. Line1 has a low gain and Line2 with a high gain that is suited for the
 // microphone
-#define WORKAROUND_MIC_LINEIN_MIXED true
+#ifndef WORKAROUND_MIC_LINEIN_MIXED
+#  define WORKAROUND_MIC_LINEIN_MIXED true
+#endif
 // Line 1 has low gain: this is making sure that the microphone is (almost not audible) min value is
 // -1. (see values from es_mic_gain_t)
-#define WORKAROUND_ES8388_LINE1_GAIN 0
+#ifndef WORKAROUND_ES8388_LINE1_GAIN
+#  define WORKAROUND_ES8388_LINE1_GAIN 0
+#endif
 
 // Special rules for IDF build
 #if defined(AUDIOKIT_USE_IDF)
