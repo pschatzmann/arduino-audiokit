@@ -297,9 +297,19 @@ esp_err_t es8388_init(audio_hal_codec_config_t *cfg)
     res |= es_write_reg(ES8388_ADDR, ES8388_DACPOWER, dac_power);  //0x3c Enable DAC and Enable Lout/Rout/1/2
     /* adc */
     res |= es_write_reg(ES8388_ADDR, ES8388_ADCPOWER, 0xFF);
-    //
+
+    // AudioKit: WORKAROUND_MIC_LINEIN_MIXED
+    es_mic_gain_t mic_gain = (es_mic_gain_t)ES8388_DEFAULT_INPUT_GAIN;
+    if (WORKAROUND_MIC_LINEIN_MIXED && (AUDIOKIT_BOARD==5 || AUDIOKIT_BOARD==7)){
+        // logic for Audiokit: line 1 does not work, so we also use line2 but with a different gain
+        if (AUDIO_HAL_ADC_INPUT_LINE1 == cfg->adc_input){
+            mic_gain = (es_mic_gain_t)WORKAROUND_ES8388_LINE1_GAIN;
+            cfg->adc_input = AUDIO_HAL_ADC_INPUT_LINE2;
+        }
+    } 
     //res |= es_write_reg(ES8388_ADDR, ES8388_ADCCONTROL1, 0xbb); // MIC Left and Right channel PGA gain
-    res |= es_write_reg(ES8388_ADDR, ES8388_ADCCONTROL1, ES8388_DEFAULT_MIC_GAIN); // MIC Left and Right channel PGA gain
+    //res |= es_write_reg(ES8388_ADDR, ES8388_ADCCONTROL1, ES8388_DEFAULT_INPUT_GAIN); // MIC Left and Right channel PGA gain
+    res |= es8388_set_mic_gain(mic_gain);
     int tmp = 0;
     if (AUDIO_HAL_ADC_INPUT_LINE1 == cfg->adc_input) {
         tmp = ADC_INPUT_LINPUT1_RINPUT1;
