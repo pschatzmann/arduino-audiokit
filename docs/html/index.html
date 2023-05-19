@@ -100,7 +100,8 @@ Configuration</h1>
 Example Sketch</h1>
 <p>Here is an example sketch that writes audio data to the audio kit board via I2S. By default I2S is set up as master and the codec as slave, the sample size is 16 bits and the sample rate is 44.1k/sec - if you did not change the default settings.</p>
 <p>You can adjust these parameters by setting your requested values in the cfg below:</p>
-<div class="fragment"><div class="line">#include &quot;AudioKit.h&quot;</div>
+<div class="fragment"><div class="line"> {C++}</div>
+<div class="line">#include &quot;AudioKit.h&quot;</div>
 <div class="line">#include &quot;SineWaveGenerator.h&quot;</div>
 <div class="line"> </div>
 <div class="line">AudioKit kit;</div>
@@ -124,14 +125,15 @@ Example Sketch</h1>
 <div class="line">  kit.write(buffer, l);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>However <b>I recommend</b> to use my <a href="https://github.com/pschatzmann/arduino-audio-tools">Arduino Audio Tools Library</a> which implements an easy to use Stream API with additional functionality on top of this and it has plenty of <a href="https://github.com/pschatzmann/arduino-audio-tools/tree/main/examples/examples-audiokit">examples</a>.</p>
-<p>You can also use this functionality just to set up the codec chip w/o doing any intput or output. In this case you can set cfg.is_i2s_active = false;</p>
+<p>You can also use this functionality just to set up the codec chip w/o doing any input or output. In this case you can set cfg.is_i2s_active = false;</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Logging</h1>
 <p>The functionality has a built in logger. The default log level has been set to Warning. You can change it like this:</p>
-<div class="fragment"><div class="line">LOGLEVEL_AUDIOKIT = AudioKitDebug; // or AudiKitInfo, AudioKitWarning, AudioKitError</div>
+<div class="fragment"><div class="line">{C++}</div>
+<div class="line"> LOGLEVEL_AUDIOKIT = AudioKitDebug; // or AudiKitInfo, AudioKitWarning, AudioKitError</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
 Documentation</h1>
-<p>Here is the documentaion of the <a href="https://pschatzmann.github.io/arduino-audiokit/html/class_audio_kit.html">AudioKit class</a>.</p>
+<p>Here is the documentaion of the <a href="https://pschatzmann.github.io/arduino-audiokit/html/classaudiokit_1_1_audio_kit.html">AudioKit class</a>.</p>
 <p>Further information can be found in the <a href="https://github.com/pschatzmann/arduino-audiokit/wiki">Wiki</a> and my <a href="https://www.pschatzmann.ch/home/tag/esp32audiokit/">Blogs</a>.</p>
 <h1><a class="anchor" id="autotoc_md5"></a>
 Installation in Arduino</h1>

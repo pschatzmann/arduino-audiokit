@@ -10,6 +10,7 @@
  *  6) ai_thinker (AC101) 2473 2762 2957
  *  7) ai_thinker (ES8388) 2957
  *  10) generci_es8388
+ *  11) generic_es8311
  * @version 0.1
  * @date 2021-12-12
  *
@@ -34,7 +35,9 @@
 // Define the default gain for the microphone amp (see values from es_mic_gain_t)
 // Alternativly you can call es8388_set_mic_gain(es_mic_gain_t gain) if you prefer to use
 // value from an comprehensive enum
-#define ES8388_DEFAULT_INPUT_GAIN 25
+#ifndef ES8388_DEFAULT_MIC_GAIN
+#  define ES8388_DEFAULT_INPUT_GAIN 25
+#endif
 
 // The AI Thinker Audiokit has a hardware error: Input on Line1 is not working and the Microphone
 // and Aux-In are mixed on Line2. If you activate this workaround both Line1 and Line2 are working

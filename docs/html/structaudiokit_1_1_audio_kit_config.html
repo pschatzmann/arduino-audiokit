@@ -102,7 +102,7 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a657a6eceda6f473c5273c9a1304e586d"><td class="memItemLeft" align="right" valign="top">i2s_port_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudiokit_1_1_audio_kit_config.html#a657a6eceda6f473c5273c9a1304e586d">i2s_num</a> = (i2s_port_t)0</td></tr>
 <tr class="separator:a657a6eceda6f473c5273c9a1304e586d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4f7c936424724f457f8b01e011a4c25"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudiokit_1_1_audio_kit_config.html#af4f7c936424724f457f8b01e011a4c25">mclk_gpio</a> = 0</td></tr>
+<tr class="memitem:af4f7c936424724f457f8b01e011a4c25"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudiokit_1_1_audio_kit_config.html#af4f7c936424724f457f8b01e011a4c25">mclk_gpio</a> = -1</td></tr>
 <tr class="separator:af4f7c936424724f457f8b01e011a4c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9801bb743d6179e6e251ebaed00a3cc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structaudiokit_1_1_audio_kit_config.html#a9801bb743d6179e6e251ebaed00a3cc6">sd_active</a> = true</td></tr>
 <tr class="separator:a9801bb743d6179e6e251ebaed00a3cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,7 +134,7 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configuation for <a class="el" href="classaudiokit_1_1_audio_kit.html" title="AudioKit API using the audio_hal.">AudioKit</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00068">68</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00082">82</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aaaef96c0f87b147eda7542638fbcdc36" name="aaaef96c0f87b147eda7542638fbcdc36"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaaef96c0f87b147eda7542638fbcdc36">&#9670;&#160;</a></span>bitsPerSample()</h2>
@@ -161,20 +161,20 @@ Public Attributes</h2></td></tr>
 
 <p>provides the bits per sample </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00094">94</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   94</span>                      {</div>
-<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">switch</span> (<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">bits_per_sample</a>) {</div>
-<div class="line"><span class="lineno">   96</span>      <span class="keywordflow">case</span> AUDIO_HAL_BIT_LENGTH_16BITS:</div>
-<div class="line"><span class="lineno">   97</span>        <span class="keywordflow">return</span> 16;</div>
-<div class="line"><span class="lineno">   98</span>      <span class="keywordflow">case</span> AUDIO_HAL_BIT_LENGTH_24BITS:</div>
-<div class="line"><span class="lineno">   99</span>        <span class="keywordflow">return</span> 24;</div>
-<div class="line"><span class="lineno">  100</span>      <span class="keywordflow">case</span> AUDIO_HAL_BIT_LENGTH_32BITS:</div>
-<div class="line"><span class="lineno">  101</span>        <span class="keywordflow">return</span> 32;</div>
-<div class="line"><span class="lineno">  102</span>    }</div>
-<div class="line"><span class="lineno">  103</span>    KIT_LOGE(<span class="stringliteral">&quot;bits_per_sample not supported: %d&quot;</span>, <a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">bits_per_sample</a>);</div>
-<div class="line"><span class="lineno">  104</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  105</span>  }</div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a30463f7640a293b8958b026638932a79"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">audiokit::AudioKitConfig::bits_per_sample</a></div><div class="ttdeci">audio_hal_iface_bits_t bits_per_sample</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00088">AudioKitHAL.h:88</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00108">108</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>                      {</div>
+<div class="line"><span class="lineno">  109</span>    <span class="keywordflow">switch</span> (<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">bits_per_sample</a>) {</div>
+<div class="line"><span class="lineno">  110</span>      <span class="keywordflow">case</span> AUDIO_HAL_BIT_LENGTH_16BITS:</div>
+<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">return</span> 16;</div>
+<div class="line"><span class="lineno">  112</span>      <span class="keywordflow">case</span> AUDIO_HAL_BIT_LENGTH_24BITS:</div>
+<div class="line"><span class="lineno">  113</span>        <span class="keywordflow">return</span> 24;</div>
+<div class="line"><span class="lineno">  114</span>      <span class="keywordflow">case</span> AUDIO_HAL_BIT_LENGTH_32BITS:</div>
+<div class="line"><span class="lineno">  115</span>        <span class="keywordflow">return</span> 32;</div>
+<div class="line"><span class="lineno">  116</span>    }</div>
+<div class="line"><span class="lineno">  117</span>    KIT_LOGE(<span class="stringliteral">&quot;bits_per_sample not supported: %d&quot;</span>, <a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">bits_per_sample</a>);</div>
+<div class="line"><span class="lineno">  118</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  119</span>  }</div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a30463f7640a293b8958b026638932a79"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">audiokit::AudioKitConfig::bits_per_sample</a></div><div class="ttdeci">audio_hal_iface_bits_t bits_per_sample</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00102">AudioKitHAL.h:102</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -203,9 +203,9 @@ Public Attributes</h2></td></tr>
 
 <p>Returns true if the CODEC is the master. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00091">91</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   91</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a62a2e936c9cd587494c35decf55b7386">master_slave_mode</a> == AUDIO_HAL_MODE_MASTER; }</div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a62a2e936c9cd587494c35decf55b7386"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a62a2e936c9cd587494c35decf55b7386">audiokit::AudioKitConfig::master_slave_mode</a></div><div class="ttdeci">audio_hal_iface_mode_t master_slave_mode</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00085">AudioKitHAL.h:85</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00105">105</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  105</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a62a2e936c9cd587494c35decf55b7386">master_slave_mode</a> == AUDIO_HAL_MODE_MASTER; }</div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a62a2e936c9cd587494c35decf55b7386"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a62a2e936c9cd587494c35decf55b7386">audiokit::AudioKitConfig::master_slave_mode</a></div><div class="ttdeci">audio_hal_iface_mode_t master_slave_mode</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00099">AudioKitHAL.h:99</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -242,30 +242,30 @@ Public Attributes</h2></td></tr>
 <p>&lt; set to 44.1k samples per second</p>
 <p>&lt; set to 48k samples per second</p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00108">108</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  108</span>                        {</div>
-<div class="line"><span class="lineno">  109</span>    <span class="keywordflow">switch</span> (<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">sample_rate</a>) {</div>
-<div class="line"><span class="lineno">  110</span>      <span class="keywordflow">case</span> AUDIO_HAL_08K_SAMPLES: <span class="comment">/*!&lt; set to  8k samples per second */</span></div>
-<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">return</span> 8000;</div>
-<div class="line"><span class="lineno">  112</span>      <span class="keywordflow">case</span> AUDIO_HAL_11K_SAMPLES: <span class="comment">/*!&lt; set to 11.025k samples per second */</span></div>
-<div class="line"><span class="lineno">  113</span>        <span class="keywordflow">return</span> 11025;</div>
-<div class="line"><span class="lineno">  114</span>      <span class="keywordflow">case</span> AUDIO_HAL_16K_SAMPLES: <span class="comment">/*!&lt; set to 16k samples in per second */</span></div>
-<div class="line"><span class="lineno">  115</span>        <span class="keywordflow">return</span> 16000;</div>
-<div class="line"><span class="lineno">  116</span>      <span class="keywordflow">case</span> AUDIO_HAL_22K_SAMPLES: <span class="comment">/*!&lt; set to 22.050k samples per second */</span></div>
-<div class="line"><span class="lineno">  117</span>        <span class="keywordflow">return</span> 22050;</div>
-<div class="line"><span class="lineno">  118</span>      <span class="keywordflow">case</span> AUDIO_HAL_24K_SAMPLES: <span class="comment">/*!&lt; set to 24k samples in per second */</span></div>
-<div class="line"><span class="lineno">  119</span>        <span class="keywordflow">return</span> 24000;</div>
-<div class="line"><span class="lineno">  120</span>      <span class="keywordflow">case</span> AUDIO_HAL_32K_SAMPLES: <span class="comment">/*!&lt; set to 32k samples in per second */</span></div>
-<div class="line"><span class="lineno">  121</span>        <span class="keywordflow">return</span> 32000;</div>
-<div class="line"><span class="lineno">  122</span>      <span class="keywordflow">case</span> AUDIO_HAL_44K_SAMPLES: <span class="comment">/*!&lt; set to 44.1k samples per second */</span></div>
-<div class="line"><span class="lineno">  123</span>        <span class="keywordflow">return</span> 44100;</div>
-<div class="line"><span class="lineno">  124</span>      <span class="keywordflow">case</span> AUDIO_HAL_48K_SAMPLES: <span class="comment">/*!&lt; set to 48k samples per second */</span></div>
-<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">return</span> 48000;</div>
-<div class="line"><span class="lineno">  126</span>    }</div>
-<div class="line"><span class="lineno">  127</span>    KIT_LOGE(<span class="stringliteral">&quot;sample rate not supported: %d&quot;</span>, <a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">sample_rate</a>);</div>
-<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  129</span>  }</div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a759b923cb717693d467aba263e133937"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">audiokit::AudioKitConfig::sample_rate</a></div><div class="ttdeci">audio_hal_iface_samples_t sample_rate</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00087">AudioKitHAL.h:87</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00122">122</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  122</span>                        {</div>
+<div class="line"><span class="lineno">  123</span>    <span class="keywordflow">switch</span> (<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">sample_rate</a>) {</div>
+<div class="line"><span class="lineno">  124</span>      <span class="keywordflow">case</span> AUDIO_HAL_08K_SAMPLES: <span class="comment">/*!&lt; set to  8k samples per second */</span></div>
+<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">return</span> 8000;</div>
+<div class="line"><span class="lineno">  126</span>      <span class="keywordflow">case</span> AUDIO_HAL_11K_SAMPLES: <span class="comment">/*!&lt; set to 11.025k samples per second */</span></div>
+<div class="line"><span class="lineno">  127</span>        <span class="keywordflow">return</span> 11025;</div>
+<div class="line"><span class="lineno">  128</span>      <span class="keywordflow">case</span> AUDIO_HAL_16K_SAMPLES: <span class="comment">/*!&lt; set to 16k samples in per second */</span></div>
+<div class="line"><span class="lineno">  129</span>        <span class="keywordflow">return</span> 16000;</div>
+<div class="line"><span class="lineno">  130</span>      <span class="keywordflow">case</span> AUDIO_HAL_22K_SAMPLES: <span class="comment">/*!&lt; set to 22.050k samples per second */</span></div>
+<div class="line"><span class="lineno">  131</span>        <span class="keywordflow">return</span> 22050;</div>
+<div class="line"><span class="lineno">  132</span>      <span class="keywordflow">case</span> AUDIO_HAL_24K_SAMPLES: <span class="comment">/*!&lt; set to 24k samples in per second */</span></div>
+<div class="line"><span class="lineno">  133</span>        <span class="keywordflow">return</span> 24000;</div>
+<div class="line"><span class="lineno">  134</span>      <span class="keywordflow">case</span> AUDIO_HAL_32K_SAMPLES: <span class="comment">/*!&lt; set to 32k samples in per second */</span></div>
+<div class="line"><span class="lineno">  135</span>        <span class="keywordflow">return</span> 32000;</div>
+<div class="line"><span class="lineno">  136</span>      <span class="keywordflow">case</span> AUDIO_HAL_44K_SAMPLES: <span class="comment">/*!&lt; set to 44.1k samples per second */</span></div>
+<div class="line"><span class="lineno">  137</span>        <span class="keywordflow">return</span> 44100;</div>
+<div class="line"><span class="lineno">  138</span>      <span class="keywordflow">case</span> AUDIO_HAL_48K_SAMPLES: <span class="comment">/*!&lt; set to 48k samples per second */</span></div>
+<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">return</span> 48000;</div>
+<div class="line"><span class="lineno">  140</span>    }</div>
+<div class="line"><span class="lineno">  141</span>    KIT_LOGE(<span class="stringliteral">&quot;sample rate not supported: %d&quot;</span>, <a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">sample_rate</a>);</div>
+<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  143</span>  }</div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a759b923cb717693d467aba263e133937"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">audiokit::AudioKitConfig::sample_rate</a></div><div class="ttdeci">audio_hal_iface_samples_t sample_rate</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00101">AudioKitHAL.h:101</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -283,7 +283,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>set adc channel with audio_hal_adc_input_t </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00082">82</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00096">96</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -299,7 +299,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00076">76</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00090">90</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -316,7 +316,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>i2s interface number of bits per sample </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00088">88</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00102">102</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -332,7 +332,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00079">79</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00093">93</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -348,7 +348,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00080">80</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00094">94</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -365,7 +365,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>select codec mode: adc, dac or both </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00084">84</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00098">98</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -382,7 +382,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>set dac channel </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00083">83</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00097">97</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -399,7 +399,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>I2S interface format </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00086">86</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00100">100</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -415,7 +415,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00078">78</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00092">92</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -431,7 +431,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00069">69</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00083">83</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -448,7 +448,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>audio codec chip mode </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00085">85</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00099">99</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -459,12 +459,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int audiokit::AudioKitConfig::mclk_gpio = 0</td>
+          <td class="memname">int audiokit::AudioKitConfig::mclk_gpio = -1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00071">71</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00087">87</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -481,7 +481,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>I2S interface samples per second </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00087">87</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00101">101</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -497,7 +497,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00075">75</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00089">89</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -513,7 +513,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00077">77</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00091">91</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>

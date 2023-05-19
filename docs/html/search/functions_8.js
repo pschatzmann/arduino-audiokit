@@ -6,5 +6,6 @@ var searchData=
   ['setsamplerate_3',['setSampleRate',['../classaudiokit_1_1_audio_kit.html#a9d8f1f16e792c3baaa99405437c97bbb',1,'audiokit::AudioKit']]],
   ['setspeakeractive_4',['setSpeakerActive',['../classaudiokit_1_1_audio_kit.html#abd0d962ee607bda3eaea1649a23a2483',1,'audiokit::AudioKit']]],
   ['setupheadphonedetection_5',['setupHeadphoneDetection',['../classaudiokit_1_1_audio_kit.html#a58c06483a574a87204e2af9d590addf0',1,'audiokit::AudioKit']]],
-  ['setvolume_6',['setVolume',['../classaudiokit_1_1_audio_kit.html#a06815b05d142e3c1147e94e05a331c2a',1,'audiokit::AudioKit']]]
+  ['setupspi_6',['setupSPI',['../classaudiokit_1_1_audio_kit.html#a21da04e0294818fcbb15802b1671157e',1,'audiokit::AudioKit']]],
+  ['setvolume_7',['setVolume',['../classaudiokit_1_1_audio_kit.html#a06815b05d142e3c1147e94e05a331c2a',1,'audiokit::AudioKit']]]
 ];

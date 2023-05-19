@@ -186,6 +186,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a58c06483a574a87204e2af9d590addf0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudiokit_1_1_audio_kit.html#a58c06483a574a87204e2af9d590addf0">setupHeadphoneDetection</a> ()</td></tr>
 <tr class="memdesc:a58c06483a574a87204e2af9d590addf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the headphone detection.  <br /></td></tr>
 <tr class="separator:a58c06483a574a87204e2af9d590addf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21da04e0294818fcbb15802b1671157e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudiokit_1_1_audio_kit.html#a21da04e0294818fcbb15802b1671157e">setupSPI</a> ()</td></tr>
+<tr class="memdesc:a21da04e0294818fcbb15802b1671157e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the SPI so that we can access the SD Drive.  <br /></td></tr>
+<tr class="separator:a21da04e0294818fcbb15802b1671157e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58cf06f317788c255fb1ba59f37840c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudiokit_1_1_audio_kit.html#a58cf06f317788c255fb1ba59f37840c0">setupI2S</a> (<a class="el" href="structaudiokit_1_1_audio_kit_config.html">AudioKitConfig</a> cnfg)</td></tr>
 <tr class="separator:a58cf06f317788c255fb1ba59f37840c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -209,11 +212,13 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aec70b279beb15c5413655a75ee1cffc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace013e92e2aaf9cda808b512b05252ce"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudiokit_1_1_audio_kit.html#ace013e92e2aaf9cda808b512b05252ce">headphonePin</a> = -1</td></tr>
 <tr class="separator:ace013e92e2aaf9cda808b512b05252ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf14d8dad78e1df1b428d005ff53bf7a"><td class="memItemLeft" align="right" valign="top">SPIClass *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudiokit_1_1_audio_kit.html#aaf14d8dad78e1df1b428d005ff53bf7a">p_spi</a> = &amp;AUDIOKIT_SD_SPI</td></tr>
+<tr class="separator:aaf14d8dad78e1df1b428d005ff53bf7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classaudiokit_1_1_audio_kit.html" title="AudioKit API using the audio_hal.">AudioKit</a> API using the audio_hal. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00218">218</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00232">232</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af7dc38811472652e192d8d2c63f2d4fb" name="af7dc38811472652e192d8d2c63f2d4fb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af7dc38811472652e192d8d2c63f2d4fb">&#9670;&#160;</a></span>AudioKit()</h2>
@@ -238,15 +243,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00221">221</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  221</span>             {</div>
-<div class="line"><span class="lineno">  222</span>    <span class="comment">// setup SPI for SD drives</span></div>
-<div class="line"><span class="lineno">  223</span>    selfAudioKit = <span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  224</span>    <span class="comment">// added to constructor so that SPI is setup as part of global variable setup</span></div>
-<div class="line"><span class="lineno">  225</span><span class="preprocessor">#if AUDIOKIT_SETUP_SD</span></div>
-<div class="line"><span class="lineno">  226</span>    setupSPI();</div>
-<div class="line"><span class="lineno">  227</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  228</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00235">235</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  235</span>             {</div>
+<div class="line"><span class="lineno">  236</span>    <span class="comment">// setup SPI for SD drives</span></div>
+<div class="line"><span class="lineno">  237</span>    selfAudioKit = <span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  238</span>    <span class="comment">// added to constructor so that SPI is setup as part of global variable setup</span></div>
+<div class="line"><span class="lineno">  239</span><span class="preprocessor">#if AUDIOKIT_SETUP_SD</span></div>
+<div class="line"><span class="lineno">  240</span>    <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a21da04e0294818fcbb15802b1671157e">setupSPI</a>();</div>
+<div class="line"><span class="lineno">  241</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  242</span>  }</div>
+<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a21da04e0294818fcbb15802b1671157e"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a21da04e0294818fcbb15802b1671157e">audiokit::AudioKit::setupSPI</a></div><div class="ttdeci">void setupSPI()</div><div class="ttdoc">Setup the SPI so that we can access the SD Drive.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00639">AudioKitHAL.h:639</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -276,25 +282,25 @@ Protected Attributes</h2></td></tr>
 
 <p>Switch off the PA if the headphone in plugged in and switch it on again if the headphone is unplugged. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00554">554</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  554</span>                                         {</div>
-<div class="line"><span class="lineno">  555</span>    <span class="keywordflow">if</span> (selfAudioKit-&gt;headphonePin&gt;0){</div>
-<div class="line"><span class="lineno">  556</span> </div>
-<div class="line"><span class="lineno">  557</span>      <span class="comment">// detect changes</span></div>
-<div class="line"><span class="lineno">  558</span>      <span class="keywordtype">bool</span> isConnected = selfAudioKit-&gt;<a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a322effdd6fa1cb61095a0483e2aa87cd">headphoneStatus</a>();</div>
-<div class="line"><span class="lineno">  559</span>      <span class="keywordflow">if</span> (selfAudioKit-&gt;headphoneIsConnected != isConnected) {</div>
-<div class="line"><span class="lineno">  560</span>        selfAudioKit-&gt;headphoneIsConnected = isConnected;</div>
-<div class="line"><span class="lineno">  561</span> </div>
-<div class="line"><span class="lineno">  562</span>        <span class="comment">// update if things have stabilized</span></div>
-<div class="line"><span class="lineno">  563</span>        <span class="keywordtype">bool</span> powerActive = !isConnected;</div>
-<div class="line"><span class="lineno">  564</span>        KIT_LOGW(<span class="stringliteral">&quot;Headphone jack has been %s&quot;</span>, isConnected ? <span class="stringliteral">&quot;inserted&quot;</span> : <span class="stringliteral">&quot;removed&quot;</span>);</div>
-<div class="line"><span class="lineno">  565</span>        selfAudioKit-&gt;<a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#abd0d962ee607bda3eaea1649a23a2483">setSpeakerActive</a>(powerActive);</div>
-<div class="line"><span class="lineno">  566</span>      }</div>
-<div class="line"><span class="lineno">  567</span>    }</div>
-<div class="line"><span class="lineno">  568</span>    yield();</div>
-<div class="line"><span class="lineno">  569</span>  }</div>
-<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a322effdd6fa1cb61095a0483e2aa87cd"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a322effdd6fa1cb61095a0483e2aa87cd">audiokit::AudioKit::headphoneStatus</a></div><div class="ttdeci">bool headphoneStatus()</div><div class="ttdoc">Returns true if the headphone was detected.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00578">AudioKitHAL.h:578</a></div></div>
-<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_abd0d962ee607bda3eaea1649a23a2483"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#abd0d962ee607bda3eaea1649a23a2483">audiokit::AudioKit::setSpeakerActive</a></div><div class="ttdeci">void setSpeakerActive(bool active)</div><div class="ttdoc">Activates/deactivates the speaker amplifier output This is working only if the driver is supporting t...</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00540">AudioKitHAL.h:540</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00570">570</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  570</span>                                         {</div>
+<div class="line"><span class="lineno">  571</span>    <span class="keywordflow">if</span> (selfAudioKit-&gt;headphonePin&gt;0){</div>
+<div class="line"><span class="lineno">  572</span> </div>
+<div class="line"><span class="lineno">  573</span>      <span class="comment">// detect changes</span></div>
+<div class="line"><span class="lineno">  574</span>      <span class="keywordtype">bool</span> isConnected = selfAudioKit-&gt;<a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a322effdd6fa1cb61095a0483e2aa87cd">headphoneStatus</a>();</div>
+<div class="line"><span class="lineno">  575</span>      <span class="keywordflow">if</span> (selfAudioKit-&gt;headphoneIsConnected != isConnected) {</div>
+<div class="line"><span class="lineno">  576</span>        selfAudioKit-&gt;headphoneIsConnected = isConnected;</div>
+<div class="line"><span class="lineno">  577</span> </div>
+<div class="line"><span class="lineno">  578</span>        <span class="comment">// update if things have stabilized</span></div>
+<div class="line"><span class="lineno">  579</span>        <span class="keywordtype">bool</span> powerActive = !isConnected;</div>
+<div class="line"><span class="lineno">  580</span>        KIT_LOGW(<span class="stringliteral">&quot;Headphone jack has been %s&quot;</span>, isConnected ? <span class="stringliteral">&quot;inserted&quot;</span> : <span class="stringliteral">&quot;removed&quot;</span>);</div>
+<div class="line"><span class="lineno">  581</span>        selfAudioKit-&gt;<a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#abd0d962ee607bda3eaea1649a23a2483">setSpeakerActive</a>(powerActive);</div>
+<div class="line"><span class="lineno">  582</span>      }</div>
+<div class="line"><span class="lineno">  583</span>    }</div>
+<div class="line"><span class="lineno">  584</span>    yield();</div>
+<div class="line"><span class="lineno">  585</span>  }</div>
+<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a322effdd6fa1cb61095a0483e2aa87cd"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a322effdd6fa1cb61095a0483e2aa87cd">audiokit::AudioKit::headphoneStatus</a></div><div class="ttdeci">bool headphoneStatus()</div><div class="ttdoc">Returns true if the headphone was detected.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00594">AudioKitHAL.h:594</a></div></div>
+<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_abd0d962ee607bda3eaea1649a23a2483"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#abd0d962ee607bda3eaea1649a23a2483">audiokit::AudioKit::setSpeakerActive</a></div><div class="ttdeci">void setSpeakerActive(bool active)</div><div class="ttdoc">Activates/deactivates the speaker amplifier output This is working only if the driver is supporting t...</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00556">AudioKitHAL.h:556</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -324,69 +330,69 @@ Protected Attributes</h2></td></tr>
 
 <p>Starts the codec. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00248">248</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  248</span>                                  {</div>
-<div class="line"><span class="lineno">  249</span>    KIT_LOGI(LOG_METHOD);</div>
-<div class="line"><span class="lineno">  250</span>    cfg = cnfg;</div>
-<div class="line"><span class="lineno">  251</span>    KIT_LOGI(<span class="stringliteral">&quot;Selected board: %d&quot;</span>, AUDIOKIT_BOARD);</div>
-<div class="line"><span class="lineno">  252</span> </div>
-<div class="line"><span class="lineno">  253</span>    <span class="comment">// if already active we stop first</span></div>
-<div class="line"><span class="lineno">  254</span>    <span class="keywordflow">if</span> (is_active){</div>
-<div class="line"><span class="lineno">  255</span>      <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ac39fb8f5b739d2a4f3126ba5e10c8ead">end</a>();</div>
-<div class="line"><span class="lineno">  256</span>    }</div>
-<div class="line"><span class="lineno">  257</span> </div>
-<div class="line"><span class="lineno">  258</span><span class="preprocessor">#if AUDIOKIT_SETUP_SD</span></div>
-<div class="line"><span class="lineno">  259</span>    <span class="comment">// release SPI for SD card if it is not necessary</span></div>
-<div class="line"><span class="lineno">  260</span>    <span class="keywordflow">if</span> (AUDIOKIT_SETUP_SD &amp;&amp; !cfg.sd_active){</div>
-<div class="line"><span class="lineno">  261</span>      p_spi-&gt;end();</div>
-<div class="line"><span class="lineno">  262</span>    }</div>
-<div class="line"><span class="lineno">  263</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  264</span>    <span class="comment">// setup headphone if necessary</span></div>
-<div class="line"><span class="lineno">  265</span>    <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a58c06483a574a87204e2af9d590addf0">setupHeadphoneDetection</a>();</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00262">262</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  262</span>                                  {</div>
+<div class="line"><span class="lineno">  263</span>    KIT_LOGI(LOG_METHOD);</div>
+<div class="line"><span class="lineno">  264</span>    cfg = cnfg;</div>
+<div class="line"><span class="lineno">  265</span>    KIT_LOGI(<span class="stringliteral">&quot;Selected board: %d&quot;</span>, AUDIOKIT_BOARD);</div>
 <div class="line"><span class="lineno">  266</span> </div>
-<div class="line"><span class="lineno">  267</span>    audio_hal_conf.adc_input = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a1f05c59296cca5f9616053f53400fd37">adc_input</a>;</div>
-<div class="line"><span class="lineno">  268</span>    audio_hal_conf.dac_output = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a9dd9f607f10f3e7f6cdb9121639ba452">dac_output</a>;</div>
-<div class="line"><span class="lineno">  269</span>    audio_hal_conf.codec_mode = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a>;</div>
-<div class="line"><span class="lineno">  270</span>    audio_hal_conf.i2s_iface.mode = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a62a2e936c9cd587494c35decf55b7386">master_slave_mode</a>;</div>
-<div class="line"><span class="lineno">  271</span>    audio_hal_conf.i2s_iface.fmt = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a83b78bfcac16d697dc2e62f34a166102">fmt</a>;</div>
-<div class="line"><span class="lineno">  272</span>    audio_hal_conf.i2s_iface.samples = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">sample_rate</a>;</div>
-<div class="line"><span class="lineno">  273</span>    audio_hal_conf.i2s_iface.bits = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">bits_per_sample</a>;</div>
-<div class="line"><span class="lineno">  274</span> </div>
-<div class="line"><span class="lineno">  275</span>    <span class="comment">// init HAL</span></div>
-<div class="line"><span class="lineno">  276</span>    <span class="keywordflow">if</span> (hal_handle == 0) {</div>
-<div class="line"><span class="lineno">  277</span>      hal_handle = audio_hal_init(&amp;audio_hal_conf, &amp;AUDIO_DRIVER);</div>
-<div class="line"><span class="lineno">  278</span>      <span class="keywordflow">if</span> (hal_handle == 0) {</div>
-<div class="line"><span class="lineno">  279</span>        KIT_LOGE(<span class="stringliteral">&quot;audio_hal_init&quot;</span>);</div>
-<div class="line"><span class="lineno">  280</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  281</span>      }</div>
-<div class="line"><span class="lineno">  282</span>    }</div>
-<div class="line"><span class="lineno">  283</span> </div>
-<div class="line"><span class="lineno">  284</span>    <span class="keywordflow">if</span> (cfg.i2s_active){</div>
-<div class="line"><span class="lineno">  285</span>      setupI2S(cfg);</div>
-<div class="line"><span class="lineno">  286</span>    }</div>
-<div class="line"><span class="lineno">  287</span> </div>
-<div class="line"><span class="lineno">  288</span>    <span class="comment">// call start</span></div>
-<div class="line"><span class="lineno">  289</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a50906c46b29710805167bda317233623">setActive</a>(<span class="keyword">true</span>)) {</div>
-<div class="line"><span class="lineno">  290</span>      KIT_LOGE(<span class="stringliteral">&quot;setActive&quot;</span>);</div>
-<div class="line"><span class="lineno">  291</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  292</span>    }</div>
-<div class="line"><span class="lineno">  293</span> </div>
-<div class="line"><span class="lineno">  294</span>    <span class="comment">// activate speaker when output not earphones only</span></div>
-<div class="line"><span class="lineno">  295</span>    <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#abd0d962ee607bda3eaea1649a23a2483">setSpeakerActive</a>(cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a9dd9f607f10f3e7f6cdb9121639ba452">dac_output</a>!=AUDIO_HAL_DAC_OUTPUT_LINE1);</div>
-<div class="line"><span class="lineno">  296</span> </div>
-<div class="line"><span class="lineno">  297</span>    is_active = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  298</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  299</span>  }</div>
-<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a50906c46b29710805167bda317233623"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a50906c46b29710805167bda317233623">audiokit::AudioKit::setActive</a></div><div class="ttdeci">bool setActive(bool active)</div><div class="ttdoc">Sets the codec active / inactive.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00325">AudioKitHAL.h:325</a></div></div>
-<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a58c06483a574a87204e2af9d590addf0"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a58c06483a574a87204e2af9d590addf0">audiokit::AudioKit::setupHeadphoneDetection</a></div><div class="ttdeci">void setupHeadphoneDetection()</div><div class="ttdoc">Setup the headphone detection.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00603">AudioKitHAL.h:603</a></div></div>
-<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_ac39fb8f5b739d2a4f3126ba5e10c8ead"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#ac39fb8f5b739d2a4f3126ba5e10c8ead">audiokit::AudioKit::end</a></div><div class="ttdeci">bool end()</div><div class="ttdoc">Stops the CODEC.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00302">AudioKitHAL.h:302</a></div></div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a1f05c59296cca5f9616053f53400fd37"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a1f05c59296cca5f9616053f53400fd37">audiokit::AudioKitConfig::adc_input</a></div><div class="ttdeci">audio_hal_adc_input_t adc_input</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00082">AudioKitHAL.h:82</a></div></div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a30463f7640a293b8958b026638932a79"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">audiokit::AudioKitConfig::bits_per_sample</a></div><div class="ttdeci">audio_hal_iface_bits_t bits_per_sample</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00088">AudioKitHAL.h:88</a></div></div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a62a2e936c9cd587494c35decf55b7386"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a62a2e936c9cd587494c35decf55b7386">audiokit::AudioKitConfig::master_slave_mode</a></div><div class="ttdeci">audio_hal_iface_mode_t master_slave_mode</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00085">AudioKitHAL.h:85</a></div></div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a759b923cb717693d467aba263e133937"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">audiokit::AudioKitConfig::sample_rate</a></div><div class="ttdeci">audio_hal_iface_samples_t sample_rate</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00087">AudioKitHAL.h:87</a></div></div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a83b78bfcac16d697dc2e62f34a166102"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a83b78bfcac16d697dc2e62f34a166102">audiokit::AudioKitConfig::fmt</a></div><div class="ttdeci">audio_hal_iface_format_t fmt</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00086">AudioKitHAL.h:86</a></div></div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a9dd9f607f10f3e7f6cdb9121639ba452"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a9dd9f607f10f3e7f6cdb9121639ba452">audiokit::AudioKitConfig::dac_output</a></div><div class="ttdeci">audio_hal_dac_output_t dac_output</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00083">AudioKitHAL.h:83</a></div></div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_aa4a282bcac569e288fc6c779f486fa02"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">audiokit::AudioKitConfig::codec_mode</a></div><div class="ttdeci">audio_hal_codec_mode_t codec_mode</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00084">AudioKitHAL.h:84</a></div></div>
+<div class="line"><span class="lineno">  267</span>    <span class="comment">// if already active we stop first</span></div>
+<div class="line"><span class="lineno">  268</span>    <span class="keywordflow">if</span> (is_active){</div>
+<div class="line"><span class="lineno">  269</span>      <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ac39fb8f5b739d2a4f3126ba5e10c8ead">end</a>();</div>
+<div class="line"><span class="lineno">  270</span>    }</div>
+<div class="line"><span class="lineno">  271</span> </div>
+<div class="line"><span class="lineno">  272</span><span class="preprocessor">#if AUDIOKIT_SETUP_SD</span></div>
+<div class="line"><span class="lineno">  273</span>    <span class="comment">// release SPI for SD card if it is not necessary</span></div>
+<div class="line"><span class="lineno">  274</span>    <span class="keywordflow">if</span> (AUDIOKIT_SETUP_SD &amp;&amp; !cfg.sd_active){</div>
+<div class="line"><span class="lineno">  275</span>      p_spi-&gt;end();</div>
+<div class="line"><span class="lineno">  276</span>    }</div>
+<div class="line"><span class="lineno">  277</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  278</span>    <span class="comment">// setup headphone if necessary</span></div>
+<div class="line"><span class="lineno">  279</span>    <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a58c06483a574a87204e2af9d590addf0">setupHeadphoneDetection</a>();</div>
+<div class="line"><span class="lineno">  280</span> </div>
+<div class="line"><span class="lineno">  281</span>    audio_hal_conf.adc_input = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a1f05c59296cca5f9616053f53400fd37">adc_input</a>;</div>
+<div class="line"><span class="lineno">  282</span>    audio_hal_conf.dac_output = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a9dd9f607f10f3e7f6cdb9121639ba452">dac_output</a>;</div>
+<div class="line"><span class="lineno">  283</span>    audio_hal_conf.codec_mode = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a>;</div>
+<div class="line"><span class="lineno">  284</span>    audio_hal_conf.i2s_iface.mode = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a62a2e936c9cd587494c35decf55b7386">master_slave_mode</a>;</div>
+<div class="line"><span class="lineno">  285</span>    audio_hal_conf.i2s_iface.fmt = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a83b78bfcac16d697dc2e62f34a166102">fmt</a>;</div>
+<div class="line"><span class="lineno">  286</span>    audio_hal_conf.i2s_iface.samples = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">sample_rate</a>;</div>
+<div class="line"><span class="lineno">  287</span>    audio_hal_conf.i2s_iface.bits = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">bits_per_sample</a>;</div>
+<div class="line"><span class="lineno">  288</span> </div>
+<div class="line"><span class="lineno">  289</span>    <span class="comment">// init HAL</span></div>
+<div class="line"><span class="lineno">  290</span>    <span class="keywordflow">if</span> (hal_handle == 0) {</div>
+<div class="line"><span class="lineno">  291</span>      hal_handle = audio_hal_init(&amp;audio_hal_conf, &amp;AUDIO_DRIVER);</div>
+<div class="line"><span class="lineno">  292</span>      <span class="keywordflow">if</span> (hal_handle == 0) {</div>
+<div class="line"><span class="lineno">  293</span>        KIT_LOGE(<span class="stringliteral">&quot;audio_hal_init&quot;</span>);</div>
+<div class="line"><span class="lineno">  294</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  295</span>      }</div>
+<div class="line"><span class="lineno">  296</span>    }</div>
+<div class="line"><span class="lineno">  297</span> </div>
+<div class="line"><span class="lineno">  298</span>    <span class="keywordflow">if</span> (cfg.i2s_active){</div>
+<div class="line"><span class="lineno">  299</span>      setupI2S(cfg);</div>
+<div class="line"><span class="lineno">  300</span>    }</div>
+<div class="line"><span class="lineno">  301</span> </div>
+<div class="line"><span class="lineno">  302</span>    <span class="comment">// call start</span></div>
+<div class="line"><span class="lineno">  303</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a50906c46b29710805167bda317233623">setActive</a>(<span class="keyword">true</span>)) {</div>
+<div class="line"><span class="lineno">  304</span>      KIT_LOGE(<span class="stringliteral">&quot;setActive&quot;</span>);</div>
+<div class="line"><span class="lineno">  305</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  306</span>    }</div>
+<div class="line"><span class="lineno">  307</span> </div>
+<div class="line"><span class="lineno">  308</span>    <span class="comment">// activate speaker when output not earphones only</span></div>
+<div class="line"><span class="lineno">  309</span>    <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#abd0d962ee607bda3eaea1649a23a2483">setSpeakerActive</a>(cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a9dd9f607f10f3e7f6cdb9121639ba452">dac_output</a>!=AUDIO_HAL_DAC_OUTPUT_LINE1);</div>
+<div class="line"><span class="lineno">  310</span> </div>
+<div class="line"><span class="lineno">  311</span>    is_active = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  312</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  313</span>  }</div>
+<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a50906c46b29710805167bda317233623"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a50906c46b29710805167bda317233623">audiokit::AudioKit::setActive</a></div><div class="ttdeci">bool setActive(bool active)</div><div class="ttdoc">Sets the codec active / inactive.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00341">AudioKitHAL.h:341</a></div></div>
+<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a58c06483a574a87204e2af9d590addf0"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a58c06483a574a87204e2af9d590addf0">audiokit::AudioKit::setupHeadphoneDetection</a></div><div class="ttdeci">void setupHeadphoneDetection()</div><div class="ttdoc">Setup the headphone detection.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00619">AudioKitHAL.h:619</a></div></div>
+<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_ac39fb8f5b739d2a4f3126ba5e10c8ead"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#ac39fb8f5b739d2a4f3126ba5e10c8ead">audiokit::AudioKit::end</a></div><div class="ttdeci">bool end()</div><div class="ttdoc">Stops the CODEC.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00316">AudioKitHAL.h:316</a></div></div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a1f05c59296cca5f9616053f53400fd37"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a1f05c59296cca5f9616053f53400fd37">audiokit::AudioKitConfig::adc_input</a></div><div class="ttdeci">audio_hal_adc_input_t adc_input</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00096">AudioKitHAL.h:96</a></div></div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a30463f7640a293b8958b026638932a79"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a30463f7640a293b8958b026638932a79">audiokit::AudioKitConfig::bits_per_sample</a></div><div class="ttdeci">audio_hal_iface_bits_t bits_per_sample</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00102">AudioKitHAL.h:102</a></div></div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a62a2e936c9cd587494c35decf55b7386"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a62a2e936c9cd587494c35decf55b7386">audiokit::AudioKitConfig::master_slave_mode</a></div><div class="ttdeci">audio_hal_iface_mode_t master_slave_mode</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00099">AudioKitHAL.h:99</a></div></div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a759b923cb717693d467aba263e133937"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">audiokit::AudioKitConfig::sample_rate</a></div><div class="ttdeci">audio_hal_iface_samples_t sample_rate</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00101">AudioKitHAL.h:101</a></div></div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a83b78bfcac16d697dc2e62f34a166102"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a83b78bfcac16d697dc2e62f34a166102">audiokit::AudioKitConfig::fmt</a></div><div class="ttdeci">audio_hal_iface_format_t fmt</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00100">AudioKitHAL.h:100</a></div></div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_a9dd9f607f10f3e7f6cdb9121639ba452"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#a9dd9f607f10f3e7f6cdb9121639ba452">audiokit::AudioKitConfig::dac_output</a></div><div class="ttdeci">audio_hal_dac_output_t dac_output</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00097">AudioKitHAL.h:97</a></div></div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_aa4a282bcac569e288fc6c779f486fa02"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">audiokit::AudioKitConfig::codec_mode</a></div><div class="ttdeci">audio_hal_codec_mode_t codec_mode</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00098">AudioKitHAL.h:98</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -415,8 +421,8 @@ Protected Attributes</h2></td></tr>
 
 <p>Provides the actual configuration. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00322">322</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  322</span>{ <span class="keywordflow">return</span> cfg; }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00338">338</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  338</span>{ <span class="keywordflow">return</span> cfg; }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -446,23 +452,23 @@ Protected Attributes</h2></td></tr>
 
 <p>Provides the default configuration for input or output. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00231">231</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  231</span>                                                                     {</div>
-<div class="line"><span class="lineno">  232</span>    <a class="code hl_struct" href="structaudiokit_1_1_audio_kit_config.html">AudioKitConfig</a> result;</div>
-<div class="line"><span class="lineno">  233</span>    <span class="keywordflow">switch</span>(inout){</div>
-<div class="line"><span class="lineno">  234</span>      <span class="keywordflow">case</span> AudioOutput:</div>
-<div class="line"><span class="lineno">  235</span>        result.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a> = AUDIO_HAL_CODEC_MODE_DECODE; <span class="comment">// dac</span></div>
-<div class="line"><span class="lineno">  236</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  237</span>      <span class="keywordflow">case</span> AudioInput:</div>
-<div class="line"><span class="lineno">  238</span>        result.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a> =  AUDIO_HAL_CODEC_MODE_ENCODE; <span class="comment">// adc</span></div>
-<div class="line"><span class="lineno">  239</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  240</span>      <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  241</span>        result.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a> =  AUDIO_HAL_CODEC_MODE_BOTH;</div>
-<div class="line"><span class="lineno">  242</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  243</span>    }</div>
-<div class="line"><span class="lineno">  244</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  245</span>  }</div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html">audiokit::AudioKitConfig</a></div><div class="ttdoc">Configuation for AudioKit.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00068">AudioKitHAL.h:68</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00245">245</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  245</span>                                                                     {</div>
+<div class="line"><span class="lineno">  246</span>    <a class="code hl_struct" href="structaudiokit_1_1_audio_kit_config.html">AudioKitConfig</a> result;</div>
+<div class="line"><span class="lineno">  247</span>    <span class="keywordflow">switch</span>(inout){</div>
+<div class="line"><span class="lineno">  248</span>      <span class="keywordflow">case</span> AudioOutput:</div>
+<div class="line"><span class="lineno">  249</span>        result.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a> = AUDIO_HAL_CODEC_MODE_DECODE; <span class="comment">// dac</span></div>
+<div class="line"><span class="lineno">  250</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  251</span>      <span class="keywordflow">case</span> AudioInput:</div>
+<div class="line"><span class="lineno">  252</span>        result.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a> =  AUDIO_HAL_CODEC_MODE_ENCODE; <span class="comment">// adc</span></div>
+<div class="line"><span class="lineno">  253</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  254</span>      <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  255</span>        result.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a> =  AUDIO_HAL_CODEC_MODE_BOTH;</div>
+<div class="line"><span class="lineno">  256</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  257</span>    }</div>
+<div class="line"><span class="lineno">  258</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  259</span>  }</div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html">audiokit::AudioKitConfig</a></div><div class="ttdoc">Configuation for AudioKit.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00082">AudioKitHAL.h:82</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -491,25 +497,27 @@ Protected Attributes</h2></td></tr>
 
 <p>Stops the CODEC. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00302">302</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  302</span>             {</div>
-<div class="line"><span class="lineno">  303</span>    KIT_LOGI(LOG_METHOD);</div>
-<div class="line"><span class="lineno">  304</span> </div>
-<div class="line"><span class="lineno">  305</span><span class="preprocessor">#if SETUP_ESP32_I2S &amp;&amp; defined(ESP32)</span></div>
-<div class="line"><span class="lineno">  306</span>    <span class="keywordflow">if</span> (cfg.i2s_active){</div>
-<div class="line"><span class="lineno">  307</span>      <span class="comment">// uninstall i2s driver</span></div>
-<div class="line"><span class="lineno">  308</span>      i2s_driver_uninstall(cfg.i2s_num);</div>
-<div class="line"><span class="lineno">  309</span>    }</div>
-<div class="line"><span class="lineno">  310</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  311</span>    <span class="comment">// stop codec driver</span></div>
-<div class="line"><span class="lineno">  312</span>    audio_hal_ctrl_codec(hal_handle, cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a>, AUDIO_HAL_CTRL_STOP);</div>
-<div class="line"><span class="lineno">  313</span>    <span class="comment">// deinit</span></div>
-<div class="line"><span class="lineno">  314</span>    audio_hal_deinit(hal_handle);</div>
-<div class="line"><span class="lineno">  315</span> </div>
-<div class="line"><span class="lineno">  316</span>    is_active = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  317</span>    hal_handle = 0;</div>
-<div class="line"><span class="lineno">  318</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  319</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00316">316</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  316</span>             {</div>
+<div class="line"><span class="lineno">  317</span>    KIT_LOGI(LOG_METHOD);</div>
+<div class="line"><span class="lineno">  318</span> </div>
+<div class="line"><span class="lineno">  319</span><span class="preprocessor">#if AUDIOKIT_ESP32_I2S &amp;&amp; defined(ESP32)</span></div>
+<div class="line"><span class="lineno">  320</span>    <span class="keywordflow">if</span> (cfg.i2s_active){</div>
+<div class="line"><span class="lineno">  321</span>      <span class="comment">// uninstall i2s driver</span></div>
+<div class="line"><span class="lineno">  322</span>      i2s_driver_uninstall(cfg.i2s_num);</div>
+<div class="line"><span class="lineno">  323</span>    }</div>
+<div class="line"><span class="lineno">  324</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  325</span>    <span class="comment">// stop codec driver</span></div>
+<div class="line"><span class="lineno">  326</span>    audio_hal_ctrl_codec(hal_handle, cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a>, AUDIO_HAL_CTRL_STOP);</div>
+<div class="line"><span class="lineno">  327</span>    <span class="comment">// deinit</span></div>
+<div class="line"><span class="lineno">  328</span>    audio_hal_deinit(hal_handle);</div>
+<div class="line"><span class="lineno">  329</span>    <span class="comment">// this will save power</span></div>
+<div class="line"><span class="lineno">  330</span>    <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#abd0d962ee607bda3eaea1649a23a2483">setSpeakerActive</a>(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">  331</span> </div>
+<div class="line"><span class="lineno">  332</span>    is_active = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  333</span>    hal_handle = 0;</div>
+<div class="line"><span class="lineno">  334</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  335</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -541,10 +549,10 @@ Protected Attributes</h2></td></tr>
 <dd>
 false </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00578">578</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  578</span>                         {</div>
-<div class="line"><span class="lineno">  579</span>    <span class="keywordflow">return</span> headphonePin&gt;0 ? !digitalRead(headphonePin) : false;</div>
-<div class="line"><span class="lineno">  580</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00594">594</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  594</span>                         {</div>
+<div class="line"><span class="lineno">  595</span>    <span class="keywordflow">return</span> headphonePin&gt;0 ? !digitalRead(headphonePin) : false;</div>
+<div class="line"><span class="lineno">  596</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -573,10 +581,10 @@ false </dd></dl>
 
 <p>checks if the SD is active </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00583">583</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  583</span>                    {</div>
-<div class="line"><span class="lineno">  584</span>    <span class="keywordflow">return</span> cfg.sd_active;</div>
-<div class="line"><span class="lineno">  585</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00599">599</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  599</span>                    {</div>
+<div class="line"><span class="lineno">  600</span>    <span class="keywordflow">return</span> cfg.sd_active;</div>
+<div class="line"><span class="lineno">  601</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -606,8 +614,8 @@ false </dd></dl>
 <p>Get the gpio number for adc detection. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00436">436</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  436</span>{ <span class="keywordflow">return</span> get_adc_detect_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00452">452</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  452</span>{ <span class="keywordflow">return</span> get_adc_detect_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -637,8 +645,8 @@ false </dd></dl>
 <p>Get the gpio number for auxin detection. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00412">412</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  412</span>{ <span class="keywordflow">return</span> get_auxin_detect_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00428">428</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  428</span>{ <span class="keywordflow">return</span> get_auxin_detect_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -668,8 +676,8 @@ false </dd></dl>
 <p>Get blue led gpio number. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00524">524</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  524</span>{ <span class="keywordflow">return</span> get_blue_led_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00540">540</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  540</span>{ <span class="keywordflow">return</span> get_blue_led_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -699,8 +707,8 @@ false </dd></dl>
 <p>Get the mclk gpio number of es7243. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00444">444</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  444</span>{ <span class="keywordflow">return</span> get_es7243_mclk_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00460">460</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  460</span>{ <span class="keywordflow">return</span> get_es7243_mclk_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -730,8 +738,8 @@ false </dd></dl>
 <p>Get gpio number for green led. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00516">516</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  516</span>{ <span class="keywordflow">return</span> get_green_led_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00532">532</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  532</span>{ <span class="keywordflow">return</span> get_green_led_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -761,8 +769,8 @@ false </dd></dl>
 <p>Get the gpio number for headphone detection. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00420">420</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  420</span>{ <span class="keywordflow">return</span> get_headphone_detect_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00436">436</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  436</span>{ <span class="keywordflow">return</span> get_headphone_detect_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -792,8 +800,8 @@ false </dd></dl>
 <p>Get the number for mode-button. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00460">460</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  460</span>{ <span class="keywordflow">return</span> get_input_mode_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00476">476</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  476</span>{ <span class="keywordflow">return</span> get_input_mode_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -823,8 +831,8 @@ false </dd></dl>
 <p>Get number for play function. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00476">476</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  476</span>{ <span class="keywordflow">return</span> get_input_play_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00492">492</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  492</span>{ <span class="keywordflow">return</span> get_input_play_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -854,8 +862,8 @@ false </dd></dl>
 <p>Get the record-button id for adc-button. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others button id </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00452">452</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  452</span>{ <span class="keywordflow">return</span> get_input_rec_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00468">468</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  468</span>{ <span class="keywordflow">return</span> get_input_rec_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -885,8 +893,8 @@ false </dd></dl>
 <p>Get number for set function. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00468">468</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  468</span>{ <span class="keywordflow">return</span> get_input_set_id(); };</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00484">484</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  484</span>{ <span class="keywordflow">return</span> get_input_set_id(); };</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -916,8 +924,8 @@ false </dd></dl>
 <p>Get the gpio number for PA enable. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00428">428</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  428</span>{ <span class="keywordflow">return</span> get_pa_enable_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00444">444</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  444</span>{ <span class="keywordflow">return</span> get_pa_enable_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -947,8 +955,8 @@ false </dd></dl>
 <p>Get gpio number to reset the board. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00508">508</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  508</span>{ <span class="keywordflow">return</span> get_reset_board_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00524">524</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  524</span>{ <span class="keywordflow">return</span> get_reset_board_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -978,8 +986,8 @@ false </dd></dl>
 <p>Get reset codec gpio number. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others gpio number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00500">500</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  500</span>{ <span class="keywordflow">return</span> get_reset_codec_gpio(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00516">516</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  516</span>{ <span class="keywordflow">return</span> get_reset_codec_gpio(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1009,10 +1017,10 @@ false </dd></dl>
 <p>SPI CS Pin for SD Drive. </p>
 <dl class="section return"><dt>Returns</dt><dd>int8_t </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00531">531</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  531</span>                    {</div>
-<div class="line"><span class="lineno">  532</span>    <span class="keywordflow">return</span> spi_cs_pin;</div>
-<div class="line"><span class="lineno">  533</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00547">547</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  547</span>                    {</div>
+<div class="line"><span class="lineno">  548</span>    <span class="keywordflow">return</span> spi_cs_pin;</div>
+<div class="line"><span class="lineno">  549</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1042,8 +1050,8 @@ false </dd></dl>
 <p>Get number for volume down function. </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00492">492</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  492</span>{ <span class="keywordflow">return</span> get_input_voldown_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00508">508</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  508</span>{ <span class="keywordflow">return</span> get_input_voldown_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1073,8 +1081,8 @@ false </dd></dl>
 <p>number for volume up function </p>
 <dl class="section return"><dt>Returns</dt><dd>-1 non-existent Others number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00484">484</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  484</span>{ <span class="keywordflow">return</span> get_input_volup_id(); }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00500">500</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  500</span>{ <span class="keywordflow">return</span> get_input_volup_id(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1104,10 +1112,10 @@ false </dd></dl>
 
 <p>Sets the codec active / inactive. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00325">325</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  325</span>                              {</div>
-<div class="line"><span class="lineno">  326</span>    <span class="keywordflow">return</span> audio_hal_ctrl_codec( hal_handle, cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a>, active ? AUDIO_HAL_CTRL_START : AUDIO_HAL_CTRL_STOP) == ESP_OK;</div>
-<div class="line"><span class="lineno">  327</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00341">341</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  341</span>                              {</div>
+<div class="line"><span class="lineno">  342</span>    <span class="keywordflow">return</span> audio_hal_ctrl_codec( hal_handle, cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#aa4a282bcac569e288fc6c779f486fa02">codec_mode</a>, active ? AUDIO_HAL_CTRL_START : AUDIO_HAL_CTRL_STOP) == ESP_OK;</div>
+<div class="line"><span class="lineno">  343</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1137,10 +1145,10 @@ false </dd></dl>
 
 <p>Mutes the output. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00330">330</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  330</span>                          {</div>
-<div class="line"><span class="lineno">  331</span>    <span class="keywordflow">return</span> audio_hal_set_mute(hal_handle, mute) == ESP_OK;</div>
-<div class="line"><span class="lineno">  332</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00346">346</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  346</span>                          {</div>
+<div class="line"><span class="lineno">  347</span>    <span class="keywordflow">return</span> audio_hal_set_mute(hal_handle, mute) == ESP_OK;</div>
+<div class="line"><span class="lineno">  348</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1170,34 +1178,34 @@ false </dd></dl>
 
 <p>Just update the sample rate. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00378">378</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  378</span>                                                           {</div>
-<div class="line"><span class="lineno">  379</span>    KIT_LOGD(<span class="stringliteral">&quot;setSampleRate&quot;</span>);</div>
-<div class="line"><span class="lineno">  380</span>    <span class="keywordtype">bool</span> result = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  381</span>    <span class="comment">// update values</span></div>
-<div class="line"><span class="lineno">  382</span>    audio_hal_conf.i2s_iface.samples = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">sample_rate</a> = sample_rate;</div>
-<div class="line"><span class="lineno">  383</span> </div>
-<div class="line"><span class="lineno">  384</span>    <span class="comment">// apply new value</span></div>
-<div class="line"><span class="lineno">  385</span>    <span class="keywordflow">if</span> (is_active){</div>
-<div class="line"><span class="lineno">  386</span>      <span class="comment">// esp_err_t audio_hal_codec_iface_config(audio_hal_handle_t audio_hal, audio_hal_codec_mode_t mode, audio_hal_codec_i2s_iface_t *iface)</span></div>
-<div class="line"><span class="lineno">  387</span>      <span class="keywordflow">if</span> (audio_hal_codec_iface_config(hal_handle, audio_hal_conf.codec_mode, &amp;audio_hal_conf.i2s_iface) != ESP_OK) {</div>
-<div class="line"><span class="lineno">  388</span>        KIT_LOGE(<span class="stringliteral">&quot;audio_hal_ctrl_codec&quot;</span>);</div>
-<div class="line"><span class="lineno">  389</span>        result = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  390</span>      }</div>
-<div class="line"><span class="lineno">  391</span><span class="preprocessor">#if SETUP_ESP32_I2S &amp;&amp; defined(ESP32)</span></div>
-<div class="line"><span class="lineno">  392</span>      <span class="comment">// update I2S</span></div>
-<div class="line"><span class="lineno">  393</span>      <span class="keywordflow">if</span> (cfg.i2s_active){</div>
-<div class="line"><span class="lineno">  394</span>        <span class="keywordflow">if</span> (i2s_set_sample_rates(cfg.i2s_num, cfg.<a class="code hl_function" href="structaudiokit_1_1_audio_kit_config.html#ab3e8df85a89b5f55eb5e6dcb5accf690">sampleRate</a>()) != ESP_OK)  {</div>
-<div class="line"><span class="lineno">  395</span>          KIT_LOGE(<span class="stringliteral">&quot;i2s_set_sample_rates&quot;</span>);</div>
-<div class="line"><span class="lineno">  396</span>          result = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  397</span>        }</div>
-<div class="line"><span class="lineno">  398</span>      }</div>
-<div class="line"><span class="lineno">  399</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  400</span>    }</div>
-<div class="line"><span class="lineno">  401</span> </div>
-<div class="line"><span class="lineno">  402</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><span class="lineno">  403</span>  }</div>
-<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_ab3e8df85a89b5f55eb5e6dcb5accf690"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#ab3e8df85a89b5f55eb5e6dcb5accf690">audiokit::AudioKitConfig::sampleRate</a></div><div class="ttdeci">uint32_t sampleRate()</div><div class="ttdoc">Provides the sample rate in samples per second.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00108">AudioKitHAL.h:108</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00394">394</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  394</span>                                                           {</div>
+<div class="line"><span class="lineno">  395</span>    KIT_LOGD(<span class="stringliteral">&quot;setSampleRate&quot;</span>);</div>
+<div class="line"><span class="lineno">  396</span>    <span class="keywordtype">bool</span> result = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  397</span>    <span class="comment">// update values</span></div>
+<div class="line"><span class="lineno">  398</span>    audio_hal_conf.i2s_iface.samples = cfg.<a class="code hl_variable" href="structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937">sample_rate</a> = sample_rate;</div>
+<div class="line"><span class="lineno">  399</span> </div>
+<div class="line"><span class="lineno">  400</span>    <span class="comment">// apply new value</span></div>
+<div class="line"><span class="lineno">  401</span>    <span class="keywordflow">if</span> (is_active){</div>
+<div class="line"><span class="lineno">  402</span>      <span class="comment">// esp_err_t audio_hal_codec_iface_config(audio_hal_handle_t audio_hal, audio_hal_codec_mode_t mode, audio_hal_codec_i2s_iface_t *iface)</span></div>
+<div class="line"><span class="lineno">  403</span>      <span class="keywordflow">if</span> (audio_hal_codec_iface_config(hal_handle, audio_hal_conf.codec_mode, &amp;audio_hal_conf.i2s_iface) != ESP_OK) {</div>
+<div class="line"><span class="lineno">  404</span>        KIT_LOGE(<span class="stringliteral">&quot;audio_hal_ctrl_codec&quot;</span>);</div>
+<div class="line"><span class="lineno">  405</span>        result = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  406</span>      }</div>
+<div class="line"><span class="lineno">  407</span><span class="preprocessor">#if AUDIOKIT_ESP32_I2S &amp;&amp; defined(ESP32)</span></div>
+<div class="line"><span class="lineno">  408</span>      <span class="comment">// update I2S</span></div>
+<div class="line"><span class="lineno">  409</span>      <span class="keywordflow">if</span> (cfg.i2s_active){</div>
+<div class="line"><span class="lineno">  410</span>        <span class="keywordflow">if</span> (i2s_set_sample_rates(cfg.i2s_num, cfg.<a class="code hl_function" href="structaudiokit_1_1_audio_kit_config.html#ab3e8df85a89b5f55eb5e6dcb5accf690">sampleRate</a>()) != ESP_OK)  {</div>
+<div class="line"><span class="lineno">  411</span>          KIT_LOGE(<span class="stringliteral">&quot;i2s_set_sample_rates&quot;</span>);</div>
+<div class="line"><span class="lineno">  412</span>          result = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  413</span>        }</div>
+<div class="line"><span class="lineno">  414</span>      }</div>
+<div class="line"><span class="lineno">  415</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  416</span>    }</div>
+<div class="line"><span class="lineno">  417</span> </div>
+<div class="line"><span class="lineno">  418</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><span class="lineno">  419</span>  }</div>
+<div class="ttc" id="astructaudiokit_1_1_audio_kit_config_html_ab3e8df85a89b5f55eb5e6dcb5accf690"><div class="ttname"><a href="structaudiokit_1_1_audio_kit_config.html#ab3e8df85a89b5f55eb5e6dcb5accf690">audiokit::AudioKitConfig::sampleRate</a></div><div class="ttdeci">uint32_t sampleRate()</div><div class="ttdoc">Provides the sample rate in samples per second.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00122">AudioKitHAL.h:122</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1233,15 +1241,15 @@ false </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00540">540</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  540</span>                                     {</div>
-<div class="line"><span class="lineno">  541</span>    <span class="keywordtype">int</span> paPin = get_pa_enable_gpio();</div>
-<div class="line"><span class="lineno">  542</span>    <span class="keywordflow">if</span> (paPin&gt;0){</div>
-<div class="line"><span class="lineno">  543</span>        digitalWrite(paPin, active);</div>
-<div class="line"><span class="lineno">  544</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  545</span>      KIT_LOGW(<span class="stringliteral">&quot;setSpeakerActive not supported&quot;</span>);</div>
-<div class="line"><span class="lineno">  546</span>    }</div>
-<div class="line"><span class="lineno">  547</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00556">556</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  556</span>                                     {</div>
+<div class="line"><span class="lineno">  557</span>    <span class="keywordtype">int</span> paPin = get_pa_enable_gpio();</div>
+<div class="line"><span class="lineno">  558</span>    <span class="keywordflow">if</span> (paPin&gt;0){</div>
+<div class="line"><span class="lineno">  559</span>        digitalWrite(paPin, active);</div>
+<div class="line"><span class="lineno">  560</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  561</span>      KIT_LOGW(<span class="stringliteral">&quot;setSpeakerActive not supported&quot;</span>);</div>
+<div class="line"><span class="lineno">  562</span>    }</div>
+<div class="line"><span class="lineno">  563</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1270,24 +1278,24 @@ false </dd></dl>
 
 <p>Setup the headphone detection. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00603">603</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  603</span>                                 {</div>
-<div class="line"><span class="lineno">  604</span>    int8_t paPin = <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a04928dc7c1aaf7f6264db584ad87c09f">pinPaEnable</a>();</div>
-<div class="line"><span class="lineno">  605</span>    <span class="keywordflow">if</span> (paPin&gt;0){</div>
-<div class="line"><span class="lineno">  606</span>      headphonePin = <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a946cf23854985e1dea5aa23fd1b5acd9">pinHeadphoneDetect</a>();</div>
-<div class="line"><span class="lineno">  607</span>      <span class="keywordflow">if</span> (headphonePin&gt;0){</div>
-<div class="line"><span class="lineno">  608</span>        pinMode(headphonePin, INPUT_PULLUP);</div>
-<div class="line"><span class="lineno">  609</span>        pinMode(paPin, OUTPUT);</div>
-<div class="line"><span class="lineno">  610</span>        KIT_LOGI(<span class="stringliteral">&quot;headphone detection is active&quot;</span>);</div>
-<div class="line"><span class="lineno">  611</span>      } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  612</span>        KIT_LOGI(<span class="stringliteral">&quot;headphone detection not supported&quot;</span>);    </div>
-<div class="line"><span class="lineno">  613</span>      }</div>
-<div class="line"><span class="lineno">  614</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  615</span>      KIT_LOGI(<span class="stringliteral">&quot;headphone detection: PA not supported&quot;</span>);</div>
-<div class="line"><span class="lineno">  616</span>    }</div>
-<div class="line"><span class="lineno">  617</span>  }</div>
-<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a04928dc7c1aaf7f6264db584ad87c09f"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a04928dc7c1aaf7f6264db584ad87c09f">audiokit::AudioKit::pinPaEnable</a></div><div class="ttdeci">int8_t pinPaEnable()</div><div class="ttdoc">Get the gpio number for PA enable.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00428">AudioKitHAL.h:428</a></div></div>
-<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a946cf23854985e1dea5aa23fd1b5acd9"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a946cf23854985e1dea5aa23fd1b5acd9">audiokit::AudioKit::pinHeadphoneDetect</a></div><div class="ttdeci">int8_t pinHeadphoneDetect()</div><div class="ttdoc">Get the gpio number for headphone detection.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00420">AudioKitHAL.h:420</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00619">619</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  619</span>                                 {</div>
+<div class="line"><span class="lineno">  620</span>    int8_t paPin = <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a04928dc7c1aaf7f6264db584ad87c09f">pinPaEnable</a>();</div>
+<div class="line"><span class="lineno">  621</span>    <span class="keywordflow">if</span> (paPin&gt;0){</div>
+<div class="line"><span class="lineno">  622</span>      headphonePin = <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#a946cf23854985e1dea5aa23fd1b5acd9">pinHeadphoneDetect</a>();</div>
+<div class="line"><span class="lineno">  623</span>      <span class="keywordflow">if</span> (headphonePin&gt;0){</div>
+<div class="line"><span class="lineno">  624</span>        pinMode(headphonePin, INPUT_PULLUP);</div>
+<div class="line"><span class="lineno">  625</span>        pinMode(paPin, OUTPUT);</div>
+<div class="line"><span class="lineno">  626</span>        KIT_LOGI(<span class="stringliteral">&quot;headphone detection is active&quot;</span>);</div>
+<div class="line"><span class="lineno">  627</span>      } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  628</span>        KIT_LOGI(<span class="stringliteral">&quot;headphone detection not supported&quot;</span>);    </div>
+<div class="line"><span class="lineno">  629</span>      }</div>
+<div class="line"><span class="lineno">  630</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  631</span>      KIT_LOGI(<span class="stringliteral">&quot;headphone detection: PA not supported&quot;</span>);</div>
+<div class="line"><span class="lineno">  632</span>    }</div>
+<div class="line"><span class="lineno">  633</span>  }</div>
+<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a04928dc7c1aaf7f6264db584ad87c09f"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a04928dc7c1aaf7f6264db584ad87c09f">audiokit::AudioKit::pinPaEnable</a></div><div class="ttdeci">int8_t pinPaEnable()</div><div class="ttdoc">Get the gpio number for PA enable.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00444">AudioKitHAL.h:444</a></div></div>
+<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_a946cf23854985e1dea5aa23fd1b5acd9"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#a946cf23854985e1dea5aa23fd1b5acd9">audiokit::AudioKit::pinHeadphoneDetect</a></div><div class="ttdeci">int8_t pinHeadphoneDetect()</div><div class="ttdoc">Get the gpio number for headphone detection.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00436">AudioKitHAL.h:436</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1315,44 +1323,92 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00660">660</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  660</span>                                   {</div>
+<div class="line"><span class="lineno">  661</span><span class="preprocessor">#if AUDIOKIT_ESP32_I2S &amp;&amp; defined(ESP32)</span></div>
+<div class="line"><span class="lineno">  662</span>    KIT_LOGD(<span class="stringliteral">&quot;setupI2S&quot;</span>);</div>
+<div class="line"><span class="lineno">  663</span>    <span class="comment">// setup i2s driver - with no queue</span></div>
+<div class="line"><span class="lineno">  664</span>    i2s_config_t i2s_config = cfg.i2sConfig();</div>
+<div class="line"><span class="lineno">  665</span>    <span class="keywordflow">if</span> (i2s_driver_install(cfg.i2s_num, &amp;i2s_config, 0, NULL) != ESP_OK) {</div>
+<div class="line"><span class="lineno">  666</span>      KIT_LOGE(<span class="stringliteral">&quot;i2s_driver_install&quot;</span>);</div>
+<div class="line"><span class="lineno">  667</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  668</span>    }</div>
+<div class="line"><span class="lineno">  669</span> </div>
+<div class="line"><span class="lineno">  670</span>    <span class="comment">// define i2s pins</span></div>
+<div class="line"><span class="lineno">  671</span>    i2s_pin_config_t pin_config = cfg.i2sPins();</div>
+<div class="line"><span class="lineno">  672</span>    KIT_LOGI(<span class="stringliteral">&quot;i2s_set_pin&quot;</span>);</div>
+<div class="line"><span class="lineno">  673</span> </div>
+<div class="line"><span class="lineno">  674</span>    KIT_LOGI(<span class="stringliteral">&quot;- bck_io_num: %d&quot;</span>, pin_config.bck_io_num);</div>
+<div class="line"><span class="lineno">  675</span>    KIT_LOGI(<span class="stringliteral">&quot;- ws_io_num: %d&quot;</span>, pin_config.ws_io_num);</div>
+<div class="line"><span class="lineno">  676</span>    KIT_LOGI(<span class="stringliteral">&quot;- data_out_num: %d&quot;</span>, pin_config.data_out_num);</div>
+<div class="line"><span class="lineno">  677</span>    KIT_LOGI(<span class="stringliteral">&quot;- data_in_num: %d&quot;</span>, pin_config.data_in_num);</div>
+<div class="line"><span class="lineno">  678</span><span class="preprocessor">#  if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(4, 4, 0)</span></div>
+<div class="line"><span class="lineno">  679</span>    KIT_LOGI(<span class="stringliteral">&quot;- mck_io_num: %d&quot;</span>, pin_config.mck_io_num);</div>
+<div class="line"><span class="lineno">  680</span><span class="preprocessor">#  endif</span></div>
+<div class="line"><span class="lineno">  681</span> </div>
+<div class="line"><span class="lineno">  682</span>    <span class="keywordflow">if</span> (i2s_set_pin(cfg.i2s_num, &amp;pin_config) != ESP_OK) {</div>
+<div class="line"><span class="lineno">  683</span>      KIT_LOGE(<span class="stringliteral">&quot;i2s_set_pin&quot;</span>);</div>
+<div class="line"><span class="lineno">  684</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  685</span>    }</div>
+<div class="line"><span class="lineno">  686</span> </div>
+<div class="line"><span class="lineno">  687</span><span class="preprocessor">#  if defined(ESP32) &amp;&amp; ESP_IDF_VERSION_MAJOR &lt; 4                  </span></div>
+<div class="line"><span class="lineno">  688</span>    <span class="keywordflow">if</span> (i2s_mclk_gpio_select(cfg.i2s_num,(gpio_num_t)cfg.mclk_gpio) != ESP_OK) {</div>
+<div class="line"><span class="lineno">  689</span>      KIT_LOGE(<span class="stringliteral">&quot;i2s_mclk_gpio_select&quot;</span>);</div>
+<div class="line"><span class="lineno">  690</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  691</span>    }</div>
+<div class="line"><span class="lineno">  692</span><span class="preprocessor">#  endif</span></div>
+<div class="line"><span class="lineno">  693</span> </div>
+<div class="line"><span class="lineno">  694</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  695</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  696</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a21da04e0294818fcbb15802b1671157e" name="a21da04e0294818fcbb15802b1671157e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21da04e0294818fcbb15802b1671157e">&#9670;&#160;</a></span>setupSPI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void audiokit::AudioKit::setupSPI </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup the SPI so that we can access the SD Drive. </p>
+
 <p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00639">639</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  639</span>                                   {</div>
-<div class="line"><span class="lineno">  640</span><span class="preprocessor">#if SETUP_ESP32_I2S &amp;&amp; defined(ESP32)</span></div>
-<div class="line"><span class="lineno">  641</span>    KIT_LOGD(<span class="stringliteral">&quot;setupI2S&quot;</span>);</div>
-<div class="line"><span class="lineno">  642</span>    <span class="comment">// setup i2s driver - with no queue</span></div>
-<div class="line"><span class="lineno">  643</span>    i2s_config_t i2s_config = cfg.i2sConfig();</div>
-<div class="line"><span class="lineno">  644</span>    <span class="keywordflow">if</span> (i2s_driver_install(cfg.i2s_num, &amp;i2s_config, 0, NULL) != ESP_OK) {</div>
-<div class="line"><span class="lineno">  645</span>      KIT_LOGE(<span class="stringliteral">&quot;i2s_driver_install&quot;</span>);</div>
-<div class="line"><span class="lineno">  646</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  647</span>    }</div>
-<div class="line"><span class="lineno">  648</span> </div>
-<div class="line"><span class="lineno">  649</span>    <span class="comment">// define i2s pins</span></div>
-<div class="line"><span class="lineno">  650</span>    i2s_pin_config_t pin_config = cfg.i2sPins();</div>
-<div class="line"><span class="lineno">  651</span>    KIT_LOGI(<span class="stringliteral">&quot;i2s_set_pin&quot;</span>);</div>
-<div class="line"><span class="lineno">  652</span> </div>
-<div class="line"><span class="lineno">  653</span>    KIT_LOGI(<span class="stringliteral">&quot;- bck_io_num: %d&quot;</span>, pin_config.bck_io_num);</div>
-<div class="line"><span class="lineno">  654</span>    KIT_LOGI(<span class="stringliteral">&quot;- ws_io_num: %d&quot;</span>, pin_config.ws_io_num);</div>
-<div class="line"><span class="lineno">  655</span>    KIT_LOGI(<span class="stringliteral">&quot;- data_out_num: %d&quot;</span>, pin_config.data_out_num);</div>
-<div class="line"><span class="lineno">  656</span>    KIT_LOGI(<span class="stringliteral">&quot;- data_in_num: %d&quot;</span>, pin_config.data_in_num);</div>
-<div class="line"><span class="lineno">  657</span><span class="preprocessor">#if ESP_IDF_VERSION &gt; ESP_IDF_VERSION_VAL(4, 4, 0)</span></div>
-<div class="line"><span class="lineno">  658</span>    KIT_LOGI(<span class="stringliteral">&quot;- mck_io_num: %d&quot;</span>, pin_config.mck_io_num);</div>
-<div class="line"><span class="lineno">  659</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  660</span> </div>
-<div class="line"><span class="lineno">  661</span>    <span class="keywordflow">if</span> (i2s_set_pin(cfg.i2s_num, &amp;pin_config) != ESP_OK) {</div>
-<div class="line"><span class="lineno">  662</span>      KIT_LOGE(<span class="stringliteral">&quot;i2s_set_pin&quot;</span>);</div>
-<div class="line"><span class="lineno">  663</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  664</span>    }</div>
-<div class="line"><span class="lineno">  665</span> </div>
-<div class="line"><span class="lineno">  666</span><span class="preprocessor">#if ESP_IDF_VERSION_MAJOR &lt; 4                  </span></div>
-<div class="line"><span class="lineno">  667</span>    <span class="keywordflow">if</span> (i2s_mclk_gpio_select(cfg.i2s_num,(gpio_num_t)cfg.mclk_gpio) != ESP_OK) {</div>
-<div class="line"><span class="lineno">  668</span>      KIT_LOGE(<span class="stringliteral">&quot;i2s_mclk_gpio_select&quot;</span>);</div>
-<div class="line"><span class="lineno">  669</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  670</span>    }</div>
-<div class="line"><span class="lineno">  671</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  672</span> </div>
-<div class="line"><span class="lineno">  673</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  674</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  675</span>}</div>
+<div class="fragment"><div class="line"><span class="lineno">  639</span>                  {</div>
+<div class="line"><span class="lineno">  640</span><span class="comment">//  I assume this is valid for all AudioKits!</span></div>
+<div class="line"><span class="lineno">  641</span><span class="preprocessor">#  if AUDIOKIT_SETUP_SD==1</span></div>
+<div class="line"><span class="lineno">  642</span>      KIT_LOGI(LOG_METHOD);</div>
+<div class="line"><span class="lineno">  643</span>      spi_cs_pin = PIN_AUDIO_KIT_SD_CARD_CS;</div>
+<div class="line"><span class="lineno">  644</span>      pinMode(spi_cs_pin, OUTPUT);</div>
+<div class="line"><span class="lineno">  645</span>      digitalWrite(spi_cs_pin, HIGH);</div>
+<div class="line"><span class="lineno">  646</span><span class="preprocessor">#    ifdef ESP32</span></div>
+<div class="line"><span class="lineno">  647</span>      p_spi-&gt;begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS); </div>
+<div class="line"><span class="lineno">  648</span><span class="preprocessor">#    else</span></div>
+<div class="line"><span class="lineno">  649</span>      p_spi-&gt;begin();</div>
+<div class="line"><span class="lineno">  650</span><span class="preprocessor">#    endif   </span></div>
+<div class="line"><span class="lineno">  651</span><span class="preprocessor">#  else</span></div>
+<div class="line"><span class="lineno">  652</span><span class="preprocessor">#    if defined(ARDUINO)</span></div>
+<div class="line"><span class="lineno">  653</span><span class="preprocessor">        #warning &quot;SPI initialization for the SD drive not supported - you might need to take care of this yourself&quot;</span> </div>
+<div class="line"><span class="lineno">  654</span><span class="preprocessor">#    endif</span></div>
+<div class="line"><span class="lineno">  655</span>    cfg.sd_active = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  656</span><span class="preprocessor">#  endif</span></div>
+<div class="line"><span class="lineno">  657</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1382,10 +1438,10 @@ false </dd></dl>
 
 <p>Defines the Volume (in %) if volume is 0, mute is enabled,range is 0-100. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00335">335</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  335</span>                          {</div>
-<div class="line"><span class="lineno">  336</span>    <span class="keywordflow">return</span> (vol &gt; 0) ? audio_hal_set_volume(hal_handle, vol) == ESP_OK : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  337</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00351">351</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  351</span>                          {</div>
+<div class="line"><span class="lineno">  352</span>    <span class="keywordflow">return</span> (vol &gt; 0) ? audio_hal_set_volume(hal_handle, vol) == ESP_OK : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  353</span>  }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1414,15 +1470,15 @@ false </dd></dl>
 
 <p>Determines the volume %. </p>
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00340">340</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  340</span>               {</div>
-<div class="line"><span class="lineno">  341</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">volume</a>;</div>
-<div class="line"><span class="lineno">  342</span>    <span class="keywordflow">if</span> (audio_hal_get_volume(hal_handle, &amp;<a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">volume</a>) != ESP_OK) {</div>
-<div class="line"><span class="lineno">  343</span>      <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">volume</a> = -1;</div>
-<div class="line"><span class="lineno">  344</span>    }</div>
-<div class="line"><span class="lineno">  345</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">volume</a>;</div>
-<div class="line"><span class="lineno">  346</span>  }</div>
-<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_ad236d314493b0e5c0bb3b05d0109238e"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">audiokit::AudioKit::volume</a></div><div class="ttdeci">int volume()</div><div class="ttdoc">Determines the volume %.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00340">AudioKitHAL.h:340</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00356">356</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  356</span>               {</div>
+<div class="line"><span class="lineno">  357</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">volume</a>;</div>
+<div class="line"><span class="lineno">  358</span>    <span class="keywordflow">if</span> (audio_hal_get_volume(hal_handle, &amp;<a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">volume</a>) != ESP_OK) {</div>
+<div class="line"><span class="lineno">  359</span>      <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">volume</a> = -1;</div>
+<div class="line"><span class="lineno">  360</span>    }</div>
+<div class="line"><span class="lineno">  361</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">volume</a>;</div>
+<div class="line"><span class="lineno">  362</span>  }</div>
+<div class="ttc" id="aclassaudiokit_1_1_audio_kit_html_ad236d314493b0e5c0bb3b05d0109238e"><div class="ttname"><a href="classaudiokit_1_1_audio_kit.html#ad236d314493b0e5c0bb3b05d0109238e">audiokit::AudioKit::volume</a></div><div class="ttdeci">int volume()</div><div class="ttdoc">Determines the volume %.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_kit_h_a_l_8h_source.html#l00356">AudioKitHAL.h:356</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1447,7 +1503,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00590">590</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00606">606</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -1471,7 +1527,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00589">589</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00605">605</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -1495,7 +1551,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00591">591</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00607">607</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -1519,7 +1575,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00594">594</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00610">610</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -1543,7 +1599,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00596">596</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00612">612</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -1567,7 +1623,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00592">592</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00608">608</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -1591,7 +1647,31 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00588">588</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00604">604</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+
+</div>
+</div>
+<a id="aaf14d8dad78e1df1b428d005ff53bf7a" name="aaf14d8dad78e1df1b428d005ff53bf7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf14d8dad78e1df1b428d005ff53bf7a">&#9670;&#160;</a></span>p_spi</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SPIClass* audiokit::AudioKit::p_spi = &amp;AUDIOKIT_SD_SPI</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00614">614</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -1615,7 +1695,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00595">595</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00611">611</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
@@ -1639,7 +1719,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00593">593</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_audio_kit_h_a_l_8h_source.html#l00609">609</a> of file <a class="el" href="_audio_kit_h_a_l_8h_source.html">AudioKitHAL.h</a>.</p>
 
 </div>
 </div>
