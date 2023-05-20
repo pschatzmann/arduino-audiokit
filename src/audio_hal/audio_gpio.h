@@ -48,6 +48,8 @@ void pinMode(int, int);
 
 #else // no ESP32
 #include <stdbool.h>
+#include <stdint.h>
+#include <stddef.h>
 
 #define I2S_NUM_0 0
 #define I2S_NUM_1 1
@@ -158,5 +160,8 @@ typedef struct {
     int spics_io_num;               ///< CS GPIO pin for this device, or -1 if not used
 } spi_device_interface_config_t;
 
+#ifndef ARDUINO
+void delay(uint64_t t);
+#endif
 
 #endif // ESP32
