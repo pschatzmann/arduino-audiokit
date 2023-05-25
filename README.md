@@ -4,7 +4,7 @@ There are different ESP32 Audio boards available that can be programmed with the
 
 <img src="https://pschatzmann.github.io/Resources/img/audio-toolkit.png" alt="Audio Kit" />
 
-The ADF Framework contains an abstraction layer to support different CODEC chips. Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.
+The ADF Framework contains an abstraction layer to support different codec audio chips (ES8388, ES8311, AC101...). Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.
 
 Because I wanted to have a proper support of the AudioKit for my [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools) library and since my Audio Tools are  header only, I decided to provide this functionality in a separate project.
 
