@@ -82,7 +82,7 @@ class AudioKit* selfAudioKit = nullptr;
 struct AudioKitConfig {
     /// @brief defines all relevant pins
     audio_kit_pins pins;
-    /// @brief driver which selects the codec implementation
+    /// @brief driver which selects the codec implementation: AUDIO_CODEC_ES8388_DEFAULT_HANDLE, AUDIO_CODEC_AC101_CODEC_HANDLE, AUDIO_CODEC_ES8311_DEFAULT_HANDLE, AUDIO_CODEC_ES7243_DEFAULT_HANDLE
     audio_hal_func_t driver = AUDIO_DRIVER;
 
     i2s_port_t i2s_num = (i2s_port_t)pins.i2s_num;

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sample_5frate_88',['sample_rate',['../structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937',1,'audiokit::AudioKitConfig']]]
+  ['pins_95',['pins',['../structaudiokit_1_1_audio_kit_config.html#a2c1e8063d82aea65aab676f2bb9e7133',1,'audiokit::AudioKitConfig']]]
 ];
