@@ -10,7 +10,12 @@ Because I wanted to have a proper support of the AudioKit for my [Arduino Audio 
 
 I converted the __audio_boards__ and their related __drivers__ into an __Arduino Library__ and provide an easy to use C++ class which configures both the CODEC and I2S. I also tried to abstract away all ESP32 specific funcationality. 
 
-So with this project it should now get quite easy to use these boards also in Arduino.
+So with this project it should now get quite easy to use these boards also in Arduino. The following functionality is supported
+
+- management of different audio codec (starting, stopping, setting volume etc)
+- optional I2S output (ESP32 only)
+- optional SD support via SPI
+- information about board specific pins
 
 ## Configuration
 
@@ -32,7 +37,7 @@ You must define your board and the default settings in the ```libraries/arduino-
 #define AUDIOKIT_BOARD 1
 
 ```
-Here the lyrat v4.3 has been selected. 
+Here the lyrat v4.3 has been selected. Further information can be found in the [Wiki](https://github.com/pschatzmann/arduino-audiokit/wiki)
 
 Unfortunately AI Thinker created a big mess with their boards using different Audio chips and pin assingments, all of them using the same version number. You might need to make an educated guess by looking at the number after the version and if you have a 2957 board, you need to check all 3 options!
 
