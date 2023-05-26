@@ -9,6 +9,8 @@
  *  5) ai_thinker (ES8388) 2957 3478 A149
  *  6) ai_thinker (AC101) 2473 2762 2957
  *  7) ai_thinker (ES8388) 2957
+ *  8) esp32_s3_box
+ *  9) esp32_s3_box_lite
  *  10) generci_es8388
  *  11) generic_es8311
  *  12) generic (no defaults)

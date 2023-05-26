@@ -659,9 +659,11 @@ protected:
 #if AUDIOKIT_SETUP_SD == 1
         if (cfg.sd_active) {
             spi_cs_pin = cfg.pins.sd_cs;
-            KIT_LOGI("SPI: cs: %d", spi_cs_pin);
-            pinMode(spi_cs_pin, OUTPUT);
-            digitalWrite(spi_cs_pin, HIGH);
+            if (spi_cs_pin!=1){
+                KIT_LOGI("SPI: cs: %d", spi_cs_pin);
+                pinMode(spi_cs_pin, OUTPUT);
+                digitalWrite(spi_cs_pin, HIGH);
+            }
 #ifdef ESP32
             KIT_LOGI("clk: %d, miso: %d, mosi: %d",cfg.pins.sd_clk, cfg.pins.sd_miso, cfg.pins.sd_mosi);
             p_spi->begin(cfg.pins.sd_clk, cfg.pins.sd_miso, cfg.pins.sd_mosi, cfg.pins.sd_cs);

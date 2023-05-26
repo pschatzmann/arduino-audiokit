@@ -26,6 +26,10 @@
 #include "audio_board/ai_thinker_ac101.h"
 #elif AUDIOKIT_BOARD==7
 #include "audio_board/ai_thinker_es8388_7.h"
+#elif AUDIOKIT_BOARD==8
+#include "audio_board/esp32_s3_box.h"
+#elif AUDIOKIT_BOARD==9
+#include "audio_board/esp32_s3_box_lite.h"
 #elif AUDIOKIT_BOARD==10
 #include "audio_board/generic_es8388.h"
 #elif AUDIOKIT_BOARD==11

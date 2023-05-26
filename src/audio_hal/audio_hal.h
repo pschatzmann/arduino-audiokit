@@ -183,10 +183,11 @@ struct audio_board_handle {
 typedef struct audio_board_handle* audio_board_handle_t;
 
 extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
-extern audio_hal_func_t AUDIO_CODEC_AC101_CODEC_HANDLE;
 extern audio_hal_func_t AUDIO_CODEC_ES8311_DEFAULT_HANDLE;
 extern audio_hal_func_t AUDIO_CODEC_ES7243_DEFAULT_HANDLE;
-
+extern audio_hal_func_t AUDIO_CODEC_ES7210_DEFAULT_HANDLE;
+extern audio_hal_func_t AUDIO_CODEC_ES8156_DEFAULT_HANDLE;
+extern audio_hal_func_t AUDIO_CODEC_AC101_CODEC_HANDLE;
 
 /**
  * 
