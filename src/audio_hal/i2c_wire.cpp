@@ -26,10 +26,11 @@ bool is_i2c_init = false;
 i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t* conf)
 {
     KIT_LOGD(LOG_METHOD);
-
+    assert(p_wire!=nullptr);
 #if defined(ESP32)
+    KIT_LOGI("sda: %d, scl:%d",conf->sda_io_num, conf->scl_io_num);
     p_wire->setPins(conf->sda_io_num, conf->scl_io_num);
-    KIT_LOGI("i2c clk_speed: %d", conf->master.clk_speed);
+
 #elif defined(ARDUINO_ARCH_RP2040)
     p_wire->setSDA(conf->sda_io_num);
     bool setSCL(conf->scl_io_num);
@@ -40,8 +41,9 @@ i2c_bus_handle_t i2c_bus_create(i2c_port_t port, i2c_config_t* conf)
          p_wire->begin();
          is_i2c_init = true;
     }
-    p_wire->setClock(conf->master.clk_speed);
-    
+    KIT_LOGI("i2c clk_speed: %d", conf->master.clk_speed);
+    p_wire->setClock(conf->master.clk_speed);    
+    KIT_LOGD(LOG_METHOD);
     return nullptr;
 }
 

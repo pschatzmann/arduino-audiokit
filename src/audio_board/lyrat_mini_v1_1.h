@@ -22,42 +22,61 @@
  *
  */
 
-#ifndef _AUDIO_BOARD_DEFINITION_H_
-#define _AUDIO_BOARD_DEFINITION_H_
-//#include "driver/touch_pad.h"
-#define ES8388
+#pragma once
+
+//#define AUDIO_DRIVER AUDIO_CODEC_ES7243_DEFAULT_HANDLE
+#define AUDIO_DRIVER AUDIO_CODEC_ES8311_DEFAULT_HANDLE
 
 #define PIN_AUDIO_KIT_SD_CARD_CS 13
 #define PIN_AUDIO_KIT_SD_CARD_MISO 2
 #define PIN_AUDIO_KIT_SD_CARD_MOSI 15
 #define PIN_AUDIO_KIT_SD_CARD_CLK  14
 
-
 #define SDCARD_OPEN_FILE_NUM_MAX  5
-#define SDCARD_INTR_GPIO          GPIO_NUM_34
+#define SDCARD_INTR_GPIO          34
+#define SDCARD_PWR_CTRL           13
+#define ES7243_MCLK_GPIO          0
 
-#define BUTTON_REC_ID             GPIO_NUM_36
-#define BUTTON_MODE_ID            GPIO_NUM_39
-#define BUTTON_SET_ID             GPIO_NUM_32
-#define BUTTON_PLAY_ID            GPIO_NUM_33
-#define BUTTON_VOLUP_ID           GPIO_NUM_27
-#define BUTTON_VOLDOWN_ID         GPIO_NUM_13
+// I2S
+#define PIN_I2S_AUDIO_KIT_MCLK 0
+#define PIN_I2S_AUDIO_KIT_BCK 5
+#define PIN_I2S_AUDIO_KIT_WS 25
+#define PIN_I2S_AUDIO_KIT_DATA_OUT 26
+#define PIN_I2S_AUDIO_KIT_DATA_IN 35
+#define PIN_I2S_AUDIO_KIT_MCLK1 0
+#define PIN_I2S_AUDIO_KIT_BCK1 32
+#define PIN_I2S_AUDIO_KIT_WS1 33
+#define PIN_I2S_AUDIO_KIT_DATA_OUT1 -1
+#define PIN_I2S_AUDIO_KIT_DATA_IN1 36
 
 
-#define PIN_KEY1 BUTTON_REC_ID
-#define PIN_KEY2 BUTTON_MODE_ID
-#define PIN_KEY3 BUTTON_PLAY_ID
-#define PIN_KEY4 BUTTON_SET_ID
-#define PIN_KEY5 BUTTON_VOLDOWN_ID
-#define PIN_KEY6 BUTTON_VOLUP_ID
+// I2C
+#define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
+#define I2C_MASTER_SCL_IO 23     
+#define I2C_MASTER_SDA_IO 18    
 
-#define AUXIN_DETECT_GPIO         GPIO_NUM_12
-#define HEADPHONE_DETECT          GPIO_NUM_19
-#define PA_ENABLE_GPIO            GPIO_NUM_21
+#define PIN_KEY1 5
+#define PIN_KEY2 4
+#define PIN_KEY3 2
+#define PIN_KEY4 3
+#define PIN_KEY5 1
+#define PIN_KEY6 0
 
-#define GREEN_LED_GPIO            GPIO_NUM_22
 
-extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
+#define ES8311_MCLK_SOURCE        0   /* 0 From MCLK of esp32   1 From BCLK */
+
+#define HEADPHONE_DETECT          19
+#define PA_ENABLE_GPIO            21
+
+#define BLUE_LED_GPIO             27
+#define GREEN_LED_GPIO            22
+#define ADC_DETECT                 -1
+#define ES7243_MCLK                -1
+#define RESET_CODEC                -1
+#define RESET_BOARD                -1
+#define BLUE_LED_GPIO              -1
+#define AUXIN_DETECT_GPIO          -1
+
 
 #define AUDIO_CODEC_DEFAULT_CONFIG(){                   \
         .adc_input  = AUDIO_HAL_ADC_INPUT_LINE1,        \
@@ -71,7 +90,10 @@ extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
         },                                              \
 };
 
-#define INPUT_KEY_NUM     6
+
+#ifndef INPUT_KEY_NUM
+#  define   INPUT_KEY_NUM     6
+#endif
 
 #define INPUT_KEY_DEFAULT_INFO() {                      \
      {                                                  \
@@ -105,5 +127,3 @@ extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
         .act_id = BUTTON_VOLDOWN_ID,                    \
     }                                                   \
 }
-
-#endif

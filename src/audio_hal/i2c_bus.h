@@ -29,7 +29,7 @@
 #include "driver/i2c.h"
 #else
 #include "audio_hal/audio_error.h"
-#include "audio_hal/board_pins_config.h"
+//#include "audio_hal/board_pins_config.h"
 #define GPIO_PULLUP_ENABLE 1
 #endif
 

@@ -25,7 +25,7 @@
 #include <string.h>
 #include "AudioKitSettings.h"
 #include "audio_hal/audiokit_logger.h"
-#include "audio_hal/audiokit_board.h"
+#include "audio_hal/audiokit_board_select.h"
 #include "audio_hal/i2c_bus.h"
 #include "es7210.h"
 

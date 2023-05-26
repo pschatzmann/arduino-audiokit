@@ -50,7 +50,7 @@ void *audio_calloc(size_t nmemb, size_t size)
     KIT_LOGD("audio_calloc: %d * %d", nmemb, size);
     void *data =  NULL;
     data = heap_caps_malloc(nmemb * size,  MALLOC_CAP_8BIT);
-    if (data) {
+    if (data!=NULL) {
         memset(data, 0, nmemb * size);
     }
 #ifdef ENABLE_AUDIO_MEM_TRACE

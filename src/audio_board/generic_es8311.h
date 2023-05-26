@@ -22,13 +22,15 @@
  *
  */
 
-#ifndef _AUDIO_BOARD_DEFINITION_H_
-#define _AUDIO_BOARD_DEFINITION_H_
+// for AUDIOKIT_BOARD==11
+
+#pragma once
 
 #if __has_include("kit_custom_pins.h")
 # include "kit_custom_pins.h"
 #endif
-#include "audio_hal/audio_hal.h" // for audio_hal_func_t
+
+#define AUDIO_DRIVER AUDIO_CODEC_ES8311_DEFAULT_HANDLE
 
 // SD
 #ifndef PIN_AUDIO_KIT_SD_CARD_CS
@@ -52,11 +54,11 @@
 #endif
 
 #ifndef SDCARD_INTR_GPIO
-#  define SDCARD_INTR_GPIO          GPIO_NUM_34
+#  define SDCARD_INTR_GPIO          34
 #endif
 
 #ifndef SDCARD_PWR_CTRL
-#  define SDCARD_PWR_CTRL           GPIO_NUM_13
+#  define SDCARD_PWR_CTRL           13
 #endif
 
 
@@ -65,29 +67,32 @@
 #  define PIN_I2S_AUDIO_KIT_MCLK 0
 #endif
 #ifndef PIN_I2S_AUDIO_KIT_BCK
-#  define PIN_I2S_AUDIO_KIT_BCK GPIO_NUM_5
+#  define PIN_I2S_AUDIO_KIT_BCK 5
 #endif
 #ifndef PIN_I2S_AUDIO_KIT_WS
-#  define PIN_I2S_AUDIO_KIT_WS GPIO_NUM_25
+#  define PIN_I2S_AUDIO_KIT_WS 25
 #endif
 #ifndef PIN_I2S_AUDIO_KIT_DATA_OUT
-#  define PIN_I2S_AUDIO_KIT_DATA_OUT GPIO_NUM_26
+#  define PIN_I2S_AUDIO_KIT_DATA_OUT 26
 #endif
 #ifndef PIN_I2S_AUDIO_KIT_DATA_IN
-#  define PIN_I2S_AUDIO_KIT_DATA_IN GPIO_NUM_35
+#  define PIN_I2S_AUDIO_KIT_DATA_IN 35
 #endif
 
+#ifndef PIN_I2S_AUDIO_KIT_MCLK1
+#  define PIN_I2S_AUDIO_KIT_MCLK1 0
+#endif
 #ifndef PIN_I2S_AUDIO_KIT_BCK1
-#  define PIN_I2S_AUDIO_KIT_BCK1 GPIO_NUM_32
+#  define PIN_I2S_AUDIO_KIT_BCK1 32
 #endif
 #ifndef PIN_I2S_AUDIO_KIT_WS1
-#  define PIN_I2S_AUDIO_KIT_WS1 GPIO_NUM_33
+#  define PIN_I2S_AUDIO_KIT_WS1 33
 #endif
 #ifndef PIN_I2S_AUDIO_KIT_DATA_OUT1
 #  define PIN_I2S_AUDIO_KIT_DATA_OUT1 -1
 #endif
 #ifndef PIN_I2S_AUDIO_KIT_DATA_IN1
-#  define PIN_I2S_AUDIO_KIT_DATA_IN1 GPIO_NUM_36
+#  define PIN_I2S_AUDIO_KIT_DATA_IN1 36
 #endif
 
 
@@ -96,16 +101,11 @@
 #  define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
 #endif
 #ifndef I2C_MASTER_SCL_IO
-#  define I2C_MASTER_SCL_IO GPIO_NUM_23     
+#  define I2C_MASTER_SCL_IO 23     
 #endif
 #ifndef I2C_MASTER_SDA_IO
-#  define I2C_MASTER_SDA_IO GPIO_NUM_18    
+#  define I2C_MASTER_SDA_IO 18    
 #endif
-#ifndef I2C_MASTER_ADDR
-#  define I2C_MASTER_ADDR 0x10
-#endif
-
-
 
 #ifndef ES7243_MCLK_GPIO
 #define ES7243_MCLK_GPIO          PIN_I2S_AUDIO_KIT_MCLK
@@ -135,34 +135,31 @@
 #  define BUTTON_REC_ID             5
 #endif
 
-#define PIN_KEY1 BUTTON_REC_ID
-#define PIN_KEY2 BUTTON_MODE_ID
-#define PIN_KEY3 BUTTON_SET_ID
-#define PIN_KEY4 BUTTON_PLAY_ID
-#define PIN_KEY5 BUTTON_VOLDOWN_ID
-#define PIN_KEY6 BUTTON_VOLUP_ID
-
-
 #define ES8311_MCLK_SOURCE        0   /* 0 From MCLK of esp32   1 From BCLK */
 
 #ifndef HEADPHONE_DETECT
-#  define HEADPHONE_DETECT          GPIO_NUM_19
+#  define HEADPHONE_DETECT          19
 #endif
 
 #ifndef PA_ENABLE_GPIO
-#  define PA_ENABLE_GPIO            GPIO_NUM_21
+#  define PA_ENABLE_GPIO            21
 #endif
 
 #ifndef BLUE_LED_GPIO
-#  define BLUE_LED_GPIO             GPIO_NUM_27
+#  define BLUE_LED_GPIO             27
 #endif
 
 #ifndef GREEN_LED_GPIO
-#  define GREEN_LED_GPIO            GPIO_NUM_22
+#  define GREEN_LED_GPIO            22
 #endif
 
-extern audio_hal_func_t AUDIO_CODEC_ES8311_DEFAULT_HANDLE;
-extern audio_hal_func_t AUDIO_CODEC_ES7243_DEFAULT_HANDLE;
+#define ADC_DETECT                 -1
+#define ES7243_MCLK                -1
+#define RESET_CODEC                -1
+#define RESET_BOARD                -1
+#define BLUE_LED_GPIO              -1
+#define AUXIN_DETECT_GPIO          -1
+
 
 #define AUDIO_CODEC_DEFAULT_CONFIG(){                   \
         .adc_input  = AUDIO_HAL_ADC_INPUT_LINE1,        \
@@ -175,6 +172,7 @@ extern audio_hal_func_t AUDIO_CODEC_ES7243_DEFAULT_HANDLE;
             .bits = AUDIO_HAL_BIT_LENGTH_16BITS,        \
         },                                              \
 };
+
 
 #define INPUT_KEY_NUM     6
 
@@ -210,5 +208,3 @@ extern audio_hal_func_t AUDIO_CODEC_ES7243_DEFAULT_HANDLE;
         .act_id = BUTTON_VOLDOWN_ID,                    \
     }                                                   \
 }
-
-#endif

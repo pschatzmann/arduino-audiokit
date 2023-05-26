@@ -29,7 +29,7 @@
 #include "audio_hal/i2c_bus.h"
 #include "audio_hal/audio_gpio.h"
 #include "es8374.h"
-#include "audio_hal/board_pins_config.h"
+//#include "audio_hal/board_pins_config.h"
 
 #define ES_ASSERT(a, format, b, ...) \
     if ((a) != 0) { \

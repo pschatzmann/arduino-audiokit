@@ -22,45 +22,124 @@
  *
  */
 
-#ifndef _AUDIO_BOARD_DEFINITION_H_
-#define _AUDIO_BOARD_DEFINITION_H_
+// for AUDIOKIT_BOARD==10
 
-#define PIN_AUDIO_KIT_SD_CARD_CS 13
-#define PIN_AUDIO_KIT_SD_CARD_MISO 2
-#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#define PIN_AUDIO_KIT_SD_CARD_CLK  14
+#pragma once
 
-#define SDCARD_OPEN_FILE_NUM_MAX  5
-#define SDCARD_INTR_GPIO          GPIO_NUM_34
-#define SDCARD_PWR_CTRL           GPIO_NUM_13
-#define ES7243_MCLK_GPIO          GPIO_NUM_0
+#if __has_include("kit_custom_pins.h") 
+# include "kit_custom_pins.h"
+#endif
 
-#define BUTTON_VOLUP_ID           0
-#define BUTTON_VOLDOWN_ID         1
-#define BUTTON_SET_ID             2
-#define BUTTON_PLAY_ID            3
-#define BUTTON_MODE_ID            4
-#define BUTTON_REC_ID             5
+#define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
 
-#define PIN_KEY1 BUTTON_REC_ID
-#define PIN_KEY2 BUTTON_MODE_ID
-#define PIN_KEY3 BUTTON_SET_ID
-#define PIN_KEY4 BUTTON_PLAY_ID
-#define PIN_KEY5 BUTTON_VOLDOWN_ID
-#define PIN_KEY6 BUTTON_VOLUP_ID
+// SD Card
+#ifndef PIN_AUDIO_KIT_SD_CARD_CS
+#  define PIN_AUDIO_KIT_SD_CARD_CS -1
+#endif
+#ifndef PIN_AUDIO_KIT_SD_CARD_MISO
+#  define PIN_AUDIO_KIT_SD_CARD_MISO -1
+#endif
+#ifndef PIN_AUDIO_KIT_SD_CARD_MOSI
+#  define PIN_AUDIO_KIT_SD_CARD_MOSI -1
+#endif
+#ifndef PIN_AUDIO_KIT_SD_CARD_CLK
+#  define PIN_AUDIO_KIT_SD_CARD_CLK  -1
+#endif
+
+// I2S
+#ifndef PIN_I2S_AUDIO_KIT_MCLK
+#  define PIN_I2S_AUDIO_KIT_MCLK 0
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_BCK
+#  define PIN_I2S_AUDIO_KIT_BCK -1
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_WS
+#  define PIN_I2S_AUDIO_KIT_WS -1
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_DATA_OUT
+#  define PIN_I2S_AUDIO_KIT_DATA_OUT -1
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_DATA_IN
+#  define PIN_I2S_AUDIO_KIT_DATA_IN -1
+#endif
+
+#ifndef PIN_I2S_AUDIO_KIT_MCLK1
+#  define PIN_I2S_AUDIO_KIT_MCLK1 0
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_BCK1
+#  define PIN_I2S_AUDIO_KIT_BCK1 -1
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_WS1
+#  define PIN_I2S_AUDIO_KIT_WS1 -1
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_DATA_OUT1
+#  define PIN_I2S_AUDIO_KIT_DATA_OUT1 -1
+#endif
+#ifndef PIN_I2S_AUDIO_KIT_DATA_IN1
+#  define PIN_I2S_AUDIO_KIT_DATA_IN1 -1
+#endif
 
 
-#define ES8311_MCLK_SOURCE        0   /* 0 From MCLK of esp32   1 From BCLK */
+// I2C
+#ifndef I2C_MASTER_NUM
+#  define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
+#endif
+#ifndef I2C_MASTER_SCL_IO
+#  define I2C_MASTER_SCL_IO -1     
+#endif
+#ifndef I2C_MASTER_SDA_IO
+#  define I2C_MASTER_SDA_IO -1    
+#endif
 
 
-#define HEADPHONE_DETECT          GPIO_NUM_19
-#define PA_ENABLE_GPIO            GPIO_NUM_21
+#ifndef SDCARD_OPEN_FILE_NUM_MAX
+#  define SDCARD_OPEN_FILE_NUM_MAX  -1
+#endif
+#ifndef SDCARD_INTR_GPIO
+#  define SDCARD_INTR_GPIO          -1
+#endif
 
-#define BLUE_LED_GPIO             GPIO_NUM_27
-#define GREEN_LED_GPIO            GPIO_NUM_22
+#ifndef PIN_KEY1
+#  define PIN_KEY1 -1
+#endif
+#ifndef PIN_KEY2
+#  define PIN_KEY2 -1
+#endif
+#ifndef PIN_KEY3
+#  define PIN_KEY3 -1
+#endif
+#ifndef PIN_KEY4
+#  define PIN_KEY4 -1
+#endif
+#ifndef PIN_KEY5
+#  define PIN_KEY5 -1
+#endif
+#ifndef PIN_KEY6
+#  define PIN_KEY6 -1
+#endif
 
-extern audio_hal_func_t AUDIO_CODEC_ES8311_DEFAULT_HANDLE;
-extern audio_hal_func_t AUDIO_CODEC_ES7243_DEFAULT_HANDLE;
+
+#ifndef AUXIN_DETECT_GPIO
+#  define AUXIN_DETECT_GPIO         -1
+#endif
+#ifndef HEADPHONE_DETECT
+#  define HEADPHONE_DETECT          -1
+#endif
+#ifndef PA_ENABLE_GPIO
+#  define PA_ENABLE_GPIO            -1
+#endif
+
+
+#ifndef GREEN_LED_GPIO
+#  define GREEN_LED_GPIO            -1
+#endif
+
+#define ADC_DETECT                  -1
+#define ES7243_MCLK                -1
+#define RESET_CODEC                -1
+#define RESET_BOARD                -1
+#define BLUE_LED_GPIO              -1
+
 
 #define AUDIO_CODEC_DEFAULT_CONFIG(){                   \
         .adc_input  = AUDIO_HAL_ADC_INPUT_LINE1,        \
@@ -74,39 +153,39 @@ extern audio_hal_func_t AUDIO_CODEC_ES7243_DEFAULT_HANDLE;
         },                                              \
 };
 
-#define INPUT_KEY_NUM     6
+#ifndef INPUT_KEY_NUM
+#  define   INPUT_KEY_NUM     6
+#endif
 
 #define INPUT_KEY_DEFAULT_INFO() {                      \
      {                                                  \
-        .type = PERIPH_ID_ADC_BTN,                      \
+        .type = PERIPH_ID_BUTTON,                       \
         .user_id = INPUT_KEY_USER_ID_REC,               \
         .act_id = BUTTON_REC_ID,                        \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_ADC_BTN,                      \
+        .type = PERIPH_ID_BUTTON,                       \
         .user_id = INPUT_KEY_USER_ID_MODE,              \
         .act_id = BUTTON_MODE_ID,                       \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_ADC_BTN,                      \
+        .type = PERIPH_ID_TOUCH,                        \
         .user_id = INPUT_KEY_USER_ID_SET,               \
         .act_id = BUTTON_SET_ID,                        \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_ADC_BTN,                      \
+        .type = PERIPH_ID_TOUCH,                        \
         .user_id = INPUT_KEY_USER_ID_PLAY,              \
         .act_id = BUTTON_PLAY_ID,                       \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_ADC_BTN,                      \
+        .type = PERIPH_ID_TOUCH,                        \
         .user_id = INPUT_KEY_USER_ID_VOLUP,             \
         .act_id = BUTTON_VOLUP_ID,                      \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_ADC_BTN,                      \
+        .type = PERIPH_ID_TOUCH,                        \
         .user_id = INPUT_KEY_USER_ID_VOLDOWN,           \
         .act_id = BUTTON_VOLDOWN_ID,                    \
     }                                                   \
 }
-
-#endif
