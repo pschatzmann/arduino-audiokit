@@ -1,15 +1,7 @@
 /*
- * @Author: your name
- * @Date: 2020-01-26 10:13:06
- * @LastEditTime : 2020-01-28 19:24:42
- * @LastEditors  : Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \esp-adf\components\audio_board\aithinker\board_def.h
- */
-/*
  * ESPRESSIF MIT License
  *
- * Copyright (c) 2019 <ESPRESSIF SYSTEMS (SHANGHAI) CO., LTD>
+ * Copyright (c) 2020 <ESPRESSIF SYSTEMS (SHANGHAI) CO., LTD>
  *
  * Permission is hereby granted for use on all ESPRESSIF SYSTEMS products, in which case,
  * it is free of charge, to any person obtaining a copy of this software and associated
@@ -30,94 +22,101 @@
  *
  */
 
-#ifndef _AUDIO_BOARD_DEFINITION_H_
-#define _AUDIO_BOARD_DEFINITION_H_
+// AUDIOKIT_BOARD==4
 
-#include "audio_hal/audio_hal.h"
+#pragma once
 
-/* SD card related */
+#define AUDIO_DRIVER AUDIO_CODEC_ES8311_DEFAULT_HANDLE
+
 #define PIN_AUDIO_KIT_SD_CARD_CS 13
 #define PIN_AUDIO_KIT_SD_CARD_MISO 2
 #define PIN_AUDIO_KIT_SD_CARD_MOSI 15
 #define PIN_AUDIO_KIT_SD_CARD_CLK  14
-#define SD_CARD_INTR_GPIO GPIO_NUM_34
-// #define SD_CARD_INTR_SEL GPIO_SEL_34
+#define SDCARD_OPEN_FILE_NUM_MAX  5
+#define SDCARD_INTR_GPIO           -1
 
-#define HEADPHONE_DETECT GPIO_NUM_5
-#define PA_ENABLE_GPIO GPIO_NUM_21
+// I2S
+#define PIN_I2S_AUDIO_KIT_MCLK 0
+#define PIN_I2S_AUDIO_KIT_BCK 18
+#define PIN_I2S_AUDIO_KIT_WS 17
+#define PIN_I2S_AUDIO_KIT_DATA_OUT 12
+#define PIN_I2S_AUDIO_KIT_DATA_IN 46
+#define PIN_I2S_AUDIO_KIT_MCLK1 0
+#define PIN_I2S_AUDIO_KIT_BCK1 18
+#define PIN_I2S_AUDIO_KIT_WS1 17
+#define PIN_I2S_AUDIO_KIT_DATA_OUT1 12
+#define PIN_I2S_AUDIO_KIT_DATA_IN1 46
 
-#define GREEN_LED_GPIO GPIO_NUM_22
-#define BLUE_LED_GPIO GPIO_NUM_19
+// I2C
+#define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
+#define I2C_MASTER_SCL_IO 7     
+#define I2C_MASTER_SDA_IO 8    
 
-#define BUTTON_REC_ID GPIO_NUM_36
-#define BUTTON_MODE_ID GPIO_NUM_13
+#define PIN_KEY1 5
+#define PIN_KEY2 4
+#define PIN_KEY3 2
+#define PIN_KEY4 3
+#define PIN_KEY5 0
+#define PIN_KEY6 1
 
-#define BUTTON_SEL_SET GPIO_NUM_19
-#define BUTTON_SEL_PLAY GPIO_NUM_23
-#define BUTTON_SEL_VOLUP GPIO_NUM_18
-#define BUTTON_SEL_VOLDWN GPIO_NUM_5
+#define PA_ENABLE_GPIO            10
+#define BUTTON_ADC                6
+#define WS2812_LED_GPIO           45
 
-#define BUTTON_SET GPIO_NUM_19
-#define BUTTON_PLAY GPIO_NUM_23
-#define BUTTON_VOLUP GPIO_NUM_18
-#define BUTTON_VOLDWN GPIO_NUM_5
+#define ADC_DETECT                 -1
+#define HEADPHONE_DETECT           -1
+#define ES7243_MCLK                -1
+#define RESET_CODEC                -1
+#define RESET_BOARD                -1
+#define GREEN_LED_GPIO             -1
+#define BLUE_LED_GPIO              -1
+#define AUXIN_DETECT_GPIO          -1
 
-/* KEY1 tp 6 */
-#define PIN_KEY1 BUTTON_REC_ID
-#define PIN_KEY2 BUTTON_MODE_ID
-#define PIN_KEY3 BUTTON_SEL_SET
-#define PIN_KEY4 BUTTON_SEL_PLAY
-#define PIN_KEY5 BUTTON_SEL_VOLUP
-#define PIN_KEY6 BUTTON_SEL_VOLDWN
+#define ES8311_MCLK_SOURCE        1   /* 0 From MCLK, 1 From BCLK */
 
-
-extern audio_hal_func_t AUDIO_CODEC_AC101_CODEC_HANDLE;
-
-#define AUDIO_CODEC_DEFAULT_CONFIG() {       \
-    .adc_input = AUDIO_HAL_ADC_INPUT_LINE1,  \
-    .dac_output = AUDIO_HAL_DAC_OUTPUT_ALL,  \
-    .codec_mode = AUDIO_HAL_CODEC_MODE_BOTH, \
-    .i2s_iface = {                           \
-        .mode = AUDIO_HAL_MODE_SLAVE,        \
-        .fmt = AUDIO_HAL_I2S_NORMAL,         \
-        .samples = AUDIO_HAL_48K_SAMPLES,    \
-        .bits = AUDIO_HAL_BIT_LENGTH_16BITS, \
-    },                                       \
+#define AUDIO_CODEC_DEFAULT_CONFIG(){                   \
+        .adc_input  = AUDIO_HAL_ADC_INPUT_LINE1,        \
+        .dac_output = AUDIO_HAL_DAC_OUTPUT_ALL,         \
+        .codec_mode = AUDIO_HAL_CODEC_MODE_BOTH,        \
+        .i2s_iface = {                                  \
+            .mode = AUDIO_HAL_MODE_SLAVE,               \
+            .fmt = AUDIO_HAL_I2S_NORMAL,                \
+            .samples = AUDIO_HAL_48K_SAMPLES,           \
+            .bits = AUDIO_HAL_BIT_LENGTH_16BITS,        \
+        },                                              \
 };
 
 #define INPUT_KEY_NUM     6
 
 #define INPUT_KEY_DEFAULT_INFO() {                      \
      {                                                  \
-        .type = PERIPH_ID_BUTTON,                       \
+        .type = PERIPH_ID_ADC_BTN,                      \
         .user_id = INPUT_KEY_USER_ID_REC,               \
         .act_id = BUTTON_REC_ID,                        \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_BUTTON,                       \
+        .type = PERIPH_ID_ADC_BTN,                      \
         .user_id = INPUT_KEY_USER_ID_MODE,              \
         .act_id = BUTTON_MODE_ID,                       \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_BUTTON,                        \
+        .type = PERIPH_ID_ADC_BTN,                      \
         .user_id = INPUT_KEY_USER_ID_SET,               \
-        .act_id = BUTTON_SEL_SET,                        \
+        .act_id = BUTTON_SET_ID,                        \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_BUTTON,                        \
+        .type = PERIPH_ID_ADC_BTN,                      \
         .user_id = INPUT_KEY_USER_ID_PLAY,              \
-        .act_id = BUTTON_SEL_PLAY,                       \
+        .act_id = BUTTON_PLAY_ID,                       \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_BUTTON,                        \
+        .type = PERIPH_ID_ADC_BTN,                      \
         .user_id = INPUT_KEY_USER_ID_VOLUP,             \
-        .act_id = BUTTON_SEL_VOLUP,                      \
+        .act_id = BUTTON_VOLUP_ID,                      \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_BUTTON,                        \
+        .type = PERIPH_ID_ADC_BTN,                      \
         .user_id = INPUT_KEY_USER_ID_VOLDOWN,           \
-        .act_id = BUTTON_SEL_VOLDWN,                    \
+        .act_id = BUTTON_VOLDOWN_ID,                    \
     }                                                   \
 }
-
-#endif

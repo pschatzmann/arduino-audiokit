@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Arduino AudioKit HAL: src/audiokit_board.h File Reference</title>
+<title>Arduino AudioKit HAL: src/audio_hal/audiokit_board.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,38 +61,340 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6a0b9af12076047c42584c30cf59d2be.html">audio_hal</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">audiokit_board.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Select bard.h based on AUDIOKIT_BOARD definition in configuration file.  
+<p>Board driver which provides the pin information.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="_audio_kit_settings_8h_source.html">AudioKitSettings.h</a>&quot;</code><br />
-<code>#include &quot;audio_board/generic_es8388/board.h&quot;</code><br />
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_audio_kit_settings_8h_source.html">AudioKitSettings.h</a>&quot;</code><br />
+<code>#include &quot;audio_hal/audio_error.h&quot;</code><br />
+<code>#include &quot;audio_hal/audio_gpio.h&quot;</code><br />
+<code>#include &quot;audio_hal/audio_hal.h&quot;</code><br />
+<code>#include &quot;audio_hal/audio_mem.h&quot;</code><br />
+<code>#include &quot;audio_hal/audiokit_board_select.h&quot;</code><br />
+<code>#include &quot;audio_hal/audiokit_logger.h&quot;</code><br />
 </div>
 <p><a href="audiokit__board_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:structaudio__kit__pins"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audiokit__board_8h.html#structaudio__kit__pins">audio_kit_pins</a></td></tr>
+<tr class="separator:structaudio__kit__pins"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classboard__driver.html">board_driver</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a7815a4168968f223eef97e8ecaf0e62b"><td class="memItemLeft" align="right" valign="top"><a id="a7815a4168968f223eef97e8ecaf0e62b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>AUDIO_DRIVER</b>&#160;&#160;&#160;AUDIO_CODEC_ES8388_DEFAULT_HANDLE</td></tr>
-<tr class="separator:a7815a4168968f223eef97e8ecaf0e62b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1071f9b05d244359926c90e23b3cd77"><td class="memItemLeft" align="right" valign="top"><a id="af1071f9b05d244359926c90e23b3cd77"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ES8311_MCLK_SRC</b>&#160;&#160;&#160;-1</td></tr>
+<tr class="separator:af1071f9b05d244359926c90e23b3cd77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a061a7903e29792382c1b66dd462aded2"><td class="memItemLeft" align="right" valign="top"><a id="a061a7903e29792382c1b66dd462aded2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BUTTON_REC_ID</b>&#160;&#160;&#160;PIN_KEY1</td></tr>
+<tr class="separator:a061a7903e29792382c1b66dd462aded2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a481d6ac88c56d5fbfc1f1b4ad9b24994"><td class="memItemLeft" align="right" valign="top"><a id="a481d6ac88c56d5fbfc1f1b4ad9b24994"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BUTTON_MODE_ID</b>&#160;&#160;&#160;PIN_KEY2</td></tr>
+<tr class="separator:a481d6ac88c56d5fbfc1f1b4ad9b24994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfecee9b68e31903419c0829a96d2834"><td class="memItemLeft" align="right" valign="top"><a id="adfecee9b68e31903419c0829a96d2834"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BUTTON_SET_ID</b>&#160;&#160;&#160;PIN_KEY3</td></tr>
+<tr class="separator:adfecee9b68e31903419c0829a96d2834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6677390ca247b9e619b4b7bda49cfe2d"><td class="memItemLeft" align="right" valign="top"><a id="a6677390ca247b9e619b4b7bda49cfe2d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BUTTON_PLAY_ID</b>&#160;&#160;&#160;PIN_KEY4</td></tr>
+<tr class="separator:a6677390ca247b9e619b4b7bda49cfe2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab855c115c2e01faf91d96461fd07d22a"><td class="memItemLeft" align="right" valign="top"><a id="ab855c115c2e01faf91d96461fd07d22a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BUTTON_VOLDOWN_ID</b>&#160;&#160;&#160;PIN_KEY5</td></tr>
+<tr class="separator:ab855c115c2e01faf91d96461fd07d22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab96a792c7e8d79b24462f562c94bb7c4"><td class="memItemLeft" align="right" valign="top"><a id="ab96a792c7e8d79b24462f562c94bb7c4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BUTTON_VOLUP_ID</b>&#160;&#160;&#160;PIN_KEY6</td></tr>
+<tr class="separator:ab96a792c7e8d79b24462f562c94bb7c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa11005f4918f760b0386a756384f3c7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>AUDIO_CODEC_DEFAULT_CONFIG</b>()</td></tr>
+<tr class="separator:aa11005f4918f760b0386a756384f3c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Select bard.h based on AUDIOKIT_BOARD definition in configuration file. </p>
+<div class="textblock"><p>Board driver which provides the pin information. </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2021-12-12</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2023-5-25</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2021 </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="audiokit__board_8h_source.html">audiokit_board.h</a>.</p>
-</div></div><!-- contents -->
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="structaudio__kit__pins" id="structaudio__kit__pins"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structaudio__kit__pins">&#9670;&nbsp;</a></span>audio_kit_pins</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct audio_kit_pins</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>Struct with all pins </p>
+
+<p class="definition">Definition at line <a class="el" href="audiokit__board_8h_source.html#l00058">58</a> of file <a class="el" href="audiokit__board_8h_source.html">audiokit_board.h</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="ab64ac882ecfddecdb2998239524753e4"></a>int8_t</td>
+<td class="fieldname">
+adc_detect</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a355a6cfdc80c3546948d228a30a2cf76"></a>int8_t</td>
+<td class="fieldname">
+detect_auxin</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a8cce069605ce0327c0e1552a10a7ccf3"></a>int8_t</td>
+<td class="fieldname">
+detect_headphone</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="afe1213f47aa93387de3beb3adaaee7aa"></a>int8_t</td>
+<td class="fieldname">
+enable_pa</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a0f103b8a4329e2d2a05ff4a908fd7627"></a>int8_t</td>
+<td class="fieldname">
+es7243_mclk</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ac04af64e971ae8368891aa66e8f4a1d2"></a>int8_t</td>
+<td class="fieldname">
+es8311_mclk_src</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a79f4f2961e9338e12a8dd79194b5e2c9"></a>int8_t</td>
+<td class="fieldname">
+i2c_num</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a804ebfdfeda26effead056d9a4ae699e"></a>int8_t</td>
+<td class="fieldname">
+i2c_scl</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a0ccae2b7f748893145642de4c3d4c0a6"></a>int8_t</td>
+<td class="fieldname">
+i2c_sda</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a9dd635fae569bed3dbc04a8454443f3b"></a>int8_t</td>
+<td class="fieldname">
+i2s1_bck</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a8733c005a59cc015222662eb1e7ffd50"></a>int8_t</td>
+<td class="fieldname">
+i2s1_in</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a69baa43e2444f72213b8d9c6f046863d"></a>int8_t</td>
+<td class="fieldname">
+i2s1_mclk</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aa6a75e979168d24477d2bd6436ea7d14"></a>int8_t</td>
+<td class="fieldname">
+i2s1_out</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab7c268e471869f95eafa2bdb0de5d3e2"></a>int8_t</td>
+<td class="fieldname">
+i2s1_ws</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a4ffe028c5c0aac06f2bdf4da8107814b"></a>int8_t</td>
+<td class="fieldname">
+i2s_bck</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab09b642c094a7013c08531842940ac08"></a>int8_t</td>
+<td class="fieldname">
+i2s_in</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a70259227e358f5fb0eb23075c4c86030"></a>int8_t</td>
+<td class="fieldname">
+i2s_mclk</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a2faa11e4b3ea64472fb55d42f2cc86a3"></a>int8_t</td>
+<td class="fieldname">
+i2s_num</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a1157612466dc3df6fa54ff2382141d3f"></a>int8_t</td>
+<td class="fieldname">
+i2s_out</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab748bb2e78688d0c22097f9e315333d7"></a>int8_t</td>
+<td class="fieldname">
+i2s_ws</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a40c19fbc32701b1c38da5282acbab7d4"></a>int8_t</td>
+<td class="fieldname">
+key1</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a9654c0619658141b16990905817a6e44"></a>int8_t</td>
+<td class="fieldname">
+key2</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab7060caf9bcb0c3dc445335de964222a"></a>int8_t</td>
+<td class="fieldname">
+key3</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ad34090afbcd0bb43a2e290a4eef244e5"></a>int8_t</td>
+<td class="fieldname">
+key4</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a63cc61a510927f83407af5295ada9fa9"></a>int8_t</td>
+<td class="fieldname">
+key5</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aad2ae4b6c74a6f4750f61b212b618049"></a>int8_t</td>
+<td class="fieldname">
+key6</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a9a669cec8ba4475dd9f44f961d7676d0"></a>int8_t</td>
+<td class="fieldname">
+led_blue</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ad09efffd284b054e1b3834df7416f74f"></a>int8_t</td>
+<td class="fieldname">
+led_green</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab919542604d55254735007b21da3d1a8"></a>int8_t</td>
+<td class="fieldname">
+reset_board</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a8ca8a448577cfbeef991c9f36224bc02"></a>int8_t</td>
+<td class="fieldname">
+reset_codec</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aeae69e3219d5f35b03d286040279f184"></a>int8_t</td>
+<td class="fieldname">
+sd_clk</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ad92df61ebaa80dcd9e794c63cfa03d00"></a>int8_t</td>
+<td class="fieldname">
+sd_cs</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ace1633e840d43a382ec47af080743acb"></a>int8_t</td>
+<td class="fieldname">
+sd_intr</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ac79ae5a232c1dc707583509fc166e90d"></a>int8_t</td>
+<td class="fieldname">
+sd_max_open_files</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a7c48e8e3c650ea00771f30cd4f9f947a"></a>int8_t</td>
+<td class="fieldname">
+sd_miso</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="adbb77bee96f59c52cf010aeaa2813223"></a>int8_t</td>
+<td class="fieldname">
+sd_mosi</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="aa11005f4918f760b0386a756384f3c7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa11005f4918f760b0386a756384f3c7e">&#9670;&nbsp;</a></span>AUDIO_CODEC_DEFAULT_CONFIG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AUDIO_CODEC_DEFAULT_CONFIG</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    {                   \</div>
+<div class="line">        .adc_input  = AUDIO_HAL_ADC_INPUT_LINE1,        \</div>
+<div class="line">        .dac_output = AUDIO_HAL_DAC_OUTPUT_ALL,         \</div>
+<div class="line">        .codec_mode = AUDIO_HAL_CODEC_MODE_BOTH,        \</div>
+<div class="line">        .i2s_iface = {                                  \</div>
+<div class="line">            .mode = AUDIO_HAL_MODE_SLAVE,               \</div>
+<div class="line">            .fmt = AUDIO_HAL_I2S_NORMAL,                \</div>
+<div class="line">            .samples = AUDIO_HAL_48K_SAMPLES,           \</div>
+<div class="line">            .bits = AUDIO_HAL_BIT_LENGTH_16BITS,        \</div>
+<div class="line">        },                                              \</div>
+<div class="line">};</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="audiokit__board_8h_source.html#l00041">41</a> of file <a class="el" href="audiokit__board_8h_source.html">audiokit_board.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

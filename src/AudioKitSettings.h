@@ -11,6 +11,7 @@
  *  7) ai_thinker (ES8388) 2957
  *  10) generci_es8388
  *  11) generic_es8311
+ *  12) generic (no defaults)
  * @version 0.1
  * @date 2021-12-12
  *
@@ -21,7 +22,7 @@
 
 // Select your specific board
 #ifndef AUDIOKIT_BOARD
-#define AUDIOKIT_BOARD 5
+#define AUDIOKIT_BOARD  5
 #endif
 
 // Default settings
@@ -65,7 +66,7 @@
 #ifndef AUDIOKIT_USE_WIRE
 #define AUDIOKIT_USE_WIRE 1
 // for AUDIOKIT_WIRE use Wire or Wire1
-#if defined(ARDUINO_ARCH_STM32)
+#if defined(ARDUINO_ARCH_STM32) || defined(CONFIG_IDF_TARGET_ESP32S3) || defined(CONFIG_IDF_TARGET_ESP32S2) || defined(CONFIG_IDF_TARGET_ESP32C3)
 #define AUDIOKIT_WIRE Wire
 #else
 #define AUDIOKIT_WIRE Wire1
@@ -95,6 +96,7 @@
 #ifndef AI_THINKER_ES8388_VOLUME_HACK
 #define AI_THINKER_ES8388_VOLUME_HACK 1
 #endif
+
 
 // ESP32 Specific Settings
 #ifdef ESP32

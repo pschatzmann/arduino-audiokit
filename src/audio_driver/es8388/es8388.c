@@ -24,7 +24,7 @@
 #include <string.h>
 #include "AudioKitSettings.h"
 #include "es8388.h"
-#include "audio_hal/board_pins_config.h"
+//#include "audio_hal/board_pins_config.h"
 #include "audio_hal/audiokit_logger.h"
 #include "audio_hal/audio_gpio.h"
 

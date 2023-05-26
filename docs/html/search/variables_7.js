@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lclk_5fdiv_285',['lclk_div',['../structes__i2s__clock__t.html#ad14575ccca5b42636a240cb4b0e364d8',1,'es_i2s_clock_t']]]
+  ['sample_5frate_96',['sample_rate',['../structaudiokit_1_1_audio_kit_config.html#a759b923cb717693d467aba263e133937',1,'audiokit::AudioKitConfig']]]
 ];

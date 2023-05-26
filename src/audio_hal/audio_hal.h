@@ -30,6 +30,8 @@
 
 #include "AudioKitSettings.h"
 #include "audio_hal/audio_error.h"
+#include "audio_hal/audio_gpio.h"
+#include "audio_hal/driver_pins.h"
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -170,6 +172,20 @@ typedef struct audio_hal {
     void* handle;                                                                                            /*!< handle of audio codec */
 } audio_hal_func_t;
 
+/**
+ * @brief Audio board handle
+ */
+struct audio_board_handle {
+    audio_hal_handle_t audio_hal; /*!< audio hardware abstract layer handle */
+    audio_hal_handle_t adc_hal; /*!< adc hardware abstract layer handle */
+};
+
+typedef struct audio_board_handle* audio_board_handle_t;
+
+extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
+extern audio_hal_func_t AUDIO_CODEC_AC101_CODEC_HANDLE;
+extern audio_hal_func_t AUDIO_CODEC_ES8311_DEFAULT_HANDLE;
+extern audio_hal_func_t AUDIO_CODEC_ES7243_DEFAULT_HANDLE;
 
 
 /**

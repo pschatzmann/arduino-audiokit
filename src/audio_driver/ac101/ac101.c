@@ -5,9 +5,9 @@
 
 #include <string.h>
 #include "AudioKitSettings.h"
-#include "audio_hal/audiokit_board.h"
+#include "audio_hal/audiokit_board_select.h"
 #include "audio_hal/i2c_bus.h"
-#include "audio_hal/board_pins_config.h"
+//#include "audio_hal/board_pins_config.h"
 #include "audio_hal/audiokit_logger.h"
 #include "audio_hal/audio_gpio.h"
 #include "ac101.h"
@@ -16,14 +16,12 @@
 #define GPIO_PIN_INTR_DISABLE 0
 #endif
 
-
 static i2c_config_t ac_i2c_cfg = {
 	.mode = I2C_MODE_MASTER,
 	.sda_pullup_en = GPIO_PULLUP_ENABLE,
 	.scl_pullup_en = GPIO_PULLUP_ENABLE,
 	.master.clk_speed = I2C_CLOCK_SPEED
 };
-
 /*
  * operate function of codec
  */
@@ -88,6 +86,7 @@ static uint16_t ac101_read_reg(uint8_t reg_addr)
 	val = (data_rd[0] << 8) + data_rd[1];
 	return val;
 }
+
 
 static int i2c_init()
 {

@@ -22,11 +22,11 @@
  *
  */
 
-#ifndef _AUDIO_BOARD_DEFINITION_H_
-#define _AUDIO_BOARD_DEFINITION_H_
+// AUDIOKIT_BOARD==7 
 
-//#include "driver/touch_pad.h"
-#define ES8388
+#pragma once
+
+#define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
 
 #define PIN_AUDIO_KIT_SD_CARD_CS 13
 #define PIN_AUDIO_KIT_SD_CARD_MISO 2
@@ -34,8 +34,26 @@
 #define PIN_AUDIO_KIT_SD_CARD_CLK  14
 
 #define SDCARD_OPEN_FILE_NUM_MAX  5
-#define SDCARD_INTR_GPIO          GPIO_NUM_34
+#define SDCARD_INTR_GPIO          34
 
+// I2S
+#define PIN_I2S_AUDIO_KIT_MCLK 0
+#define PIN_I2S_AUDIO_KIT_BCK 5
+#define PIN_I2S_AUDIO_KIT_WS 25
+#define PIN_I2S_AUDIO_KIT_DATA_OUT 26
+#define PIN_I2S_AUDIO_KIT_DATA_IN 35
+#define PIN_I2S_AUDIO_KIT_MCLK1 0
+#define PIN_I2S_AUDIO_KIT_BCK1 5
+#define PIN_I2S_AUDIO_KIT_WS1 25
+#define PIN_I2S_AUDIO_KIT_DATA_OUT1 26
+#define PIN_I2S_AUDIO_KIT_DATA_IN1 35
+
+// I2C
+#define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
+#define I2C_MASTER_SCL_IO 23     
+#define I2C_MASTER_SDA_IO 18    
+
+// keys
 #define PIN_KEY1 36
 #define PIN_KEY2 13
 #define PIN_KEY3 19
@@ -43,18 +61,17 @@
 #define PIN_KEY5 18
 #define PIN_KEY6 5
 
-#define BUTTON_REC_ID             PIN_KEY1
-#define BUTTON_MODE_ID            PIN_KEY2
-#define BUTTON_SET_ID             PIN_KEY3
-#define BUTTON_PLAY_ID            PIN_KEY4
-#define BUTTON_VOLDOWN_ID         PIN_KEY5
-#define BUTTON_VOLUP_ID           PIN_KEY6
+#define AUXIN_DETECT_GPIO          12
+#define HEADPHONE_DETECT           39
+#define PA_ENABLE_GPIO             21
 
-#define AUXIN_DETECT_GPIO         GPIO_NUM_12
-#define HEADPHONE_DETECT          GPIO_NUM_39
-#define PA_ENABLE_GPIO            GPIO_NUM_21
+#define GREEN_LED_GPIO             22
+#define BLUE_LED_GPIO              -1
 
-#define GREEN_LED_GPIO            GPIO_NUM_22
+#define ADC_DETECT                 -1
+#define ES7243_MCLK                -1
+#define RESET_CODEC                -1
+#define RESET_BOARD                -1
 
 extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
 
@@ -104,5 +121,3 @@ extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
         .act_id = BUTTON_VOLDOWN_ID,                    \
     }                                                   \
 }
-
-#endif

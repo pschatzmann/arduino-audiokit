@@ -25,7 +25,7 @@
 #include "audio_hal/audiokit_logger.h"
 #include "es7148.h"
 #include "audio_hal/audio_gpio.h"
-#include "audio_hal/audiokit_board.h"
+#include "audio_hal/audiokit_board_select.h"
 
 
 static bool codec_init_flag = 0;

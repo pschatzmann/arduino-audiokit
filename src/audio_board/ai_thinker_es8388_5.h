@@ -22,87 +22,47 @@
  *
  */
 
-#ifndef _AUDIO_BOARD_DEFINITION_H_
-#define _AUDIO_BOARD_DEFINITION_H_
+// for AUDIOKIT_BOARD==5
 
+#pragma once
 #if __has_include("kit_custom_pins.h") 
 # include "kit_custom_pins.h"
 #endif
-#include "audio_hal/audio_hal.h" // for audio_hal_func_t
 
-#define ES8388
+#define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
 
 // SD Card
-#ifndef PIN_AUDIO_KIT_SD_CARD_CS
-#  define PIN_AUDIO_KIT_SD_CARD_CS 13
-#endif
-#ifndef PIN_AUDIO_KIT_SD_CARD_MISO
-#  define PIN_AUDIO_KIT_SD_CARD_MISO 2
-#endif
-#ifndef PIN_AUDIO_KIT_SD_CARD_MOSI
-#  define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#endif
-#ifndef PIN_AUDIO_KIT_SD_CARD_CLK
-#  define PIN_AUDIO_KIT_SD_CARD_CLK  14
-#endif
+#define PIN_AUDIO_KIT_SD_CARD_CS 13
+#define PIN_AUDIO_KIT_SD_CARD_MISO 2
+#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
+#define PIN_AUDIO_KIT_SD_CARD_CLK  14
 
 // I2S
-#ifndef PIN_I2S_AUDIO_KIT_MCLK
-#  define PIN_I2S_AUDIO_KIT_MCLK 0
-#endif
-#ifndef PIN_I2S_AUDIO_KIT_BCK
-#  define PIN_I2S_AUDIO_KIT_BCK 27
-#endif
-#ifndef PIN_I2S_AUDIO_KIT_WS
-#  define PIN_I2S_AUDIO_KIT_WS 25
-#endif
-#ifndef PIN_I2S_AUDIO_KIT_DATA_OUT
-#  define PIN_I2S_AUDIO_KIT_DATA_OUT 26
-#endif
-#ifndef PIN_I2S_AUDIO_KIT_DATA_IN
-#  define PIN_I2S_AUDIO_KIT_DATA_IN 35
-#endif
+#define PIN_I2S_AUDIO_KIT_MCLK 0
+#define PIN_I2S_AUDIO_KIT_BCK 27
+#define PIN_I2S_AUDIO_KIT_WS 25
+#define PIN_I2S_AUDIO_KIT_DATA_OUT 26
+#define PIN_I2S_AUDIO_KIT_DATA_IN 35
+#define PIN_I2S_AUDIO_KIT_MCLK1 0
+#define PIN_I2S_AUDIO_KIT_BCK1 27
+#define PIN_I2S_AUDIO_KIT_WS1 25
+#define PIN_I2S_AUDIO_KIT_DATA_OUT1 26
+#define PIN_I2S_AUDIO_KIT_DATA_IN1 35
 
 // I2C
-#ifndef I2C_MASTER_NUM
-#  define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
-#endif
-#ifndef I2C_MASTER_SCL_IO
-#  define I2C_MASTER_SCL_IO 32     
-#endif
-#ifndef I2C_MASTER_SDA_IO
-#  define I2C_MASTER_SDA_IO 33    
-#endif
-#ifndef I2C_MASTER_ADDR
-#  define I2C_MASTER_ADDR 0x10
-#endif
+#define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
+#define I2C_MASTER_SCL_IO 32     
+#define I2C_MASTER_SDA_IO 33    
 
+#define SDCARD_OPEN_FILE_NUM_MAX  5
+#define SDCARD_INTR_GPIO          34
 
-#ifndef SDCARD_OPEN_FILE_NUM_MAX
-#  define SDCARD_OPEN_FILE_NUM_MAX  5
-#endif
-#ifndef SDCARD_INTR_GPIO
-#  define SDCARD_INTR_GPIO          GPIO_NUM_34
-#endif
-
-#ifndef PIN_KEY1
-#  define PIN_KEY1 36
-#endif
-#ifndef PIN_KEY2
-#  define PIN_KEY2 13
-#endif
-#ifndef PIN_KEY3
-#  define PIN_KEY3 19
-#endif
-#ifndef PIN_KEY4
-#  define PIN_KEY4 23
-#endif
-#ifndef PIN_KEY5
-#  define PIN_KEY5 18
-#endif
-#ifndef PIN_KEY6
-#  define PIN_KEY6 5
-#endif
+#define PIN_KEY1 36
+#define PIN_KEY2 13
+#define PIN_KEY3 19
+#define PIN_KEY4 23
+#define PIN_KEY5 18
+#define PIN_KEY6 5
 
 #define BUTTON_REC_ID             PIN_KEY1
 #define BUTTON_MODE_ID            PIN_KEY2
@@ -112,22 +72,17 @@
 #define BUTTON_VOLUP_ID           PIN_KEY6
 
 
-#ifndef AUXIN_DETECT_GPIO
-#  define AUXIN_DETECT_GPIO         GPIO_NUM_12
-#endif
-#ifndef HEADPHONE_DETECT
-#  define HEADPHONE_DETECT          GPIO_NUM_39
-#endif
-#ifndef PA_ENABLE_GPIO
-#  define PA_ENABLE_GPIO            GPIO_NUM_21
-#endif
+#define AUXIN_DETECT_GPIO         12
+#define HEADPHONE_DETECT          39
+#define PA_ENABLE_GPIO            21
+#define ADC_DETECT                  -1
+#define ES7243_MCLK                -1
+#define RESET_CODEC                -1
+#define RESET_BOARD                -1
+#define GREEN_LED_GPIO            22
+#define BLUE_LED_GPIO              -1
 
-
-#ifndef GREEN_LED_GPIO
-#  define GREEN_LED_GPIO            GPIO_NUM_22
-#endif
-
-extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
+// extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
 
 #define AUDIO_CODEC_DEFAULT_CONFIG(){                   \
         .adc_input  = AUDIO_HAL_ADC_INPUT_LINE1,        \
@@ -141,9 +96,8 @@ extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
         },                                              \
 };
 
-#ifndef INPUT_KEY_NUM
-#  define   INPUT_KEY_NUM     6
-#endif
+
+#define INPUT_KEY_NUM     6
 
 #define INPUT_KEY_DEFAULT_INFO() {                      \
      {                                                  \
@@ -157,25 +111,23 @@ extern audio_hal_func_t AUDIO_CODEC_ES8388_DEFAULT_HANDLE;
         .act_id = BUTTON_MODE_ID,                       \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_TOUCH,                        \
+        .type = PERIPH_ID_BUTTON,                        \
         .user_id = INPUT_KEY_USER_ID_SET,               \
         .act_id = BUTTON_SET_ID,                        \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_TOUCH,                        \
+        .type = PERIPH_ID_BUTTON,                        \
         .user_id = INPUT_KEY_USER_ID_PLAY,              \
         .act_id = BUTTON_PLAY_ID,                       \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_TOUCH,                        \
+        .type = PERIPH_ID_BUTTON,                        \
         .user_id = INPUT_KEY_USER_ID_VOLUP,             \
         .act_id = BUTTON_VOLUP_ID,                      \
     },                                                  \
     {                                                   \
-        .type = PERIPH_ID_TOUCH,                        \
+        .type = PERIPH_ID_BUTTON,                        \
         .user_id = INPUT_KEY_USER_ID_VOLDOWN,           \
         .act_id = BUTTON_VOLDOWN_ID,                    \
     }                                                   \
 }
-
-#endif
