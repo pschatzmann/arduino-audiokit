@@ -16,8 +16,12 @@
 #define GPIO_PIN_INTR_DISABLE 0
 #endif
 
-static i2c_bus_handle_t i2c_handle;
-
+static i2c_config_t ac_i2c_cfg = {
+	.mode = I2C_MODE_MASTER,
+	.sda_pullup_en = GPIO_PULLUP_ENABLE,
+	.scl_pullup_en = GPIO_PULLUP_ENABLE,
+	.master.clk_speed = I2C_CLOCK_SPEED
+};
 /*
  * operate function of codec
  */
@@ -83,19 +87,15 @@ static uint16_t ac101_read_reg(uint8_t reg_addr)
 	return val;
 }
 
+
 static int i2c_init()
 {
-    KIT_LOGD(LOG_METHOD);
-    static i2c_config_t es_i2c_cfg = {
-        .mode = I2C_MODE_MASTER,
-        .sda_pullup_en = GPIO_PULLUP_ENABLE,
-        .scl_pullup_en = GPIO_PULLUP_ENABLE,
-        .master.clk_speed = I2C_CLOCK_SPEED
-    };
-    int res = get_i2c_pins(I2C_NUM_0, &es_i2c_cfg);
-    AC_ASSERT(res, "getting i2c pins error", res);
-    i2c_handle = i2c_bus_create(I2C_NUM_0, &es_i2c_cfg);
-    return res;
+	int res = 0;
+	get_i2c_pins(I2C_NUM_0, &ac_i2c_cfg);
+	res |= i2c_param_config(I2C_NUM_0, &ac_i2c_cfg);
+	res |= i2c_driver_install(I2C_NUM_0, ac_i2c_cfg.mode, 0, 0, 0);
+	AC_ASSERT(res, "i2c_init error", -1);
+	return res;
 }
 
 void set_codec_clk(audio_hal_iface_samples_t sampledata)

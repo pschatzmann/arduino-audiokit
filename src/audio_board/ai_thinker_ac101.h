@@ -58,8 +58,8 @@
 
 // I2C
 #define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
-#define I2C_MASTER_SCL_IO 33     
-#define I2C_MASTER_SDA_IO 32    
+#define I2C_MASTER_SCL_IO 32     
+#define I2C_MASTER_SDA_IO 33    
 
 
 #define HEADPHONE_DETECT 5

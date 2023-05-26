@@ -26,7 +26,7 @@
 #include "audio_hal/driver_pins.h"
 
 // flag to indicate that the config supports pins
-#define AUDIOKIT_EXT_PINS
+#define AUDIOKIT_V1
 
 #if AUDIOKIT_SETUP_SD
 #include "SPI.h"
