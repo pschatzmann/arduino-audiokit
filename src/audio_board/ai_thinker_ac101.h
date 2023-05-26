@@ -41,7 +41,6 @@
 #define PIN_AUDIO_KIT_SD_CARD_MISO 2
 #define PIN_AUDIO_KIT_SD_CARD_MOSI 15
 #define PIN_AUDIO_KIT_SD_CARD_CLK  14
-//#define SD_CARD_INTR_GPIO 34
 #define SDCARD_INTR_GPIO 34
 #define SDCARD_OPEN_FILE_NUM_MAX  5
 
@@ -107,31 +106,31 @@
      {                                                  \
         .type = PERIPH_ID_BUTTON,                       \
         .user_id = INPUT_KEY_USER_ID_REC,               \
-        .act_id = BUTTON_REC_ID,                        \
+        .act_id = PIN_KEY1,                        \
     },                                                  \
     {                                                   \
         .type = PERIPH_ID_BUTTON,                       \
         .user_id = INPUT_KEY_USER_ID_MODE,              \
-        .act_id = BUTTON_MODE_ID,                       \
+        .act_id = PIN_KEY2,                       \
     },                                                  \
     {                                                   \
         .type = PERIPH_ID_BUTTON,                        \
         .user_id = INPUT_KEY_USER_ID_SET,               \
-        .act_id = BUTTON_SEL_SET,                        \
+        .act_id = PIN_KEY3,                        \
     },                                                  \
     {                                                   \
         .type = PERIPH_ID_BUTTON,                        \
         .user_id = INPUT_KEY_USER_ID_PLAY,              \
-        .act_id = BUTTON_SEL_PLAY,                       \
+        .act_id = PIN_KEY4,                       \
     },                                                  \
     {                                                   \
         .type = PERIPH_ID_BUTTON,                        \
         .user_id = INPUT_KEY_USER_ID_VOLUP,             \
-        .act_id = BUTTON_SEL_VOLUP,                      \
+        .act_id = PIN_KEY5,                      \
     },                                                  \
     {                                                   \
         .type = PERIPH_ID_BUTTON,                        \
         .user_id = INPUT_KEY_USER_ID_VOLDOWN,           \
-        .act_id = BUTTON_SEL_VOLDWN,                    \
+        .act_id = PIN_KEY6,                    \
     }                                                   \
 }
