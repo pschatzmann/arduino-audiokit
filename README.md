@@ -34,6 +34,8 @@ You must define your board and the default settings in the ```libraries/arduino-
  * 5) ai_thinker (ES8388) 2957 3478 A149 2762
  * 6) ai_thinker (AC101) 2762 2957
  * 7) ai_thinker (ES8388) 2957
+ * 8) esp32_s3_box DRAFT Not Tested
+ * 9) esp32_s3_box_lite.h DRAFT Not Tested
  * 10) generic_es8388
  * 11) generic_es8311
  */
