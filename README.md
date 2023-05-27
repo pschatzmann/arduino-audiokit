@@ -4,18 +4,22 @@ There are different ESP32 Audio boards available that can be programmed with the
 
 <img src="https://pschatzmann.github.io/Resources/img/audio-toolkit.png" alt="Audio Kit" />
 
-The ADF Framework contains an abstraction layer to support different codec audio chips (ES8388, ES8311, AC101...). Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.
+The ADF Framework contains an abstraction layer to support different codec audio chips (ES8388, ES8311, AC101...) which need to be configured usually via I2C. 
+
+Unfortunately ADF can not be used in Arduino, but it would be quite useful to have this functionality also available.
 
 Because I wanted to have a proper support of the AudioKit for my [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools) library and since my Audio Tools are  header only, I decided to provide this functionality in a separate project.
 
 I converted the __audio_boards__ and their related __drivers__ into an __Arduino Library__ and provide an easy to use C++ class which configures both the CODEC and I2S. I also tried to abstract away all ESP32 specific funcationality. 
 
-So with this project it should now get quite easy to use these boards also in Arduino. The following functionality is supported
+The following functionality is supported
 
 - management of different audio codec (starting, stopping, setting volume etc)
 - optional I2S output (ESP32 only)
 - optional SD support via SPI
 - information about board specific pins
+
+So with this project it should now get quite easy to use these boards also in Arduino. 
 
 ## Configuration
 
