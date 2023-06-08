@@ -22,7 +22,7 @@
  *
  */
 
-// for AUDIOKIT_BOARD==10
+// for AUDIOKIT_BOARD==12
 
 #pragma once
 
