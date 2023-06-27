@@ -115,7 +115,7 @@ struct AudioKitConfig {
             .bits_per_sample = (i2s_bits_per_sample_t)bitsPerSample(),
             .channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT,
             .communication_format = (i2s_comm_format_t)i2sFormat(),
-            .intr_alloc_flags = ESP_INTR_FLAG_LEVEL2 | ESP_INTR_FLAG_IRAM,
+            .intr_alloc_flags = 0, // default interrupt priority
             .dma_buf_count = buffer_count,
             .dma_buf_len = buffer_size,
             .use_apll = use_apll,
