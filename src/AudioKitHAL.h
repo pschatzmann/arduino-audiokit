@@ -267,7 +267,7 @@ public:
         }
 
         if (cfg.i2s_active) {
-            setupI2S(cfg);
+            setupI2S();
         }
 
         // call start
@@ -637,7 +637,7 @@ protected:
     }
 #endif
 
-    bool setupI2S(AudioKitConfig cnfg)
+    bool setupI2S()
     {
 #if AUDIOKIT_ESP32_I2S && defined(ESP32)
         KIT_LOGD("setupI2S");
