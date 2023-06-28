@@ -34,9 +34,12 @@ class SineWaveGenerator {
 
         /// Provides a single sample
         int16_t readSample() {
-            float angle = double_Pi * m_frequency * m_time + m_phase;
-            int16_t result = m_amplitude * sin(angle);
-            m_time += m_deltaTime;
+            float angle = double_Pi * m_cycles + m_phase;
+            int16_t result = m_amplitude * sinf(angle);
+            m_cycles += m_frequency * m_deltaTime;
+            if (m_cycles > 1.0) {
+                m_cycles -= 1.0;
+            }
             return result;
         }
 
@@ -55,6 +58,7 @@ class SineWaveGenerator {
 
     protected:
         int sample_rate;
+        float m_cycles = 0.0; // Varies between 0.0 and 1.0
         float m_frequency = 0;
         float m_time = 0.0;
         float m_amplitude = 1.0;  
