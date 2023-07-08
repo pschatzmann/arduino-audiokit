@@ -44,10 +44,6 @@ void pinMode(int, int);
 #include "driver/rtc_io.h"
 #include "hal/gpio_types.h"
 
-#if defined(CONFIG_IDF_TARGET_ESP32S2)
-#  define I2S_NUM_1 1
-#endif
-
 #else // no ESP32
 #include <stdbool.h>
 #include <stdint.h>

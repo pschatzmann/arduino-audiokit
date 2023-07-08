@@ -120,10 +120,12 @@ public:
         if (port == I2C_NUM_0) {
             i2c_config->sda_io_num = pins.i2c_sda;
             i2c_config->scl_io_num = pins.i2c_scl;
+#ifdef I2C_NUM_1
         } else if (port == I2C_NUM_1 ) {
             // we use the same pins like in 0
             i2c_config->sda_io_num = pins.i2c_sda;
             i2c_config->scl_io_num = pins.i2c_scl;
+#endif
         } else {
             i2c_config->sda_io_num = -1;
             i2c_config->scl_io_num = -1;
@@ -147,12 +149,14 @@ public:
             i2s_config->data_out_num = pins.i2s_out;
             i2s_config->data_in_num = pins.i2s_in;
             i2s_config->mck_io_num = pins.i2s_mclk;
+#ifdef I2S_NUM_1
         } else if (port == I2S_NUM_1) {
             i2s_config->bck_io_num = pins.i2s1_bck;
             i2s_config->ws_io_num = pins.i2s1_ws;
             i2s_config->data_out_num = pins.i2s1_out;
             i2s_config->data_in_num = pins.i2s1_in;
             i2s_config->mck_io_num = pins.i2s1_mclk;
+#endif
         } else {
             //memset(i2s_config, -1, sizeof(i2s_pin_config_t));
             KIT_LOGE("i2s port %d is not supported", port);
