@@ -30,12 +30,29 @@
 #  define ES8311_MCLK_SRC -1
 #endif
 
-#define BUTTON_REC_ID             PIN_KEY1
-#define BUTTON_MODE_ID            PIN_KEY2
-#define BUTTON_SET_ID             PIN_KEY3
-#define BUTTON_PLAY_ID            PIN_KEY4
-#define BUTTON_VOLDOWN_ID         PIN_KEY5
-#define BUTTON_VOLUP_ID           PIN_KEY6
+#ifndef BUTTON_REC_ID
+#  define BUTTON_REC_ID             PIN_KEY1
+#endif
+
+#ifndef BUTTON_MODE_ID
+#  define BUTTON_MODE_ID            PIN_KEY2
+#endif
+
+#ifndef BUTTON_SET_ID
+#  define BUTTON_SET_ID             PIN_KEY3
+#endif
+
+#ifndef BUTTON_PLAY_ID
+#  define BUTTON_PLAY_ID            PIN_KEY4
+#endif
+
+#ifndef BUTTON_VOLDOWN_ID
+#  define BUTTON_VOLDOWN_ID         PIN_KEY5
+#endif
+
+#ifndef BUTTON_VOLUP_ID
+#  define BUTTON_VOLUP_ID           PIN_KEY6
+#endif
 
 
 #define AUDIO_CODEC_DEFAULT_CONFIG()                                                               \
