@@ -38,7 +38,7 @@
 // Define the default gain for the microphone amp (see values from es_mic_gain_t)
 // Alternativly you can call es8388_set_mic_gain(es_mic_gain_t gain) if you prefer to use
 // value from an comprehensive enum
-#ifndef ES8388_DEFAULT_MIC_GAIN
+#ifndef ES8388_DEFAULT_INPUT_GAIN
 #  define ES8388_DEFAULT_INPUT_GAIN 25
 #endif
 
