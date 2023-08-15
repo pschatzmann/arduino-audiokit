@@ -74,7 +74,7 @@
 #define GREEN_LED_GPIO            22
 
 #define ADC_DETECT                 -1
-#define HEADPHONE_DETECT           -1
+
 #define ES7243_MCLK                -1
 #define RESET_CODEC                -1
 #define RESET_BOARD                -1
