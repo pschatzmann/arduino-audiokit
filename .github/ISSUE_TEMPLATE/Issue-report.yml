@@ -40,7 +40,7 @@ body:
       description: Is there any other information you can think of which will help us reproduce this problem? Any additional info can be added as well.
       placeholder: ex. I also tried on other OS, HW...it works correctly on that setup.
 
-  - type: text
+  - type: input
     id: esp32-version
     attributes:
       label: Provide your Version of the EP32 Arduino Core 
