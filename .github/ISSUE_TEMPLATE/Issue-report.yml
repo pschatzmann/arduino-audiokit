@@ -53,4 +53,5 @@ body:
       description: You agree to check all the resources above before opening a new issue.
       options:
         - label: I confirm I have checked existing issues, discussions and online documentation
-          required: true  - type: input
+          required: true  
+        - type: input
