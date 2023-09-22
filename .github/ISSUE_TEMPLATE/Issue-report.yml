@@ -55,4 +55,3 @@ body:
       options:
         - label: I confirm I have checked existing issues, discussions and online documentation
           required: true  
-        - type: input
