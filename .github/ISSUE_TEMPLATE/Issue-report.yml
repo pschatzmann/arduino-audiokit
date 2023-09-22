@@ -3,7 +3,7 @@ description: Report any new bug here
 body:
   - type: markdown
     attributes:
-      value: 
+      value: |
         * Before reporting a new bug please check and search the [list of existing issues](https://github.com/pschatzmann/arduino-audiokit/issues?q=) 
         * Please check [the Readme](https://github.com/pschatzmann/arduino-audiokit) and [Wiki](https://github.com/pschatzmann/arduino-audiokit/wiki)
         * Don't forget to check [the discusions](https://github.com/pschatzmann/arduino-audiokit/discussions)
