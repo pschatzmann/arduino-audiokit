@@ -17,7 +17,7 @@ AudioKit kit;
 
 void setup(){
     Serial.begin(115200);
-    if(!SD.begin(kit.pinSpiCs(), AUDIOKIT_SD_SPI)){
+    if(!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS, AUDIOKIT_SD_SPI)){
         Serial.println("Card Mount Failed");
         return;
     } else {
