@@ -18,7 +18,7 @@ AudioKit kit;
 void setup(){
     Serial.begin(115200);
     
-    // setup SPI with the coorrect pins
+    // setup SPI with the coorrect pins: This is not necessary if you call kit.begin() with the SD active.
     SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
 
     // start SD
