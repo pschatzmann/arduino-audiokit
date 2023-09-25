@@ -515,6 +515,14 @@ public:
     int8_t pinBlueLed() { return driver.get_blue_led_gpio(); }
 
     /**
+     * @brief SPI CS Pin for SD Drive
+     * 
+     * @return int8_t 
+     */
+    int8_t pinSpiCs() { return cfg.pins.sd_cs; }
+
+
+    /**
      * @brief Activates/deactivates the speaker amplifier output
      * This is working only if the driver is supporting the functionality
      * @param active
@@ -575,7 +583,6 @@ protected:
     audio_hal_codec_config_t audio_hal_conf;
     audio_hal_handle_t hal_handle = 0;
     audio_hal_codec_i2s_iface_t iface;
-    int8_t spi_cs_pin;
     bool headphoneIsConnected = false;
     unsigned long speakerChangeTimeout = 0;
     board_driver driver;
@@ -614,8 +621,8 @@ protected:
 //  I assume this is valid for all AudioKits!
 #if AUDIOKIT_SETUP_SD == 1
         if (cfg.sd_active) {
-            spi_cs_pin = cfg.pins.sd_cs;
-            if (spi_cs_pin!=1){
+            int spi_cs_pin = cfg.pins.sd_cs;
+            if (spi_cs_pin != -1){
                 KIT_LOGI("SPI: cs: %d", spi_cs_pin);
                 pinMode(spi_cs_pin, OUTPUT);
                 digitalWrite(spi_cs_pin, HIGH);
