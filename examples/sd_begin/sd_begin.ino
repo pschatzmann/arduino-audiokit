@@ -17,6 +17,11 @@ AudioKit kit;
 
 void setup(){
     Serial.begin(115200);
+    
+    // setup SPI with the coorrect pins
+    SPI.begin(PIN_AUDIO_KIT_SD_CARD_CLK, PIN_AUDIO_KIT_SD_CARD_MISO, PIN_AUDIO_KIT_SD_CARD_MOSI, PIN_AUDIO_KIT_SD_CARD_CS);
+
+    // start SD
     if(!SD.begin(PIN_AUDIO_KIT_SD_CARD_CS, AUDIOKIT_SD_SPI)){
         Serial.println("Card Mount Failed");
         return;
