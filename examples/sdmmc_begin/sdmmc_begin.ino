@@ -4,7 +4,7 @@
  * @brief  A simple test if we can start the SD via SDMMC of the AudioKit
  * @date 2022-5-12
  *
- *  On the AI Thinker boards the pin settings should be Off, On, On, Off, Off,
+ *  On the AI Thinker boards the pin settings should be On, On, On, On, On,
  *
  * @copyright Copyright (c) 2021
  * 
