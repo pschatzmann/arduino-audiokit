@@ -31,11 +31,10 @@
 
 #define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
 
-// SD Card
-#define PIN_AUDIO_KIT_SD_CARD_CS 13
-#define PIN_AUDIO_KIT_SD_CARD_MISO 2
-#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#define PIN_AUDIO_KIT_SD_CARD_CLK  14
+// SD Card Pins
+#include "common/esp32_sd.h"
+#define SDCARD_OPEN_FILE_NUM_MAX  5
+#define SDCARD_INTR_GPIO          34
 
 // I2S
 #define PIN_I2S_AUDIO_KIT_MCLK 0
@@ -53,9 +52,6 @@
 #define I2C_MASTER_NUM I2C_NUM_0 /*!< I2C port number for master dev */
 #define I2C_MASTER_SCL_IO 32     
 #define I2C_MASTER_SDA_IO 33    
-
-#define SDCARD_OPEN_FILE_NUM_MAX  5
-#define SDCARD_INTR_GPIO          34
 
 #define PIN_KEY1 36
 #define PIN_KEY2 13

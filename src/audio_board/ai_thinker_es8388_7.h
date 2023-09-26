@@ -28,10 +28,8 @@
 
 #define AUDIO_DRIVER AUDIO_CODEC_ES8388_DEFAULT_HANDLE
 
-#define PIN_AUDIO_KIT_SD_CARD_CS 13
-#define PIN_AUDIO_KIT_SD_CARD_MISO 2
-#define PIN_AUDIO_KIT_SD_CARD_MOSI 15
-#define PIN_AUDIO_KIT_SD_CARD_CLK  14
+// SD Card Pins
+#include "common/esp32_sd.h"
 
 #define SDCARD_OPEN_FILE_NUM_MAX  5
 #define SDCARD_INTR_GPIO          34
