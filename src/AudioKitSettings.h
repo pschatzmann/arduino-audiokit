@@ -21,6 +21,7 @@
  */
 
 #pragma once
+#include "esp_idf_version.h"
 
 // Select your specific board
 #ifndef AUDIOKIT_BOARD
@@ -56,12 +57,17 @@
 #  define WORKAROUND_ES8388_LINE1_GAIN 0
 #endif
 
-// Special rules for IDF build
-#if defined(AUDIOKIT_USE_IDF)
+// Special rules for IDF build 
+#if defined(AUDIOKIT_USE_IDF) 
 #define AUDIOKIT_SETUP_SD 0
 #define AUDIOKIT_FREE_RTOS 1
 #define AUDIOKIT_ESP32_I2S 0
 #define AUDIOKIT_ESP32_AUDIOKIT_USE_WIRE 0
+#endif
+
+// Special rules for IDF 5 
+#if defined(ARDUINO) && ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+#define AUDIOKIT_ESP32_I2S 0
 #endif
 
 // 1 = Using Arduino Wire Library; 0 = Use ESP32 I2C API

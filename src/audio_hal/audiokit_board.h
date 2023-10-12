@@ -14,8 +14,8 @@
 #include "driver/spi_slave.h"
 #include "driver/spi_master.h"
 #include "driver/i2c.h"
-#include "driver/i2s.h"
 #endif
+
 #include <string.h>
 #include "AudioKitSettings.h"
 #include "audio_hal/audio_error.h"
@@ -157,7 +157,7 @@ public:
         return ESP_OK;
     }
 
-    esp_err_t get_i2s_pins(i2s_port_t port, i2s_pin_config_t* i2s_config)
+    esp_err_t get_i2s_pins(int port, i2s_pin_config_t* i2s_config)
     {
         AUDIO_NULL_CHECK(TAG, i2s_config, return ESP_FAIL);
         if (port == I2S_NUM_0) {
@@ -187,6 +187,7 @@ public:
 
         return ESP_OK;
     }
+
 
     esp_err_t get_spi_pins(
         spi_bus_config_t* spi_config, spi_device_interface_config_t* spi_device_interface_config)

@@ -8,13 +8,31 @@
  * @copyright Copyright (c) 2021
 */
 #pragma once
+
 #include "audio_hal/audio_gpio.h"
 #ifdef ESP32
 #include "hal/spi_types.h"
 #include "driver/spi_slave.h"
 #include "driver/spi_master.h"
 #include "driver/i2c.h"
+
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
 #include "driver/i2s.h"
+#else
+#define I2S_NUM_0 0
+#ifndef I2S_PIN_NO_CHANGE
+#define I2S_PIN_NO_CHANGE -1
+#endif
+typedef struct {
+    int mck_io_num;
+    int bck_io_num;     /*!< BCK in out pin*/
+    int ws_io_num;      /*!< WS in out pin*/
+    int data_out_num;   /*!< DATA out pin*/
+    int data_in_num;    /*!< DATA in pin*/
+} i2s_pin_config_t;
+
+#endif
+
 #endif
 
 #ifdef __cplusplus

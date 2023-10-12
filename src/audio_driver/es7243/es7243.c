@@ -81,11 +81,11 @@ esp_err_t es7243_adc_set_addr(int addr)
 
 static esp_err_t es7243_mclk_active(uint8_t mclk_gpio)
 {
-#ifdef ESP32
+#ifdef ARDUINO
+    pinMode(mclk_gpio, OUTPUT);
+#elif defined(ESP32)
     gpio_pad_select_gpio(mclk_gpio);
     gpio_set_direction(mclk_gpio, GPIO_MODE_OUTPUT);
-#else
-    pinMode(mclk_gpio, OUTPUT);
 #endif
     /*
         Before initializing es7243, it is necessary to output

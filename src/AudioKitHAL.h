@@ -41,7 +41,7 @@ struct AudioKitConfig {
     /// @brief driver which selects the codec implementation: AUDIO_CODEC_ES8388_DEFAULT_HANDLE, AUDIO_CODEC_AC101_CODEC_HANDLE, AUDIO_CODEC_ES8311_DEFAULT_HANDLE, AUDIO_CODEC_ES7243_DEFAULT_HANDLE
     audio_hal_func_t driver = AUDIO_DRIVER;
 
-    i2s_port_t i2s_num = (i2s_port_t)pins.i2s_num;
+    int i2s_num = pins.i2s_num;
     bool sd_active = true;
     bool auto_clear = true;
     bool use_apll = true;
@@ -291,7 +291,7 @@ public:
 #if AUDIOKIT_ESP32_I2S && defined(ESP32)
         if (cfg.i2s_active) {
             // uninstall i2s driver
-            i2s_driver_uninstall(cfg.i2s_num);
+            i2s_driver_uninstall((i2s_port_t)cfg.i2s_num);
         }
 #endif
         // stop codec driver
@@ -343,7 +343,7 @@ public:
     {
         KIT_LOGD("write: %zu", size);
         size_t bytes_written = 0;
-        if (i2s_write(cfg.i2s_num, src, size, &bytes_written, ticks_to_wait) != ESP_OK) {
+        if (i2s_write((i2s_port_t)cfg.i2s_num, src, size, &bytes_written, ticks_to_wait) != ESP_OK) {
             KIT_LOGE("i2s_write");
         }
         return bytes_written;
@@ -354,7 +354,7 @@ public:
     {
         KIT_LOGD("read: %zu", size);
         size_t bytes_read = 0;
-        if (i2s_read(cfg.i2s_num, dest, size, &bytes_read, ticks_to_wait) != ESP_OK) {
+        if (i2s_read((i2s_port_t)cfg.i2s_num, dest, size, &bytes_read, ticks_to_wait) != ESP_OK) {
             KIT_LOGE("i2s_read");
         }
         return bytes_read;
@@ -383,7 +383,7 @@ public:
 #if AUDIOKIT_ESP32_I2S && defined(ESP32)
             // update I2S
             if (cfg.i2s_active) {
-                if (i2s_set_sample_rates(cfg.i2s_num, cfg.sampleRate()) != ESP_OK) {
+                if (i2s_set_sample_rates((i2s_port_t)cfg.i2s_num, cfg.sampleRate()) != ESP_OK) {
                     KIT_LOGE("i2s_set_sample_rates");
                     result = false;
                 }
@@ -636,8 +636,7 @@ protected:
         }
 #else
 #if defined(ARDUINO)
-#warning                                                                                           \
-    "SPI initialization for the SD drive not supported - you might need to take care of this yourself"
+#warning "SPI initialization for the SD drive not supported - you might need to take care of this yourself"
 #endif
         cfg.sd_active = false;
 #endif
@@ -650,7 +649,7 @@ protected:
         KIT_LOGD("setupI2S");
         // setup i2s driver - with no queue
         i2s_config_t i2s_config = cfg.i2sConfig();
-        if (i2s_driver_install(cfg.i2s_num, &i2s_config, 0, NULL) != ESP_OK) {
+        if (i2s_driver_install((i2s_port_t)cfg.i2s_num, &i2s_config, 0, NULL) != ESP_OK) {
             KIT_LOGE("i2s_driver_install");
             return false;
         }
@@ -667,7 +666,7 @@ protected:
         KIT_LOGI("- mck_io_num: %d", pin_config.mck_io_num);
 #endif
 
-        if (i2s_set_pin(cfg.i2s_num, &pin_config) != ESP_OK) {
+        if (i2s_set_pin((i2s_port_t)cfg.i2s_num, &pin_config) != ESP_OK) {
             KIT_LOGE("i2s_set_pin");
             return false;
         }
