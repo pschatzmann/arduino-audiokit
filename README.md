@@ -55,7 +55,7 @@ Here is an example sketch that writes audio data to the audio kit board via I2S.
 You can adjust these parameters by setting your requested values in the cfg below:
 
 ```C++
-#include "AudioKit.h"
+#include "AudioKitHAL.h"
 #include "SineWaveGenerator.h"
 
 AudioKit kit;
