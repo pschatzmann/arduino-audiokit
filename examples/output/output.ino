@@ -20,7 +20,7 @@ void setup() {
   LOGLEVEL_AUDIOKIT = AudioKitInfo; 
   Serial.begin(115200);
   // open in write mode
-  auto cfg = kit.defaultConfig(AudioOutput);
+  auto cfg = kit.defaultConfig(KitOutput);
   kit.begin(cfg);
 
   // 1000 hz

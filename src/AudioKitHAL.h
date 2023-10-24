@@ -186,7 +186,7 @@ protected:
  * @brief Do we read or write audio data - or both
  *
  */
-enum AudioKitInOut { AudioOutput, AudioInput, AudioInputOutput };
+enum AudioKitInOut { KitOutput, KitInput, KitInputOutput };
 
 /**
  * @brief AudioKit API using the audio_hal
@@ -203,14 +203,14 @@ public:
     }
 
     /// Provides the default configuration for input or output
-    AudioKitConfig defaultConfig(AudioKitInOut inout = AudioInputOutput)
+    AudioKitConfig defaultConfig(AudioKitInOut inout = KitInputOutput)
     {
         AudioKitConfig result;
         switch (inout) {
-        case AudioOutput:
+        case KitOutput:
             result.codec_mode = AUDIO_HAL_CODEC_MODE_DECODE; // dac
             break;
-        case AudioInput:
+        case KitInput:
             result.codec_mode = AUDIO_HAL_CODEC_MODE_ENCODE; // adc
             break;
         default:
