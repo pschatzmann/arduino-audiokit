@@ -29,7 +29,7 @@
 namespace audiokit {
 
 class AudioKit;
-class AudioKit* selfAudioKit = nullptr;
+static AudioKit* selfAudioKit = nullptr;
 
 /**
  * @brief Configuation for AudioKit
