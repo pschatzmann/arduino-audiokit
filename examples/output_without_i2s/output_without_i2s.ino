@@ -22,7 +22,7 @@ void setup() {
   LOGLEVEL_AUDIOKIT = AudioKitInfo; 
 
   // Setup Codec chip only w/o I2S
-  auto cfg = kit.defaultConfig(AudioOutput);
+  auto cfg = kit.defaultConfig(KitOutput);
   cfg.i2s_active = false;
   cfg.sample_rate = AUDIO_HAL_08K_SAMPLES;
   kit.begin(cfg);

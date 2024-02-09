@@ -16,7 +16,7 @@
 #    include "audio_hal/audio_version.h"
 #    if !defined(CONFIG_IDF_TARGET_ESP32S3) && !defined(CONFIG_IDF_TARGET_ESP32S2)                     \
      && !defined(CONFIG_IDF_TARGET_ESP32C3)
-SPIClass SPI_VSPI(VSPI);
+static SPIClass SPI_VSPI(VSPI);
 #    endif
 #  endif
 #endif

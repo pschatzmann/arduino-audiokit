@@ -74,7 +74,7 @@ uint8_t buffer[BUFFER_SIZE];
 void setup() {
   Serial.begin(115200);
   // open in write mode
-  auto cfg = kit.defaultConfig(AudioOutput);
+  auto cfg = kit.defaultConfig(KitOutput);
   cfg.sample_rate = AUDIO_HAL_22K_SAMPLES;
   kit.begin(cfg);
 
