@@ -1,4 +1,12 @@
+
 # Arduino ADF/AudioKit HAL
+
+---
+___Please note that I do not support this library any more!___ 
+
+___I recommend that you start to use my new, more flexible [audio-driver library](https://github.com/pschatzmann/arduino-audio-driver) instead___
+
+---
 
 There are different ESP32 Audio boards available that can be programmed with the Espressif ADF Framework.
 
